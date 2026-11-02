@@ -1,0 +1,27 @@
+{
+ "adjudication": {
+  "adjudicator": "openai/gpt-6-luna",
+  "chosen": "prime-1",
+  "confidence": 0.99,
+  "reason": "openai/gpt-6-luna chose prime-1 with confidence 0.99"
+ },
+ "attempts": [
+  {
+   "environment": "home worktree",
+   "finished_at": 275.5,
+   "model": "prime-1",
+   "patch": "--- a/tokens.py\n+++ b/tokens.py\n@@ -5,1 +5,2 @@\n-count = count_tokens(text)\n+count = cached_count(text)\n",
+   "result": "green",
+   "tokens": null
+  },
+  {
+   "environment": "shadow worktree",
+   "finished_at": 270.0,
+   "model": "shadow-1",
+   "patch": "--- a/tokens.py\n+++ b/tokens.py\n@@ -5,1 +5,1 @@\n-count = count_tokens(text)\n+count = len(text) // 4\n",
+   "result": "green",
+   "tokens": 58700
+  }
+ ],
+ "task": "cache the token count"
+}

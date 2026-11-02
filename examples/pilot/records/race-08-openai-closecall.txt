@@ -1,0 +1,4 @@
+closecall cache the token count
+in the band, both attempts went green and the gap of 5.5 seconds is within five percent of the slower finish of 275.5 seconds
+adjudication by openai/gpt-6-luna chose prime-1 at confidence 0.99, the race is decided for prime-1
+verdict, prime-1 wins

@@ -8,11 +8,18 @@ import pathlib, sys
 root = pathlib.Path(__file__).resolve().parent.parent
 counts = {"U+2014": 0, "U+2013": 0}
 ignored_dirs = {".git", ".venv", "venv", "dist", "build", "node_modules", "__pycache__"}
+# The one directory the scan does not cover, under the pilot
+# envelope scan exemption in CONTRACT.md. Recorded envelopes stand
+# exactly as their routes returned them, and a returned envelope
+# can carry forbidden characters in the model own words.
+exempt_prefixes = (("examples", "pilot", "envelopes"),)
 for p in sorted(root.rglob("*")):
     if not p.is_file():
         continue
     rel = p.relative_to(root)
     if any(part in ignored_dirs or part.endswith(".egg-info") for part in rel.parts[:-1]):
+        continue
+    if any(rel.parts[: len(prefix)] == prefix for prefix in exempt_prefixes):
         continue
     if p.suffix not in {".md", ".txt", ".py", ".json", ".toml", ".yml", ".yaml", ""}:
         continue

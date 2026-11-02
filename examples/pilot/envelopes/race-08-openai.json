@@ -1,0 +1,61 @@
+{
+  "id": "gen-1793628602-viGYzfGmkHH1iWkei0L8",
+  "object": "chat.completion",
+  "created": 1793628602,
+  "model": "openai/gpt-6-luna",
+  "provider": "OpenAI",
+  "system_fingerprint": null,
+  "service_tier": "default",
+  "choices": [
+    {
+      "index": 0,
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "message": {
+        "role": "assistant",
+        "content": "{\"choice\":\"prime-1\",\"confidence\":0.99,\"probabilities\":{\"prime-1\":0.99,\"shadow-1\":0.01}}",
+        "refusal": null,
+        "reasoning": "**Evaluating token counts**\n\nI need to judge the task cache token count. For the Prime option, I'm using cached_count(text) directly, but Shadow approximation is based on length divided by four, which isn't caching and might lead to inaccuracies. While Prime's tokens aren't reported, the runtime is at 275.5 versus 270, and both are green, so I’ll go with Prime. I also need to ensure the JSON has the exact fields. Probabilities are likely at .99 for Prime and .01 for Shadow, with the confidence being the same.",
+        "reasoning_details": [
+          {
+            "type": "reasoning.summary",
+            "summary": "**Evaluating token counts**\n\nI need to judge the task cache token count. For the Prime option, I'm using cached_count(text) directly, but Shadow approximation is based on length divided by four, which isn't caching and might lead to inaccuracies. While Prime's tokens aren't reported, the runtime is at 275.5 versus 270, and both are green, so I’ll go with Prime. I also need to ensure the JSON has the exact fields. Probabilities are likely at .99 for Prime and .01 for Shadow, with the confidence being the same.",
+            "format": "openai-responses-v1",
+            "index": 0
+          },
+          {
+            "type": "reasoning.encrypted",
+            "data": "gAAAAABq6Jm8IZEUWrJVqVZwX4GvWUZmf4KRIWgUzMJgDYWzx9G992qjouDZFf4I-Zf9isc3hcsoO32BHYaKtJRdwkg7pYfvsCeM8Ik-2CSo3XxTJLQSQ9XCdqNikblhyRqja9Y_RhN_0g91ntD9VHl54ToBkDX5Z1RP-jZhdUUUY8n55IQNYwyvDc1SwLC-YF1FpDzGmYRM-S83VQObzC0U7V5wuY0bLLl9fIcEaFN_4CP1nFdSnTXHrMVYZDwuSBf5S4drKAhSOtYbgHQ2n-Sx7mGRwJ2WDlY1-l95E2zYBeJkj_HCXXiNgsQL5TLCc1hJpT4KrzDI_2Yl-15m21OG54c-Wu2T2YRupJvE6WK1rpNyaPj5EgFYeBqr1Ni8219AuKFI9R-Ef4T-wBvl1UG99krJJoSekYCHwUUY63xip26-gz-SMywRL6h9uNfHnd4YuBJXgNDEl6MA54sQq9OQkBU_JmA6kJLdY-nRL0stiaSMi0LxxOmG98Z9V9zEuS7QvK5z2vgyAxICjnGd1sOpfOVtb03vs-iwrg2jkt_xn8IoNJkdCq8uuxB6M01tA4rUIhAy-Q7ORjIZmT0rg6pbko6XitIdOx001aY33jBe-an4Cboqta6t-r7GUgR5V6MsnUyXNettpi2cDeKjVR1-ST5W1BpAoN-M0XVTVovxpHXWupZVLWGViroS19aRtmPEGUshXRjnSCUyC5J59jShIFeEusZG99e8sh0QclLH0S-hgO4k_ZfEzUuNsv6xxaQV8OJ_fg_Kp83kOLQVNH4ObqJXyDVciJsSnhjyFIVeEiV69V-Lb5Gs7FSx6GhbqkF7zOoJflB3p61lno5Vm6eWcrJjzsD5_yGEapxXfEru4ceRui3vuINhmhRG9dcuTtE_qEKTOjHR3YDuLpXvcqaPOx3mA0AKpwyodEDEIOoO3M4DusiRNkIL7oyyauLykfwK71Sy5Zsy8j_pj1YbYCsDJs0xJzIrc5jnTp9JEmu3KiYm8JHQgJ-lcJkJkfkyJIuQM-9kzmv85RcW3yMab8kuumWwnGFamCn0dh88fIwFOgrTGd7HmhKpaiJ944J_Zcb8BgZYCfuYjLgA_aiTZ83yfPvDXxww_7pMmvIzBQNUzSbceO1AGyHZfR-NGCPS8qpMr26Be8WzosmcGhhA0eDVAWVOt8AM51pxP_1Gctol8ZJKPyj2jWsAuFMkDGOMp3O2MS_VXdj_n_OdlyfhtGJFb8RcUnSOga8pvkXNXNMTI4r3xSDyEZLZAR8ITaHavskLgLlVBEQd8lDwLNCl7f9jg61y6tvL8g1BoGBJitpbr5l1PK5zGFVQMGA3HikSb_ZYVJ-w9p6wkQzJ-vpO--UnVFLNbMOsr7TbPH4l7JrvBcOquofTkMWSER_2xC_8HnWaLUndebZDxuQcEr6HkviuRlgkVAsmAw-7rFxnJbI4v2M0ml6b5BsbtOsyiw2d75D8M_CUzvDIPxrxfJIj6c5esHEGLem-CzGdBxpbIde_3lN7LsTu6_5OT-TU3i4g_hJKPMGurCUQr2Z9IBrYXc_mM7ErBOHK4tfCUmMEqw6Hk9Tm7iK0R9jIRgdqdsR9yIZPthxbBcUGuwQaviOt-RYVJdVvqrcKhvu0Gb0wNJ9GM6uuyJDzmy802XEQM0NvfzuJZWEV08W3uZJgBjPkCyl8_NKxmvrHi-pBVC7ecJyBDw6_ax7MDOPVgeXUDBZTAayDX8hgE74TUObkbAkOFhDghujzRtBtEJ-Jaj9HInV7Hh69zgIPlA6eq8WkQ8ZIJmY6H_xSQE_kM_70RpOGcaA-3AAs3XpTz769thvvzbcxiFrzp5l_DTyX3Nlbm31lL9nC9fDuyQ4xaUJY-vlRgyH1LbEREqccYU2ddDxyFXqOm-CaXlZOcK-E-xlhCEdxCUWIxyVAzj5MGjEz0GLLOvP1T4uLvmPkwvsYm0jdk9v0LIxFIW1si_GNES6Tg924_Evpim8DOoh_3EveTjk9ryXL0v9rwy0h4nln8GhSdTX9F9at4cqf0lykkwx1AKiFqNZm_zQ75WVSUHZJehG_RD-DtJ7mJeJvCaRf5OG-I644C9oJ-FeT2qR7YtWvFYCWnai4y749F__3yx7KktfZhC97bfC2aH1-mV_hVRe28FnmDgWYlwJkMCm4L7u-NX9yqpBsKjxok_FCPYnE7ALrn68cu3iV2y9zzj3rVijVPpjxspr2slJ91ROEID6jcHDhH63FB9bfs2e-XvpfLxrK4MnuE4RAiMj6itpSDKZf123YuOUH-fxNgG37mkCCeO-DbpeDBRjjfkJYU478QI0_usLwLzlx-BZdvvemklnxb2cIV_FfzB-tNwCcbDWTch0mWXNksOZE6ThkZmO_mYNasbJqI7Eapnizm34jECT76ZTQemWcjAqqrN8kq0psbYJnIDN_YRupJl5eIbre3sQ9YGsK3dcXu_ODHcNnNkzT-_kSBUZDXlV_31s=.eyJlbmRwb2ludF9zbHVnIjoib3BlbmFpL2dwdC02LWx1bmEtMjAyNjA5MjJ8b3BlbmFpIn0",
+            "format": "openai-responses-v1",
+            "id": "rs_0e1401ca613fc4a3016ae899bb1bdc87d1804e83be39d47021",
+            "index": 1
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 237,
+    "completion_tokens": 108,
+    "total_tokens": 345,
+    "cost": 7.77e-05,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 7.77e-05,
+      "upstream_inference_prompt_cost": 2.37e-05,
+      "upstream_inference_completions_cost": 5.4e-05
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 70,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  }
+}

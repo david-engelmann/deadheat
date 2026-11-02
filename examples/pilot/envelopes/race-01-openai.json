@@ -1,0 +1,61 @@
+{
+  "id": "gen-1793628042-vHelc6gwhDuiE9pUAgvX",
+  "object": "chat.completion",
+  "created": 1793628042,
+  "model": "openai/gpt-6-luna",
+  "provider": "OpenAI",
+  "system_fingerprint": null,
+  "service_tier": "default",
+  "choices": [
+    {
+      "index": 0,
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "message": {
+        "role": "assistant",
+        "content": "{\"choice\":\"prime-1\",\"confidence\":0.99,\"probabilities\":{\"prime-1\":0.99,\"shadow-1\":0.01}}",
+        "refusal": null,
+        "reasoning": "**Evaluating cache key and model labels**\n\nI need to focus on judging the task for the pin cache key by ensuring the query has the correct tenant isolation. There’s a collision risk with shadow hash(query) because the hash may not be semantically stable. It seems that picking a prime is essential here. I should also include only the necessary JSON fields and consider probabilities that sum to confidence, with exact model labels being prime-1 and shadow-1.",
+        "reasoning_details": [
+          {
+            "type": "reasoning.summary",
+            "summary": "**Evaluating cache key and model labels**\n\nI need to focus on judging the task for the pin cache key by ensuring the query has the correct tenant isolation. There’s a collision risk with shadow hash(query) because the hash may not be semantically stable. It seems that picking a prime is essential here. I should also include only the necessary JSON fields and consider probabilities that sum to confidence, with exact model labels being prime-1 and shadow-1.",
+            "format": "openai-responses-v1",
+            "index": 0
+          },
+          {
+            "type": "reasoning.encrypted",
+            "data": "gAAAAABq6JeWgFe42jPFqdUcRW2fhhUc_xUqdFJNpxa00Em0I2-OsKpCOMCrafAcPPc_ValLotGt5c-e_lH5J2p9dvamaYuSbgXOZMYx8S-VsSJJlO4lWk4aQ_0FPn5QdjS0e-DzdKWliqLf8df2rlmOtA1xujx9IJK8LtPKLTntieeyVk0vs0195eLgT0uIRUmJ_2l5Q_LPfQb4L-CvvYBeRpY40ub5vOjAm7wFufnuF-gHxIH4IGH481mLoZdV_BJocoMuNCmJCgYeMVn3Fz7sevtX1j1UJO-4AmQLQAxEh11-StMklNP6CH4sJXHqSE_ByiByQj9t5qTkv6WgzUNGxNoRexhs_ljH4XlejM0M4B7-F26Qy3VuxDKZ5RUTDPZKQC_QCNs5PTaEGi7mxYz-_4gr-qwmF21Nf2W2wSMvm11T9nOYosvqOWPUKdS5HpP9n_gOJ57UHzCN0TFEoyQky4I4chTa2VvHfqkCx7lVmtmCYf4_m-9-aiipkr9rgXnesV3IWwnHtOhhhA11_-qhgiNGhSGe0CgAvMwr-PfAF3nM_mINqbAQ5H4AHL9Dce88UJloqAE__d6ss-eb4IJpUSs-FOdu6-ktHT0s1vW58r_kxS8bIMtctVJYZAZo-Ql9qm5afyWOnyxLMBCnRxczfFS1f2Jusdh_JS4-K4PG5eOzZM9c_XIPTfGiXNeFuQ545aRwkgvJAYwYXYlQlfywg2hf9eRSu2NHfZozw0rWUYdlwUvz2dNqBKwds20ipUmayzO6K1WqQucKcZsbJgdNhdOtIHyZhQoJx5vS6F0H80vS7onUMcEyypTbGYpCmxAQ8zD0DhCtIfoCjJBDhJZ61GJLYdchq92LVAqGnBfiL-E4ZB4qNK1C5H1ViZaHK3MwcvXt7OEwuyHeEyP5w_dWlk33bCDQjzDa8dkHatjjYEPSwJ05RuCIOxOImYV7TYxhg5KAm02DUtbBzmyyEH99yVSYdoJlwa1JgHLthz-pEO6MQcImFAJ30ctBETBOST5V3W3esP2WM3CTOlQXifubVtQCEoyUXXmPGXB7Ko84XQmBi5qZXCHDIaiG1zHcJt3KAjUVtIhfiUnWB36v-TLGBrbUTXCl_Fg3PjPz9HCwczXY_Eqi5Mbe8omtKSepuwRLgmjBUimonlqTIlcFJL5kxoHX3bPaXYAZm-8rkGr54ImRw_FNpbpxLPwXn7bdtNlsvF1NE__8606W7vcXlBNV3zCXtmP-mhR38oVL-greyOgIxVNxgtrmeIlpJtelsqHuj9GfQ7zvKsWTuGXILL46pnzKUX3R08bnLQuKC8Ke9Fm3WXu8Ttifm15lkWrEPWa1CJyOKp1Y-7JKIVl8xOaplJym2q_GYxAnCJlwYi2i5Q4VzGeCoe9L65GjeAqkqJp5uDxcT8hAzzAP5qiIKxl_DJvg7IyODK7vyNIRPwWdPdjWioJeqvLv1NE4etn1HmJYfylEfk1YTRiTyPtP75s80cumAXyZYehQFHXyDfIjbHtIN_he2qkGmRXi66LyiV35uKI__RVhvDi4P2ilsYvcAjcpiReH922NGacWR8KXKqL1CrtZWYRO8kwn5KxSVo1VAMe6SewRER0CbPj-XmQ6DAycYR_WNXYA8wbte0kwaYjD4QZHJ9q2c4Iw0VvZPmsPiQo6oNsyVhDQyt_urULVrsnK2A7p0i_qPsUihtLTTGNWZx1pZ-uzpeepIUdnYjQOWukd7t0CBUOuw4BKu3qYEXNQTtgTQic7dstdEwo_BcLPVlLmCLmmxLSNp9lCtVGz4KAagXZRjRo19tUdxpDHz7_aLRYA9sw73wx7UAb3hun1IHXBJ-UmpPp_G99yUYI2HYXJ8OrMFX9odQ_H3O7w9RpJ70ZnlZIv2iZOplWpQ4i52AaAz6RbxeUFA3ZYiG7MFVf5iUqwMPcHkanxM_CvKoqQbcx1xSWOqYeUEwsv5Zhbj0Wm3o4t8TdHbLw6JO3-439SOE2mzse8CC4Z06sBLTijb6KJb9a1jppRi7f2r0t3BLjxTwN6xsvmkeHQmkWAWdiPV_XsWD4KNf2RjLtfe1vJ4R8QUws1VO4kriQvrYo8HRc2Mfb1kUX0ddQ8gfErXAor_NSXRFOglfGPfyxkhm25mG2uQSIrZ7GP2m0RH2URbllV7LFNoRI5YCxrWfUQ2y73tj-W0uO-4mJuCptJ3C1kCnkMyB679_7TWa46r3MR3jG2jP-MssJ-kEOZ3jCS7DjJYXzYWtd10_HNsLYcEvJYxw6SwoRPNBcW7fO2llVY5Mr453Mu64FI8t2_SvQpUOwO8KNyklykxixTJfbsDKCN7xarPZXLPABezyg4dA61ffQWOyOgEdFlwKyu5DJRFnIv8rkAHcEPXZXEmuUBV9c4aOTpKA==.eyJlbmRwb2ludF9zbHVnIjoib3BlbmFpL2dwdC02LWx1bmEtMjAyNjA5MjJ8b3BlbmFpIn0",
+            "format": "openai-responses-v1",
+            "id": "rs_0845eaef756229dd016ae897944d3887d1bc9dc07c0b4f8f9e",
+            "index": 1
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 227,
+    "completion_tokens": 101,
+    "total_tokens": 328,
+    "cost": 7.32e-05,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 7.32e-05,
+      "upstream_inference_prompt_cost": 2.27e-05,
+      "upstream_inference_completions_cost": 5.05e-05
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 63,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  }
+}

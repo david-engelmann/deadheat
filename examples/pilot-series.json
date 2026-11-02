@@ -1,0 +1,278 @@
+{
+ "models": [
+  "prime-1",
+  "shadow-1"
+ ],
+ "races": [
+  {
+   "adjudication": {
+    "adjudicator": "jev-1.13.0",
+    "chosen": "prime-1",
+    "confidence": 0.94,
+    "reason": "jev-1.13.0 chose prime-1 with confidence 0.94"
+   },
+   "attempts": [
+    {
+     "environment": "home worktree",
+     "finished_at": 412.0,
+     "model": "prime-1",
+     "patch": "--- a/cache.py\n+++ b/cache.py\n@@ -4,1 +4,1 @@\n-key = query\n+key = (tenant, query)\n",
+     "result": "green",
+     "tokens": 96400
+    },
+    {
+     "environment": "shadow worktree",
+     "finished_at": 398.5,
+     "model": "shadow-1",
+     "patch": "--- a/cache.py\n+++ b/cache.py\n@@ -4,1 +4,1 @@\n-key = query\n+key = hash(query)\n",
+     "result": "green",
+     "tokens": 101250
+    }
+   ],
+   "task": "pin the cache key"
+  },
+  {
+   "adjudication": {
+    "adjudicator": "jev-1.13.0",
+    "chosen": "prime-1",
+    "confidence": 0.62,
+    "reason": "jev-1.13.0 chose prime-1 with confidence 0.62"
+   },
+   "attempts": [
+    {
+     "environment": "home worktree",
+     "finished_at": 500.0,
+     "model": "prime-1",
+     "patch": "--- a/report.py\n+++ b/report.py\n@@ -1,3 +1,1 @@\n-import os\n-import sys\n import json\n",
+     "result": "green",
+     "tokens": 40200
+    },
+    {
+     "environment": "shadow worktree",
+     "finished_at": 505.25,
+     "model": "shadow-1",
+     "patch": "--- a/report.py\n+++ b/report.py\n@@ -1,3 +1,2 @@\n-import os\n import sys\n import json\n",
+     "result": "green",
+     "tokens": 39800
+    }
+   ],
+   "task": "trim the import list"
+  },
+  {
+   "adjudication": {
+    "adjudicator": "jev-1.13.0",
+    "chosen": "prime-1",
+    "confidence": 0.04,
+    "reason": "jev-1.13.0 chose prime-1 with confidence 0.04"
+   },
+   "attempts": [
+    {
+     "environment": "home worktree",
+     "finished_at": 380.0,
+     "model": "prime-1",
+     "patch": "--- a/queue.py\n+++ b/queue.py\n@@ -7,1 +7,2 @@\n-job = queue.pop()\n+if queue:\n+    job = queue.pop()\n",
+     "result": "green",
+     "tokens": 77300
+    },
+    {
+     "environment": "shadow worktree",
+     "finished_at": 400.0,
+     "model": "shadow-1",
+     "patch": "--- a/queue.py\n+++ b/queue.py\n@@ -7,1 +7,1 @@\n-job = queue.pop()\n+job = queue.pop() if queue else None\n",
+     "result": "green",
+     "tokens": 80900
+    }
+   ],
+   "task": "guard the empty queue"
+  },
+  {
+   "adjudication": {
+    "adjudicator": "jev-1.13.0",
+    "chosen": "prime-1",
+    "confidence": 0.44,
+    "reason": "jev-1.13.0 chose prime-1 with confidence 0.44"
+   },
+   "attempts": [
+    {
+     "environment": "home worktree",
+     "finished_at": 350.0,
+     "model": "prime-1",
+     "patch": "--- a/hook.py\n+++ b/hook.py\n@@ -3,1 +3,1 @@\n-timeout = 5\n+timeout = 30\n",
+     "result": "red",
+     "tokens": 120400
+    },
+    {
+     "environment": "shadow worktree",
+     "finished_at": 342.0,
+     "model": "shadow-1",
+     "patch": "--- a/hook.py\n+++ b/hook.py\n@@ -3,1 +3,1 @@\n-timeout = 5\n+timeout = 10\n",
+     "result": "red",
+     "tokens": 118900
+    }
+   ],
+   "task": "retry the flaky hook"
+  },
+  {
+   "adjudication": {
+    "adjudicator": "jev-1.13.0",
+    "chosen": "prime-1",
+    "confidence": 0.84,
+    "reason": "jev-1.13.0 chose prime-1 with confidence 0.84"
+   },
+   "attempts": [
+    {
+     "environment": "home worktree",
+     "finished_at": 512.5,
+     "model": "prime-1",
+     "patch": "--- a/pool.py\n+++ b/pool.py\n@@ -2,1 +2,1 @@\n-name = \"pool\"\n+name = \"workers\"\n",
+     "result": "red",
+     "tokens": 65400
+    },
+    {
+     "environment": "shadow worktree",
+     "finished_at": 512.5,
+     "model": "shadow-1",
+     "patch": "--- a/pool.py\n+++ b/pool.py\n@@ -2,1 +2,1 @@\n-name = \"pool\"\n+name = \"fleet\"\n",
+     "result": "red",
+     "tokens": 67100
+    }
+   ],
+   "task": "name the worker pool"
+  },
+  {
+   "adjudication": {
+    "adjudicator": "jev-1.13.0",
+    "chosen": "shadow-1",
+    "confidence": 0.3,
+    "reason": "jev-1.13.0 chose shadow-1 with confidence 0.3"
+   },
+   "attempts": [
+    {
+     "environment": "home worktree",
+     "model": "prime-1",
+     "patch": "--- a/NOTES.md\n+++ b/NOTES.md\n@@ -1,1 +1,2 @@\n # migration\n+step one, copy the tables\n",
+     "result": "unfinished",
+     "tokens": 23100
+    },
+    {
+     "environment": "shadow worktree",
+     "model": "shadow-1",
+     "patch": "--- a/NOTES.md\n+++ b/NOTES.md\n@@ -1,1 +1,2 @@\n # migration\n+step one, dump the schema\n",
+     "result": "unfinished",
+     "tokens": 19800
+    }
+   ],
+   "task": "draft the migration note"
+  },
+  {
+   "adjudication": {
+    "adjudicator": "jev-1.13.0",
+    "chosen": "shadow-1",
+    "confidence": 0.8,
+    "reason": "jev-1.13.0 chose shadow-1 with confidence 0.8"
+   },
+   "attempts": [
+    {
+     "environment": "home worktree",
+     "finished_at": 600.0,
+     "model": "prime-1",
+     "patch": "--- a/prompt.py\n+++ b/prompt.py\n@@ -2,1 +2,1 @@\n-BUDGET = 9000\n+BUDGET = 6000\n",
+     "result": "green",
+     "tokens": 149800
+    },
+    {
+     "environment": "shadow worktree",
+     "finished_at": 590.0,
+     "model": "shadow-1",
+     "patch": "--- a/prompt.py\n+++ b/prompt.py\n@@ -2,4 +2,3 @@\n-BUDGET = 9000\n-history = load_history()\n-prompt = build(history)\n+prompt = build_recent(6000)\n",
+     "result": "green",
+     "tokens": 132600
+    }
+   ],
+   "task": "shrink the prompt budget"
+  },
+  {
+   "adjudication": {
+    "adjudicator": "jev-1.13.0",
+    "chosen": "prime-1",
+    "confidence": 0.42,
+    "reason": "jev-1.13.0 chose prime-1 with confidence 0.42"
+   },
+   "attempts": [
+    {
+     "environment": "home worktree",
+     "finished_at": 275.5,
+     "model": "prime-1",
+     "patch": "--- a/tokens.py\n+++ b/tokens.py\n@@ -5,1 +5,2 @@\n-count = count_tokens(text)\n+count = cached_count(text)\n",
+     "result": "green",
+     "tokens": null
+    },
+    {
+     "environment": "shadow worktree",
+     "finished_at": 270.0,
+     "model": "shadow-1",
+     "patch": "--- a/tokens.py\n+++ b/tokens.py\n@@ -5,1 +5,1 @@\n-count = count_tokens(text)\n+count = len(text) // 4\n",
+     "result": "green",
+     "tokens": 58700
+    }
+   ],
+   "task": "cache the token count"
+  },
+  {
+   "adjudication": {
+    "adjudicator": "jev-1.13.0",
+    "chosen": "prime-1",
+    "confidence": 0.88,
+    "reason": "jev-1.13.0 chose prime-1 with confidence 0.88"
+   },
+   "attempts": [
+    {
+     "environment": "home worktree",
+     "finished_at": 288.0,
+     "model": "prime-1",
+     "patch": "--- a/seeds.py\n+++ b/seeds.py\n@@ -3,1 +3,1 @@\n-seeds = load()\n+seeds = sorted(load())\n",
+     "result": "red",
+     "tokens": 44700
+    },
+    {
+     "environment": "shadow worktree",
+     "finished_at": 301.0,
+     "model": "shadow-1",
+     "patch": "--- a/seeds.py\n+++ b/seeds.py\n@@ -3,1 +3,1 @@\n-seeds = load()\n+seeds = sorted(load(), reverse=True)\n",
+     "result": "red",
+     "tokens": 46200
+    }
+   ],
+   "task": "sort the seed list"
+  },
+  {
+   "adjudication": {
+    "adjudicator": "jev-1.13.0",
+    "chosen": "shadow-1",
+    "confidence": 0.06,
+    "reason": "jev-1.13.0 chose shadow-1 with confidence 0.06"
+   },
+   "attempts": [
+    {
+     "environment": "home worktree",
+     "finished_at": 1000.0,
+     "model": "prime-1",
+     "patch": "--- a/config.py\n+++ b/config.py\n@@ -6,1 +6,1 @@\n-config = base\n+config = base | local\n",
+     "result": "green",
+     "tokens": 210300
+    },
+    {
+     "environment": "shadow worktree",
+     "finished_at": 955.0,
+     "model": "shadow-1",
+     "patch": "--- a/config.py\n+++ b/config.py\n@@ -6,2 +6,1 @@\n-config = base\n-config.update(local)\n+config = {**base, **local}\n",
+     "result": "green",
+     "tokens": 205900
+    }
+   ],
+   "task": "merge the config layers"
+  }
+ ],
+ "task": "the recorded close call pilot",
+ "wins_target": 3
+}

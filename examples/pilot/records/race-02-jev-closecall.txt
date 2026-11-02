@@ -1,0 +1,4 @@
+closecall trim the import list
+in the band, both attempts went green and the gap of 5.25 seconds is within five percent of the slower finish of 505.25 seconds
+adjudication by jev-1.13.0 abstained at confidence 0.62, below the threshold of 0.8
+verdict, no winner

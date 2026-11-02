@@ -1,0 +1,61 @@
+{
+  "id": "gen-1793628582-Kr8zlMTmjSBjb583mNQw",
+  "object": "chat.completion",
+  "created": 1793628582,
+  "model": "openai/gpt-6-luna",
+  "provider": "OpenAI",
+  "system_fingerprint": null,
+  "service_tier": "default",
+  "choices": [
+    {
+      "index": 0,
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "message": {
+        "role": "assistant",
+        "content": "{\"choice\":\"shadow-1\",\"confidence\":0.65,\"probabilities\":{\"prime-1\":0.35,\"shadow-1\":0.65}}",
+        "refusal": null,
+        "reasoning": "**Determining migration steps**\n\nI need to decide which approach is better for drafting a migration note. I have two unfinished options: \"copy the tables\" and \"dump the schema.\" The first step should likely be \"dump the schema\" since it's more technically accurate than just copying tables, which could lead to skipping necessary schema details. I need to choose option shadow-1 and assess my confidence level in this choice, which I'm estimating at around 0.65.",
+        "reasoning_details": [
+          {
+            "type": "reasoning.summary",
+            "summary": "**Determining migration steps**\n\nI need to decide which approach is better for drafting a migration note. I have two unfinished options: \"copy the tables\" and \"dump the schema.\" The first step should likely be \"dump the schema\" since it's more technically accurate than just copying tables, which could lead to skipping necessary schema details. I need to choose option shadow-1 and assess my confidence level in this choice, which I'm estimating at around 0.65.",
+            "format": "openai-responses-v1",
+            "index": 0
+          },
+          {
+            "type": "reasoning.encrypted",
+            "data": "gAAAAABq6JmpNnZghWoAtmyCN_AAs630CScCEym_Dh-zdOlrcjMRrcNMXKi1wnaB-8tSUoIa7H_h45SOsh5dr44yvkIVcnuiIJzUguOTOfPySooDCyfSEqXpz8wxZxJBpCUvLKrzMvtONIM881DXWoDXIFwDPUhbdPY70TQ9yeYHhXmKcKe1GJVC_JjzC72JXe4h1sScx01wMd3IR5rw-YFwCZN-SYd0dr424Tl81bnibq8eZXsmVIxvROhbbXjyyPq-1kMTFW6tl_9s3QYZgP_AKuFitKwcrVDixCf6e_lzV4h6quoR0lmTRl9P5MPIMAT8ZRE7zxjyu2_M0lW8yRRpvDcid-3HadfHwDSzCUMkB0uvXh51bObNJNk-MOu9Ir6JXb6l-UgO8WSRduwMQznqr0HmOIYwjbEE4hZJJHrZLFYrkQIP95xloWSOAx2jCkBLT8FuneLzvTTemordfaz-6kVOgVOvU4EhK-p1_xlrLo-NONHU8vTFr4XvQxz0WTfLpO_x_18ZyVFxPzV4J10eHlm3QOK0KDRjKDJnTBIRG2wnmzCpXF9iXcDGDjLL4CLNBiRzo8AkXxbhXXatiRrflOBycYeEkj4ddiSgFhlbwgn96V8QELrl3ax8_PSMmfw6DsAZzl_9QH8hI8Ct3yxDJosoF6QYoZxV7Pas-Lp-RvHe8vIkMFk8Qy_NADvPPUgc6tsaoc7CgKDj68_G2EUPAlM5FUCeBRnppFIDc7dMCqC2bHYNEFHZZWoE3TzQBiTMpmJcbpgvyBC1pSm977Qd3s998IbZ5X56zpIHenbgci1NQsokAPLA0HahYTT-cabC8eYV1qazKsCypzPtECsX-rIZlW1AwhmW8TjmHBbaAS9tm-TNVZEaTPjHUlShXJfTqBHO6CEVRpATRyS4j-wJnQhYr4VpmUc56B1Ia7LcehqLm5078XY1ioNRRgRaL5DmkplhDaJV2YwRhugitQE-eXmSM11VjbxSOX3V4KDfHsshA2_sVN8l66Z4p3uzLvDLz6is_ELNrCQRUKS7dUkqqy6G0g1afuhtIUj0Tgvn-zTmm3e7eMzbreACjfs8DKhKtycgH-bPYkLZdLqLqL_tnEZpR8QwSFCmnuZfMyE0dhykg2aXBb5wjl1YnozjQr3tSBMqrUT7QZIhbo9Qwpx7yENKQ_e8C3EXzKlsfKXoaOJNSPzr9oS1Umk2nWPafLq33jnDzdWpW7K_7TnLvb2gfF2ZHS-4wDhXDmUDjJi5bSXImsuZVq7kI8wkS3n3nKiEMfh29y-c5iNzsmMuNQLL2y7DSZHhcIIKwpC6EdChhZtlEvHzni5uC6XVhDoF4o-p4UlasnjekxifKsUr10zgAqKnBOzIKGko_z_KkNG1b4Ak4fyQ0poAUO3N4UshQRIEe0etSYrVsW4EyYIywpOLtT_EJuBR6-oZERMKCpNnr4CW7Pkb12oy6hFRTJB4hJakH-nzemQvT9h1CuZRPMZVN8bOKiaYBv4CSZ9wZm4TZe9T5L-KFEJLBSWDnUO1mKdQSgbvDAW4W216pQveiDRWVFUbuyyMpUsI7XEFJg5r-qf2FYTB4cV-cPzGNB1mNBOhE3mKKAHy9M0Jh6N435DhzSWmL0sYFByJaYoHb0hvhrE5Nz_GMa3_sR23LhbXwS_79-9PoRJ1dyTt3D3FF61AABwrHIadOFhX07_HBMGVC7kAh_R0jeAVm4-txZOWeP8k8Yv6TJb6NYhBN3zfGH3xtbejmeurD-ZOR-GrvXLzRpKCybGu4JR6H0pRF8pWMV4Uv_dY5RZfDQZNE7c6AhwX3BaAoCfBlRoeNtUjXNtvvL07NyaKM7NE9awErsx7vcVmZvvLxvumhZlDiMV2igfmMGbju9F1DFpF7eXUhhs9OBtuvzjkFJorX8abTB3JqQxfSjw7_D8B-VcBOLrx4uCNCvFt-TgvMjvi_rMhYhocbAofkD79dWPihFx5zBcHne8rso5c29SzpnEZ3uRtlwTBmu44fbHisuku3r23bjGmAMD92UYK-q0-FGKXQ_c2xnoEvnLjYMKhm6o_T8Ln0uVkIPknH8bJb5_2hn22_N8ebzexPzh0HWbNq9tIbImGRLb6wjqtYBuz8JTaowyyvVUIaeQuJoxsYt-46KOTb3xIHeR7j-pPZ5Vk1o7Ni63MZ7A22hgfu8H9YPH0aLyXx43Sypl5-3cunSp_S9BL727klAXCqU_kDzh1qcoufZCYyUL9m196sjcPcGW6luqBNI2YGb4efYwH9Ct1cxt2n2aOwtdQ6Aqk3iB0vGlRA8qpiccd2-Wi8WMpr7837pE_Lr4z7NtD5ypzmclh9HiACTU6VsKIiDTi69suJ-97KiZxIs7mm6JZRGFv5PsQr4LF_zYE1j3dQBT8G-e6f4Ja_PVubsylyyR9oi1CranMWJawWZefI7KDoruDlLHHF-D2esyLJ6v9EzbOnvn1qAL1QgkezufHrrusBCR7OsqfkMOaRudcXp_ggtTh5hFChvit1IWn-HXXdizyiinDzmeBnxIK-pQlQ4JKFl_85ufNDfsc1HkFC_qiaqJx5snnM3q1Oz7sC4oTeAMeHdNWpJRrVmJ_DoW5CKhsPfqS13YnJSag3xdkKF0b4kC4W3PxdKTXwJKztMH2A609HOv_M3YJeWYtiolPSmPYxh_Vwc96YLRewacwgiEvMwGQwWif9QzcT5mU85aLpDC2RRLOSHyQCfjqKyTQs_cObD_9F7YHaHsyvXUrlu2H4VEjn_Ziv_RCLElTuR9LPUBIyeLyJT6dmxJdhiRh60BzxI_rVfoeLDCb6LADwsISmkiqLG7CqC0nsoUaYCcOjKUYbKL-xVqdwS7S3FxoiZPNmDXM13cnOT4YZYXNHT6BK50jwlzERStsGsDufuo5izerjixfDueaewE0dU7yXdZzFLRJqg1ggSPvM2mKx4_KdSXN0REoa3ppQsqT3yMMZNq9A3PxVCeba-aJ_Gs5gqM0sG5no5kXIlsTwHSSX_H4YCacOtIkHpyt8oEAoW3gYRCtXyHdIRovjojLCCcMq4Scbzr4RIE2hAhRCfT6ewy-IaaYsvBltjrffpodzSaF4XlSmR3XHNsDFOqIi6F2jFfLZG0irlmRoahB6UEbUzK5NEhB5gRJ-8gl7CvwOMJhCl_NXD4gmD-Q36dylV0RfILARvYoWKTmtzO_o4y7ObwTxKFeSoCnFfyDZF1KKa2skXBFDh5qjgjmB98S-18IedrUgEw=.eyJlbmRwb2ludF9zbHVnIjoib3BlbmFpL2dwdC02LWx1bmEtMjAyNjA5MjJ8b3BlbmFpIn0",
+            "format": "openai-responses-v1",
+            "id": "rs_02ed728fac2b52a4016ae899a6e9c887d18ca90847da0a5e2e",
+            "index": 1
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 227,
+    "completion_tokens": 168,
+    "total_tokens": 395,
+    "cost": 0.0001067,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0001067,
+      "upstream_inference_prompt_cost": 2.27e-05,
+      "upstream_inference_completions_cost": 8.4e-05
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 130,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  }
+}
