@@ -8,7 +8,14 @@ You start a task and the race begins. Your agent works in your worktree. A fork 
 
 ## Status
 
-Seeded on 2026-10-29. The concept is claimed and the build has not started.
+Seeded in October 2026. Setup has landed and the build has not started. Part of the Spectacle line in the 39 repo storefront perfection programme.
+
+## Programme status
+
+- Closed perfection rounds, 0 of 100. A round counts only when a full cycle of work, audit, review, red team, and approval has closed. Seeding and setup are not rounds.
+- Contract, SETUP-1 to SETUP-4 met by the setup slice. The first slice obligations DH-1 to DH-4 stand in stub form in CONTRACT.md and are not yet met.
+- The first slice races two recorded or locally run attempts at the same task in separate environments, first green wins, the funeral rendered, and the season standings file started.
+- Local gate, python3 scripts/codepoint_scan.py and python3 -m pytest tests -q. CI runs the same commands.
 
 ## Licence
 
