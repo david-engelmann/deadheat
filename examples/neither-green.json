@@ -1,0 +1,1 @@
+{"attempts":[{"environment":"home worktree","finished_at":305.5,"model":"prime-1","patch":"--- a/importer.py\n+++ b/importer.py\n@@ -1,1 +1,1 @@\n-import legacy_csv\n+import csv\n","result":"red","tokens":90250},{"environment":"shadow worktree","model":"shadow-1","patch":"","result":"unfinished","tokens":null}],"task":"unbreak the nightly import"}

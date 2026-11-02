@@ -1,0 +1,8 @@
+race unbreak the nightly import
+prime-1 in home worktree, red in 305.5 seconds, 90250 tokens
+shadow-1 in shadow worktree, unfinished, tokens unreported
+verdict, no winner
+funeral for unbreak the nightly import
+no winner, neither suite went green
+prime-1 in home worktree went red in 305.5 seconds
+shadow-1 in shadow worktree never finished
