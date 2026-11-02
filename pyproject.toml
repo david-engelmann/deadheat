@@ -9,6 +9,9 @@ description = "Every task raced by a shadow fork on a rival model, season standi
 requires-python = ">=3.11"
 license = "MIT"
 
+[project.scripts]
+deadheat = "deadheat.cli:main"
+
 [tool.setuptools.packages.find]
 where = ["src"]
 

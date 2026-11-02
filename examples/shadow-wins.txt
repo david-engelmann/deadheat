@@ -1,0 +1,8 @@
+race land the settings migration
+prime-1 in home worktree, red in 812.4 seconds, 152300 tokens
+shadow-1 in shadow worktree, green in 640.75 seconds, 121900 tokens
+verdict, shadow-1 wins
+funeral for land the settings migration
+winner shadow-1 in shadow worktree went green in 640.75 seconds
+loser prime-1 in home worktree went red in 812.4 seconds
+margin 171.65 seconds between the two finishes
