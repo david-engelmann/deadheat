@@ -1,0 +1,11 @@
+race rescue the stuck migration
+prime-1 in home worktree, red in 210.5 seconds, 64200 tokens
+shadow-1 in shadow worktree, red in 402.25 seconds, tokens unreported
+verdict, no winner
+close call, no adjudication on record
+funeral for rescue the stuck migration
+no winner, neither suite went green
+prime-1 in home worktree went red in 210.5 seconds
+shadow-1 in shadow worktree went red in 402.25 seconds
+close call, no adjudication on record, the race stands as a dead heat
+margin 191.75 seconds between the two finishes

@@ -7,6 +7,7 @@ its outcomes, and the standings update is pinned as exact dicts.
 
 import copy
 import json
+from fractions import Fraction
 
 from deadheat.races import (
     adopt_patch,
@@ -447,7 +448,8 @@ def test_the_report_lines_for_a_decided_race():
 def test_the_report_states_no_winner_when_neither_goes_green():
     data = valid_race(attempts=[valid_attempt(result="red"), other_attempt()])
     lines = race_report(loaded(data))
-    assert lines[-1] == "verdict, no winner"
+    assert lines[-2] == "verdict, no winner"
+    assert lines[-1] == "close call, no adjudication on record"
 
 
 def test_the_funeral_lines_for_a_decided_race():
@@ -498,6 +500,12 @@ def test_no_margin_line_when_the_loser_never_finished():
 
 
 def test_a_sub_precision_margin_renders_at_full_precision():
+    # Altered under FIX-DH-8, a named mechanical consequence of the
+    # amendment. The pin first asserted the float repr prefix of
+    # the margin line, and the amendment retires float rendering,
+    # so the line now carries the exact expansion of the gap in
+    # plain decimal notation. The guard against a zero margin
+    # stands.
     data = valid_race(
         attempts=[
             valid_attempt(finished_at=1.0),
@@ -505,7 +513,10 @@ def test_a_sub_precision_margin_renders_at_full_precision():
         ]
     )
     lines = funeral(loaded(data))
-    assert lines[-1].startswith("margin 4.")
+    assert lines[-1] == (
+        "margin 0.0000004000000000115022658064845018088817596435546875 "
+        "seconds between the two finishes"
+    )
     assert "margin 0 seconds" not in lines[-1]
 
 
@@ -513,6 +524,25 @@ def test_format_seconds_renders_plain_values():
     assert format_seconds(30.25) == "30.25"
     assert format_seconds(10.0) == "10"
     assert format_seconds(0) == "0"
+
+
+def test_format_seconds_renders_a_large_integer_digit_for_digit():
+    assert format_seconds(123456789012345678) == "123456789012345678"
+    assert format_seconds(100000000000000000001) == (
+        "100000000000000000001"
+    )
+
+
+def test_format_seconds_rounds_an_exact_half_up_on_the_exact_value():
+    assert format_seconds(0.0078125) == "0.007813"
+
+
+def test_format_seconds_renders_a_terminating_sub_floor_figure_in_full():
+    assert format_seconds(1 / 2**22) == "0.0000002384185791015625"
+
+
+def test_format_seconds_rounds_a_non_terminating_sub_floor_figure():
+    assert format_seconds(Fraction(1, 30000000)) == "0.000000033333"
 
 
 # The loser patch operations, DH-3

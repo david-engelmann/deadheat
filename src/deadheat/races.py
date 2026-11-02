@@ -3,13 +3,14 @@
 Every function in this module is a pure function of its inputs, and
 the loaders never raise on malformed content. The obligations this
 module carries are DH-1 to DH-4 in CONTRACT.md, in the full form
-section.
+section, and DH-5 in the Round 2 section.
 """
 
 import json
 import math
 import pathlib
 import re
+from fractions import Fraction
 
 _RESULTS = ("green", "red", "unfinished")
 _STANDINGS_FIELDS = ("wins", "losses", "no_results", "tokens", "tokens_unreported")
@@ -51,19 +52,77 @@ def _holds_unpaired_surrogate(text):
     return False
 
 
-def format_seconds(value):
-    """Render a number of seconds the same way everywhere it appears.
+def _round_half_up_units(fraction, places):
+    """Return the count of units a fraction rounds to at a precision.
 
-    Values render exactly at up to six decimal places. A nonzero
-    value that rounds to zero at that precision renders at full
-    precision instead, so a margin never prints as zero.
+    The count is taken on the exact value, and an exact half rounds
+    up. Every value the renderers pass is non negative, a finish
+    time, a confidence, or a gap taken as an absolute value, so the
+    rule needs no sign case.
     """
-    number = round(float(value), 6)
-    if number == 0 and float(value) != 0:
-        return repr(float(value))
-    if number == int(number):
-        return str(int(number))
-    return f"{number:.6f}".rstrip("0").rstrip(".")
+    scaled = fraction * (10 ** places)
+    units = scaled.numerator // scaled.denominator
+    if 2 * (scaled - units) >= 1:
+        units += 1
+    return units
+
+
+def _render_units(units, places):
+    """Render a count of units at a precision in plain decimal."""
+    whole, part = divmod(units, 10 ** places)
+    if part == 0:
+        return str(whole)
+    digits = f"{part:0{places}d}".rstrip("0")
+    return f"{whole}.{digits}"
+
+
+def _exact_expansion(fraction):
+    """Return the exact decimal expansion of a fraction, or None.
+
+    The expansion terminates exactly when the denominator of the
+    fraction in its lowest terms carries no prime factor other than
+    two and five.
+    """
+    denominator = fraction.denominator
+    twos = 0
+    while denominator % 2 == 0:
+        denominator //= 2
+        twos += 1
+    fives = 0
+    while denominator % 5 == 0:
+        denominator //= 5
+        fives += 1
+    if denominator != 1:
+        return None
+    places = max(twos, fives)
+    return _render_units(int(fraction * (10 ** places)), places)
+
+
+def format_seconds(value):
+    """Render a number the same way everywhere it appears.
+
+    Seconds and confidence figures both render through here, from
+    the exact value and never through a float. A figure that needs
+    six or fewer decimal places renders exactly. A figure that
+    needs more renders rounded at six decimal places, with an
+    exact half at the seventh place rounding up on the exact
+    value. A nonzero figure that rounds to zero at six places
+    renders its exact decimal expansion when that expansion
+    terminates, and otherwise renders rounded at twelve decimal
+    places with halves rounding up. Every figure renders in plain
+    decimal notation and never in scientific notation, so a nonzero
+    margin never prints as zero.
+    The rule is FIX-DH-8 in CONTRACT.md, amending DH-3 and DH-5.
+    """
+    fraction = Fraction(value)
+    if (fraction * 1000000).denominator == 1:
+        return _render_units(int(fraction * 1000000), 6)
+    if fraction != 0 and fraction < Fraction(1, 2000000):
+        expansion = _exact_expansion(fraction)
+        if expansion is not None:
+            return expansion
+        return _render_units(_round_half_up_units(fraction, 12), 12)
+    return _render_units(_round_half_up_units(fraction, 6), 6)
 
 
 def _check_text_field(data, name, defects):
@@ -204,6 +263,88 @@ def _load_attempts(data, defects):
     return clean
 
 
+def _check_adjudication_text(entry, name, defects):
+    if name not in entry:
+        defects.append(f"adjudication is missing field {name}")
+        return None
+    value = entry[name]
+    if not isinstance(value, str):
+        defects.append(f"adjudication field {name} has the wrong type")
+        return None
+    if value == "":
+        defects.append(f"adjudication field {name} is empty")
+        return None
+    if _holds_unpaired_surrogate(value):
+        defects.append(
+            f"adjudication field {name} holds an unpaired surrogate"
+        )
+        return None
+    return value
+
+
+def _load_adjudication(data, attempts, defects):
+    if "adjudication" not in data:
+        return None
+    entry = data["adjudication"]
+    if not isinstance(entry, dict):
+        defects.append("field adjudication is not an object")
+        return None
+    before = len(defects)
+    adjudicator = _check_adjudication_text(entry, "adjudicator", defects)
+    chosen = _check_adjudication_text(entry, "chosen", defects)
+    reason = _check_adjudication_text(entry, "reason", defects)
+    if reason is not None and ("\n" in reason or "\r" in reason):
+        defects.append("adjudication field reason holds a newline")
+    confidence = None
+    if "confidence" not in entry:
+        defects.append("adjudication is missing field confidence")
+    elif not _is_number(entry["confidence"]):
+        defects.append("adjudication field confidence has the wrong type")
+    elif not _is_finite_number(entry["confidence"]):
+        defects.append(
+            "adjudication field confidence is not a finite number"
+        )
+    elif entry["confidence"] < 0 or entry["confidence"] > 1:
+        defects.append(
+            "adjudication field confidence is outside the range zero to one"
+        )
+    else:
+        confidence = entry["confidence"]
+    if chosen is not None and attempts is not None:
+        if chosen not in [attempt["model"] for attempt in attempts]:
+            defects.append(
+                "adjudication field chosen names no attempt in this race"
+            )
+    if len(defects) != before:
+        return None
+    return {
+        "adjudicator": adjudicator,
+        "chosen": chosen,
+        "confidence": confidence,
+        "reason": reason,
+    }
+
+
+def load_race_data(data):
+    """Build a race from a parsed JSON object, naming every defect.
+
+    Returns a pair of the race and the defect list. A malformed
+    object returns no race, and this function never raises on bad
+    content. The text and file entry points parse first and then
+    read the race through here.
+    """
+    defects = []
+    task = _check_text_field(data, "task", defects)
+    attempts = _load_attempts(data, defects)
+    adjudication = _load_adjudication(data, attempts, defects)
+    if defects:
+        return None, defects
+    race = {"task": task, "attempts": attempts}
+    if adjudication is not None:
+        race["adjudication"] = adjudication
+    return race, []
+
+
 def load_race_text(text):
     """Parse recorded race text into a race, naming every defect found.
 
@@ -217,12 +358,7 @@ def load_race_text(text):
         return None, ["input is not valid JSON"]
     if not isinstance(data, dict):
         return None, ["input is not a JSON object"]
-    defects = []
-    task = _check_text_field(data, "task", defects)
-    attempts = _load_attempts(data, defects)
-    if defects:
-        return None, defects
-    return {"task": task, "attempts": attempts}, []
+    return load_race_data(data)
 
 
 def load_race_file(path):
@@ -234,15 +370,113 @@ def load_race_file(path):
     return load_race_text(text)
 
 
+def _exact(value):
+    """Return the exact fraction a recorded number names.
+
+    A float converts to the fraction of its exact binary value and
+    an int to itself, so comparisons built on this never round.
+    """
+    return Fraction(value)
+
+
+def is_close_call(race):
+    """Return whether a race sits in the close call band of DH-5.
+
+    Both attempts holding the same non green outcome is a close
+    call. Both attempts green is a close call when the finish times
+    differ and the gap is no more than five percent of the slower
+    finish. The comparison multiplies the exact gap by twenty and
+    compares it against the exact slower finish, so no rounding at
+    any precision can move a race across the band edge. An exact
+    tie of green finish times is not a close call.
+    """
+    first, second = race["attempts"]
+    if first["result"] != second["result"]:
+        return False
+    if first["result"] != "green":
+        return True
+    gap = abs(_exact(first["finished_at"]) - _exact(second["finished_at"]))
+    slower = max(_exact(first["finished_at"]), _exact(second["finished_at"]))
+    return gap > 0 and gap * 20 <= slower
+
+
+_CONFIDENCE_THRESHOLD = Fraction(4, 5)
+
+
+def _confidence_meets(confidence):
+    """Return whether a recorded confidence meets the DH-5 threshold.
+
+    The threshold is the constant _CONFIDENCE_THRESHOLD, four
+    fifths, and this comparison is its one home. The recorded
+    figure is compared against it on exact fractions, so a
+    recorded 0.8 meets the threshold and no rounding can move a
+    verdict across it.
+    """
+    return _exact(confidence) >= _CONFIDENCE_THRESHOLD
+
+
+def _format_confidence(confidence):
+    """Render a confidence for a line reporting it below the threshold.
+
+    The figure renders the way seconds render, with one exception.
+    A confidence below the threshold whose rendering at six places
+    would print the threshold figure itself renders in full
+    precision instead, its exact decimal expansion when that
+    expansion terminates and otherwise rounded at twelve decimal
+    places with halves rounding up on the exact value. A line
+    reporting an abstention therefore never shows a confidence
+    equal to the threshold. The rule is FIX-DH-10 in CONTRACT.md,
+    amending DH-5.
+    """
+    fraction = _exact(confidence)
+    if fraction < _CONFIDENCE_THRESHOLD and format_seconds(
+        confidence
+    ) == format_seconds(_CONFIDENCE_THRESHOLD):
+        expansion = _exact_expansion(fraction)
+        if expansion is not None:
+            return expansion
+        return _render_units(_round_half_up_units(fraction, 12), 12)
+    return format_seconds(confidence)
+
+
+def _adjudication_state(race):
+    """Name what the adjudication machinery does to a race.
+
+    The words are decided when an entry in the band meets the
+    confidence threshold, abstained when an entry in the band falls
+    below it, unrecorded when the band holds no entry, not needed
+    when an entry rides on a race outside the band, and absent when
+    the race carries no entry and sits outside the band.
+    """
+    entry = race.get("adjudication")
+    if not is_close_call(race):
+        return "not needed" if entry is not None else "absent"
+    if entry is None:
+        return "unrecorded"
+    if _confidence_meets(entry["confidence"]):
+        return "decided"
+    return "abstained"
+
+
 def decide_winner(race):
     """Return the winning and losing attempts of a race.
 
-    A green attempt beats a red or unfinished attempt. When both
-    attempts are green the earlier finish wins, and an exact tie of
-    finish times goes to the attempt that stands first in the
-    record. When neither attempt is green both returns are None.
+    A close call under DH-5 is decided for the chosen attempt when
+    its adjudication entry meets the confidence threshold, and
+    stands with no winner otherwise. Outside the band a green
+    attempt beats a red or unfinished attempt. When both attempts
+    are green the earlier finish wins, and an exact tie of finish
+    times goes to the attempt that stands first in the record.
+    When neither attempt is green both returns are None.
     """
     first, second = race["attempts"]
+    if is_close_call(race):
+        entry = race.get("adjudication")
+        if entry is not None and _confidence_meets(entry["confidence"]):
+            winner = first if first["model"] == entry["chosen"] else second
+            loser = second if winner is first else first
+            return winner, loser
+        return None, None
     greens = [attempt for attempt in race["attempts"] if attempt["result"] == "green"]
     if not greens:
         return None, None
@@ -295,6 +529,26 @@ def race_report(race):
         lines.append("verdict, no winner")
     else:
         lines.append(f"verdict, {winner['model']} wins")
+    entry = race.get("adjudication")
+    state = _adjudication_state(race)
+    if state == "decided":
+        lines.append(
+            f"close call, adjudication by {entry['adjudicator']} "
+            f"chose {winner['model']} at confidence "
+            f"{format_seconds(entry['confidence'])}"
+        )
+    elif state == "abstained":
+        lines.append(
+            f"close call, adjudication by {entry['adjudicator']} "
+            f"abstained at confidence {_format_confidence(entry['confidence'])}"
+        )
+    elif state == "unrecorded":
+        lines.append("close call, no adjudication on record")
+    elif state == "not needed":
+        lines.append(
+            f"adjudication by {entry['adjudicator']} not needed, "
+            "the race stands outside the close call band"
+        )
     return lines
 
 
@@ -308,8 +562,15 @@ def funeral(race):
     """
     lines = [f"funeral for {race['task']}"]
     winner, loser = decide_winner(race)
+    first, second = race["attempts"]
     if winner is None:
-        lines.append("no winner, neither suite went green")
+        if first["result"] == "green" and second["result"] == "green":
+            lines.append(
+                "no winner, both suites went green "
+                "inside the close call band"
+            )
+        else:
+            lines.append("no winner, neither suite went green")
         for attempt in race["attempts"]:
             lines.append(
                 f"{attempt['model']} in {attempt['environment']} "
@@ -324,13 +585,115 @@ def funeral(race):
             f"loser {loser['model']} in {loser['environment']} "
             f"{_outcome_phrase(loser)}"
         )
-    first, second = race["attempts"]
+    entry = race.get("adjudication")
+    state = _adjudication_state(race)
+    if state == "decided":
+        lines.append(
+            f"decided by adjudication, {entry['adjudicator']} "
+            f"chose {winner['model']} at confidence "
+            f"{format_seconds(entry['confidence'])}"
+        )
+    elif state == "abstained":
+        lines.append(
+            f"close call, adjudication by {entry['adjudicator']} "
+            f"abstained at confidence "
+            f"{_format_confidence(entry['confidence'])}, "
+            "the race stands as a dead heat"
+        )
+    elif state == "unrecorded":
+        lines.append(
+            "close call, no adjudication on record, "
+            "the race stands as a dead heat"
+        )
     if "finished_at" in first and "finished_at" in second:
-        margin = abs(first["finished_at"] - second["finished_at"])
+        margin = abs(
+            _exact(first["finished_at"]) - _exact(second["finished_at"])
+        )
         lines.append(
             f"margin {format_seconds(margin)} seconds "
             "between the two finishes"
         )
+    return lines
+
+
+def close_call_report(race):
+    """Return the closecall lines for one race.
+
+    The first line names the race. The second states whether the
+    race sits in the close call band and why. The next states what
+    the adjudication entry does when one matters, and the last is
+    the verdict line the race report uses. The report is a pure
+    function of the race.
+    """
+    first, second = race["attempts"]
+    lines = [f"closecall {race['task']}"]
+    if first["result"] == "green" and second["result"] == "green":
+        gap = abs(
+            _exact(first["finished_at"]) - _exact(second["finished_at"])
+        )
+        slower = max(
+            _exact(first["finished_at"]), _exact(second["finished_at"])
+        )
+        if gap == 0:
+            lines.append(
+                "outside the band, the finish times are tied and "
+                "the tie goes to the first attempt in the record"
+            )
+        elif is_close_call(race):
+            lines.append(
+                "in the band, both attempts went green and "
+                f"the gap of {format_seconds(gap)} seconds is within "
+                "five percent of the slower finish of "
+                f"{format_seconds(slower)} seconds"
+            )
+        else:
+            lines.append(
+                "outside the band, the gap of "
+                f"{format_seconds(gap)} seconds is wider than "
+                "five percent of the slower finish of "
+                f"{format_seconds(slower)} seconds"
+            )
+    elif first["result"] == second["result"]:
+        if first["result"] == "red":
+            lines.append("in the band, both attempts went red")
+        else:
+            lines.append("in the band, both attempts never finished")
+    else:
+        lines.append(
+            "outside the band, the two attempts hold different outcomes"
+        )
+    entry = race.get("adjudication")
+    state = _adjudication_state(race)
+    if state == "decided":
+        winner, _loser = decide_winner(race)
+        lines.append(
+            f"adjudication by {entry['adjudicator']} "
+            f"chose {winner['model']} at confidence "
+            f"{format_seconds(entry['confidence'])}, "
+            f"the race is decided for {winner['model']}"
+        )
+    elif state == "abstained":
+        lines.append(
+            f"adjudication by {entry['adjudicator']} "
+            f"abstained at confidence "
+            f"{_format_confidence(entry['confidence'])}, "
+            "below the threshold of "
+            f"{format_seconds(_CONFIDENCE_THRESHOLD)}"
+        )
+    elif state == "unrecorded":
+        lines.append(
+            "no adjudication on record, the race stands as no result"
+        )
+    elif state == "not needed":
+        lines.append(
+            f"adjudication by {entry['adjudicator']} not needed, "
+            "the race stands outside the close call band"
+        )
+    winner, _loser = decide_winner(race)
+    if winner is None:
+        lines.append("verdict, no winner")
+    else:
+        lines.append(f"verdict, {winner['model']} wins")
     return lines
 
 

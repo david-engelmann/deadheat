@@ -1,0 +1,4 @@
+closecall merge the duplicate webhooks
+in the band, both attempts went green and the gap of 20 seconds is within five percent of the slower finish of 500 seconds
+adjudication by judge-2 abstained at confidence 0.62, below the threshold of 0.8
+verdict, no winner

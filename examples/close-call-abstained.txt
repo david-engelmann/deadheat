@@ -1,0 +1,11 @@
+race merge the duplicate webhooks
+prime-1 in home worktree, green in 500 seconds, 132750 tokens
+shadow-1 in shadow worktree, green in 480 seconds, 129300 tokens
+verdict, no winner
+close call, adjudication by judge-2 abstained at confidence 0.62
+funeral for merge the duplicate webhooks
+no winner, both suites went green inside the close call band
+prime-1 in home worktree went green in 500 seconds
+shadow-1 in shadow worktree went green in 480 seconds
+close call, adjudication by judge-2 abstained at confidence 0.62, the race stands as a dead heat
+margin 20 seconds between the two finishes

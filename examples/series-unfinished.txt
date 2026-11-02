@@ -1,0 +1,11 @@
+series the nightly import saga
+prime-1 against shadow-1, first to 3 wins
+race 1, import race one, shadow-1 wins
+tally, prime-1 0 wins, shadow-1 1 wins, 0 no results
+race 2, import race two, prime-1 wins
+tally, prime-1 1 wins, shadow-1 1 wins, 0 no results
+race 3, import race three, no result
+tally, prime-1 1 wins, shadow-1 1 wins, 1 no results
+race 4, import race four, shadow-1 wins
+tally, prime-1 1 wins, shadow-1 2 wins, 1 no results
+series unfinished, the target of 3 wins is not reached

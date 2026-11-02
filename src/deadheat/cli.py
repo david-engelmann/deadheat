@@ -1,11 +1,13 @@
 """The deadheat command line surface.
 
-Four commands work on recorded races and the standings file. The
-race command prints the report and the funeral for one recorded
-race and can update a standings file. The adopt and discard
-commands perform the loser patch file operations. The standings
-command prints the standings table. Nothing here touches the
-network.
+Six commands work on recorded races, series, and the standings
+file. The race command prints the report and the funeral for one
+recorded race and can update a standings file. The adopt and
+discard commands perform the loser patch file operations. The
+standings command prints the standings table. The closecall
+command prints whether one recorded race sits in the close call
+band and why, and the series command prints the series report.
+Nothing here touches the network.
 """
 
 import argparse
@@ -14,6 +16,7 @@ import sys
 
 from deadheat.races import (
     adopt_patch,
+    close_call_report,
     discard_patch,
     empty_standings,
     funeral,
@@ -24,6 +27,7 @@ from deadheat.races import (
     standings_text,
     update_standings,
 )
+from deadheat.series import load_series_file, series_report
 
 
 def _load_race_or_print_defects(path):
@@ -99,6 +103,25 @@ def _command_standings(args):
     return 0
 
 
+def _command_closecall(args):
+    race = _load_race_or_print_defects(args.file)
+    if race is None:
+        return 1
+    for line in close_call_report(race):
+        print(line)
+    return 0
+
+
+def _command_series(args):
+    series, defects = load_series_file(args.file)
+    if defects:
+        _print_defects("invalid series file", defects)
+        return 1
+    for line in series_report(series):
+        print(line)
+    return 0
+
+
 def main(argv=None):
     """Run the deadheat command line and return the exit status."""
     parser = argparse.ArgumentParser(
@@ -121,6 +144,12 @@ def main(argv=None):
     standings = commands.add_parser("standings", help="print the standings table")
     standings.add_argument("file")
     standings.set_defaults(handler=_command_standings)
+    closecall = commands.add_parser("closecall", help="print whether one recorded race sits in the close call band and why")
+    closecall.add_argument("file")
+    closecall.set_defaults(handler=_command_closecall)
+    series = commands.add_parser("series", help="print the series report for one series file")
+    series.add_argument("file")
+    series.set_defaults(handler=_command_series)
     args = parser.parse_args(argv)
     return args.handler(args)
 
