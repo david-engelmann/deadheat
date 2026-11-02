@@ -1,0 +1,4 @@
+closecall sort the seed list
+in the band, both attempts went red
+adjudication by jev-1.13.0 chose prime-1 at confidence 0.88, the race is decided for prime-1
+verdict, prime-1 wins

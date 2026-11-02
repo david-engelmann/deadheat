@@ -1,0 +1,4 @@
+closecall draft the migration note
+in the band, both attempts never finished
+adjudication by jev-1.13.0 abstained at confidence 0.3, below the threshold of 0.8
+verdict, no winner

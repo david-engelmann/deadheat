@@ -1,0 +1,18 @@
+{
+  "model": "jev-1.13.0",
+  "answers": {
+    "decision": {
+      "type": "choice",
+      "choice": "prime-1",
+      "confidence": 0.84,
+      "probabilities": {
+        "prime-1": 0.92,
+        "shadow-1": 0.08
+      }
+    }
+  },
+  "usage": {
+    "input_tokens": 502,
+    "output_tokens": 37
+  }
+}

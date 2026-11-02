@@ -1,0 +1,4 @@
+closecall cache the token count
+in the band, both attempts went green and the gap of 5.5 seconds is within five percent of the slower finish of 275.5 seconds
+adjudication by jev-1.13.0 abstained at confidence 0.42, below the threshold of 0.8
+verdict, no winner

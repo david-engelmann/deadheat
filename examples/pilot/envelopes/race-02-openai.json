@@ -1,0 +1,61 @@
+{
+  "id": "gen-1793628178-NcPAYGayREFXrrH0da1R",
+  "object": "chat.completion",
+  "created": 1793628178,
+  "model": "openai/gpt-6-luna",
+  "provider": "OpenAI",
+  "system_fingerprint": null,
+  "service_tier": "default",
+  "choices": [
+    {
+      "index": 0,
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "message": {
+        "role": "assistant",
+        "content": "{\"choice\":\"prime-1\",\"confidence\":0.98,\"probabilities\":{\"prime-1\":0.98,\"shadow-1\":0.02}}",
+        "refusal": null,
+        "reasoning": "**Evaluating import removal**\n\nI need to figure out the task involving trimming the import list. Both approaches aim to remove imports, but Prime removes both os and sys, while Shadow only removes os. The task probably expects unused imports to be removed, so I should look for what’s actually being used in report.py. The primary question is whether sys is still in use. Given that Prime is more comprehensive, it seems the better choice for trimming the import list. However, I wonder if the whole file context is being considered here.**Choosing import removal method**\n\nIt seems we're looking at either just the imports or a shortened diff. The hunk indicates there are three original lines and one new line, suggesting the file indeed only has those three lines. Since both os and sys look unused and Prime removes both, while Shadow retains sys, I think I’ll confidently choose Prime as the better option. The confidence here is quite high at .98, which makes this decision feel solid!",
+        "reasoning_details": [
+          {
+            "type": "reasoning.summary",
+            "summary": "**Evaluating import removal**\n\nI need to figure out the task involving trimming the import list. Both approaches aim to remove imports, but Prime removes both os and sys, while Shadow only removes os. The task probably expects unused imports to be removed, so I should look for what’s actually being used in report.py. The primary question is whether sys is still in use. Given that Prime is more comprehensive, it seems the better choice for trimming the import list. However, I wonder if the whole file context is being considered here.**Choosing import removal method**\n\nIt seems we're looking at either just the imports or a shortened diff. The hunk indicates there are three original lines and one new line, suggesting the file indeed only has those three lines. Since both os and sys look unused and Prime removes both, while Shadow retains sys, I think I’ll confidently choose Prime as the better option. The confidence here is quite high at .98, which makes this decision feel solid!",
+            "format": "openai-responses-v1",
+            "index": 0
+          },
+          {
+            "type": "reasoning.encrypted",
+            "data": "gAAAAABq6JgYnU6JNefCvGo8IrEj0WyRMsCVemliJGC9NWwJt9pJd-FsaVtN5e-rZPG80vMoBIGWW9-FlgTFYCPjhXy3pHs12ivceRHEjey7n1hFe3dqYcu1uQtQU6LWoVl-p9maFuANLFunSBl9fYsVB63FBL6uL10VWlh-GpsdtUyvxKW1P1jtfp6XmWqv05G_vAmBHfM8OrGB26KifKIHnh4fGmxUeoPvsIsFt0tzGT0XyIVvPPQ3ZzIYr3G5ev2PWQzuk9St_1ZE8pzXLgh8XJQr7AXy8CekNFUlVBqFS2ePYlJGk-DBzCvcuazNwKsBZ53AepcUlPpMTJOEeewzSGr9rRPNdWY7ZQWVczgL697PEDcXTwBwOHlm9bGw6F0p_gCOOWqLgVtGgZ5aZSw3TdzR5_SfMuO4sJPoCwNNKtNkjTA-ZVg-w55FwYQQd67HJP1dBcvBFbAAXH1ItzGXddG9rxqi53pdBPEawZzWHgTzcrWP-31kUSAuMrYS7dPLW3NBAqmWlWHyC8oUBhnBFR_bRD_6bcccx3kG6VJ9ZVpLFsbvb0DW7-S96RYeYrYSuzkk4KuhkJGBNPkyMWW_DNurn6K_diuwPIc2SHeM3XDSuYHMrVV15EolZH3XEuypwFaNx3kW04SETewlZQ6WLfROXGTZuozhvDncEa8-zkUE96DOD36DjFdMJqu_O8csIfaF6OzfgUNaaSGv3yczGJRh53lXX_3Qa4v2ZLGfkPvtkM0-si_ErVasjTY8IMxeOnunQYIC4WQ0tk1FPfrKfudcMib5g60zewC2sqHcvVkU7DG9JFonND-aAvuwD8DXPX-CLqXDExvkLZ1IJaFhbL8LTt8oSKG-8gfi5OQfGeWVLfUYAwgZU20pfggKpuSs_1OgqtWB406h4688p6gUs8mEeO0T-SD6BLtv_Ye97MmGmwRaz70mFGbktd9nLVeG8ed7EMD0e1RLNqxYjFOYA0-BekysLUzFbrdgajYyGgcbSO7N1ZZqsIQAPkNlqOnNeWnA-Gjk6G5lu9D-lnXV-lRSfez6MANBlJTAigAdQ77D9feU-p4aSkHLH4CRn1nsKAvc9IvRtq0_DkBTvbzCA7vFhfRtXJm0PacllzzXN_msGKTRJH_RNmwua7Tx7E1EDqQUktINcHIWGLr20vLQC5fQ_YJyBW5dwM1dc4VL0kcdVkll9cOvrh9W96MfRc7iWvXvaVhH4TaN3RNBUnBMVP1hDi7huivSunW40fMvN3CiILs4IlnoRAuIqqkA4HTRgog8TfbgKYzYXWVhUTw1uHHUee_X7oucLAPR2R9RNkOMLzIc4A35cCDbO68D9AdogKyhvU55iqec-AK_iCzb41y1anuocEqSQERDseLU8_FV-2grcjBQzktcpSozHXdrSXcTIb1jk7HSXErDsKcU11LhJfr33w_mJPbasjYX_0cE11mWyrvraYSTa_4OX1Omm_u0loHsK169auafx1mT-2c21_l5bDX0qqldZgEKBMaWfQ_8ItXBjshW0I0rtmKlVR4__51cPxsb_vJ2l_OTkFXbvAF19hUJJOdij8GrvvXNaS1unVXSo9NX3Dru3jI1y1VpXDT9rrczb1U5gAPS7cnEVAARUuxRGcCYKuLGVdc81Qubk3kL-CxJQPMNBm80GUrt46Is-gMqmnCfiHkpFMj7VIg9F_ld4UouLy_bfUJID2ccev3503d_8YgJXQ1YmMY3werID4wLLYqkSJ9VjiPUY--pLwKvrRpKW9StIY3NlK_mQVtYZLKf9UzqHjVpBeO6EoptmRo85LpxslrReKHr7IfL3CV6l-5J5KYUCg39TZIlaUDi5TevA4N5BHaFdS5nW-UOqfLLZesqHnDxApcToNTqU9pUatKCHj2VqTesLaKY-9QuA9W7ytTNkfEsUN-wt4QOTKpO0cQeSBP6vkm7XGfAz7ZmyT_Mt8b_njVB_tI7PXTm-QdWFXQatrwWIjIZvH1tPIsyP0JrOubvgiWvusI9se_ms5wodIt4xAhvQNVmkleYDCiC-Q8QaJlZiZYMTezz0RecTXaQChecv71_RXZVk_nkqxOZEiwxJ34CXq5xe_lXQ3UxANkrKH1TqoUQMfWnol5WO99_ohvmmvNUK47G9Vi9LDxFKl_c9FiW_FTCvjhBK1GkUsJV7O6PwJhRVRTPOltNsQtDoPff6YmpMWT84J6fpcsPVdXfnk3NoP651-OIXwK0k2UEVnWRBEAi3PRwaF1kOU6opEDbRVdugeNlFQqM5F6dh0oS_jSvD0rkY3CR9ZJuD_mBzeMvRbftOj1Hyejuei3BwIgDtOci3woUOWe3nMysDDcMHx7mIsYX8vOf8D5fGPsy38neo-9xO-FKA1h7eMZfFe6o4TVCXhoV-_gM3s1UqTLV7-1FyMZ9UGObSh_zPeNqJDZi3NsC5GrXNRCfTAoBFKLTSQJ8Nwi5gcXGOiCSQ18lRtAoUwQ7rKUEny-T-b28i3u1cbIdWyKxABm0X_cVgiLMzYYqtgi3zcQPsbCE22umUcdLxxQ1wDJEsdlgb1GWogt6wlrjylRNaiinIF7IMZQkxSnXvsOJJg3sKzFQK5GdUcrfJqI2otsdvT1t5NTFd-zhUNbhB3iHQ67LSDjPDNtE6lYLe9xK_PYxi_vdQhXGOm2RroE6n7kEh0Tym7EI9-8QGfkTGyE5-2YK9A3sHTnyyyFfIKCe1MWTx9EHhVCyFP4NnXBlQEJ5ZUz7USvyFsNhDoB6HSdn8BZZP3gi_nmHzVS3Wv4j_zZpRXYms8KTWGrKIQ05OFU9w0BH2PO0X336G_YX0fvZavFdZgwBfK8YsD-Ov0o3_4Y47y5NL8MVQaXhya-vWLlbVTAY1_gY1pijR39hgRt1tQEvpMjBRTkuFv3E4P8DAgryHYwoyRtfUhHBJzhb3hRqpGWKEwciVQkNjsKIFqZ5MQ8dpeCQhnUdm0hqhrBUKjV2wWdK8OP13jnzxvUx4CGaRy7wTG_vEg47qBU94Er1rA5Y6WoxxPBsFPeMSP0uHY6zbTjcs9J2bTs4xx1wRKEO0_vZ3OW23posiRf5-mTTfwXxfYaZXVRfWgvTJAkMdwkIzJI85Xg0UFvq5HVV4-rtZTfuWtQrodrFApBq56-KTM-ZXV0f6JZCn4Bln5cqwVZJc6TG9EAI90NLrorEz1z-Ndz5y06T2PwW3cjkrMODlnsLHizKT1a7R2_-ogZ6DiOtUmMKUrJP11JIx4-13tTzGrGEBYRm0sCmumsHIko67n0nCLO1UpUQUkkoTHRE9Zbe6DFRsC2GcAHalQmn52Pr46zP-G2Xth9R0no5fuAtT1UPM3gg7iZUpZtBLHbsoaza3jIoGctd1WpqVNgsLU5qXfi9uF6gTm_KATUNU6Z9Gcf5nu3ReF_fig8xaYMI6A8qiRHEbfd-LlDhifKKTyu5IeOkccuIiOLQ66vH4cWBLoyERRSAM5hw76HCslq2IpC9BHOnJ522nnRwTBGXNjJLMpUgLNAQUXwtOPsqrAZIGXpWBU_PoeoaBOOP_VncoK0ctkf1GAToN69zdKGiRNe-BCFsBWeM_G9Ym0lE7ujNEXa7q2rQdjxuZTPvGrRxcj7nyjXUMul7cO7xf7io5e1CDPiiLyX3oS5cGqXaYEMVTXppTuh6N3h-KYDLqLPh-WO5apwIFLFsx1wPqvalFNYJSIGDkUN3lgwBWeAPvBi6ZsdFBe2XqjNf0ODjwGr-5wK4OXLU3c--nvEU3NMWsLh2izTmnfY6CmEkRruQOpcbMHZy6jz3f3f3X9HLEhA6YdKv6TkNU7VJljBoVQe8jCLMhAXDnl3QwBxnxh7fhpeXOQoT0GKN7ORo0SInhBRE7vBIgtjulQXwBvrlUJaIDqRYIXzGp-1pKBg2t195uS1JeCnSMsx4Gs_QQSlm6Mr0OxQ6uUkyVVOQtyCOIsF4jwOO2uHk2Ux0Uxo_HYhZAL7sqDV6TYqoBgjlAfefbkdNNY7lzWJBJytmxMvR4hmSSZAX9Co3qPkGeApc0CrbjBDEALRoPJhUpuUl7Vzdp39Q-OBTF-fvktSPQExc2ORgUqpsSMxrYuhkuAfZVWcLlP1L-BCcJ5ZTSD-UyQCi0HQIQc85zLIaVdbDxj059HMSoEIxAOZsADGBskf1b6iCn5H0wheVzCV9Sg-TtPc73bhamu5R4HlEGUJlkvhxq7E-MJQVJ6Hr8trKLRY2aKaXfCTwWITWWOalHAlSWFlMxy7Id7VBRszAJ0DDHkfiD6s_NuxVFaPoaysjRYgLNnJGR1D0xdELKptjBcaBSOGNB8mpmF84SCpb-3-r5IKP5G4ZKhuhXo31y712HmiI524QTbN-boV8kIxHNd4hzULOPZhZNGJNYO_kFKpmtwqsh-JBRYMLRAt3YW5p5PfL-mN2fk5hxhgFweCUaB8XW5TRMWv0hYHSj5JyrZ1-AqBUTHfL58JESBiVOUoNhlaMKr2hBghv9qN74GuSd7h3XT_NAYcbH98uN6t_Weo-5d7-T3-2OtYCIxfKe2dWfK8rYu3HcUFXjfuLzGwL_Erf8F98BY0LwCIRVxMuH98nyXz30Ds3zlw6IQFGCyX6hUBRdGc5-ZK8CPh895GPiac7WCwt9ovlDKFznlHeE4PW_u4EIAaceeY8pdug5nfYGKzlH1wRsjgJbgq35zj4Wn9k4wxtASoBtaz1-mgCo_PzmqASrYsopHn1_k8EE0wiGhzpjtETUY2P27m72xzZWSQidU2kUcM9qpv6pZXKTKHyY63C_N40eIx3ZddN7uz-1rp-X_DFcYDZrHnF8lO0yvYBqZowZOZjWJjLQrhMiY_7aC3i5dq36gs=.eyJlbmRwb2ludF9zbHVnIjoib3BlbmFpL2dwdC02LWx1bmEtMjAyNjA5MjJ8b3BlbmFpIn0",
+            "format": "openai-responses-v1",
+            "id": "rs_0255351b9a234c92016ae89813db5487d199043ca1348780de",
+            "index": 1
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 223,
+    "completion_tokens": 290,
+    "total_tokens": 513,
+    "cost": 0.0001673,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0001673,
+      "upstream_inference_prompt_cost": 2.23e-05,
+      "upstream_inference_completions_cost": 0.000145
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 252,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  }
+}

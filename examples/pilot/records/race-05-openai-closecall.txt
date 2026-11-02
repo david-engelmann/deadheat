@@ -1,0 +1,4 @@
+closecall name the worker pool
+in the band, both attempts went red
+adjudication by openai/gpt-6-luna chose prime-1 at confidence 0.8, the race is decided for prime-1
+verdict, prime-1 wins

@@ -1,0 +1,61 @@
+{
+  "id": "gen-1793628608-fY8IDb1c4E1FzPHCc8IJ",
+  "object": "chat.completion",
+  "created": 1793628608,
+  "model": "openai/gpt-6-luna",
+  "provider": "OpenAI",
+  "system_fingerprint": null,
+  "service_tier": "default",
+  "choices": [
+    {
+      "index": 0,
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "message": {
+        "role": "assistant",
+        "content": "{\"choice\":\"prime-1\",\"confidence\":0.99,\"probabilities\":{\"prime-1\":0.99,\"shadow-1\":0.01}}",
+        "refusal": null,
+        "reasoning": "**Evaluating sorting tasks**\n\nI need to adjudicate a task to sort a seed list. The red tests might compare whether the expected outcome is an ascending order or a reverse order. Prime sorting seems to be the default choice, and I need to select a prime option. I'd like to clarify how I explain that — I’ll keep it in JSON format. My confidence is high about this, and I need to ensure that the probabilities for each label sum to one.",
+        "reasoning_details": [
+          {
+            "type": "reasoning.summary",
+            "summary": "**Evaluating sorting tasks**\n\nI need to adjudicate a task to sort a seed list. The red tests might compare whether the expected outcome is an ascending order or a reverse order. Prime sorting seems to be the default choice, and I need to select a prime option. I'd like to clarify how I explain that — I’ll keep it in JSON format. My confidence is high about this, and I need to ensure that the probabilities for each label sum to one.",
+            "format": "openai-responses-v1",
+            "index": 0
+          },
+          {
+            "type": "reasoning.encrypted",
+            "data": "gAAAAABq6JnCg9t7yLIvrkmbpG9UeEz7vKsf3e8DkMj2Zhr1QXP7geb89iQAvpwwXLZ5zlx3nKC7drbSqToC1iZjd3vZaWvSm_3CY4xoEnA-IlanhCvIZEI9f5oaArTtn8EJzVpa7VSLLAJRZ31A8y7nfElByw9FKdGvj-GOIB0QXefLJdE9BE_stEjyQqxttiLHBOBQszL4ZyWKKD-7wnSvFHEX7caS3GMl2-ElIEEbCIeV1yfMc9ZOChyJG8QC7nfRBOeXSvwTgBbezIMGXAJGAjY6zb1BHFmYaW6eTzIETrhtR94MzZ4i_XdTK5UiSHB2Lrof242ZHdRzhYwAA7SmS8TrpMb_DlTnWrjNXz8zDRlK_shNBcH0dygxy5wJZICmupqNS8v43PitdJ4fuKaEhXTutnBziZqLTgsnIERbm_4Tk6dfxozEcP_5jmEiou0xp_WoK6QtfQXktSpcvviVHF9cpqsx2aNbxZbbRFz8-J3I81s8hnXlEX57_BK3cYX726Pm15UOmcrTCmnyAd34WDjU2y_NMrES4n2glyKdurFI-0iZlu27Dtv6kx83UM5JTOXH6bdAzTLRn1j4pkIB6ZrDyAJ7PAD_ct7yGoXVgFkwKti8xnCQosudhklggnnc-Sc5EeNHC5bHILEz7InBFKZrc2bsJqL3x7kNJ5Ale575S_YKHYzX_hhucpZkCaVWM-hRcGx8C1Iz9DmUBAx-BdCMP9UPQ7yWnaEZItF3poNtFzDJwHMZ6pik-DjtZp03iN8v6kAglMtyOdzLYid_sgcY3f_7F2gHlKMvTuB9TsOcM-ri7KXbolgZAAox-KoXwqj5R3UAOu7SOgAna1svnDr0dqonUKHeh0pVgD710YRCsoYImI2jaTI4a2yeyzWcxwk3C3YSj8exzmDENPvYtTWawuUCuz63Wt7VMu4Wx3hcLpMwGYKTuwOBP4PDYBFXSdjvWsEpmVddtEjGsLk89Q5D0tQ4O_q7NwohmRb4wb_JAksGzRKBapjzUSD57Jg4iVZt_kPN-_PL4KFqN3kJbQhSEriWZfQMicWZsJsC_frOiMB3AqL9-mBUd0S2cTAD1AQ-2kU1FCuz4kJoFVGXjgwand7eb5xbQI61lezXf1quSEbXG9dTwbMsjhMDAHtpmg_J_SWE-UQe_gjC-Yiz9JYTeddIlIMeaJqCT7CWFzxhPmS0MKhN_hOCs4waDiuOaIW2YWLkLwhZ3xf6w0U02zvM_FWaCKu0xq_XPA3pWf7pdhI7FVPCJFYPdWlXOLN9_A2EKe8tIJQEsB5_-MWep9w6CrH9lZelV6B3maMXSAX9Evc9oua21Pxh-a0VRnOZtIQnU_Yx8cI843Yb8KWd0YL5bjMiu2z1Ah1aFR-5OD2X3KG7tLjEmCN4Ar_8jym6AruH4UiuMLEsw2IvhZvtP6iEoiJRkr8c6J4ssubxyb0eDjlHBsVHU2C4XEBqClo7RsthpTxDiUrvIlYeR8YNgJb6Ulh4YW3LJCH4hBayyLnf7R5iqTNLUZsKeF0Jie2xNRnLfy8FY3h8CpzzxjnFTSPu94nq98xUJkxH9E1M5M0VvHcBgqS9QMWETGxZUg0Qdo-mNrEuFjCN9S1Tq7QZEPjBTcE34PzF_OHIsHa9LChqihXQ1WulLnQkkRf9Xp_1dy_G80eIuqdE0WPewvJaeabQx-BEJ7sJ_I3AJ6fMddSfhPWRNerN0nGyTAs5o2nu5F97Ck0T_FByel7D0OIvJ5i73aKy4df0E3kgPcC9byzMHkkDM_0JQvlTJ5NcgPqgGW_XNPz7ANWDLwMGDzwKjm0rj6IxhWsPw-Unzi4fKgI8uqAMpqqnRBjSIITMhDZltR5odv10gH7CMWLcoWcSbKF3JapCi4oCa138XrbtTgO9Iq2nsi9fKnfzbVe6sSXSL6bW07ivKgSjNQAiIAidgaADdfdjrwKO5FIugsvgSgJlBMzM1S9lONRRDoFvXs5-QjmrrfNl7umv4Ms2ysOLXDiDnlJjECTZqcmT0n1Ijt6rcewSVlnHuNXJfdJ5R5rFjplvrBumpRNKDhbEWwIuJQ9ujVVYMRf-Au13dHa2RN6oP2-ktbjl-ZHVwq4nKUTQF5ezpN_Llj0w4JEB0Rqa6Gd6EijDZcKYNi-regjoE8MJkpLN7q1Ut29M_HR9P6iQNCtB9x-frDgb4b-tggi00jEsOK5kDG3tR3s_eUWosm-ZjcDCo9kjYzungw10HpSgjkJ0nwtyct2BOhN7aIUwXm3uMM6OqeTvMp-qBfs3eM0bLCIPs4WXbarPqPevOc2KlFqpxtlzP7uB-JAhGRyOzBnYg2Ohdqh2xqd3WlYhqLHhmGM9dxeRJXHC4QgEPEaBCpyxeu1O.eyJlbmRwb2ludF9zbHVnIjoib3BlbmFpL2dwdC02LWx1bmEtMjAyNjA5MjJ8b3BlbmFpIn0",
+            "format": "openai-responses-v1",
+            "id": "rs_0e091574a8616ebf016ae899c0eeac87d18a2f109d1a6876b0",
+            "index": 1
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 234,
+    "completion_tokens": 95,
+    "total_tokens": 329,
+    "cost": 7.09e-05,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 7.09e-05,
+      "upstream_inference_prompt_cost": 2.34e-05,
+      "upstream_inference_completions_cost": 4.75e-05
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 57,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  }
+}

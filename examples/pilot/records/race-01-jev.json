@@ -1,0 +1,27 @@
+{
+ "adjudication": {
+  "adjudicator": "jev-1.13.0",
+  "chosen": "prime-1",
+  "confidence": 0.94,
+  "reason": "jev-1.13.0 chose prime-1 with confidence 0.94"
+ },
+ "attempts": [
+  {
+   "environment": "home worktree",
+   "finished_at": 412.0,
+   "model": "prime-1",
+   "patch": "--- a/cache.py\n+++ b/cache.py\n@@ -4,1 +4,1 @@\n-key = query\n+key = (tenant, query)\n",
+   "result": "green",
+   "tokens": 96400
+  },
+  {
+   "environment": "shadow worktree",
+   "finished_at": 398.5,
+   "model": "shadow-1",
+   "patch": "--- a/cache.py\n+++ b/cache.py\n@@ -4,1 +4,1 @@\n-key = query\n+key = hash(query)\n",
+   "result": "green",
+   "tokens": 101250
+  }
+ ],
+ "task": "pin the cache key"
+}

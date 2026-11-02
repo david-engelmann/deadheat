@@ -1,0 +1,61 @@
+{
+  "id": "gen-1793628614-i1zUy4xx69PPGdbtCDbx",
+  "object": "chat.completion",
+  "created": 1793628614,
+  "model": "openai/gpt-6-luna",
+  "provider": "OpenAI",
+  "system_fingerprint": null,
+  "service_tier": "default",
+  "choices": [
+    {
+      "index": 0,
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "completed",
+      "message": {
+        "role": "assistant",
+        "content": "{\"choice\":\"shadow-1\",\"confidence\":0.65,\"probabilities\":{\"prime-1\":0.35,\"shadow-1\":0.65}}",
+        "refusal": null,
+        "reasoning": "**Evaluating Python dict merges**\n\nI need to choose between two equivalent Python dict merge methods based on quality and speed. The prime option uses base while local requires Python 3.9. Shadow supports older versions. I wonder about the existing config updates that could mutate the base. Using new dict unpacking avoids this mutation, but I need to consider which has the best compatibility. Overall, shadow tends to be faster and more compatible, so I might lean towards it with modest confidence.",
+        "reasoning_details": [
+          {
+            "type": "reasoning.summary",
+            "summary": "**Evaluating Python dict merges**\n\nI need to choose between two equivalent Python dict merge methods based on quality and speed. The prime option uses base while local requires Python 3.9. Shadow supports older versions. I wonder about the existing config updates that could mutate the base. Using new dict unpacking avoids this mutation, but I need to consider which has the best compatibility. Overall, shadow tends to be faster and more compatible, so I might lean towards it with modest confidence.",
+            "format": "openai-responses-v1",
+            "index": 0
+          },
+          {
+            "type": "reasoning.encrypted",
+            "data": "gAAAAABq6JnT8W0pNnmT4bo2zC1smzHoC9gLf6uqCJjX7A39mRi0DXhMAH9P79rV_LneAhvZAEqwN3RjJi3h8vZHtfI6yuoXUkGiB7B5YJWWYP2Xu36qxb-dOg1pY969hCrS-fasrDVpZctoF9-sOevWiRr0MmzRNbfs85XBGVJYriRGmAQWCRPqAWDMeHUpbzLZtZYtkb2NsaepHNzDw4P-Fc5cyY7bUZb7DEFzEIQos2eooAXwTrd_qpxubjo4JgaLT5DGZftMGYY2TRROUHap0RiJG7ssSUWaL7tWvob59omp21JQHiI4yBb2GQf7SVxo7eIy_P4CztutRhjypba9A8WVQecW5x9C9jQewpN5v5BeetVWx7_WLqXNyY2sq-3piIXHrHRuNEF0fGTXmGNvVKrTM9QmJATS0NYWULNxCNamqqLxcc89D91bz4IUNhRvJszSxOXX-_Et6CzDRqoV3OeDkJjvGmjHxszZ4deGny10si-7tzHAPgwZR_Rv1u6Werb1HRFgTnM9ZkSV1ACWRP6skVoyTRyq89Nt2DYtmFDrpIr5zC1hCYj2oHzFL66eL2hg_QKvxURpRn-idqUtEp6lp3a1lrvyuCvRFedvmLkEQhRDDtiB7ytE0GbJu5fMleq0U0bozaNM9OR9tD2k_b6NhMsuidVGTZiVc2tW2I-7VU9496mrMAbCdDnMFzWtP1YCchiatFBkW5UUwzFFKZOE9_sh-eXBKvVruvMt1I4U2rHEQsUlLjz5bhobn2m_8XheP37bcJl-EjWRHNq5aCA_JGlbUsFfMuwPOUzd8dcBQuy0Re5ZVqhDipv1JBX1Tla92Pws64Wl8lvmMgj-niae17xm9GkzGabE73_if4NmMN2C3_uTcrXEO8Gukt4UErMAqskQhbDCMJ4kiWHEHwIA0eYxVkAFqgmgQtH8eMsgsWiG7w5Z79OfiNOxLd4mKLdq7v5maIyOXD5xgiHpc4lGIQnZhmEy8z2WoBlRovVAXPwfYLZPeCuKhYvhJaN3bHya_ykrYM81tEXgTkK703xqmA8NATP0EsO4K1A7sJ7G5X7_l4BrXQYmlMO7dSSir10gUhszowDkUMlCasY0zsAzs7XhsErzE_UDG9q3rcEg4w4KT6yv8_REOTZ5M-2c4YLn6p7Te6NgzjZJbPu5fnrlk4ZyCO6ft4A1tqxjWcxY1czw9koW9_jxtBdMUISExCs7pEd-FCwxS-QJto6DPFdUR1jfKzz5zIR2GPMRchqvnWZrJNC_yedysoHyKS0dwkn8Zm9HGCkpGvgHzCmgnb9hcQWZLdj0BKKmP4W_wK1qVlh_co-Fgh7dzM-G_lnr1wgwhl-DY8rvpcBio1-7U3P7Za0ooFKeZRLoKGW_aNS0BAZOPbNjE_H8cJvawVq78IP_bV_1sVM110dNZuJZyodKW1pHR9AwS3cczKm5TYfSRYTB9IH6xrWueXSKCOkmgeQN6iqsH4rDnmH2MV78_cWtr7AS2YvIyWmQoRSM6dB51lL0wjGg10b2MTXx6Le5lGNT4PELEaee6MNQvOsokWcjq3pSqH2Xfiz2FffCQz_p0bM8te4QENVgFjlj0CfJKxOni7xFXOCqhEaCtwDg85Rod1jJaTKJxYKDXZO_pRc1lctr1JVyispvugxFeAUgcJmLMP7CrSTtzAhwWWJCud8DlmVOoUn4v3R9TH7sfgD9RazYAeX3iVfwKWxr4tq5Ov1ZkJxgs9oS-fyQCSK8dVdYD_qD-dnN1xUlhti_zCQ6Gw9i1UtyVc2YvxhejGGj-NgcgnMeWMQWNjyjPpB_14WE_Sv4pQFrlwQ7eNy1ixYaztqKNuGJIqeTKLZ1_qvCudygejV7ZgILcaHcRZssZN2eddJE8_YcB-88S6k7dNH49Cjdo4YLCBC0L6ySMnhbyW72TUA9e0qvbcOEEtKtvuEZOUp7UyhClTfDa0W6AGyx0Z6VsZcsv_X5uT-fGberROtyos2T_vkhDHjP7UD-tBBVXOeXGbI6iN9aubp-6tUjTTnInWt3noAQXBRUiSBrN5HXLavX9ptqYtT0s0DWWSu4AVGgUxopK4xF9ic9bqxBdCJz1_kC0cU76cFCSA_e1W9vO05-3iUpttd_Q0uU6-rDr0I2COyhAP0P4viW1kXNpQDjR3IHDJUKUiL2SEKkPvpjoSX3hPpkVW0zfsd1TtMejyFCVjDbXCahyDr2nQPePdGNVKYIOKle10ckyakyEfWcXIGPKb7glM4zAnXPvcH9gokJvC0CMerPZZ1hqJQGoCAs_oFJQ6Ke71rSo0Kk_3kmRMoDGcv1sy2VSoJ1ShLUCqQTbQwEAd7_3oB5XeWR30TkRfMrIiC6JRZxQKnESME4Bk1w2L1vexhw5KcSSJ9-OnzA40UCr0dMzxnn-NeBjow9MN3KGYpzYN1hnT8sQB2mdjk6bPD_GAiUHQkJupH0Et93t0qztwCUl4EQtJx2kIn777Kfi4CYnGfIg_rLtA_Z6OSlQFoQ_TuiC1lNrQ34losqe4D4XQkriMecvykPDgUzVOY_mseq2b3EbYFlJ1OZvUkktewJmOHaPtexMlldeXgzwZwfdH7Jpn53BSVqAF69PPAfa5Qbfb1tWIMg9ko_9hCwp3Z4cWuZf6r1HQPQ-O9SZusiFs-FLJbCNcV6auA_hA73SAmKw_1nsE9iqq58XrhKjOMTFqhXJfOto1zi7bwlwunaaAocEe-Adr577foMfJJYdR0pPd852fGkjR7CCqMxEkqoiuS6AJ4Q6DaseH2Wcyei0wkg1SMkW9M8UQJ2FHP4YOQK25Mvai8g3G2lhZYRnFkypdv0GdV47mhFWj3PKfxCm_rwSytt3uFAFJYLhaqaijFUa2djSktVMrk_5hYwiqqh81jAcbK4JNcNnDF9DtGHesE6nMg2EdV13NTcqh3mAm68eTdkf5aXKOpRLPvmFNoI1QjkBtJbSqbztRWDI3OjCGvjBRgMUdHepLm-OlGmLwapDA1K9hLOcuydKU0rS6PbeA2Zga0cR4NCuJ3-CJfWTT6DluuPbDIKUkiy-Q4-15vZc1s5Q-8JBoDW1DkrlGnsHklUFT23sV_Ek_dsZ9J5mQEXVdMDPMNDnlwIYAZ0DC8yCX76edhHjtT9gBXJg91JmqTfUsSeY1m6ALkrgZzCAat5RUZ2WYFBPl3-1zuAXEPRpoyDXB5kg7e0c5JqNZ8mmfwbTjeIN-qY2j816g==.eyJlbmRwb2ludF9zbHVnIjoib3BlbmFpL2dwdC02LWx1bmEtMjAyNjA5MjJ8b3BlbmFpIn0",
+            "format": "openai-responses-v1",
+            "id": "rs_0ec19f7b45295e45016ae899d037dc87d196bd3205395cb174",
+            "index": 1
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 233,
+    "completion_tokens": 165,
+    "total_tokens": 398,
+    "cost": 0.0001058,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0001058,
+      "upstream_inference_prompt_cost": 2.33e-05,
+      "upstream_inference_completions_cost": 8.25e-05
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 127,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  }
+}

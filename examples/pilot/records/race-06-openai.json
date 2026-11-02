@@ -1,0 +1,25 @@
+{
+ "adjudication": {
+  "adjudicator": "openai/gpt-6-luna",
+  "chosen": "shadow-1",
+  "confidence": 0.65,
+  "reason": "openai/gpt-6-luna chose shadow-1 with confidence 0.65"
+ },
+ "attempts": [
+  {
+   "environment": "home worktree",
+   "model": "prime-1",
+   "patch": "--- a/NOTES.md\n+++ b/NOTES.md\n@@ -1,1 +1,2 @@\n # migration\n+step one, copy the tables\n",
+   "result": "unfinished",
+   "tokens": 23100
+  },
+  {
+   "environment": "shadow worktree",
+   "model": "shadow-1",
+   "patch": "--- a/NOTES.md\n+++ b/NOTES.md\n@@ -1,1 +1,2 @@\n # migration\n+step one, dump the schema\n",
+   "result": "unfinished",
+   "tokens": 19800
+  }
+ ],
+ "task": "draft the migration note"
+}

@@ -1,0 +1,27 @@
+{
+ "adjudication": {
+  "adjudicator": "openai/gpt-6-luna",
+  "chosen": "prime-1",
+  "confidence": 0.8,
+  "reason": "openai/gpt-6-luna chose prime-1 with confidence 0.8"
+ },
+ "attempts": [
+  {
+   "environment": "home worktree",
+   "finished_at": 512.5,
+   "model": "prime-1",
+   "patch": "--- a/pool.py\n+++ b/pool.py\n@@ -2,1 +2,1 @@\n-name = \"pool\"\n+name = \"workers\"\n",
+   "result": "red",
+   "tokens": 65400
+  },
+  {
+   "environment": "shadow worktree",
+   "finished_at": 512.5,
+   "model": "shadow-1",
+   "patch": "--- a/pool.py\n+++ b/pool.py\n@@ -2,1 +2,1 @@\n-name = \"pool\"\n+name = \"fleet\"\n",
+   "result": "red",
+   "tokens": 67100
+  }
+ ],
+ "task": "name the worker pool"
+}

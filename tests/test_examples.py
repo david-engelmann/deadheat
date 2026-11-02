@@ -99,3 +99,33 @@ def test_the_series_examples_match_their_goldens(capsys):
         series, defects = load_series_file(source)
         assert defects == []
         assert "\n".join(series_report(series)) + "\n" == golden
+
+
+PILOT = EXAMPLES / "pilot"
+PILOT_RACES = tuple(f"race-{index:02d}" for index in range(1, 11))
+PILOT_ROUTES = ("jev", "openai")
+
+
+def test_the_pilot_records_match_their_closecall_goldens(capsys):
+    for name in PILOT_RACES:
+        for route in PILOT_ROUTES:
+            source = PILOT / "records" / f"{name}-{route}.json"
+            assert main(["closecall", str(source)]) == 0
+            out = capsys.readouterr().out
+            golden = (
+                PILOT / "records" / f"{name}-{route}-closecall.txt"
+            ).read_text(encoding="utf-8")
+            assert out == golden, (name, route)
+            race, defects = load_race_file(source)
+            assert defects == []
+            rendered = "\n".join(close_call_report(race)) + "\n"
+            assert rendered == golden, (name, route)
+
+
+def test_the_pilot_series_matches_its_golden(capsys):
+    source = EXAMPLES / "pilot-series.json"
+    assert main(["series", str(source)]) == 0
+    out = capsys.readouterr().out
+    golden = (EXAMPLES / "pilot-series.txt").read_text(encoding="utf-8")
+    assert out == golden
+    assert "series winner, prime-1" in out
