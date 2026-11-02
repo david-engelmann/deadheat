@@ -1,0 +1,10 @@
+race tighten the retry budget
+prime-1 in home worktree, green in 300 seconds, 88100 tokens
+shadow-1 in shadow worktree, green in 288 seconds, 91400 tokens
+verdict, prime-1 wins
+close call, adjudication by judge-2 chose prime-1 at confidence 0.87
+funeral for tighten the retry budget
+winner prime-1 in home worktree went green in 300 seconds
+loser shadow-1 in shadow worktree went green in 288 seconds
+decided by adjudication, judge-2 chose prime-1 at confidence 0.87
+margin 12 seconds between the two finishes

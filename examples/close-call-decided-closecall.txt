@@ -1,0 +1,4 @@
+closecall tighten the retry budget
+in the band, both attempts went green and the gap of 12 seconds is within five percent of the slower finish of 300 seconds
+adjudication by judge-2 chose prime-1 at confidence 0.87, the race is decided for prime-1
+verdict, prime-1 wins

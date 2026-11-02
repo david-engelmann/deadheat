@@ -1,0 +1,9 @@
+race speed up the search index
+prime-1 in home worktree, green in 200 seconds, 76400 tokens
+shadow-1 in shadow worktree, green in 150 seconds, 69800 tokens
+verdict, shadow-1 wins
+adjudication by judge-2 not needed, the race stands outside the close call band
+funeral for speed up the search index
+winner shadow-1 in shadow worktree went green in 150 seconds
+loser prime-1 in home worktree went green in 200 seconds
+margin 50 seconds between the two finishes

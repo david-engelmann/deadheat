@@ -1,0 +1,1 @@
+{"attempts": [{"environment": "home worktree", "finished_at": 210.5, "model": "prime-1", "patch": "--- a/migrate.py\n+++ b/migrate.py\n@@ -1,1 +1,1 @@\n-step = 1\n+step = 2\n", "result": "red", "tokens": 64200}, {"environment": "shadow worktree", "finished_at": 402.25, "model": "shadow-1", "patch": "", "result": "red", "tokens": null}], "task": "rescue the stuck migration"}

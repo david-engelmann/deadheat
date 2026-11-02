@@ -8,13 +8,15 @@ You start a task and the race begins. Your agent works in your worktree. A fork 
 
 ## Status
 
-Seeded in October 2026. Setup has landed and Round 1 has closed, with slice 2 merged on main. Part of the Spectacle line in the 39 repo storefront perfection programme.
+Seeded in October 2026. Setup has landed and Round 1 has closed, with slice 2 merged on main. The Round 2 slice is built and in review. Part of the Spectacle line in the 39 repo storefront perfection programme.
 
 ## Programme status
 
 - Closed perfection rounds, 1 of 100. A round counts only when a full cycle of work, audit, review, red team, and approval has closed. Seeding and setup are not rounds.
 - Contract, SETUP-1 to SETUP-4 and DH-1 to DH-4 met. DH-1 to DH-4 stand in full form in CONTRACT.md with the Round 1 repair amendments, and Round 1 closed on the merged slice 2 after three reviews, a repair pass, and an approving re-review.
 - Slice 2 has landed. It carries the recorded race loader, the local runner, the winner rule, the race report and the funeral, the loser patch adopt and discard operations, the season standings, and the race, adopt, discard, and standings commands, with two synthetic recorded races and their golden renderings under examples.
+- The Round 2 obligations DH-5 and DH-6 now stand in full form in CONTRACT.md, and their standing is not claimed here, as Round 2 has not closed.
+- The Round 2 slice carries the close call band and the recorded adjudication, and the series over recorded races, with the closecall and series commands, and with synthetic recorded races and series and their golden renderings under examples.
 - Local gate, python3 scripts/codepoint_scan.py and python3 -m pytest tests -q. CI runs the same commands.
 
 ## Licence

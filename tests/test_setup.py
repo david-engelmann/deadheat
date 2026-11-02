@@ -14,7 +14,7 @@ def test_readme_states_the_closed_round_count():
 
 def test_contract_carries_the_setup_obligations():
     text = (ROOT / "CONTRACT.md").read_text(encoding="utf-8")
-    for oid in ("SETUP-1", "SETUP-2", "SETUP-3", "SETUP-4", "DH-1"):
+    for oid in ("SETUP-1", "SETUP-2", "SETUP-3", "SETUP-4", "DH-1", "DH-5", "DH-6"):
         assert oid in text, oid
 
 def test_readme_reports_the_contract_status():
