@@ -19,9 +19,10 @@ Seeded in October 2026. Setup has landed, and Rounds 1 to 4 have closed, with al
 - Slice 3 has landed. It carries the close call band and the recorded adjudication, and the series over recorded races, with the closecall and series commands, and with synthetic recorded races and series and their golden renderings under examples.
 - Contract, DH-7 and DH-8 met. They stand in full form in CONTRACT.md with the Round 3 repair amendments, and Round 3 closed on the merged slice 4 after three reviews, a repair pass, and an approving re-review.
 - Slice 4 has landed. It carries the adjudication seat over the two decision model routes, the live entry path into the race record, and the recorded close call pilot over both models, ten synthetic recorded races with their envelopes, adjudicated records, and run record under examples.
-- Contract, DH-9 and DH-10 now stand in full form in CONTRACT.md under the Round 4 obligations, and their standing is not claimed here, as Round 4 has not closed.
+- Contract, DH-9 and DH-10 met. They stand in full form in CONTRACT.md with the Round 4 repair amendments, and Round 4 closed on the merged slice 5 after three reviews, a repair pass, and an approving re-review.
 - Slice 5 has landed. It carries the panel reading over two recorded adjudication entries, the panel join over the Round 3 pilot records, and the recorded panel pilot over both models, ten panel records with their closecall goldens and the panel series under examples.
-- Local gate, python3 scripts/codepoint_scan.py and python3 -m pytest tests -q. CI runs the same commands.
+- The Rust port has been built and is in review. It carries the same behavior as the Python package, checked against the same goldens.
+- Local gate, python3 scripts/codepoint_scan.py, python3 -m pytest tests -q, and the cargo gate of cargo fmt --check, cargo clippy --all-targets -- -D warnings, and cargo test. CI runs the same commands.
 
 ## Licence
 

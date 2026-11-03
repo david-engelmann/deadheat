@@ -1,0 +1,20 @@
+//! The deadheat library, the Rust port of the Python package.
+//!
+//! The landed Python implementation is the behavioral spec of
+//! this port, as PORT-1 in CONTRACT.md states. The loaders, the
+//! readings, and the renderings are pure library functions over
+//! recorded files, and the command line is a thin shell over
+//! them.
+
+pub mod cli;
+pub mod json;
+pub mod makers;
+pub mod panels;
+pub mod pynum;
+pub mod pytext;
+pub mod pyunicode;
+pub mod races;
+pub mod runner;
+pub mod scan;
+pub mod seats;
+pub mod series;
