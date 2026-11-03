@@ -10,9 +10,13 @@ path = "rust/src/lib.rs"
 name = "deadheat"
 path = "rust/src/main.rs"
 
+[[bin]]
+name = "codepoint_scan"
+path = "rust/src/bin/codepoint_scan.rs"
+
 # The integration tests live beside the library under rust/tests, so
 # each one is named here with its path rather than discovered from a
-# root level tests directory, which belongs to the Python corpus.
+# root level tests directory.
 [[test]]
 name = "test_races"
 path = "rust/tests/test_races.rs"

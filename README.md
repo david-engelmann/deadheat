@@ -21,8 +21,8 @@ Seeded in October 2026. Setup has landed, and Rounds 1 to 4 have closed, with al
 - Slice 4 has landed. It carries the adjudication seat over the two decision model routes, the live entry path into the race record, and the recorded close call pilot over both models, ten synthetic recorded races with their envelopes, adjudicated records, and run record under examples.
 - Contract, DH-9 and DH-10 met. They stand in full form in CONTRACT.md with the Round 4 repair amendments, and Round 4 closed on the merged slice 5 after three reviews, a repair pass, and an approving re-review.
 - Slice 5 has landed. It carries the panel reading over two recorded adjudication entries, the panel join over the Round 3 pilot records, and the recorded panel pilot over both models, ten panel records with their closecall goldens and the panel series under examples.
-- The Rust port has been built and is in review. It carries the same behavior as the Python package, checked against the same goldens.
-- Local gate, python3 scripts/codepoint_scan.py, python3 -m pytest tests -q, and the cargo gate of cargo fmt --check, cargo clippy --all-targets -- -D warnings, and cargo test. CI runs the same commands.
+- The Rust port has landed. It carries the behavior the Python package carried, checked against the same goldens, and the Python tree stands removed under PORT-13.
+- Local gate, cargo run --bin codepoint_scan, cargo fmt --check, cargo clippy --all-targets -- -D warnings, and cargo test. CI runs the same commands.
 
 ## Licence
 

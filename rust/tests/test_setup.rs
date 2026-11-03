@@ -4,8 +4,8 @@
 //!
 //! The last two pins are port additions. The README carries
 //! the Rust port status line, and the CI gate carries the
-//! cargo steps beside the Python gate, as the port section of
-//! the contract states.
+//! cargo steps and the scan binary alone since the removal
+//! under PORT-13, as the port section of the contract states.
 
 mod shared;
 
@@ -66,17 +66,18 @@ fn readme_reports_the_round_four_status() {
 }
 
 #[test]
-fn the_gate_lines_name_both_gates() {
-    // A port repair pin. The README gate line and the AGENTS
-    // annex gate sentence once named the Python gate alone
-    // while the repo carries both gates, so both lines are
-    // pinned in their full form here.
+fn the_gate_lines_name_the_standing_gate() {
+    // A port repair pin, updated at the removal under PORT-13.
+    // The README gate line and the AGENTS annex gate sentence
+    // named the Python gate while it stood, so both lines are
+    // pinned in their full form here, now naming the scan
+    // binary and the cargo gate alone.
     let readme = read(&repo_root().join("README.md"));
-    let gate = "- Local gate, python3 scripts/codepoint_scan.py, python3 -m pytest tests -q, and the cargo gate of cargo fmt --check, cargo clippy --all-targets -- -D warnings, and cargo test. CI runs the same commands.";
+    let gate = "- Local gate, cargo run --bin codepoint_scan, cargo fmt --check, cargo clippy --all-targets -- -D warnings, and cargo test. CI runs the same commands.";
     assert!(readme.lines().any(|line| line == gate));
     let agents = read(&repo_root().join("AGENTS.md"));
     assert!(agents.contains(
-        "The local gate is python3 scripts/codepoint_scan.py, python3 -m pytest tests -q, and the cargo gate of cargo fmt --check, cargo clippy --all-targets -- -D warnings, and cargo test"
+        "The local gate is cargo run --bin codepoint_scan, cargo fmt --check, cargo clippy --all-targets -- -D warnings, and cargo test"
     ));
 }
 
@@ -88,19 +89,20 @@ fn ci_runs_the_same_gate_as_the_local_gate() {
         .map(|line| line.split('#').next().expect("a head"))
         .collect::<Vec<_>>()
         .join("\n");
-    assert!(live.contains("python3 scripts/codepoint_scan.py"));
-    assert!(live.contains("python3 -m pytest tests -q"));
+    assert!(live.contains("cargo run --bin codepoint_scan"));
+    assert!(!live.contains("python3"), "the Python gate is gone");
+    assert!(!live.contains("pytest"), "the Python gate is gone");
 }
 
 #[test]
 fn readme_reports_the_rust_port_status() {
     let text = read(&repo_root().join("README.md"));
-    let line = "- The Rust port has been built and is in review. It carries the same behavior as the Python package, checked against the same goldens.";
+    let line = "- The Rust port has landed. It carries the behavior the Python package carried, checked against the same goldens, and the Python tree stands removed under PORT-13.";
     assert!(text.lines().any(|held| held == line));
 }
 
 #[test]
-fn ci_carries_the_cargo_steps_beside_the_python_gate() {
+fn ci_carries_the_cargo_steps() {
     let text = read(&repo_root().join(".github").join("workflows").join("ci.yml"));
     let live: String = text
         .lines()
