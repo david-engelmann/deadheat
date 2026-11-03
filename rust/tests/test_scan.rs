@@ -115,3 +115,19 @@ fn the_scan_exempts_the_envelope_directory_alone() {
 fn the_repo_itself_scans_clean() {
     assert_eq!(scan_tree(&repo_root()), (0, 0));
 }
+
+#[test]
+fn a_dash_inside_the_cargo_target_directory_does_not_count() {
+    // The build output directory is not repo content. CI builds
+    // into it before the test step runs, so a scan that opened
+    // it would read compiled artifacts as if they were files
+    // of the repo.
+    let root = temp_dir("scan-target");
+    write(
+        &root,
+        "target/debug/build/output",
+        &format!("built {EM_DASH} here\n"),
+    );
+    write(&root, "notes.md", "plain text\n");
+    assert_eq!(scan_tree(&root), (0, 0));
+}

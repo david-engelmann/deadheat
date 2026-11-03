@@ -88,6 +88,16 @@ def test_dashes_inside_an_ignored_directory_pass_the_scan(tmp_path):
     assert "U+2013=0" in result.stdout
 
 
+def test_dashes_inside_the_cargo_target_directory_pass_the_scan(tmp_path):
+    root = plant_tree(tmp_path)
+    target = root / "target" / "debug"
+    target.mkdir(parents=True)
+    (target / "output").write_text(f"built {EM_DASH} here\n", encoding="utf-8")
+    result = run_scan(root)
+    assert result.returncode == 0
+    assert "U+2014=0" in result.stdout
+
+
 def test_a_dash_in_a_rust_file_fails_the_scan(tmp_path):
     root = plant_tree(tmp_path)
     (root / "module.rs").write_text(

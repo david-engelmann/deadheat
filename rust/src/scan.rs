@@ -13,12 +13,13 @@
 
 use std::path::Path;
 
-const IGNORED_DIRS: [&str; 7] = [
+const IGNORED_DIRS: [&str; 8] = [
     ".git",
     ".venv",
     "venv",
     "dist",
     "build",
+    "target",
     "node_modules",
     "__pycache__",
 ];
