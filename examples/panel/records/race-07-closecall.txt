@@ -1,0 +1,4 @@
+closecall shrink the prompt budget
+in the band, both attempts went green and the gap of 10 seconds is within five percent of the slower finish of 600 seconds
+panel, adjudication by jev-1.13.0 chose shadow-1 at confidence 0.8 and adjudication by openai/gpt-6-luna abstained at confidence 0.76, the race is decided for shadow-1
+verdict, shadow-1 wins

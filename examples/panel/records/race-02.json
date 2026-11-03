@@ -1,0 +1,35 @@
+{
+ "attempts": [
+  {
+   "environment": "home worktree",
+   "finished_at": 500.0,
+   "model": "prime-1",
+   "patch": "--- a/report.py\n+++ b/report.py\n@@ -1,3 +1,1 @@\n-import os\n-import sys\n import json\n",
+   "result": "green",
+   "tokens": 40200
+  },
+  {
+   "environment": "shadow worktree",
+   "finished_at": 505.25,
+   "model": "shadow-1",
+   "patch": "--- a/report.py\n+++ b/report.py\n@@ -1,3 +1,2 @@\n-import os\n import sys\n import json\n",
+   "result": "green",
+   "tokens": 39800
+  }
+ ],
+ "panel": [
+  {
+   "adjudicator": "jev-1.13.0",
+   "chosen": "prime-1",
+   "confidence": 0.62,
+   "reason": "jev-1.13.0 chose prime-1 with confidence 0.62"
+  },
+  {
+   "adjudicator": "openai/gpt-6-luna",
+   "chosen": "prime-1",
+   "confidence": 0.98,
+   "reason": "openai/gpt-6-luna chose prime-1 with confidence 0.98"
+  }
+ ],
+ "task": "trim the import list"
+}

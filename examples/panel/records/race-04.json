@@ -1,0 +1,35 @@
+{
+ "attempts": [
+  {
+   "environment": "home worktree",
+   "finished_at": 350.0,
+   "model": "prime-1",
+   "patch": "--- a/hook.py\n+++ b/hook.py\n@@ -3,1 +3,1 @@\n-timeout = 5\n+timeout = 30\n",
+   "result": "red",
+   "tokens": 120400
+  },
+  {
+   "environment": "shadow worktree",
+   "finished_at": 342.0,
+   "model": "shadow-1",
+   "patch": "--- a/hook.py\n+++ b/hook.py\n@@ -3,1 +3,1 @@\n-timeout = 5\n+timeout = 10\n",
+   "result": "red",
+   "tokens": 118900
+  }
+ ],
+ "panel": [
+  {
+   "adjudicator": "jev-1.13.0",
+   "chosen": "prime-1",
+   "confidence": 0.44,
+   "reason": "jev-1.13.0 chose prime-1 with confidence 0.44"
+  },
+  {
+   "adjudicator": "openai/gpt-6-luna",
+   "chosen": "shadow-1",
+   "confidence": 0.56,
+   "reason": "openai/gpt-6-luna chose shadow-1 with confidence 0.56"
+  }
+ ],
+ "task": "retry the flaky hook"
+}

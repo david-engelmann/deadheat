@@ -1,0 +1,35 @@
+{
+ "attempts": [
+  {
+   "environment": "home worktree",
+   "finished_at": 1000.0,
+   "model": "prime-1",
+   "patch": "--- a/config.py\n+++ b/config.py\n@@ -6,1 +6,1 @@\n-config = base\n+config = base | local\n",
+   "result": "green",
+   "tokens": 210300
+  },
+  {
+   "environment": "shadow worktree",
+   "finished_at": 955.0,
+   "model": "shadow-1",
+   "patch": "--- a/config.py\n+++ b/config.py\n@@ -6,2 +6,1 @@\n-config = base\n-config.update(local)\n+config = {**base, **local}\n",
+   "result": "green",
+   "tokens": 205900
+  }
+ ],
+ "panel": [
+  {
+   "adjudicator": "jev-1.13.0",
+   "chosen": "shadow-1",
+   "confidence": 0.06,
+   "reason": "jev-1.13.0 chose shadow-1 with confidence 0.06"
+  },
+  {
+   "adjudicator": "openai/gpt-6-luna",
+   "chosen": "shadow-1",
+   "confidence": 0.65,
+   "reason": "openai/gpt-6-luna chose shadow-1 with confidence 0.65"
+  }
+ ],
+ "task": "merge the config layers"
+}

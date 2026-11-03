@@ -235,6 +235,30 @@ def test_a_reason_holding_a_carriage_return_is_named():
     assert defects_of(data) == ["adjudication field reason holds a newline"]
 
 
+def test_an_adjudicator_holding_a_newline_is_named():
+    data = race_with([attempt(), other()], entry(adjudicator="two\nlines"))
+    assert defects_of(data) == [
+        "adjudication field adjudicator holds a newline"
+    ]
+
+
+def test_an_adjudicator_holding_a_carriage_return_is_named():
+    data = race_with([attempt(), other()], entry(adjudicator="two\rlines"))
+    assert defects_of(data) == [
+        "adjudication field adjudicator holds a newline"
+    ]
+
+
+def test_a_chosen_label_holding_a_newline_is_named():
+    data = race_with([attempt(), other()], entry(chosen="two\nlines"))
+    assert defects_of(data) == ["adjudication field chosen holds a newline"]
+
+
+def test_a_chosen_label_holding_a_carriage_return_is_named():
+    data = race_with([attempt(), other()], entry(chosen="two\rlines"))
+    assert defects_of(data) == ["adjudication field chosen holds a newline"]
+
+
 def test_a_confidence_of_the_wrong_type_is_named():
     data = race_with([attempt(), other()], entry(confidence="high"))
     assert defects_of(data) == [

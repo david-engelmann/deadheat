@@ -1,0 +1,4 @@
+closecall retry the flaky hook
+in the band, both attempts went red
+panel, adjudication by jev-1.13.0 abstained at confidence 0.44 and adjudication by openai/gpt-6-luna abstained at confidence 0.56, below the threshold of 0.8
+verdict, no winner
