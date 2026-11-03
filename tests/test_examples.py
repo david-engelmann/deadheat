@@ -129,3 +129,36 @@ def test_the_pilot_series_matches_its_golden(capsys):
     golden = (EXAMPLES / "pilot-series.txt").read_text(encoding="utf-8")
     assert out == golden
     assert "series winner, prime-1" in out
+
+
+PANEL = EXAMPLES / "panel"
+
+
+def test_the_panel_records_match_their_closecall_goldens(capsys):
+    for name in PILOT_RACES:
+        source = PANEL / "records" / f"{name}.json"
+        assert main(["closecall", str(source)]) == 0
+        out = capsys.readouterr().out
+        golden = (PANEL / "records" / f"{name}-closecall.txt").read_text(
+            encoding="utf-8"
+        )
+        assert out == golden, name
+        race, defects = load_race_file(source)
+        assert defects == []
+        rendered = "\n".join(close_call_report(race)) + "\n"
+        assert rendered == golden, name
+        assert "panel," in golden, name
+
+
+def test_the_panel_series_matches_its_golden(capsys):
+    source = EXAMPLES / "panel-series.json"
+    assert main(["series", str(source)]) == 0
+    out = capsys.readouterr().out
+    golden = (EXAMPLES / "panel-series.txt").read_text(encoding="utf-8")
+    assert out == golden
+    assert "race 5, name the worker pool, prime-1 wins" in out
+    assert "race 6, draft the migration note, beyond the decision" in out
+    assert out.rstrip().endswith("series winner, prime-1")
+    series, defects = load_series_file(source)
+    assert defects == []
+    assert "\n".join(series_report(series)) + "\n" == golden

@@ -11,6 +11,7 @@ import pathlib
 
 from deadheat.races import (
     _check_text_field,
+    _holds_line_break,
     _holds_unpaired_surrogate,
     _is_int,
     decide_winner,
@@ -39,6 +40,8 @@ def _load_models(data, defects):
             defects.append(
                 f"models entry {index} holds an unpaired surrogate"
             )
+        elif _holds_line_break(entry):
+            defects.append(f"models entry {index} holds a newline")
         else:
             clean.append(entry)
     if len(clean) == 2 and clean[0] == clean[1]:

@@ -3,7 +3,8 @@
 Every function in this module is a pure function of its inputs, and
 the loaders never raise on malformed content. The obligations this
 module carries are DH-1 to DH-4 in CONTRACT.md, in the full form
-section, and DH-5 in the Round 2 section.
+section, DH-5 in the Round 2 section, and the panel shape and
+reading of DH-9 in the Round 4 section.
 """
 
 import json
@@ -50,6 +51,17 @@ def _holds_unpaired_surrogate(text):
     except UnicodeEncodeError:
         return True
     return False
+
+
+def _holds_line_break(text):
+    """Return whether a string holds a newline or a carriage return.
+
+    A text field a rendering prints inside one line can never hold
+    a line break, because the break would carry the value across
+    lines and mint lines the rendering never wrote. The refusal is
+    FIX-DH-13 in CONTRACT.md, amending DH-1, DH-4, DH-5, and DH-6.
+    """
+    return "\n" in text or "\r" in text
 
 
 def _round_half_up_units(fraction, places):
@@ -139,6 +151,9 @@ def _check_text_field(data, name, defects):
     if _holds_unpaired_surrogate(value):
         defects.append(f"field {name} holds an unpaired surrogate")
         return None
+    if _holds_line_break(value):
+        defects.append(f"field {name} holds a newline")
+        return None
     return value
 
 
@@ -157,6 +172,9 @@ def _check_attempt_text(entry, index, name, defects):
         defects.append(
             f"attempt {index} field {name} holds an unpaired surrogate"
         )
+        return None
+    if _holds_line_break(value):
+        defects.append(f"attempt {index} field {name} holds a newline")
         return None
     return value
 
@@ -279,6 +297,9 @@ def _check_adjudication_text(entry, name, defects):
             f"adjudication field {name} holds an unpaired surrogate"
         )
         return None
+    if _holds_line_break(value):
+        defects.append(f"adjudication field {name} holds a newline")
+        return None
     return value
 
 
@@ -293,8 +314,6 @@ def _load_adjudication(data, attempts, defects):
     adjudicator = _check_adjudication_text(entry, "adjudicator", defects)
     chosen = _check_adjudication_text(entry, "chosen", defects)
     reason = _check_adjudication_text(entry, "reason", defects)
-    if reason is not None and ("\n" in reason or "\r" in reason):
-        defects.append("adjudication field reason holds a newline")
     confidence = None
     if "confidence" not in entry:
         defects.append("adjudication is missing field confidence")
@@ -325,6 +344,104 @@ def _load_adjudication(data, attempts, defects):
     }
 
 
+def _check_panel_entry_text(entry, index, name, defects):
+    if name not in entry:
+        defects.append(f"panel entry {index} is missing field {name}")
+        return None
+    value = entry[name]
+    if not isinstance(value, str):
+        defects.append(
+            f"panel entry {index} field {name} has the wrong type"
+        )
+        return None
+    if value == "":
+        defects.append(f"panel entry {index} field {name} is empty")
+        return None
+    if _holds_unpaired_surrogate(value):
+        defects.append(
+            f"panel entry {index} field {name} "
+            "holds an unpaired surrogate"
+        )
+        return None
+    if "\n" in value or "\r" in value:
+        defects.append(
+            f"panel entry {index} field {name} holds a newline"
+        )
+        return None
+    return value
+
+
+def _load_panel_entry(entry, index, attempts, defects):
+    if not isinstance(entry, dict):
+        defects.append(f"panel entry {index} is not an object")
+        return None
+    before = len(defects)
+    adjudicator = _check_panel_entry_text(
+        entry, index, "adjudicator", defects
+    )
+    chosen = _check_panel_entry_text(entry, index, "chosen", defects)
+    reason = _check_panel_entry_text(entry, index, "reason", defects)
+    confidence = None
+    if "confidence" not in entry:
+        defects.append(f"panel entry {index} is missing field confidence")
+    elif not _is_number(entry["confidence"]):
+        defects.append(
+            f"panel entry {index} field confidence has the wrong type"
+        )
+    elif not _is_finite_number(entry["confidence"]):
+        defects.append(
+            f"panel entry {index} field confidence "
+            "is not a finite number"
+        )
+    elif entry["confidence"] < 0 or entry["confidence"] > 1:
+        defects.append(
+            f"panel entry {index} field confidence "
+            "is outside the range zero to one"
+        )
+    else:
+        confidence = entry["confidence"]
+    if chosen is not None and attempts is not None:
+        if chosen not in [attempt["model"] for attempt in attempts]:
+            defects.append(
+                f"panel entry {index} field chosen "
+                "names no attempt in this race"
+            )
+    if len(defects) != before:
+        return None
+    return {
+        "adjudicator": adjudicator,
+        "chosen": chosen,
+        "confidence": confidence,
+        "reason": reason,
+    }
+
+
+def _load_panel(data, attempts, defects):
+    if "panel" not in data:
+        return None
+    if "adjudication" in data:
+        defects.append("field panel stands beside an adjudication entry")
+    raw = data["panel"]
+    if not isinstance(raw, list):
+        defects.append("field panel has the wrong type")
+        return None
+    before = len(defects)
+    if len(raw) == 0:
+        defects.append("field panel holds no entries")
+    if len(raw) > 2:
+        defects.append("field panel holds more than two entries")
+    clean = []
+    for index, entry in enumerate(raw):
+        loaded = _load_panel_entry(entry, index, attempts, defects)
+        if loaded is not None:
+            clean.append(loaded)
+    if len(clean) == 2 and clean[0]["adjudicator"] == clean[1]["adjudicator"]:
+        defects.append("field panel names the same adjudicator twice")
+    if len(defects) != before or len(clean) != len(raw):
+        return None
+    return clean
+
+
 def load_race_data(data):
     """Build a race from a parsed JSON object, naming every defect.
 
@@ -337,11 +454,14 @@ def load_race_data(data):
     task = _check_text_field(data, "task", defects)
     attempts = _load_attempts(data, defects)
     adjudication = _load_adjudication(data, attempts, defects)
+    panel = _load_panel(data, attempts, defects)
     if defects:
         return None, defects
     race = {"task": task, "attempts": attempts}
     if adjudication is not None:
         race["adjudication"] = adjudication
+    if panel is not None:
+        race["panel"] = panel
     return race, []
 
 
@@ -458,9 +578,149 @@ def _adjudication_state(race):
     return "abstained"
 
 
+def _panel_deciders(race):
+    """Return the entries of a race panel that decide under DH-9.
+
+    An entry decides when its confidence meets the DH-5 threshold,
+    compared exactly as DH-5 compares it, and abstains when it
+    falls below.
+    """
+    return [
+        entry
+        for entry in race["panel"]
+        if _confidence_meets(entry["confidence"])
+    ]
+
+
+def _panel_state(race):
+    """Name what a panel does to a race under DH-9.
+
+    The words are confirmed when both entries decide for the same
+    attempt, divided when both decide for different attempts,
+    follows when exactly one entry decides, abstained when no
+    entry decides, and not needed when the race sits outside the
+    close call band and the panel is ignored.
+    """
+    if not is_close_call(race):
+        return "not needed"
+    deciders = _panel_deciders(race)
+    if len(deciders) == 2:
+        if deciders[0]["chosen"] == deciders[1]["chosen"]:
+            return "confirmed"
+        return "divided"
+    if len(deciders) == 1:
+        return "follows"
+    return "abstained"
+
+
+def _panel_body(race):
+    """Return the entry clauses of a panel line, in entry order.
+
+    A deciding entry stands as adjudication by its adjudicator,
+    chose its label, at its confidence rendered the way seconds
+    render. An abstaining entry stands with the word abstained and
+    its confidence rendered under FIX-DH-10, so the clause never
+    shows a confidence equal to the threshold. A panel holding one
+    entry names the absent judge after the entry that stands, with
+    the words the other judge is absent. The clauses are joined by
+    the word and.
+    """
+    clauses = []
+    for entry in race["panel"]:
+        if _confidence_meets(entry["confidence"]):
+            clauses.append(
+                f"adjudication by {entry['adjudicator']} "
+                f"chose {entry['chosen']} at confidence "
+                f"{format_seconds(entry['confidence'])}"
+            )
+        else:
+            clauses.append(
+                f"adjudication by {entry['adjudicator']} "
+                f"abstained at confidence "
+                f"{_format_confidence(entry['confidence'])}"
+            )
+    if len(race["panel"]) == 1:
+        clauses.append("the other judge is absent")
+    return " and ".join(clauses)
+
+
+def _panel_report_line(race):
+    """Return the race report line for a race carrying a panel."""
+    state = _panel_state(race)
+    if state == "not needed":
+        return (
+            "panel not needed, "
+            "the race stands outside the close call band"
+        )
+    body = _panel_body(race)
+    if state == "confirmed":
+        winner, _loser = decide_winner(race)
+        return (
+            f"close call, panel, {body}, "
+            f"the panel confirms {winner['model']}"
+        )
+    if state == "follows":
+        decider = _panel_deciders(race)[0]
+        return (
+            f"close call, panel, {body}, "
+            f"the panel follows {decider['adjudicator']}"
+        )
+    if state == "divided":
+        return f"close call, panel, {body}, the panel stands divided"
+    return f"close call, panel, {body}"
+
+
+def _panel_funeral_line(race):
+    """Return the funeral line for a panel race, or None.
+
+    The funeral carries no panel line for a race outside the band,
+    as it carries no line for a single entry it did not need.
+    """
+    state = _panel_state(race)
+    if state == "not needed":
+        return None
+    body = _panel_body(race)
+    if state in ("confirmed", "follows"):
+        return f"decided by the panel, {body}"
+    if state == "divided":
+        return (
+            f"close call, panel, {body}, the panel stands divided, "
+            "the race stands as a dead heat"
+        )
+    return (
+        f"close call, panel, {body}, the race stands as a dead heat"
+    )
+
+
+def _panel_close_call_line(race):
+    """Return the closecall line for a race carrying a panel."""
+    state = _panel_state(race)
+    if state == "not needed":
+        return (
+            "panel not needed, "
+            "the race stands outside the close call band"
+        )
+    body = _panel_body(race)
+    if state in ("confirmed", "follows"):
+        winner, _loser = decide_winner(race)
+        return (
+            f"panel, {body}, "
+            f"the race is decided for {winner['model']}"
+        )
+    if state == "divided":
+        return f"panel, {body}, the panel stands divided"
+    return (
+        f"panel, {body}, below the threshold of "
+        f"{format_seconds(_CONFIDENCE_THRESHOLD)}"
+    )
+
+
 def decide_winner(race):
     """Return the winning and losing attempts of a race.
 
+    A close call carrying a panel under DH-9 is decided for the
+    chosen attempt the panel confirms or follows, and stands with
+    no winner when the panel stands divided or no entry decides.
     A close call under DH-5 is decided for the chosen attempt when
     its adjudication entry meets the confidence threshold, and
     stands with no winner otherwise. Outside the band a green
@@ -471,6 +731,17 @@ def decide_winner(race):
     """
     first, second = race["attempts"]
     if is_close_call(race):
+        panel = race.get("panel")
+        if panel is not None:
+            deciders = _panel_deciders(race)
+            if not deciders:
+                return None, None
+            chosen = deciders[0]["chosen"]
+            if any(entry["chosen"] != chosen for entry in deciders):
+                return None, None
+            winner = first if first["model"] == chosen else second
+            loser = second if winner is first else first
+            return winner, loser
         entry = race.get("adjudication")
         if entry is not None and _confidence_meets(entry["confidence"]):
             winner = first if first["model"] == entry["chosen"] else second
@@ -529,6 +800,9 @@ def race_report(race):
         lines.append("verdict, no winner")
     else:
         lines.append(f"verdict, {winner['model']} wins")
+    if "panel" in race:
+        lines.append(_panel_report_line(race))
+        return lines
     entry = race.get("adjudication")
     state = _adjudication_state(race)
     if state == "decided":
@@ -585,26 +859,31 @@ def funeral(race):
             f"loser {loser['model']} in {loser['environment']} "
             f"{_outcome_phrase(loser)}"
         )
-    entry = race.get("adjudication")
-    state = _adjudication_state(race)
-    if state == "decided":
-        lines.append(
-            f"decided by adjudication, {entry['adjudicator']} "
-            f"chose {winner['model']} at confidence "
-            f"{format_seconds(entry['confidence'])}"
-        )
-    elif state == "abstained":
-        lines.append(
-            f"close call, adjudication by {entry['adjudicator']} "
-            f"abstained at confidence "
-            f"{_format_confidence(entry['confidence'])}, "
-            "the race stands as a dead heat"
-        )
-    elif state == "unrecorded":
-        lines.append(
-            "close call, no adjudication on record, "
-            "the race stands as a dead heat"
-        )
+    if "panel" in race:
+        panel_line = _panel_funeral_line(race)
+        if panel_line is not None:
+            lines.append(panel_line)
+    else:
+        entry = race.get("adjudication")
+        state = _adjudication_state(race)
+        if state == "decided":
+            lines.append(
+                f"decided by adjudication, {entry['adjudicator']} "
+                f"chose {winner['model']} at confidence "
+                f"{format_seconds(entry['confidence'])}"
+            )
+        elif state == "abstained":
+            lines.append(
+                f"close call, adjudication by {entry['adjudicator']} "
+                f"abstained at confidence "
+                f"{_format_confidence(entry['confidence'])}, "
+                "the race stands as a dead heat"
+            )
+        elif state == "unrecorded":
+            lines.append(
+                "close call, no adjudication on record, "
+                "the race stands as a dead heat"
+            )
     if "finished_at" in first and "finished_at" in second:
         margin = abs(
             _exact(first["finished_at"]) - _exact(second["finished_at"])
@@ -662,33 +941,37 @@ def close_call_report(race):
         lines.append(
             "outside the band, the two attempts hold different outcomes"
         )
-    entry = race.get("adjudication")
-    state = _adjudication_state(race)
-    if state == "decided":
-        winner, _loser = decide_winner(race)
-        lines.append(
-            f"adjudication by {entry['adjudicator']} "
-            f"chose {winner['model']} at confidence "
-            f"{format_seconds(entry['confidence'])}, "
-            f"the race is decided for {winner['model']}"
-        )
-    elif state == "abstained":
-        lines.append(
-            f"adjudication by {entry['adjudicator']} "
-            f"abstained at confidence "
-            f"{_format_confidence(entry['confidence'])}, "
-            "below the threshold of "
-            f"{format_seconds(_CONFIDENCE_THRESHOLD)}"
-        )
-    elif state == "unrecorded":
-        lines.append(
-            "no adjudication on record, the race stands as no result"
-        )
-    elif state == "not needed":
-        lines.append(
-            f"adjudication by {entry['adjudicator']} not needed, "
-            "the race stands outside the close call band"
-        )
+    if "panel" in race:
+        lines.append(_panel_close_call_line(race))
+    else:
+        entry = race.get("adjudication")
+        state = _adjudication_state(race)
+        if state == "decided":
+            winner, _loser = decide_winner(race)
+            lines.append(
+                f"adjudication by {entry['adjudicator']} "
+                f"chose {winner['model']} at confidence "
+                f"{format_seconds(entry['confidence'])}, "
+                f"the race is decided for {winner['model']}"
+            )
+        elif state == "abstained":
+            lines.append(
+                f"adjudication by {entry['adjudicator']} "
+                f"abstained at confidence "
+                f"{_format_confidence(entry['confidence'])}, "
+                "below the threshold of "
+                f"{format_seconds(_CONFIDENCE_THRESHOLD)}"
+            )
+        elif state == "unrecorded":
+            lines.append(
+                "no adjudication on record, "
+                "the race stands as no result"
+            )
+        elif state == "not needed":
+            lines.append(
+                f"adjudication by {entry['adjudicator']} not needed, "
+                "the race stands outside the close call band"
+            )
     winner, _loser = decide_winner(race)
     if winner is None:
         lines.append("verdict, no winner")
@@ -834,6 +1117,9 @@ def load_standings_text(text):
         for name, entry in data["models"].items():
             if _holds_unpaired_surrogate(name):
                 defects.append("field models holds an unpaired surrogate")
+                continue
+            if _holds_line_break(name):
+                defects.append("field models holds a newline")
                 continue
             clean = _load_standings_entry(name, entry, defects)
             if clean is not None:

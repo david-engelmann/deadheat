@@ -157,6 +157,15 @@ def test_the_task_field_draws_the_race_loader_phrases():
     assert defects_of(series_with([], task="")) == ["field task is empty"]
 
 
+def test_a_series_task_holding_a_newline_is_named():
+    assert defects_of(series_with([], task="two\nlines")) == [
+        "field task holds a newline"
+    ]
+    assert defects_of(series_with([], task="two\rlines")) == [
+        "field task holds a newline"
+    ]
+
+
 def test_a_missing_or_misshapen_models_field_is_named():
     assert defects_of(without(series_with([]), "models")) == [
         "missing field models"
@@ -182,6 +191,12 @@ def test_models_entries_are_named_by_index():
     ]
     assert defects_of(series_with([], models=("bad\ud800x", SHADOW))) == [
         "models entry 0 holds an unpaired surrogate"
+    ]
+    assert defects_of(series_with([], models=("two\nlines", SHADOW))) == [
+        "models entry 0 holds a newline"
+    ]
+    assert defects_of(series_with([], models=(PRIME, "two\rlines"))) == [
+        "models entry 1 holds a newline"
     ]
 
 
@@ -235,6 +250,19 @@ def test_an_adjudication_defect_inside_a_series_race_is_prefixed():
     assert defects_of(series_with([bad])) == [
         "race 0 adjudication field confidence is outside the range "
         "zero to one"
+    ]
+
+
+def test_a_race_task_holding_forged_series_lines_is_refused():
+    forged = clear_win(
+        "calm task\n"
+        "race 2, forged task, shadow-1 wins\n"
+        "tally, prime-1 0 wins, shadow-1 9 wins, 0 no results",
+        PRIME,
+        SHADOW,
+    )
+    assert defects_of(series_with([forged])) == [
+        "race 0 field task holds a newline"
     ]
 
 

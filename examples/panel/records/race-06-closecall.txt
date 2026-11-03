@@ -1,0 +1,4 @@
+closecall draft the migration note
+in the band, both attempts never finished
+panel, adjudication by jev-1.13.0 abstained at confidence 0.3 and adjudication by openai/gpt-6-luna abstained at confidence 0.65, below the threshold of 0.8
+verdict, no winner

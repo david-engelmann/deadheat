@@ -138,6 +138,18 @@ def test_a_task_holding_an_unpaired_surrogate_is_named():
     ]
 
 
+def test_a_task_holding_a_newline_is_named():
+    assert defects_of(valid_race(task="two\nlines")) == [
+        "field task holds a newline"
+    ]
+
+
+def test_a_task_holding_a_carriage_return_is_named():
+    assert defects_of(valid_race(task="two\rlines")) == [
+        "field task holds a newline"
+    ]
+
+
 def test_missing_attempts_is_named():
     assert defects_of(without(valid_race(), "attempts")) == [
         "missing field attempts"
@@ -203,6 +215,30 @@ def test_an_environment_holding_an_unpaired_surrogate_is_named():
     assert defects_of(race_with_attempt(0, valid_attempt(environment="lane\ud800"))) == [
         "attempt 0 field environment holds an unpaired surrogate"
     ]
+
+
+def test_a_model_holding_a_newline_is_named():
+    assert defects_of(race_with_attempt(0, valid_attempt(model="two\nlines"))) == [
+        "attempt 0 field model holds a newline"
+    ]
+
+
+def test_a_model_holding_a_carriage_return_is_named_with_its_position():
+    assert defects_of(race_with_attempt(1, other_attempt(model="two\rlines"))) == [
+        "attempt 1 field model holds a newline"
+    ]
+
+
+def test_an_environment_holding_a_newline_is_named():
+    assert defects_of(
+        race_with_attempt(0, valid_attempt(environment="two\nlines"))
+    ) == ["attempt 0 field environment holds a newline"]
+
+
+def test_an_environment_holding_a_carriage_return_is_named_with_its_position():
+    assert defects_of(
+        race_with_attempt(1, other_attempt(environment="two\rlines"))
+    ) == ["attempt 1 field environment holds a newline"]
 
 
 def test_an_empty_model_is_named():
@@ -775,3 +811,18 @@ def test_standings_loader_names_an_unpaired_surrogate_in_a_model_key():
     )
     assert standings is None
     assert defects == ["field models holds an unpaired surrogate"]
+
+
+def test_standings_loader_names_a_newline_in_a_model_key():
+    entry = {
+        "wins": 0,
+        "losses": 0,
+        "no_results": 0,
+        "tokens": 0,
+        "tokens_unreported": 0,
+    }
+    standings, defects = load_standings_text(
+        json.dumps({"models": {"bad\nkey": entry}})
+    )
+    assert standings is None
+    assert defects == ["field models holds a newline"]

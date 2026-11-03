@@ -1,0 +1,35 @@
+{
+ "attempts": [
+  {
+   "environment": "home worktree",
+   "finished_at": 380.0,
+   "model": "prime-1",
+   "patch": "--- a/queue.py\n+++ b/queue.py\n@@ -7,1 +7,2 @@\n-job = queue.pop()\n+if queue:\n+    job = queue.pop()\n",
+   "result": "green",
+   "tokens": 77300
+  },
+  {
+   "environment": "shadow worktree",
+   "finished_at": 400.0,
+   "model": "shadow-1",
+   "patch": "--- a/queue.py\n+++ b/queue.py\n@@ -7,1 +7,1 @@\n-job = queue.pop()\n+job = queue.pop() if queue else None\n",
+   "result": "green",
+   "tokens": 80900
+  }
+ ],
+ "panel": [
+  {
+   "adjudicator": "jev-1.13.0",
+   "chosen": "prime-1",
+   "confidence": 0.04,
+   "reason": "jev-1.13.0 chose prime-1 with confidence 0.04"
+  },
+  {
+   "adjudicator": "openai/gpt-6-luna",
+   "chosen": "shadow-1",
+   "confidence": 0.72,
+   "reason": "openai/gpt-6-luna chose shadow-1 with confidence 0.72"
+  }
+ ],
+ "task": "guard the empty queue"
+}
