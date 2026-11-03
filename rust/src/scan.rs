@@ -7,9 +7,10 @@
 //! directories are skipped, and the pilot envelope directory
 //! stands exempt under the scan exemption in CONTRACT.md,
 //! because recorded envelopes stand exactly as their routes
-//! returned them. This reading carries the job the scan script
-//! under scripts does today, so the cargo suite holds the rule
-//! on its own, as the port plan states.
+//! returned them. The reading mirrors the Python scan script
+//! this module replaces under PORT-13, so a tree reads the same
+//! counts under the library as it read under the script, and
+//! the cargo suite holds the rule on its own.
 
 use std::path::Path;
 
