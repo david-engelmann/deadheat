@@ -241,20 +241,16 @@ fn parse_columns(value: &str) -> Option<usize> {
             underscores += 1;
             continue;
         }
-        match crate::pyunicode::nd_digit_value(*point as u32) {
-            Some(value) => {
-                if underscores > 1 || (underscores == 1 && digits == 0) {
-                    return None;
-                }
-                underscores = 0;
-                digits += 1;
-                magnitude = magnitude
-                    .saturating_mul(10)
-                    .saturating_add(value as u64)
-                    .min(1_000_000);
-            }
-            None => return None,
+        let digit = crate::pyunicode::nd_digit_value(*point as u32)?;
+        if underscores > 1 || (underscores == 1 && digits == 0) {
+            return None;
         }
+        underscores = 0;
+        digits += 1;
+        magnitude = magnitude
+            .saturating_mul(10)
+            .saturating_add(digit as u64)
+            .min(1_000_000);
     }
     if digits == 0 || underscores > 0 || negative || magnitude == 0 {
         return None;
