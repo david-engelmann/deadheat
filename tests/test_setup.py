@@ -10,7 +10,7 @@ def test_agents_carries_the_canonical_marker():
 
 def test_readme_states_the_closed_round_count():
     text = (ROOT / "README.md").read_text(encoding="utf-8")
-    assert re.search(r"Closed perfection rounds, 3 of 100", text)
+    assert re.search(r"Closed perfection rounds, 4 of 100", text)
 
 def test_contract_carries_the_setup_obligations():
     text = (ROOT / "CONTRACT.md").read_text(encoding="utf-8")
@@ -57,7 +57,7 @@ def test_readme_reports_the_round_four_status():
     )
     assert standing in lines
     slice_line = (
-        "- Slice 5 is built and in review. It carries the panel "
+        "- Slice 5 has landed. It carries the panel "
         "reading over two recorded adjudication entries, the "
         "panel join over the Round 3 pilot records, and the "
         "recorded panel pilot over both models, ten panel "
@@ -65,7 +65,7 @@ def test_readme_reports_the_round_four_status():
         "series under examples."
     )
     assert slice_line in lines
-    assert text.count("built and in review") == 1
+    assert text.count("built and in review") == 0
 
 def test_ci_runs_the_same_gate_as_the_local_gate():
     text = (ROOT / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
