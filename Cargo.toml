@@ -1,0 +1,63 @@
+[package]
+name = "deadheat"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+path = "rust/src/lib.rs"
+
+[[bin]]
+name = "deadheat"
+path = "rust/src/main.rs"
+
+# The integration tests live beside the library under rust/tests, so
+# each one is named here with its path rather than discovered from a
+# root level tests directory, which belongs to the Python corpus.
+[[test]]
+name = "test_races"
+path = "rust/tests/test_races.rs"
+
+[[test]]
+name = "test_close_calls"
+path = "rust/tests/test_close_calls.rs"
+
+[[test]]
+name = "test_panels"
+path = "rust/tests/test_panels.rs"
+
+[[test]]
+name = "test_seats"
+path = "rust/tests/test_seats.rs"
+
+[[test]]
+name = "test_series"
+path = "rust/tests/test_series.rs"
+
+[[test]]
+name = "test_cli"
+path = "rust/tests/test_cli.rs"
+
+[[test]]
+name = "test_examples"
+path = "rust/tests/test_examples.rs"
+
+[[test]]
+name = "test_pilot"
+path = "rust/tests/test_pilot.rs"
+
+[[test]]
+name = "test_runner"
+path = "rust/tests/test_runner.rs"
+
+[[test]]
+name = "test_scan"
+path = "rust/tests/test_scan.rs"
+
+[[test]]
+name = "test_setup"
+path = "rust/tests/test_setup.rs"
+
+[dependencies]
+num-bigint = "0.4"
+num-rational = "0.4"
+num-traits = "0.2"

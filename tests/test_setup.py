@@ -51,9 +51,10 @@ def test_readme_reports_the_round_four_status():
     text = (ROOT / "README.md").read_text(encoding="utf-8")
     lines = text.splitlines()
     standing = (
-        "- Contract, DH-9 and DH-10 now stand in full form in "
-        "CONTRACT.md under the Round 4 obligations, and their "
-        "standing is not claimed here, as Round 4 has not closed."
+        "- Contract, DH-9 and DH-10 met. They stand in full form "
+        "in CONTRACT.md with the Round 4 repair amendments, and "
+        "Round 4 closed on the merged slice 5 after three "
+        "reviews, a repair pass, and an approving re-review."
     )
     assert standing in lines
     slice_line = (
@@ -66,6 +67,23 @@ def test_readme_reports_the_round_four_status():
     )
     assert slice_line in lines
     assert text.count("built and in review") == 0
+
+def test_the_gate_lines_name_both_gates():
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    gate = (
+        "- Local gate, python3 scripts/codepoint_scan.py, "
+        "python3 -m pytest tests -q, and the cargo gate of "
+        "cargo fmt --check, cargo clippy --all-targets -- "
+        "-D warnings, and cargo test. CI runs the same commands."
+    )
+    assert gate in readme.splitlines()
+    agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+    assert (
+        "The local gate is python3 scripts/codepoint_scan.py, "
+        "python3 -m pytest tests -q, and the cargo gate of "
+        "cargo fmt --check, cargo clippy --all-targets -- "
+        "-D warnings, and cargo test"
+    ) in agents
 
 def test_ci_runs_the_same_gate_as_the_local_gate():
     text = (ROOT / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
