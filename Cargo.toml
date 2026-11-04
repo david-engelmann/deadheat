@@ -30,6 +30,10 @@ name = "test_panels"
 path = "rust/tests/test_panels.rs"
 
 [[test]]
+name = "test_handicap"
+path = "rust/tests/test_handicap.rs"
+
+[[test]]
 name = "test_seats"
 path = "rust/tests/test_seats.rs"
 

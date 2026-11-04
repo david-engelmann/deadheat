@@ -5,8 +5,9 @@
 //! inputs, and the loaders never raise on malformed content. The
 //! obligations this module carries are DH-1 to DH-4 in
 //! CONTRACT.md, in the full form section, DH-5 in the Round 2
-//! section, and the panel shape and reading of DH-9 in the
-//! Round 4 section. The Python module of the same name is the
+//! section, the panel shape and reading of DH-9 in the
+//! Round 4 section, and the handicap of DH-11 in the Round 5
+//! section. The Python module of the same name is the
 //! behavioral spec, as PORT-1 states.
 
 use std::path::{Path, PathBuf};
@@ -58,6 +59,7 @@ pub struct Attempt {
     pub tokens: Option<BigInt>,
     pub patch: PText,
     pub finished_at: Option<Num>,
+    pub adjustment: Option<Num>,
 }
 
 /// One adjudication entry, the shape DH-5 validates, which is
@@ -101,6 +103,32 @@ pub fn as_int(value: &JsonValue) -> Option<&BigInt> {
 /// integer to itself, so comparisons built on this never round.
 pub fn exact(num: &Num) -> Ratio<BigInt> {
     num.to_fraction()
+}
+
+/// Return the adjusted finish of one attempt under DH-11, its
+/// recorded finish plus its adjustment, computed exactly. An
+/// attempt carrying no adjustment holds its recorded finish,
+/// and an unfinished attempt holds no adjusted finish.
+pub fn adjusted_finish(attempt: &Attempt) -> Option<Ratio<BigInt>> {
+    let finished = attempt.finished_at.as_ref()?;
+    let mut total = exact(finished);
+    if let Some(adjustment) = &attempt.adjustment {
+        total += exact(adjustment);
+    }
+    Some(total)
+}
+
+/// Return the finish the rules read for one finished attempt,
+/// its adjusted finish under DH-11.
+fn finish_reading(attempt: &Attempt) -> Ratio<BigInt> {
+    adjusted_finish(attempt).expect("a finished attempt")
+}
+
+/// Return whether any attempt of a race carries an adjustment.
+fn race_adjusted(race: &Race) -> bool {
+    race.attempts
+        .iter()
+        .any(|attempt| attempt.adjustment.is_some())
 }
 
 fn ratio_int(value: i64) -> Ratio<BigInt> {
@@ -199,8 +227,14 @@ fn exact_expansion(fraction: &Ratio<BigInt>) -> Option<String> {
 /// places with halves rounding up. Every figure renders in
 /// plain decimal notation and never in scientific notation, so
 /// a nonzero margin never prints as zero. The rule is FIX-DH-8
-/// in CONTRACT.md, amending DH-3 and DH-5.
+/// in CONTRACT.md, amending DH-3 and DH-5. A negative figure,
+/// a shape only the adjustment of DH-11 brings, renders with a
+/// leading minus sign over the rendering of its absolute value.
 pub fn format_seconds_fraction(fraction: &Ratio<BigInt>) -> String {
+    if fraction.is_negative() {
+        let magnitude = -fraction.clone();
+        return format!("-{}", format_seconds_fraction(&magnitude));
+    }
     let million = Ratio::from_integer(BigInt::from(1_000_000));
     let scaled = fraction * &million;
     if scaled.denom() == &BigInt::from(1) {
@@ -358,6 +392,59 @@ fn check_finished_at(
     }
 }
 
+/// Validate the adjustment field of one attempt under DH-11.
+///
+/// The field is optional. Where it stands it must hold a
+/// finite number, it cannot stand on an unfinished attempt,
+/// which holds no finish for it to move, and it cannot take
+/// its finish below zero. The checks that read the finish run
+/// only where the finish itself validated, because the attempt
+/// already stands refused on its finish defect there.
+fn check_adjustment(
+    entry: &JsonValue,
+    index: usize,
+    result: Option<SuiteResult>,
+    finished: Option<&Num>,
+    defects: &mut Vec<String>,
+) -> Option<Num> {
+    let value = entry.get("adjustment")?;
+    let num = match value.as_num() {
+        None => {
+            defects.push(format!(
+                "attempt {} field adjustment has the wrong type",
+                index
+            ));
+            return None;
+        }
+        Some(num) => num,
+    };
+    if !num.is_finite_number() {
+        defects.push(format!(
+            "attempt {} field adjustment is not a finite number",
+            index
+        ));
+        return None;
+    }
+    if result == Some(SuiteResult::Unfinished) {
+        defects.push(format!(
+            "attempt {} field adjustment is present but the suite did not finish",
+            index
+        ));
+        return None;
+    }
+    if let Some(finished) = finished {
+        let adjusted = exact(finished) + exact(num);
+        if adjusted.is_negative() {
+            defects.push(format!(
+                "attempt {} field adjustment takes the finish below zero",
+                index
+            ));
+            return None;
+        }
+    }
+    Some(num.clone())
+}
+
 fn load_attempt(entry: &JsonValue, index: usize, defects: &mut Vec<String>) -> Option<Attempt> {
     if entry.as_object().is_none() {
         defects.push(format!("attempt {} is not an object", index));
@@ -413,6 +500,7 @@ fn load_attempt(entry: &JsonValue, index: usize, defects: &mut Vec<String>) -> O
         },
     }
     let finished = check_finished_at(entry, index, result, defects);
+    let adjustment = check_adjustment(entry, index, result, finished.as_ref(), defects);
     if defects.len() != before {
         return None;
     }
@@ -423,6 +511,7 @@ fn load_attempt(entry: &JsonValue, index: usize, defects: &mut Vec<String>) -> O
         tokens,
         patch: patch?,
         finished_at: finished,
+        adjustment,
     })
 }
 
@@ -757,10 +846,13 @@ pub fn read_text_file(path: &Path) -> Option<String> {
 /// Both attempts holding the same non green outcome is a close
 /// call. Both attempts green is a close call when the finish
 /// times differ and the gap is no more than five percent of the
-/// slower finish. The comparison multiplies the exact gap by
-/// twenty and compares it against the exact slower finish, so
-/// no rounding at any precision can move a race across the band
-/// edge. An exact tie of green finish times is not a close call.
+/// slower finish. The finishes read here are the adjusted
+/// finishes of DH-11, which are the recorded finishes on a race
+/// carrying no adjustment. The comparison multiplies the exact
+/// gap by twenty and compares it against the exact slower
+/// finish, so no rounding at any precision can move a race
+/// across the band edge. An exact tie of green finish times is
+/// not a close call.
 pub fn is_close_call(race: &Race) -> bool {
     let first = &race.attempts[0];
     let second = &race.attempts[1];
@@ -770,8 +862,8 @@ pub fn is_close_call(race: &Race) -> bool {
     if first.result != SuiteResult::Green {
         return true;
     }
-    let first_finish = exact(first.finished_at.as_ref().expect("a green finish"));
-    let second_finish = exact(second.finished_at.as_ref().expect("a green finish"));
+    let first_finish = finish_reading(first);
+    let second_finish = finish_reading(second);
     let gap = (first_finish.clone() - second_finish.clone()).abs();
     let slower = first_finish.max(second_finish);
     !gap.is_zero() && gap * ratio_int(20) <= slower
@@ -966,10 +1058,11 @@ fn panel_close_call_line(race: &Race) -> String {
 /// attempt when its adjudication entry meets the confidence
 /// threshold, and stands with no winner otherwise. Outside the
 /// band a green attempt beats a red or unfinished attempt. When
-/// both attempts are green the earlier finish wins, and an
-/// exact tie of finish times goes to the attempt that stands
-/// first in the record. When neither attempt is green both
-/// returns are None.
+/// both attempts are green the earlier adjusted finish wins
+/// under DH-11, the recorded finish on an unadjusted attempt,
+/// and an exact tie of adjusted finishes goes to the attempt
+/// that stands first in the record. When neither attempt is
+/// green both returns are None.
 pub fn decide_winner(race: &Race) -> (Option<usize>, Option<usize>) {
     let first = &race.attempts[0];
     let second = &race.attempts[1];
@@ -1007,8 +1100,8 @@ pub fn decide_winner(race: &Race) -> (Option<usize>, Option<usize>) {
     let winner = if greens.len() == 1 {
         greens[0]
     } else {
-        let first_finish = exact(first.finished_at.as_ref().expect("a green finish"));
-        let second_finish = exact(second.finished_at.as_ref().expect("a green finish"));
+        let first_finish = finish_reading(first);
+        let second_finish = finish_reading(second);
         if first_finish <= second_finish {
             0
         } else {
@@ -1018,14 +1111,36 @@ pub fn decide_winner(race: &Race) -> (Option<usize>, Option<usize>) {
     (Some(winner), Some(1 - winner))
 }
 
+/// Return the phrase naming one attempt finish, the phrase the
+/// race report and the funeral share. An attempt carrying an
+/// adjustment under DH-11 names the adjustment and the adjusted
+/// finish beside the recorded finish, and an attempt carrying
+/// none names its recorded finish alone, exactly as the earlier
+/// rounds left it.
+fn finish_clause(attempt: &Attempt) -> String {
+    let recorded = format!(
+        "in {} seconds",
+        format_seconds(attempt.finished_at.as_ref().expect("a finish"))
+    );
+    match &attempt.adjustment {
+        None => recorded,
+        Some(adjustment) => format!(
+            "{}, adjustment {} seconds, adjusted finish {} seconds",
+            recorded,
+            format_seconds(adjustment),
+            format_seconds_fraction(&finish_reading(attempt))
+        ),
+    }
+}
+
 fn outcome_phrase(attempt: &Attempt) -> String {
     if attempt.result == SuiteResult::Unfinished {
         return "never finished".to_string();
     }
     format!(
-        "went {} in {} seconds",
+        "went {} {}",
         attempt.result.as_str(),
-        format_seconds(attempt.finished_at.as_ref().expect("a finish"))
+        finish_clause(attempt)
     )
 }
 
@@ -1033,11 +1148,7 @@ fn report_line(attempt: &Attempt) -> String {
     let outcome = if attempt.result == SuiteResult::Unfinished {
         "unfinished".to_string()
     } else {
-        format!(
-            "{} in {} seconds",
-            attempt.result.as_str(),
-            format_seconds(attempt.finished_at.as_ref().expect("a finish"))
-        )
+        format!("{} {}", attempt.result.as_str(), finish_clause(attempt))
     };
     let spend = match &attempt.tokens {
         None => "tokens unreported".to_string(),
@@ -1172,12 +1283,19 @@ pub fn funeral(race: &Race) -> Vec<String> {
             "close call, no adjudication on record, the race stands as a dead heat".to_string(),
         );
     }
-    if let (Some(first_finish), Some(second_finish)) = (&first.finished_at, &second.finished_at) {
-        let margin = (exact(first_finish) - exact(second_finish)).abs();
-        lines.push(format!(
-            "margin {} seconds between the two finishes",
-            format_seconds_fraction(&margin)
-        ));
+    if first.finished_at.is_some() && second.finished_at.is_some() {
+        let margin = (finish_reading(first) - finish_reading(second)).abs();
+        if race_adjusted(race) {
+            lines.push(format!(
+                "margin {} seconds between the two adjusted finishes",
+                format_seconds_fraction(&margin)
+            ));
+        } else {
+            lines.push(format!(
+                "margin {} seconds between the two finishes",
+                format_seconds_fraction(&margin)
+            ));
+        }
     }
     lines
 }
@@ -1188,8 +1306,8 @@ pub fn close_call_report(race: &Race) -> Vec<String> {
     let second = &race.attempts[1];
     let mut lines = vec![format!("closecall {}", race.task.display())];
     if first.result == SuiteResult::Green && second.result == SuiteResult::Green {
-        let first_finish = exact(first.finished_at.as_ref().expect("a green finish"));
-        let second_finish = exact(second.finished_at.as_ref().expect("a green finish"));
+        let first_finish = finish_reading(first);
+        let second_finish = finish_reading(second);
         let gap = (first_finish.clone() - second_finish.clone()).abs();
         let slower = first_finish.max(second_finish);
         if gap.is_zero() {
@@ -1609,6 +1727,12 @@ pub fn race_to_json(race: &Race) -> JsonValue {
                 pairs.push((
                     PText::from_text("finished_at"),
                     JsonValue::Num(finished.clone()),
+                ));
+            }
+            if let Some(adjustment) = &attempt.adjustment {
+                pairs.push((
+                    PText::from_text("adjustment"),
+                    JsonValue::Num(adjustment.clone()),
                 ));
             }
             JsonValue::object(pairs)

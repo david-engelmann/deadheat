@@ -1,0 +1,1 @@
+{"attempts":[{"environment":"lane one","finished_at":100,"model":"prime-1","patch":"prime diff","result":"green","tokens":41000},{"adjustment":-30,"environment":"lane two","finished_at":120,"model":"shadow-1","patch":"shadow diff","result":"green","tokens":45500}],"task":"balance the ledger import"}

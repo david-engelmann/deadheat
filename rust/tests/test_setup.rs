@@ -33,7 +33,7 @@ fn contract_carries_the_setup_obligations() {
     let text = read(&repo_root().join("CONTRACT.md"));
     for oid in [
         "SETUP-1", "SETUP-2", "SETUP-3", "SETUP-4", "DH-1", "DH-5", "DH-6", "DH-7", "DH-8", "DH-9",
-        "DH-10",
+        "DH-10", "DH-11", "DH-12",
     ] {
         assert!(text.contains(oid), "{oid}");
     }
@@ -62,7 +62,23 @@ fn readme_reports_the_round_four_status() {
     assert!(text.lines().any(|line| line == standing));
     let slice_line = "- Slice 5 has landed. It carries the panel reading over two recorded adjudication entries, the panel join over the Round 3 pilot records, and the recorded panel pilot over both models, ten panel records with their closecall goldens and the panel series under examples.";
     assert!(text.lines().any(|line| line == slice_line));
-    assert_eq!(text.matches("built and in review").count(), 0);
+    // Altered at the Round 5 slice for its named mechanical
+    // consequence. This count holds the slices standing in
+    // review across the whole README. It stood at zero when
+    // Round 4 closed, and slice 6 stands in review while
+    // Round 5 is built, so the count is one until the Round 5
+    // closure lands slice 6 and the count returns to zero.
+    // The round five pin below holds the slice line itself.
+    assert_eq!(text.matches("built and in review").count(), 1);
+}
+
+#[test]
+fn readme_reports_the_round_five_slice() {
+    let text = read(&repo_root().join("README.md"));
+    let standing = "- Contract, DH-11 and DH-12 now stand in full form in CONTRACT.md under the Round 5 obligations, and their standing is not claimed here, as Round 5 has not closed.";
+    assert!(text.lines().any(|line| line == standing));
+    let slice_line = "- Slice 6 is built and in review. It carries the handicap, a per attempt adjustment in seconds read as an adjusted finish by the winner rule and the close call band, with the handicapped example race and the handicap series and their goldens under examples.";
+    assert!(text.lines().any(|line| line == slice_line));
 }
 
 #[test]

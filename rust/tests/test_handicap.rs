@@ -1,0 +1,574 @@
+//! Pins for DH-11 and DH-12, the handicap and the adjusted
+//! finish, in the Round 5 section of CONTRACT.md.
+//!
+//! Each pin is built so it fails under the negation of the rule
+//! it names. The winner and band pins stand in pairs, the same
+//! race with and without its adjustments, so a reading that
+//! ignored the adjustments or read the recorded figures where
+//! the adjusted ones govern fails one side of the pair. The
+//! closing sweep holds every standing golden byte for byte
+//! over the races carrying no adjustment.
+
+mod shared;
+
+use std::path::{Path, PathBuf};
+
+use deadheat::json::JsonValue;
+use deadheat::panels::join_panel_records;
+use deadheat::pynum::Num;
+use deadheat::races::{
+    adjusted_finish, close_call_report, decide_winner, empty_standings, format_seconds_fraction,
+    funeral, is_close_call, load_race_data, load_race_file, load_race_text, race_report,
+    race_to_json, standings_table, update_standings, Race,
+};
+use deadheat::seats::attempt_summary;
+use deadheat::series::{load_series_file, load_series_text, series_report};
+use shared::*;
+
+fn attempt(
+    model: &str,
+    result: &str,
+    finish: Option<JsonValue>,
+    adjustment: Option<JsonValue>,
+) -> JsonValue {
+    let mut pairs = vec![
+        ("model", s(model)),
+        ("environment", s("lane")),
+        ("result", s(result)),
+        ("tokens", i(1000)),
+        ("patch", s("a diff")),
+    ];
+    if let Some(finish) = finish {
+        pairs.push(("finished_at", finish));
+    }
+    if let Some(adjustment) = adjustment {
+        pairs.push(("adjustment", adjustment));
+    }
+    obj(pairs)
+}
+
+fn green(model: &str, finish: JsonValue, adjustment: Option<JsonValue>) -> JsonValue {
+    attempt(model, "green", Some(finish), adjustment)
+}
+
+fn race(first: JsonValue, second: JsonValue) -> JsonValue {
+    obj(vec![
+        ("task", s("a task")),
+        ("attempts", arr(vec![first, second])),
+    ])
+}
+
+fn load(value: &JsonValue) -> Race {
+    let (race, defects) = load_race_data(value);
+    assert_eq!(defects, Vec::<String>::new());
+    race.expect("a race")
+}
+
+fn defects_of(value: &JsonValue) -> Vec<String> {
+    let (race, defects) = load_race_data(value);
+    assert!(race.is_none());
+    defects
+}
+
+fn report_text(race: &Race) -> String {
+    race_report(race).join("\n")
+}
+
+#[test]
+fn an_adjustment_loads_in_each_of_its_shapes() {
+    for (figure, rendered) in [
+        (i(-30), "70"),
+        (f(-2.5), "97.5"),
+        (i(0), "100"),
+        (f(12.25), "112.25"),
+    ] {
+        let value = race(
+            green("prime-1", i(100), Some(figure)),
+            green("shadow-1", i(200), None),
+        );
+        let loaded = load(&value);
+        let adjusted = adjusted_finish(&loaded.attempts[0]).expect("an adjusted finish");
+        assert_eq!(format_seconds_fraction(&adjusted), rendered);
+    }
+    let value = race(
+        green("prime-1", i(100), None),
+        green("shadow-1", i(200), None),
+    );
+    let loaded = load(&value);
+    assert!(loaded.attempts[0].adjustment.is_none());
+    let adjusted = adjusted_finish(&loaded.attempts[0]).expect("an adjusted finish");
+    assert_eq!(format_seconds_fraction(&adjusted), "100");
+    let unfinished = load(&race(
+        attempt("prime-1", "unfinished", None, None),
+        green("shadow-1", i(200), None),
+    ));
+    assert!(adjusted_finish(&unfinished.attempts[0]).is_none());
+}
+
+#[test]
+fn an_adjustment_of_the_wrong_type_is_refused() {
+    for bad in [s("five"), JsonValue::Null, JsonValue::Bool(true)] {
+        let value = race(
+            green("prime-1", i(100), Some(bad)),
+            green("shadow-1", i(200), None),
+        );
+        assert_eq!(
+            defects_of(&value),
+            vec!["attempt 0 field adjustment has the wrong type".to_string()]
+        );
+    }
+    let value = race(
+        green("prime-1", i(100), None),
+        green("shadow-1", i(200), Some(s("five"))),
+    );
+    assert_eq!(
+        defects_of(&value),
+        vec!["attempt 1 field adjustment has the wrong type".to_string()]
+    );
+}
+
+#[test]
+fn a_non_finite_adjustment_is_refused() {
+    for bad in [f(f64::INFINITY), f(f64::NAN), bigint(&"1".repeat(400))] {
+        let value = race(
+            green("prime-1", i(100), Some(bad)),
+            green("shadow-1", i(200), None),
+        );
+        assert_eq!(
+            defects_of(&value),
+            vec!["attempt 0 field adjustment is not a finite number".to_string()]
+        );
+    }
+    for literal in ["1e400", &"9".repeat(400)] {
+        let text = format!(
+            "{{\"task\": \"a task\", \"attempts\": [{{\"model\": \"prime-1\", \"environment\": \"lane\", \"result\": \"green\", \"tokens\": 1, \"patch\": \"\", \"finished_at\": 100, \"adjustment\": {literal}}}, {{\"model\": \"shadow-1\", \"environment\": \"lane\", \"result\": \"green\", \"tokens\": 1, \"patch\": \"\", \"finished_at\": 200}}]}}"
+        );
+        let (race, defects) = load_race_text(&text);
+        assert!(race.is_none());
+        assert_eq!(
+            defects,
+            vec!["attempt 0 field adjustment is not a finite number".to_string()],
+            "{literal}"
+        );
+    }
+}
+
+#[test]
+fn an_adjustment_on_an_unfinished_attempt_is_refused() {
+    let value = race(
+        attempt("prime-1", "unfinished", None, Some(i(5))),
+        green("shadow-1", i(200), None),
+    );
+    assert_eq!(
+        defects_of(&value),
+        vec!["attempt 0 field adjustment is present but the suite did not finish".to_string()]
+    );
+}
+
+#[test]
+fn an_adjustment_taking_the_finish_below_zero_is_refused() {
+    let value = race(
+        green("prime-1", i(30), Some(i(-31))),
+        green("shadow-1", i(200), None),
+    );
+    assert_eq!(
+        defects_of(&value),
+        vec!["attempt 0 field adjustment takes the finish below zero".to_string()]
+    );
+    let value = race(
+        green("prime-1", f(30.5), Some(f(-30.75))),
+        green("shadow-1", i(200), None),
+    );
+    assert_eq!(
+        defects_of(&value),
+        vec!["attempt 0 field adjustment takes the finish below zero".to_string()]
+    );
+}
+
+#[test]
+fn an_adjustment_taking_the_finish_exactly_to_zero_stands() {
+    let value = race(
+        green("prime-1", i(30), Some(i(-30))),
+        attempt("shadow-1", "red", Some(i(50)), None),
+    );
+    let loaded = load(&value);
+    let adjusted = adjusted_finish(&loaded.attempts[0]).expect("an adjusted finish");
+    assert_eq!(format_seconds_fraction(&adjusted), "0");
+    assert_eq!(decide_winner(&loaded), (Some(0), Some(1)));
+    assert!(report_text(&loaded)
+        .contains("green in 30 seconds, adjustment -30 seconds, adjusted finish 0 seconds"));
+}
+
+#[test]
+fn the_adjustment_reverses_the_scratch_outcome() {
+    let handicapped = load(&race(
+        green("prime-1", i(100), None),
+        green("shadow-1", i(120), Some(i(-30))),
+    ));
+    assert_eq!(decide_winner(&handicapped), (Some(1), Some(0)));
+    assert!(report_text(&handicapped).contains("verdict, shadow-1 wins"));
+    let scratch = load(&race(
+        green("prime-1", i(100), None),
+        green("shadow-1", i(120), None),
+    ));
+    assert_eq!(decide_winner(&scratch), (Some(0), Some(1)));
+    assert!(report_text(&scratch).contains("verdict, prime-1 wins"));
+}
+
+#[test]
+fn an_exact_adjusted_tie_goes_to_the_first_attempt_in_the_record() {
+    let value = race(
+        green("shadow-1", i(110), Some(i(-10))),
+        green("prime-1", i(100), None),
+    );
+    let loaded = load(&value);
+    assert!(!is_close_call(&loaded));
+    assert_eq!(decide_winner(&loaded), (Some(0), Some(1)));
+    let closecall = close_call_report(&loaded).join("\n");
+    assert!(closecall.contains(
+        "outside the band, the finish times are tied and the tie goes to the first attempt in the record"
+    ));
+    assert!(closecall.contains("verdict, shadow-1 wins"));
+    let scratch = load(&race(
+        green("shadow-1", i(110), None),
+        green("prime-1", i(100), None),
+    ));
+    assert_eq!(decide_winner(&scratch), (Some(1), Some(0)));
+}
+
+#[test]
+fn an_adjustment_moves_a_race_into_the_band() {
+    let handicapped = load(&race(
+        green("prime-1", i(100), None),
+        green("shadow-1", i(120), Some(i(-16))),
+    ));
+    assert!(is_close_call(&handicapped));
+    assert_eq!(decide_winner(&handicapped), (None, None));
+    assert!(report_text(&handicapped).contains("close call, no adjudication on record"));
+    let closecall = close_call_report(&handicapped).join("\n");
+    assert!(closecall.contains(
+        "in the band, both attempts went green and the gap of 4 seconds is within five percent of the slower finish of 104 seconds"
+    ));
+    let scratch = load(&race(
+        green("prime-1", i(100), None),
+        green("shadow-1", i(120), None),
+    ));
+    assert!(!is_close_call(&scratch));
+    assert_eq!(decide_winner(&scratch), (Some(0), Some(1)));
+}
+
+#[test]
+fn an_adjustment_moves_a_race_out_of_the_band() {
+    let mut handicapped = race(
+        green("prime-1", i(100), None),
+        green("shadow-1", i(104), Some(i(10))),
+    );
+    handicapped = set(
+        &handicapped,
+        "adjudication",
+        obj(vec![
+            ("adjudicator", s("judge-2")),
+            ("chosen", s("shadow-1")),
+            ("confidence", f(0.9)),
+            ("reason", s("the steadier diff")),
+        ]),
+    );
+    let loaded = load(&handicapped);
+    assert!(!is_close_call(&loaded));
+    assert_eq!(decide_winner(&loaded), (Some(0), Some(1)));
+    assert!(report_text(&loaded).contains(
+        "adjudication by judge-2 not needed, the race stands outside the close call band"
+    ));
+    let scratch = load(&race(
+        green("prime-1", i(100), None),
+        green("shadow-1", i(104), None),
+    ));
+    assert!(is_close_call(&scratch));
+    assert_eq!(decide_winner(&scratch), (None, None));
+}
+
+#[test]
+fn the_band_edge_stands_on_adjusted_figures() {
+    let at_edge = load(&race(
+        green("prime-1", i(100), Some(i(-5))),
+        green("shadow-1", i(100), None),
+    ));
+    assert!(is_close_call(&at_edge));
+    let past_edge = load(&race(
+        green("prime-1", i(100), Some(f(-5.25))),
+        green("shadow-1", i(100), None),
+    ));
+    assert!(!is_close_call(&past_edge));
+    assert_eq!(decide_winner(&past_edge), (Some(0), Some(1)));
+}
+
+#[test]
+fn a_zero_adjustment_renders_its_clause() {
+    let loaded = load(&race(
+        green("prime-1", i(100), Some(i(0))),
+        attempt("shadow-1", "red", Some(i(130)), None),
+    ));
+    let lines = race_report(&loaded);
+    assert!(lines.contains(
+        &"prime-1 in lane, green in 100 seconds, adjustment 0 seconds, adjusted finish 100 seconds, 1000 tokens"
+            .to_string()
+    ));
+    assert_eq!(decide_winner(&loaded), (Some(0), Some(1)));
+    let funeral_lines = funeral(&loaded);
+    assert!(
+        funeral_lines.contains(&"margin 30 seconds between the two adjusted finishes".to_string())
+    );
+}
+
+#[test]
+fn negative_adjustments_render_with_a_minus_over_the_absolute_value() {
+    let loaded = load(&race(
+        green("prime-1", i(100), Some(f(-0.5))),
+        attempt("shadow-1", "red", Some(i(130)), None),
+    ));
+    assert!(report_text(&loaded).contains("adjustment -0.5 seconds, adjusted finish 99.5 seconds"));
+    let loaded = load(&race(
+        green("prime-1", i(100), Some(f(-0.25))),
+        attempt("shadow-1", "red", Some(i(130)), None),
+    ));
+    assert!(
+        report_text(&loaded).contains("adjustment -0.25 seconds, adjusted finish 99.75 seconds")
+    );
+    let loaded = load(&race(
+        green("prime-1", i(100), Some(f(-0.000000476837158203125))),
+        attempt("shadow-1", "red", Some(i(130)), None),
+    ));
+    let text = report_text(&loaded);
+    assert!(
+        text.contains("adjustment -0.000000476837158203125 seconds"),
+        "{text}"
+    );
+}
+
+#[test]
+fn the_margin_reads_adjusted_finishes_when_an_adjustment_stands() {
+    let loaded = load(&race(
+        attempt("prime-1", "red", Some(i(100)), Some(i(-10))),
+        green("shadow-1", i(50), None),
+    ));
+    let lines = funeral(&loaded);
+    assert!(
+        lines.contains(&"margin 40 seconds between the two adjusted finishes".to_string()),
+        "{lines:?}"
+    );
+    assert!(lines.contains(
+        &"loser prime-1 in lane went red in 100 seconds, adjustment -10 seconds, adjusted finish 90 seconds"
+            .to_string()
+    ));
+    let scratch = load(&race(
+        attempt("prime-1", "red", Some(i(100)), None),
+        green("shadow-1", i(50), None),
+    ));
+    let lines = funeral(&scratch);
+    assert!(
+        lines.contains(&"margin 50 seconds between the two finishes".to_string()),
+        "{lines:?}"
+    );
+}
+
+#[test]
+fn the_standings_count_a_handicapped_race_by_its_adjusted_winner() {
+    let loaded = load(&race(
+        green("prime-1", i(100), None),
+        green("shadow-1", i(120), Some(i(-30))),
+    ));
+    let standings = update_standings(&empty_standings(), &loaded);
+    let table = standings_table(&standings).join("\n");
+    assert!(
+        table.contains("shadow-1, 1 wins, 0 losses, 0 no results, 1000 tokens, 0 unreported"),
+        "{table}"
+    );
+    assert!(
+        table.contains("prime-1, 0 wins, 1 losses, 0 no results, 1000 tokens, 0 unreported"),
+        "{table}"
+    );
+}
+
+#[test]
+fn a_panel_decides_a_race_the_adjustments_put_in_the_band() {
+    let mut value = race(
+        green("prime-1", i(100), None),
+        green("shadow-1", i(130), Some(i(-27))),
+    );
+    value = set(
+        &value,
+        "panel",
+        arr(vec![obj(vec![
+            ("adjudicator", s("judge-2")),
+            ("chosen", s("shadow-1")),
+            ("confidence", f(0.9)),
+            ("reason", s("the steadier diff")),
+        ])]),
+    );
+    let loaded = load(&value);
+    assert!(is_close_call(&loaded));
+    assert_eq!(decide_winner(&loaded), (Some(1), Some(0)));
+    assert!(report_text(&loaded).contains(
+        "close call, panel, adjudication by judge-2 chose shadow-1 at confidence 0.9 and the other judge is absent, the panel follows judge-2"
+    ));
+    let scratch = load(&race(
+        green("prime-1", i(100), None),
+        green("shadow-1", i(130), None),
+    ));
+    assert!(!is_close_call(&scratch));
+}
+
+#[test]
+fn the_join_carries_adjustments_and_refuses_a_mismatch() {
+    let entry = |judge: &str| {
+        obj(vec![
+            ("adjudicator", s(judge)),
+            ("chosen", s("shadow-1")),
+            ("confidence", f(0.9)),
+            ("reason", s("the steadier diff")),
+        ])
+    };
+    let base = race(
+        green("prime-1", i(100), None),
+        green("shadow-1", i(120), Some(i(-30))),
+    );
+    let first = load(&set(&base, "adjudication", entry("judge-2")));
+    let second = load(&set(&base, "adjudication", entry("judge-3")));
+    let (joined, defects) = join_panel_records(&first, &second);
+    assert_eq!(defects, Vec::<String>::new());
+    let joined = joined.expect("a joined record");
+    assert_eq!(joined.attempts[1].adjustment, Some(Num::from_i64(-30)));
+    let rendered = race_to_json(&joined);
+    assert_eq!(
+        get_path(&rendered, &["attempts", "1", "adjustment"]),
+        Some(&JsonValue::Num(Num::from_i64(-30)))
+    );
+    let (reloaded, defects) = load_race_data(&rendered);
+    assert_eq!(defects, Vec::<String>::new());
+    assert_eq!(reloaded.expect("a reloaded race"), joined);
+    let second_with_entry = load(&set(
+        &race(
+            green("prime-1", i(100), None),
+            green("shadow-1", i(120), Some(i(-25))),
+        ),
+        "adjudication",
+        entry("judge-3"),
+    ));
+    let (joined, defects) = join_panel_records(&first, &second_with_entry);
+    assert!(joined.is_none());
+    assert_eq!(
+        defects,
+        vec!["the two records hold different attempts".to_string()]
+    );
+}
+
+#[test]
+fn the_seat_summary_keeps_the_dh7_form_over_a_handicapped_race() {
+    let loaded = load(&race(
+        green("prime-1", i(100), None),
+        green("shadow-1", i(130), Some(i(-27))),
+    ));
+    let summary = attempt_summary(&loaded);
+    assert!(
+        summary.contains("attempt, model shadow-1, environment lane, result green, finished in 130 seconds, 1000 tokens"),
+        "{summary}"
+    );
+    assert!(!summary.contains("adjustment"), "{summary}");
+}
+
+#[test]
+fn a_series_counts_the_handicapped_race_by_its_adjusted_winner() {
+    let text = "{\"task\": \"a season\", \"models\": [\"prime-1\", \"shadow-1\"], \"wins_target\": 1, \"races\": [{\"task\": \"the handicapped race\", \"attempts\": [{\"model\": \"prime-1\", \"environment\": \"lane\", \"result\": \"green\", \"tokens\": 10, \"patch\": \"\", \"finished_at\": 100}, {\"model\": \"shadow-1\", \"environment\": \"lane\", \"result\": \"green\", \"tokens\": 10, \"patch\": \"\", \"finished_at\": 120, \"adjustment\": -30}]}]}";
+    let (series, defects) = load_series_text(text);
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered = series_report(&series.expect("a series")).join("\n");
+    assert!(
+        rendered.contains("race 1, the handicapped race, shadow-1 wins"),
+        "{rendered}"
+    );
+    assert!(rendered.contains("series winner, shadow-1"), "{rendered}");
+}
+
+#[test]
+fn the_cli_refuses_an_adjustment_on_an_unfinished_attempt() {
+    let dir = temp_dir("handicap-cli");
+    let path = dir.join("race.json");
+    let text = "{\"task\": \"a task\", \"attempts\": [{\"model\": \"prime-1\", \"environment\": \"lane\", \"result\": \"unfinished\", \"tokens\": 1, \"patch\": \"\", \"adjustment\": 5}, {\"model\": \"shadow-1\", \"environment\": \"lane\", \"result\": \"green\", \"tokens\": 1, \"patch\": \"\", \"finished_at\": 200}]}";
+    std::fs::write(&path, text).expect("a written race");
+    let (out, _, code) = run_cli(&["race", path.to_str().expect("utf8")]);
+    assert_eq!(code, 1);
+    assert_eq!(
+        out,
+        "invalid recorded race\ndefect attempt 0 field adjustment is present but the suite did not finish\n"
+    );
+}
+
+fn collect_goldens(dir: &Path, out: &mut Vec<PathBuf>) {
+    let mut entries: Vec<PathBuf> = std::fs::read_dir(dir)
+        .expect("a readable directory")
+        .map(|entry| entry.expect("an entry").path())
+        .collect();
+    entries.sort();
+    for entry in entries {
+        if entry.is_dir() {
+            collect_goldens(&entry, out);
+        } else if entry.extension().is_some_and(|ext| ext == "txt") {
+            out.push(entry);
+        }
+    }
+}
+
+fn race_is_unadjusted(race: &Race) -> bool {
+    race.attempts
+        .iter()
+        .all(|attempt| attempt.adjustment.is_none())
+}
+
+#[test]
+fn every_standing_golden_still_matches_byte_for_byte() {
+    let mut goldens = Vec::new();
+    collect_goldens(&examples(), &mut goldens);
+    let mut unadjusted = 0usize;
+    for golden_path in &goldens {
+        let golden = std::fs::read_to_string(golden_path).expect("a golden");
+        let name = golden_path
+            .file_name()
+            .expect("a file name")
+            .to_string_lossy()
+            .into_owned();
+        if let Some(stem) = name.strip_suffix("-closecall.txt") {
+            let source = golden_path.with_file_name(format!("{stem}.json"));
+            let (race, defects) = load_race_file(&source);
+            assert_eq!(defects, Vec::<String>::new(), "{name}");
+            let race = race.expect("a race");
+            if race_is_unadjusted(&race) {
+                unadjusted += 1;
+            }
+            let rendered = close_call_report(&race).join("\n") + "\n";
+            assert_eq!(rendered, golden, "{name}");
+            continue;
+        }
+        let source = golden_path.with_extension("json");
+        let (race, _) = load_race_file(&source);
+        if let Some(race) = race {
+            if race_is_unadjusted(&race) {
+                unadjusted += 1;
+            }
+            let mut lines = race_report(&race);
+            lines.extend(funeral(&race));
+            let rendered = lines.join("\n") + "\n";
+            assert_eq!(rendered, golden, "{name}");
+            continue;
+        }
+        let (series, defects) = load_series_file(&source);
+        assert_eq!(defects, Vec::<String>::new(), "{name}");
+        let series = series.expect("a series");
+        if series.races.iter().all(race_is_unadjusted) {
+            unadjusted += 1;
+        }
+        let rendered = series_report(&series).join("\n") + "\n";
+        assert_eq!(rendered, golden, "{name}");
+    }
+    assert_eq!(goldens.len(), 47);
+    assert_eq!(unadjusted, 44);
+}
