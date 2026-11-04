@@ -77,6 +77,7 @@ fn unfinished_attempt(model: &PText, environment: &PText, directory: &Path) -> A
         tokens: None,
         patch: read_patch(directory),
         finished_at: None,
+        adjustment: None,
     }
 }
 
@@ -195,6 +196,7 @@ pub fn run_attempt(
         } else {
             None
         },
+        adjustment: None,
     })
 }
 

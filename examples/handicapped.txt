@@ -1,0 +1,8 @@
+race balance the ledger import
+prime-1 in lane one, green in 100 seconds, 41000 tokens
+shadow-1 in lane two, green in 120 seconds, adjustment -30 seconds, adjusted finish 90 seconds, 45500 tokens
+verdict, shadow-1 wins
+funeral for balance the ledger import
+winner shadow-1 in lane two went green in 120 seconds, adjustment -30 seconds, adjusted finish 90 seconds
+loser prime-1 in lane one went green in 100 seconds
+margin 10 seconds between the two adjusted finishes

@@ -165,6 +165,40 @@ fn the_panel_records_match_their_closecall_goldens() {
 }
 
 #[test]
+fn the_handicapped_example_matches_its_goldens() {
+    let source = examples().join("handicapped.json");
+    let out = run_ok(&["race", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("handicapped.txt"));
+    assert_eq!(out, golden);
+    assert!(out.contains("verdict, shadow-1 wins"));
+    assert!(out.contains("adjustment -30 seconds, adjusted finish 90 seconds"));
+    let out = run_ok(&["closecall", source.to_str().expect("utf8")]);
+    let closecall_golden = read_text(&examples().join("handicapped-closecall.txt"));
+    assert_eq!(out, closecall_golden);
+    let (race, defects) = load_race_file(&source);
+    assert_eq!(defects, Vec::<String>::new());
+    let race = race.expect("a race");
+    let mut lines = race_report(&race);
+    lines.extend(funeral(&race));
+    assert_eq!(lines.join("\n") + "\n", golden);
+    assert_eq!(close_call_report(&race).join("\n") + "\n", closecall_golden);
+}
+
+#[test]
+fn the_handicap_series_matches_its_golden() {
+    let source = examples().join("handicap-series.json");
+    let out = run_ok(&["series", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("handicap-series.txt"));
+    assert_eq!(out, golden);
+    assert!(out.contains("race 2, balance the ledger import, shadow-1 wins"));
+    assert!(out.trim_end().ends_with("series winner, shadow-1"));
+    let (series, defects) = load_series_file(&source);
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered = series_report(&series.expect("a series")).join("\n") + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
 fn the_panel_series_matches_its_golden() {
     let source = examples().join("panel-series.json");
     let out = run_ok(&["series", source.to_str().expect("utf8")]);
