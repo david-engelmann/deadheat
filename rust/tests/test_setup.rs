@@ -25,7 +25,7 @@ fn agents_carries_the_canonical_marker() {
 #[test]
 fn readme_states_the_closed_round_count() {
     let text = read(&repo_root().join("README.md"));
-    assert!(text.contains("Closed perfection rounds, 4 of 100"));
+    assert!(text.contains("Closed perfection rounds, 5 of 100"));
 }
 
 #[test]
@@ -65,19 +65,20 @@ fn readme_reports_the_round_four_status() {
     // Altered at the Round 5 slice for its named mechanical
     // consequence. This count holds the slices standing in
     // review across the whole README. It stood at zero when
-    // Round 4 closed, and slice 6 stands in review while
-    // Round 5 is built, so the count is one until the Round 5
-    // closure lands slice 6 and the count returns to zero.
-    // The round five pin below holds the slice line itself.
-    assert_eq!(text.matches("built and in review").count(), 1);
+    // Round 4 closed, and slice 6 stood in review while
+    // Round 5 was built, so the count was one until the
+    // Round 5 closure landed slice 6 and the count returned
+    // to zero. The round five pin below holds the slice line
+    // itself.
+    assert_eq!(text.matches("built and in review").count(), 0);
 }
 
 #[test]
-fn readme_reports_the_round_five_slice() {
+fn readme_reports_the_round_five_status() {
     let text = read(&repo_root().join("README.md"));
-    let standing = "- Contract, DH-11 and DH-12 now stand in full form in CONTRACT.md under the Round 5 obligations, and their standing is not claimed here, as Round 5 has not closed.";
+    let standing = "- Contract, DH-11 and DH-12 met. They stand in full form in CONTRACT.md under the Round 5 obligations, and Round 5 closed on the merged slice 6 after three reviews, no repair pass, and an owner gate discharging the standards verification condition with three mutation spot checks.";
     assert!(text.lines().any(|line| line == standing));
-    let slice_line = "- Slice 6 is built and in review. It carries the handicap, a per attempt adjustment in seconds read as an adjusted finish by the winner rule and the close call band, with the handicapped example race and the handicap series and their goldens under examples.";
+    let slice_line = "- Slice 6 has landed. It carries the handicap, a per attempt adjustment in seconds read as an adjusted finish by the winner rule and the close call band, with the handicapped example race and the handicap series and their goldens under examples.";
     assert!(text.lines().any(|line| line == slice_line));
 }
 
