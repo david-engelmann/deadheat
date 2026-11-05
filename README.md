@@ -1,14 +1,18 @@
 # deadheat
 
-Every task is a race. Your agent in one lane, a shadow of yourself on a rival model in the other, and the loser gets a tiny funeral.
+Deadheat races two attempts at the same task, one attempt per model, and decides the winner from the recorded results.
 
 ## What this is
 
-You start a task and the race begins. Your agent works in your worktree. A fork of the same conversation, same context, same ticket, starts on a rival model in its own worktree. A scoreboard tracks both lanes live, files touched, tests green, tests red, tokens spent. The first suite to go fully green takes the flag. The loser's pane dims, a small funeral plays, and its diff arrives as a patch you can adopt or burn. The standings persist across sessions, so over a season you learn something no benchmark can tell you. In this repo, at this hour, which model actually wins your work, and what each victory costs.
+Deadheat is a Rust library with a command line tool of the same name. A race pairs two attempts at one task. Each attempt record names the model that made the attempt, the environment it ran in, its suite result of green, red, or unfinished, its finish time in seconds where the suite finished, its token spend where the spend was reported, and the patch it left. The records live in JSON files. A local runner can build a race record by running one shell command per attempt, each in its own directory, and taking the suite result, the elapsed time, the token spend, and the patch from what the command leaves behind.
+
+Deadheat decides the winner from the record alone. A green attempt beats an attempt that did not go green. Between two green attempts the earlier finish wins, and a per attempt adjustment in seconds is applied to the finish before the comparison. An exact tie goes to the attempt that stands first in the record. When the attempts land in the close call band, a recorded adjudication entry with a confidence of four fifths or higher decides the race, and a panel of recorded entries decides the race when the entries meeting that threshold agree. A close call that no entry decides has no winner.
+
+The commands print readings over the recorded files and keep the score. The race command prints the race report and the funeral for one recorded race, and with a standings file named it updates that file with the result. The closecall command states whether one race sits in the close call band and what decided it. The series command reads a series file of races between the same two models and prints the result of each race and the winner of the series. The championship command reads a championship file naming series files and prints the championship table over them. The flip command reads a series file and stands the scratch winner of each race beside the adjusted winner, stating whether the race flipped, held, or had no result. The standings command prints the standings table held in a standings file. The adopt command writes the losing attempt patch into a patches folder and the discard command removes it. The commands work offline over the files they are given.
 
 ## Status
 
-Seeded in October 2026. Setup has landed, and Rounds 1 to 5 have closed, with all five slices merged on main. Part of the Spectacle line in the 39 repo storefront perfection programme.
+Seeded in October 2026. Setup has landed, and Rounds 1 to 7 have closed, with all slices merged on main. Part of the Spectacle line in the 39 repo storefront perfection programme.
 
 ## Programme status
 
