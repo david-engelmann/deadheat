@@ -199,6 +199,23 @@ fn the_handicap_series_matches_its_golden() {
 }
 
 #[test]
+fn the_championship_example_matches_its_golden() {
+    let source = examples().join("championship.json");
+    let out = run_ok(&["championship", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("championship.txt"));
+    assert_eq!(out, golden);
+    assert!(out.contains("aggregate margin 45.25 seconds"));
+    let (championship, defects) =
+        deadheat::championship::load_championship_file(&examples().join("championship.json"));
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered =
+        deadheat::championship::championship_report(&championship.expect("a championship"))
+            .join("\n")
+            + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
 fn the_panel_series_matches_its_golden() {
     let source = examples().join("panel-series.json");
     let out = run_ok(&["series", source.to_str().expect("utf8")]);

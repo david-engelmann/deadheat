@@ -1,0 +1,10 @@
+championship
+series 1, the recorded close call pilot
+prime-1 against shadow-1, first to 3 wins
+series winner, prime-1
+series 2, the recorded close call panel
+prime-1 against shadow-1, first to 3 wins
+series winner, prime-1
+championship table
+prime-1, 2 series won, 2 series stood in, 6 race wins, 7 no results, aggregate margin 45.25 seconds
+shadow-1, 0 series won, 2 series stood in, 1 race wins, 7 no results, aggregate margin 10 seconds

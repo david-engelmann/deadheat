@@ -42,6 +42,10 @@ name = "test_series"
 path = "rust/tests/test_series.rs"
 
 [[test]]
+name = "test_championship"
+path = "rust/tests/test_championship.rs"
+
+[[test]]
 name = "test_cli"
 path = "rust/tests/test_cli.rs"
 
