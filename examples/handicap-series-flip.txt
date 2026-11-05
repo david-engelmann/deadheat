@@ -1,0 +1,6 @@
+series the ledger import season
+prime-1 against shadow-1, first to 2 wins
+race 1, ledger import one, scratch prime-1, adjusted prime-1, held
+race 2, balance the ledger import, scratch prime-1, adjusted shadow-1, flipped
+race 3, ledger import three, scratch shadow-1, adjusted shadow-1, held
+flips, 3 races, 1 flipped, 2 held, 0 no results

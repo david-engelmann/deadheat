@@ -548,6 +548,27 @@ fn every_standing_golden_still_matches_byte_for_byte() {
             assert_eq!(rendered, golden, "{name}");
             continue;
         }
+        // Altered at the Round 7 slice for its named mechanical
+        // consequence. The flip example of DH-16 adds one golden
+        // whose stem names a series rather than a race, so the
+        // sweep reads it through the series loader and the flip
+        // report before the generic race reading can misread its
+        // source, and the golden count below rises by one. The
+        // unadjusted count does not rise, because the handicap
+        // series the flip golden reads carries an adjustment in
+        // its second race.
+        if let Some(stem) = name.strip_suffix("-flip.txt") {
+            let source = golden_path.with_file_name(format!("{stem}.json"));
+            let (series, defects) = load_series_file(&source);
+            assert_eq!(defects, Vec::<String>::new(), "{name}");
+            let series = series.expect("a series");
+            if series.races.iter().all(race_is_unadjusted) {
+                unadjusted += 1;
+            }
+            let rendered = deadheat::flips::flip_report(&series).join("\n") + "\n";
+            assert_eq!(rendered, golden, "{name}");
+            continue;
+        }
         let source = golden_path.with_extension("json");
         let (race, _) = load_race_file(&source);
         if let Some(race) = race {
@@ -591,6 +612,6 @@ fn every_standing_golden_still_matches_byte_for_byte() {
         let rendered = deadheat::championship::championship_report(&championship).join("\n") + "\n";
         assert_eq!(rendered, golden, "{name}");
     }
-    assert_eq!(goldens.len(), 48);
+    assert_eq!(goldens.len(), 49);
     assert_eq!(unadjusted, 45);
 }

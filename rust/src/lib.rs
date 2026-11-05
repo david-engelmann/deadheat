@@ -8,6 +8,7 @@
 
 pub mod championship;
 pub mod cli;
+pub mod flips;
 pub mod json;
 pub mod makers;
 pub mod panels;
