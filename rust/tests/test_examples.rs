@@ -199,6 +199,24 @@ fn the_handicap_series_matches_its_golden() {
 }
 
 #[test]
+fn the_flip_example_matches_its_golden() {
+    let source = examples().join("handicap-series.json");
+    let out = run_ok(&["flip", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("handicap-series-flip.txt"));
+    assert_eq!(out, golden);
+    assert!(out.contains(
+        "race 2, balance the ledger import, scratch prime-1, adjusted shadow-1, flipped"
+    ));
+    assert!(out
+        .trim_end()
+        .ends_with("flips, 3 races, 1 flipped, 2 held, 0 no results"));
+    let (series, defects) = load_series_file(&source);
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered = deadheat::flips::flip_report(&series.expect("a series")).join("\n") + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
 fn the_championship_example_matches_its_golden() {
     let source = examples().join("championship.json");
     let out = run_ok(&["championship", source.to_str().expect("utf8")]);
