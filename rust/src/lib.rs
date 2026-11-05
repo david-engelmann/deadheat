@@ -6,6 +6,7 @@
 //! recorded files, and the command line is a thin shell over
 //! them.
 
+pub mod championship;
 pub mod cli;
 pub mod json;
 pub mod makers;

@@ -560,15 +560,37 @@ fn every_standing_golden_still_matches_byte_for_byte() {
             assert_eq!(rendered, golden, "{name}");
             continue;
         }
-        let (series, defects) = load_series_file(&source);
+        let (series, _) = load_series_file(&source);
+        if let Some(series) = series {
+            if series.races.iter().all(race_is_unadjusted) {
+                unadjusted += 1;
+            }
+            let rendered = series_report(&series).join("\n") + "\n";
+            assert_eq!(rendered, golden, "{name}");
+            continue;
+        }
+        // Altered at the Round 6 slice for its named mechanical
+        // consequence. The championship example of DH-14 adds
+        // one golden whose source loads as neither a race nor a
+        // series, so the sweep reads it through the championship
+        // loader before it may name a defect, and the two counts
+        // below rise by one each, the golden count for the new
+        // golden and the unadjusted count because every race
+        // under the two recorded series stands unadjusted.
+        let (championship, defects) = deadheat::championship::load_championship_file(&source);
         assert_eq!(defects, Vec::<String>::new(), "{name}");
-        let series = series.expect("a series");
-        if series.races.iter().all(race_is_unadjusted) {
+        let championship = championship.expect("a championship");
+        if championship
+            .series
+            .iter()
+            .flat_map(|series| series.races.iter())
+            .all(race_is_unadjusted)
+        {
             unadjusted += 1;
         }
-        let rendered = series_report(&series).join("\n") + "\n";
+        let rendered = deadheat::championship::championship_report(&championship).join("\n") + "\n";
         assert_eq!(rendered, golden, "{name}");
     }
-    assert_eq!(goldens.len(), 47);
-    assert_eq!(unadjusted, 44);
+    assert_eq!(goldens.len(), 48);
+    assert_eq!(unadjusted, 45);
 }

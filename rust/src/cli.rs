@@ -13,6 +13,7 @@
 
 use std::path::PathBuf;
 
+use crate::championship::{championship_report, load_championship_file};
 use crate::pytext::PText;
 use crate::races::{
     close_call_report, decide_winner, empty_standings, funeral, load_race_file,
@@ -334,7 +335,10 @@ fn spec_max_invocation(spec: &ParserSpec) -> usize {
 }
 
 fn top_spec() -> ParserSpec {
-    let mut commands = action("{race,adopt,discard,standings,closecall,series}", None);
+    let mut commands = action(
+        "{race,adopt,discard,standings,closecall,series,championship}",
+        None,
+    );
     commands.subactions = vec![
         action(
             "race",
@@ -354,14 +358,21 @@ fn top_spec() -> ParserSpec {
             "series",
             Some("print the series report for one series file"),
         ),
+        action(
+            "championship",
+            Some("print the championship report for one championship file"),
+        ),
     ];
     let mut spec = ParserSpec {
         prog: "deadheat",
         description: Some("Race two attempts at one task and keep the standings."),
         opt_usage: "[-h]",
-        pos_usage: "{race,adopt,discard,standings,closecall,series} ...",
+        pos_usage: "{race,adopt,discard,standings,closecall,series,championship} ...",
         opt_parts: vec!["[-h]"],
-        pos_parts: vec!["{race,adopt,discard,standings,closecall,series}", "..."],
+        pos_parts: vec![
+            "{race,adopt,discard,standings,closecall,series,championship}",
+            "...",
+        ],
         positionals: vec![commands],
         options: vec![help_action()],
         max_invocation: 0,
@@ -428,6 +439,14 @@ fn sub_spec(command: &str) -> ParserSpec {
         ),
         "series" => (
             "deadheat series",
+            vec![action("file", None)],
+            vec![help_action()],
+            "[-h]",
+            "file",
+            vec!["file"],
+        ),
+        "championship" => (
+            "deadheat championship",
             vec![action("file", None)],
             vec![help_action()],
             "[-h]",
@@ -871,13 +890,14 @@ fn is_help_token(text: &PText, has_standings: bool) -> bool {
     false
 }
 
-const COMMANDS: [&str; 6] = [
+const COMMANDS: [&str; 7] = [
     "race",
     "adopt",
     "discard",
     "standings",
     "closecall",
     "series",
+    "championship",
 ];
 
 /// Run the command line over the given arguments at the given
@@ -953,7 +973,7 @@ fn invalid_choice(spec: &ParserSpec, columns: usize, value: &PText) -> Outcome {
         spec,
         columns,
         &format!(
-            "argument command: invalid choice: {} (choose from 'race', 'adopt', 'discard', 'standings', 'closecall', 'series')",
+            "argument command: invalid choice: {} (choose from 'race', 'adopt', 'discard', 'standings', 'closecall', 'series', 'championship')",
             py_repr(value)
         ),
     )
@@ -1112,6 +1132,7 @@ fn run_subcommand(
         "standings" => command_standings(&values[0]),
         "closecall" => command_closecall(&values[0]),
         "series" => command_series(&values[0]),
+        "championship" => command_championship(&values[0]),
         _ => unreachable!("a known command"),
     }
 }
@@ -1256,4 +1277,15 @@ fn command_series(file: &PText) -> Outcome {
         return print_defects("invalid series file", defects);
     }
     Outcome::plain(series_report(&series.expect("a clean series")), 0)
+}
+
+fn command_championship(file: &PText) -> Outcome {
+    let (championship, defects) = load_championship_file(&path_from_arg(file));
+    if !defects.is_empty() {
+        return print_defects("invalid championship file", defects);
+    }
+    Outcome::plain(
+        championship_report(&championship.expect("a clean championship")),
+        0,
+    )
 }
