@@ -25,7 +25,7 @@ fn agents_carries_the_canonical_marker() {
 #[test]
 fn readme_states_the_closed_round_count() {
     let text = read(&repo_root().join("README.md"));
-    assert!(text.contains("Closed perfection rounds, 5 of 100"));
+    assert!(text.contains("Closed perfection rounds, 6 of 100"));
 }
 
 #[test]
@@ -69,12 +69,12 @@ fn readme_reports_the_round_four_status() {
     // Round 4 closed, and slice 6 stood in review while
     // Round 5 was built, so the count was one until the
     // Round 5 closure landed slice 6 and the count returned
-    // to zero. Slice 7 stands in review while Round 6 is
-    // built, so the count is one again until the Round 6
-    // closure lands slice 7. The round five pin below holds
-    // the slice 6 line itself, and the round six pin below
-    // holds the slice 7 line.
-    assert_eq!(text.matches("built and in review").count(), 1);
+    // to zero. Slice 7 stood in review while Round 6 was
+    // built, so the count was one again until the Round 6
+    // closure landed slice 7 and the count returned to zero.
+    // The round five pin below holds the slice 6 line itself,
+    // and the round six pin below holds the slice 7 line.
+    assert_eq!(text.matches("built and in review").count(), 0);
 }
 
 #[test]
@@ -87,11 +87,11 @@ fn readme_reports_the_round_five_status() {
 }
 
 #[test]
-fn readme_reports_the_round_six_slice() {
+fn readme_reports_the_round_six_status() {
     let text = read(&repo_root().join("README.md"));
-    let standing = "- Contract, DH-13 and DH-14 now stand in full form in CONTRACT.md under the Round 6 obligations, and their standing is not claimed here, as Round 6 has not closed.";
+    let standing = "- Contract, DH-13 and DH-14 met. They stand in full form in CONTRACT.md under the Round 6 obligations, and Round 6 closed on the merged slice 7 after three reviews approving with no findings.";
     assert!(text.lines().any(|line| line == standing));
-    let slice_line = "- Slice 7 is built and in review. It carries the championship, a reading across recorded series naming the series each model took and the championship table over series won, race wins, and the aggregate margin, with the championship example over the two recorded series and its golden under examples.";
+    let slice_line = "- Slice 7 has landed. It carries the championship, a reading across recorded series naming the series each model took and the championship table over series won, race wins, and the aggregate margin, with the championship example over the two recorded series and its golden under examples.";
     assert!(text.lines().any(|line| line == slice_line));
 }
 
