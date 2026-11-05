@@ -25,7 +25,7 @@ fn agents_carries_the_canonical_marker() {
 #[test]
 fn readme_states_the_closed_round_count() {
     let text = read(&repo_root().join("README.md"));
-    assert!(text.contains("Closed perfection rounds, 6 of 100"));
+    assert!(text.contains("Closed perfection rounds, 7 of 100"));
 }
 
 #[test]
@@ -72,12 +72,14 @@ fn readme_reports_the_round_four_status() {
     // count returned to zero. Slice 7 stood in review while
     // Round 6 was built, so the count was one again until the
     // Round 6 closure landed slice 7 and the count returned
-    // to zero. Slice 8 now stands in review while Round 7 is
-    // built, so the count is one again. The round five pin
+    // to zero. Slice 8 stood in review while Round 7 was
+    // built, so the count was one again until the Round 7
+    // closure landed slice 8 and the count returned to zero.
+    // The round five pin
     // below holds the slice 6 line itself, the round six pin
     // below holds the slice 7 line, and the round seven pin
     // below holds the slice 8 line.
-    assert_eq!(text.matches("built and in review").count(), 1);
+    assert_eq!(text.matches("built and in review").count(), 0);
 }
 
 #[test]
@@ -99,11 +101,11 @@ fn readme_reports_the_round_six_status() {
 }
 
 #[test]
-fn readme_reports_the_round_seven_slice() {
+fn readme_reports_the_round_seven_status() {
     let text = read(&repo_root().join("README.md"));
-    let standing = "- Contract, DH-15 and DH-16 now stand in full form in CONTRACT.md under the Round 7 obligations, and their standing is not claimed here, as Round 7 has not closed.";
+    let standing = "- Contract, DH-15 and DH-16 met. They stand in full form in CONTRACT.md under the Round 7 obligations, and Round 7 closed on the merged slice 8 after three reviews approving with no findings.";
     assert!(text.lines().any(|line| line == standing));
-    let slice_line = "- Slice 8 is built and in review. It carries the flip reading over a recorded series, the scratch winner and the adjusted winner of each race and the standing of the race as flipped, held, or no result, with the closing counts of races, flipped, held, and no results, with the flip example over the handicap series and its golden under examples, and the flip command beside race, closecall, series, and championship.";
+    let slice_line = "- Slice 8 has landed. It carries the flip reading over a recorded series, the scratch winner and the adjusted winner of each race and the standing of the race as flipped, held, or no result, with the closing counts of races, flipped, held, and no results, with the flip example over the handicap series and its golden under examples, and the flip command beside race, closecall, series, and championship.";
     assert!(text.lines().any(|line| line == slice_line));
 }
 
