@@ -50,6 +50,10 @@ name = "test_flips"
 path = "rust/tests/test_flips.rs"
 
 [[test]]
+name = "test_totals"
+path = "rust/tests/test_totals.rs"
+
+[[test]]
 name = "test_cli"
 path = "rust/tests/test_cli.rs"
 
