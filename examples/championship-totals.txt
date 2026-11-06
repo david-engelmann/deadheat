@@ -1,0 +1,4 @@
+totals
+prime-1, 14 races, 6 wins, 1 losses, 7 no results, 1017000 tokens
+shadow-1, 14 races, 1 wins, 6 losses, 7 no results, 1073200 tokens
+totals, 2 series, 14 races, 2 models

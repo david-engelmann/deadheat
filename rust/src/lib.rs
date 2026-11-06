@@ -20,3 +20,4 @@ pub mod runner;
 pub mod scan;
 pub mod seats;
 pub mod series;
+pub mod totals;

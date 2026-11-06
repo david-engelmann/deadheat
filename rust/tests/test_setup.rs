@@ -33,7 +33,7 @@ fn contract_carries_the_setup_obligations() {
     let text = read(&repo_root().join("CONTRACT.md"));
     for oid in [
         "SETUP-1", "SETUP-2", "SETUP-3", "SETUP-4", "DH-1", "DH-5", "DH-6", "DH-7", "DH-8", "DH-9",
-        "DH-10", "DH-11", "DH-12", "DH-13", "DH-14", "DH-15", "DH-16",
+        "DH-10", "DH-11", "DH-12", "DH-13", "DH-14", "DH-15", "DH-16", "DH-17", "DH-18",
     ] {
         assert!(text.contains(oid), "{oid}");
     }
@@ -64,7 +64,8 @@ fn readme_reports_the_round_four_status() {
     assert!(text.lines().any(|line| line == slice_line));
     // Altered at the Round 5 slice for its named mechanical
     // consequence, and again at the Round 6 slice for the same
-    // consequence, and again at the Round 7 slice. This count
+    // consequence, and again at the Round 7 slice, and again
+    // at the Round 8 slice. This count
     // holds the slices standing in review across the whole
     // README. It stood at zero when Round 4 closed, and slice
     // 6 stood in review while Round 5 was built, so the count
@@ -75,11 +76,13 @@ fn readme_reports_the_round_four_status() {
     // to zero. Slice 8 stood in review while Round 7 was
     // built, so the count was one again until the Round 7
     // closure landed slice 8 and the count returned to zero.
-    // The round five pin
+    // Slice 9 now stands in review while Round 8 is built,
+    // so the count is one again. The round five pin
     // below holds the slice 6 line itself, the round six pin
-    // below holds the slice 7 line, and the round seven pin
-    // below holds the slice 8 line.
-    assert_eq!(text.matches("built and in review").count(), 0);
+    // below holds the slice 7 line, the round seven pin
+    // below holds the slice 8 line, and the round eight pin
+    // below holds the slice 9 line.
+    assert_eq!(text.matches("built and in review").count(), 1);
 }
 
 #[test]
@@ -106,6 +109,15 @@ fn readme_reports_the_round_seven_status() {
     let standing = "- Contract, DH-15 and DH-16 met. They stand in full form in CONTRACT.md under the Round 7 obligations, and Round 7 closed on the merged slice 8 after three reviews approving with no findings.";
     assert!(text.lines().any(|line| line == standing));
     let slice_line = "- Slice 8 has landed. It carries the flip reading over a recorded series, the scratch winner and the adjusted winner of each race and the standing of the race as flipped, held, or no result, with the closing counts of races, flipped, held, and no results, with the flip example over the handicap series and its golden under examples, and the flip command beside race, closecall, series, and championship.";
+    assert!(text.lines().any(|line| line == slice_line));
+}
+
+#[test]
+fn readme_reports_the_round_eight_slice() {
+    let text = read(&repo_root().join("README.md"));
+    let standing = "- Contract, DH-17 and DH-18 now stand in full form in CONTRACT.md under the Round 8 obligations, and their standing is not claimed here, as Round 8 has not closed.";
+    assert!(text.lines().any(|line| line == standing));
+    let slice_line = "- Slice 9 is built and in review. It carries the totals reading over a recorded championship, the races entered, won, lost, and left without a result by each model and the token spend its attempts reported, counted under the counting walk that stops at each series decision, with the closing counts of series, races, and models, with the totals example over the standing championship and its golden under examples, and the totals command beside race, closecall, series, championship, and flip.";
     assert!(text.lines().any(|line| line == slice_line));
 }
 
