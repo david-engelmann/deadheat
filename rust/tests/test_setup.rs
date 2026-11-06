@@ -25,7 +25,7 @@ fn agents_carries_the_canonical_marker() {
 #[test]
 fn readme_states_the_closed_round_count() {
     let text = read(&repo_root().join("README.md"));
-    assert!(text.contains("Closed perfection rounds, 7 of 100"));
+    assert!(text.contains("Closed perfection rounds, 8 of 100"));
 }
 
 #[test]
@@ -76,13 +76,15 @@ fn readme_reports_the_round_four_status() {
     // to zero. Slice 8 stood in review while Round 7 was
     // built, so the count was one again until the Round 7
     // closure landed slice 8 and the count returned to zero.
-    // Slice 9 now stands in review while Round 8 is built,
-    // so the count is one again. The round five pin
+    // Slice 9 stood in review while Round 8 was
+    // built, so the count was one again until the Round 8
+    // closure landed slice 9 and the count returned to zero.
+    // The round five pin
     // below holds the slice 6 line itself, the round six pin
     // below holds the slice 7 line, the round seven pin
     // below holds the slice 8 line, and the round eight pin
     // below holds the slice 9 line.
-    assert_eq!(text.matches("built and in review").count(), 1);
+    assert_eq!(text.matches("built and in review").count(), 0);
 }
 
 #[test]
@@ -113,11 +115,11 @@ fn readme_reports_the_round_seven_status() {
 }
 
 #[test]
-fn readme_reports_the_round_eight_slice() {
+fn readme_reports_the_round_eight_status() {
     let text = read(&repo_root().join("README.md"));
-    let standing = "- Contract, DH-17 and DH-18 now stand in full form in CONTRACT.md under the Round 8 obligations, and their standing is not claimed here, as Round 8 has not closed.";
+    let standing = "- Contract, DH-17 and DH-18 met. They stand in full form in CONTRACT.md under the Round 8 obligations, and Round 8 closed on the merged slice 9 after three reviews, no repair pass, and the standards mutation condition discharged on executed runs.";
     assert!(text.lines().any(|line| line == standing));
-    let slice_line = "- Slice 9 is built and in review. It carries the totals reading over a recorded championship, the races entered, won, lost, and left without a result by each model and the token spend its attempts reported, counted under the counting walk that stops at each series decision, with the closing counts of series, races, and models, with the totals example over the standing championship and its golden under examples, and the totals command beside race, closecall, series, championship, and flip.";
+    let slice_line = "- Slice 9 has landed. It carries the totals reading over a recorded championship, the races entered, won, lost, and left without a result by each model and the token spend its attempts reported, counted under the counting walk that stops at each series decision, with the closing counts of series, races, and models, with the totals example over the standing championship and its golden under examples, and the totals command beside race, closecall, series, championship, and flip.";
     assert!(text.lines().any(|line| line == slice_line));
 }
 
