@@ -192,11 +192,11 @@ pub fn series_report(series: &Series) -> Vec<String> {
     let second_model = &series.models[1];
     let target = &series.wins_target;
     let mut lines = vec![
-        format!("series {}", series.task.display()),
+        format!("series {}", series.task.display_line()),
         format!(
             "{} against {}, first to {} wins",
-            first_model.display(),
-            second_model.display(),
+            first_model.display_line(),
+            second_model.display_line(),
             target
         ),
     ];
@@ -210,7 +210,7 @@ pub fn series_report(series: &Series) -> Vec<String> {
             lines.push(format!(
                 "race {}, {}, beyond the decision",
                 index,
-                race.task.display()
+                race.task.display_line()
             ));
             continue;
         }
@@ -222,7 +222,7 @@ pub fn series_report(series: &Series) -> Vec<String> {
                 lines.push(format!(
                     "race {}, {}, no result",
                     index,
-                    race.task.display()
+                    race.task.display_line()
                 ));
             }
             Some(model) => {
@@ -234,16 +234,16 @@ pub fn series_report(series: &Series) -> Vec<String> {
                 lines.push(format!(
                     "race {}, {}, {} wins",
                     index,
-                    race.task.display(),
-                    model.display()
+                    race.task.display_line(),
+                    model.display_line()
                 ));
             }
         }
         lines.push(format!(
             "tally, {} {} wins, {} {} wins, {} no results",
-            first_model.display(),
+            first_model.display_line(),
             first_wins,
-            second_model.display(),
+            second_model.display_line(),
             second_wins,
             no_results
         ));
@@ -259,7 +259,7 @@ pub fn series_report(series: &Series) -> Vec<String> {
         }
     }
     match champion {
-        Some(model) => lines.push(format!("series winner, {}", model.display())),
+        Some(model) => lines.push(format!("series winner, {}", model.display_line())),
         None => lines.push(format!(
             "series unfinished, the target of {} wins is not reached",
             target

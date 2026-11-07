@@ -252,6 +252,25 @@ fn the_totals_example_matches_its_golden() {
 }
 
 #[test]
+fn the_pairing_example_matches_its_golden() {
+    let source = examples().join("championship.json");
+    let out = run_ok(&["pairing", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("championship-pairings.txt"));
+    assert_eq!(out, golden);
+    assert!(out.contains("pairing, prime-1, against, shadow-1"));
+    assert!(out
+        .trim_end()
+        .ends_with("pairings, 1 pairings, 2 series, 14 races"));
+    let (championship, defects) =
+        deadheat::championship::load_championship_file(&examples().join("championship.json"));
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered = deadheat::pairings::pairing_report(&championship.expect("a championship"))
+        .join("\n")
+        + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
 fn the_panel_series_matches_its_golden() {
     let source = examples().join("panel-series.json");
     let out = run_ok(&["series", source.to_str().expect("utf8")]);

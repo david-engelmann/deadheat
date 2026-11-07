@@ -101,6 +101,24 @@ impl PText {
         self.code_points().into_iter().collect()
     }
 
+    /// Render the text for standing inside one printed line, the
+    /// fencing FIX-DH-16 states. A text holding a newline or a
+    /// carriage return renders as the empty field, so no field a
+    /// rendering prints inside a line can carry text across
+    /// lines or place forged text at the start of a line. A text
+    /// holding no line break renders exactly as display renders
+    /// it, so on every value the loaders accept every rendering
+    /// is unchanged byte for byte. This helper is the one home
+    /// of the fencing, and every rendering reads its printed
+    /// label fields through it.
+    pub fn display_line(&self) -> String {
+        if self.holds_line_break() {
+            String::new()
+        } else {
+            self.display()
+        }
+    }
+
     /// Compare two texts by code point, the order the Python
     /// reading sorts labels in.
     pub fn cmp_code_points(&self, other: &PText) -> Ordering {

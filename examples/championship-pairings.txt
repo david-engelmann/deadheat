@@ -1,0 +1,7 @@
+pairings
+pairing, prime-1, against, shadow-1
+series read, 2
+races read, 14
+prime-1, 2 series won, 6 race wins, 7 no results, aggregate margin 45.25 seconds
+shadow-1, 0 series won, 1 race wins, 7 no results, aggregate margin 10 seconds
+pairings, 1 pairings, 2 series, 14 races

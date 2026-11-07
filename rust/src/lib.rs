@@ -11,6 +11,7 @@ pub mod cli;
 pub mod flips;
 pub mod json;
 pub mod makers;
+pub mod pairings;
 pub mod panels;
 pub mod pynum;
 pub mod pytext;

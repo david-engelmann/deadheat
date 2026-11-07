@@ -114,7 +114,7 @@ pub fn totals_report(championship: &Championship) -> Vec<String> {
         };
         lines.push(format!(
             "{}, {} races, {} wins, {} losses, {} no results, {}",
-            tally.model.display(),
+            tally.model.display_line(),
             tally.entered,
             tally.won,
             tally.lost,

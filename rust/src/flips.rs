@@ -38,7 +38,7 @@ pub fn flip_report(series: &Series) -> Vec<String> {
         let scratch = scratch_winner(race);
         let (adjusted, _) = decide_winner(race);
         let name = |winner: Option<usize>| match winner {
-            Some(index) => race.attempts[index].model.display(),
+            Some(index) => race.attempts[index].model.display_line(),
             None => "none".to_string(),
         };
         let standing = match (scratch, adjusted) {
@@ -58,7 +58,7 @@ pub fn flip_report(series: &Series) -> Vec<String> {
         lines.push(format!(
             "race {}, {}, scratch {}, adjusted {}, {}",
             offset + 1,
-            race.task.display(),
+            race.task.display_line(),
             name(scratch),
             name(adjusted),
             standing
