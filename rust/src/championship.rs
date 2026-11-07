@@ -164,6 +164,12 @@ pub(crate) struct SeriesCount {
     /// The races the walk read, the deciding race counted
     /// and every race after it not read.
     pub races_walked: u64,
+    /// The counted races that hold a winner, in race order,
+    /// each standing as the count of the race in the record
+    /// and the side that won it. The comeback reading of
+    /// DH-21 reads the decided races of a series from this
+    /// record of the one walk.
+    pub decided: Vec<(u64, usize)>,
 }
 
 /// Count one series under the counting walk of DH-13. The
@@ -177,7 +183,9 @@ pub(crate) struct SeriesCount {
 /// This is the one counting walk of the crate. The
 /// championship reading and the pairing reading both
 /// consume it, so their figures derive from one
-/// computation.
+/// computation, and the comeback reading reads the
+/// decided races of a series from the record this walk
+/// leaves beside those figures.
 pub(crate) fn count_series(series: &Series, first: &PText) -> SeriesCount {
     let mut count = SeriesCount {
         wins: [0, 0],
@@ -185,6 +193,7 @@ pub(crate) fn count_series(series: &Series, first: &PText) -> SeriesCount {
         no_results: 0,
         champion: None,
         races_walked: 0,
+        decided: Vec::new(),
     };
     for race in &series.races {
         if count.champion.is_some() {
@@ -197,6 +206,7 @@ pub(crate) fn count_series(series: &Series, first: &PText) -> SeriesCount {
             Some(winner) => {
                 let model = &race.attempts[winner].model;
                 let side = if *model == *first { 0 } else { 1 };
+                count.decided.push((count.races_walked, side));
                 count.wins[side] += 1;
                 let first_finish = adjusted_finish(&race.attempts[0]);
                 let second_finish = adjusted_finish(&race.attempts[1]);

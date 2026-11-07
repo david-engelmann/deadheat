@@ -271,6 +271,57 @@ fn the_pairing_example_matches_its_golden() {
 }
 
 #[test]
+fn the_comeback_example_matches_its_golden() {
+    // The standing championship holds no series won from
+    // behind, both of its series standing won from the
+    // front, so the golden is the empty form of DH-22, the
+    // head line and the closing counts and no section.
+    let source = examples().join("championship.json");
+    let out = run_ok(&["comeback", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("championship-comebacks.txt"));
+    assert_eq!(out, golden);
+    assert_eq!(
+        out,
+        "comebacks\ncomebacks, 2 series, 0 from behind, 2 from the front\n"
+    );
+    let (championship, defects) =
+        deadheat::championship::load_championship_file(&examples().join("championship.json"));
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered = deadheat::comebacks::comeback_report(&championship.expect("a championship"))
+        .join("\n")
+        + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_constructed_comeback_example_matches_its_golden() {
+    // The constructed championship of DH-22, labelled as
+    // constructed in its file names and its task text and
+    // never presented as recorded. Its one series stands
+    // won from behind, so the golden carries the section
+    // form, and its fourth race stands beyond the decision
+    // and is named nowhere in the reading.
+    let source = examples().join("constructed-comeback.json");
+    let out = run_ok(&["comeback", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("constructed-comeback-comebacks.txt"));
+    assert_eq!(out, golden);
+    assert!(out.contains("series 1, the constructed comeback drill"));
+    assert!(out.contains("first decided race, race 1, alpha-1 lost to beta-1"));
+    assert!(!out.contains("race four"));
+    assert!(out
+        .trim_end()
+        .ends_with("comebacks, 1 series, 1 from behind, 0 from the front"));
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("constructed-comeback.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered = deadheat::comebacks::comeback_report(&championship.expect("a championship"))
+        .join("\n")
+        + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
 fn the_panel_series_matches_its_golden() {
     let source = examples().join("panel-series.json");
     let out = run_ok(&["series", source.to_str().expect("utf8")]);

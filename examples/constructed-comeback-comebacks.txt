@@ -1,0 +1,9 @@
+comebacks
+series 1, the constructed comeback drill
+alpha-1 against beta-1, first to 2 wins
+race 1, comeback drill race one, beta-1 wins
+race 2, comeback drill race two, alpha-1 wins
+race 3, comeback drill race three, alpha-1 wins
+first decided race, race 1, alpha-1 lost to beta-1
+series winner, alpha-1, alpha-1 2 race wins, beta-1 1 race wins, 0 no results
+comebacks, 1 series, 1 from behind, 0 from the front

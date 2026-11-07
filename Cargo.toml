@@ -59,6 +59,10 @@ name = "test_pairings"
 path = "rust/tests/test_pairings.rs"
 
 [[test]]
+name = "test_comebacks"
+path = "rust/tests/test_comebacks.rs"
+
+[[test]]
 name = "test_fencing"
 path = "rust/tests/test_fencing.rs"
 
