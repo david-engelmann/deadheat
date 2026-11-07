@@ -142,12 +142,81 @@ pub fn load_championship_file(path: &Path) -> (Option<Championship>, Vec<String>
     load_championship_text(&text, base_dir)
 }
 
-/// Count one series under the counting walk of DH-13, folding
-/// its counted figures into the standings. The walk reads the
-/// races in record order and stops at the decision, so the race
-/// reaching the wins target counts and every race after it
-/// counts for nothing.
-fn count_series(standings: &mut Vec<Standing>, series: &Series) {
+/// The figures one series counts under the counting walk
+/// of DH-13, stated per side of an ordering over the two
+/// models of the series. Side zero is the side of the
+/// model the caller names first in its ordering and side
+/// one is the side of the other model, so each reading
+/// folds the count into standings that stand in its own
+/// order while the walk itself stands in this one home.
+pub(crate) struct SeriesCount {
+    /// The race wins of each side over the counted races.
+    pub wins: [u64; 2],
+    /// The aggregate margin of each side over its counted
+    /// race wins.
+    pub margins: [Ratio<BigInt>; 2],
+    /// The counted races with no result, credited to both
+    /// models of the series.
+    pub no_results: u64,
+    /// The side that reached the wins target, where the
+    /// walk decided the series.
+    pub champion: Option<usize>,
+    /// The races the walk read, the deciding race counted
+    /// and every race after it not read.
+    pub races_walked: u64,
+}
+
+/// Count one series under the counting walk of DH-13. The
+/// walk reads the races in record order and stops at the
+/// decision, so the race reaching the wins target counts
+/// and every race after it counts for nothing. The winner
+/// of each race is read against the attempt's model, the
+/// winner is credited the absolute difference of the two
+/// adjusted finishes, and a race with no result is counted
+/// once here and credited to both models by the caller.
+/// This is the one counting walk of the crate. The
+/// championship reading and the pairing reading both
+/// consume it, so their figures derive from one
+/// computation.
+pub(crate) fn count_series(series: &Series, first: &PText) -> SeriesCount {
+    let mut count = SeriesCount {
+        wins: [0, 0],
+        margins: [Ratio::zero(), Ratio::zero()],
+        no_results: 0,
+        champion: None,
+        races_walked: 0,
+    };
+    for race in &series.races {
+        if count.champion.is_some() {
+            break;
+        }
+        count.races_walked += 1;
+        let (winner, _) = decide_winner(race);
+        match winner {
+            None => count.no_results += 1,
+            Some(winner) => {
+                let model = &race.attempts[winner].model;
+                let side = if *model == *first { 0 } else { 1 };
+                count.wins[side] += 1;
+                let first_finish = adjusted_finish(&race.attempts[0]);
+                let second_finish = adjusted_finish(&race.attempts[1]);
+                if let (Some(first_finish), Some(second_finish)) = (first_finish, second_finish) {
+                    count.margins[side] += (first_finish - second_finish).abs();
+                }
+                if BigInt::from(count.wins[side]) >= series.wins_target {
+                    count.champion = Some(side);
+                }
+            }
+        }
+    }
+    count
+}
+
+/// Fold one series into the championship standings. Each
+/// model of the series is stood in once for the series,
+/// and the counted figures of the one counting walk are
+/// folded in against the positions the models hold.
+fn fold_series(standings: &mut Vec<Standing>, series: &Series) {
     let mut positions: Vec<usize> = Vec::new();
     for model in &series.models {
         let position = match standings.iter().position(|held| held.model == *model) {
@@ -160,37 +229,14 @@ fn count_series(standings: &mut Vec<Standing>, series: &Series) {
         standings[position].stood_in += 1;
         positions.push(position);
     }
-    let mut wins: Vec<u64> = vec![0, 0];
-    let mut no_results: u64 = 0;
-    let mut champion: Option<usize> = None;
-    for race in &series.races {
-        if champion.is_some() {
-            break;
-        }
-        let (winner, _) = decide_winner(race);
-        match winner {
-            None => no_results += 1,
-            Some(winner) => {
-                let model = &race.attempts[winner].model;
-                let side = if *model == series.models[0] { 0 } else { 1 };
-                wins[side] += 1;
-                let position = positions[side];
-                standings[position].race_wins += 1;
-                let first = adjusted_finish(&race.attempts[0]);
-                let second = adjusted_finish(&race.attempts[1]);
-                if let (Some(first), Some(second)) = (first, second) {
-                    standings[position].margin += (first - second).abs();
-                }
-                if BigInt::from(wins[side]) >= series.wins_target {
-                    champion = Some(side);
-                }
-            }
-        }
+    let count = count_series(series, &series.models[0]);
+    for side in 0..2 {
+        let held = &mut standings[positions[side]];
+        held.race_wins += count.wins[side];
+        held.no_results += count.no_results;
+        held.margin += count.margins[side].clone();
     }
-    for position in &positions {
-        standings[*position].no_results += no_results;
-    }
-    if let Some(side) = champion {
+    if let Some(side) = count.champion {
         standings[positions[side]].series_won += 1;
     }
 }
@@ -201,10 +247,14 @@ pub fn championship_report(championship: &Championship) -> Vec<String> {
     let mut standings: Vec<Standing> = Vec::new();
     for (offset, series) in championship.series.iter().enumerate() {
         let report = series_report(series);
-        lines.push(format!("series {}, {}", offset + 1, series.task.display()));
+        lines.push(format!(
+            "series {}, {}",
+            offset + 1,
+            series.task.display_line()
+        ));
         lines.push(report[1].clone());
         lines.push(report[report.len() - 1].clone());
-        count_series(&mut standings, series);
+        fold_series(&mut standings, series);
     }
     lines.push("championship table".to_string());
     standings.sort_by(|a, b| {
@@ -217,7 +267,7 @@ pub fn championship_report(championship: &Championship) -> Vec<String> {
     for held in &standings {
         lines.push(format!(
             "{}, {} series won, {} series stood in, {} race wins, {} no results, aggregate margin {} seconds",
-            held.model.display(),
+            held.model.display_line(),
             held.series_won,
             held.stood_in,
             held.race_wins,

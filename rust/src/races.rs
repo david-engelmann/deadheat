@@ -956,14 +956,14 @@ fn panel_body(race: &Race) -> String {
         if confidence_meets(&entry.confidence) {
             clauses.push(format!(
                 "adjudication by {} chose {} at confidence {}",
-                entry.adjudicator.display(),
-                entry.chosen.display(),
+                entry.adjudicator.display_line(),
+                entry.chosen.display_line(),
                 format_seconds(&entry.confidence)
             ));
         } else {
             clauses.push(format!(
                 "adjudication by {} abstained at confidence {}",
-                entry.adjudicator.display(),
+                entry.adjudicator.display_line(),
                 format_confidence(&entry.confidence)
             ));
         }
@@ -987,7 +987,7 @@ fn panel_report_line(race: &Race) -> String {
             format!(
                 "close call, panel, {}, the panel confirms {}",
                 body,
-                winner.model.display()
+                winner.model.display_line()
             )
         }
         "follows" => {
@@ -995,7 +995,7 @@ fn panel_report_line(race: &Race) -> String {
             format!(
                 "close call, panel, {}, the panel follows {}",
                 body,
-                decider.adjudicator.display()
+                decider.adjudicator.display_line()
             )
         }
         "divided" => format!("close call, panel, {}, the panel stands divided", body),
@@ -1035,7 +1035,7 @@ fn panel_close_call_line(race: &Race) -> String {
             format!(
                 "panel, {}, the race is decided for {}",
                 body,
-                winner.model.display()
+                winner.model.display_line()
             )
         }
         "divided" => format!("panel, {}, the panel stands divided", body),
@@ -1156,8 +1156,8 @@ fn report_line(attempt: &Attempt) -> String {
     };
     format!(
         "{} in {}, {}, {}",
-        attempt.model.display(),
-        attempt.environment.display(),
+        attempt.model.display_line(),
+        attempt.environment.display_line(),
         outcome,
         spend
     )
@@ -1165,7 +1165,7 @@ fn report_line(attempt: &Attempt) -> String {
 
 /// Return the report lines for one race.
 pub fn race_report(race: &Race) -> Vec<String> {
-    let mut lines = vec![format!("race {}", race.task.display())];
+    let mut lines = vec![format!("race {}", race.task.display_line())];
     for attempt in &race.attempts {
         lines.push(report_line(attempt));
     }
@@ -1174,7 +1174,7 @@ pub fn race_report(race: &Race) -> Vec<String> {
         None => lines.push("verdict, no winner".to_string()),
         Some(winner) => lines.push(format!(
             "verdict, {} wins",
-            race.attempts[winner].model.display()
+            race.attempts[winner].model.display_line()
         )),
     }
     if race.panel.is_some() {
@@ -1188,19 +1188,19 @@ pub fn race_report(race: &Race) -> Vec<String> {
                 let winner = winner.expect("a decided winner");
                 lines.push(format!(
                     "close call, adjudication by {} chose {} at confidence {}",
-                    entry.adjudicator.display(),
-                    race.attempts[winner].model.display(),
+                    entry.adjudicator.display_line(),
+                    race.attempts[winner].model.display_line(),
                     format_seconds(&entry.confidence)
                 ));
             }
             "abstained" => lines.push(format!(
                 "close call, adjudication by {} abstained at confidence {}",
-                entry.adjudicator.display(),
+                entry.adjudicator.display_line(),
                 format_confidence(&entry.confidence)
             )),
             "not needed" => lines.push(format!(
                 "adjudication by {} not needed, the race stands outside the close call band",
-                entry.adjudicator.display()
+                entry.adjudicator.display_line()
             )),
             _ => {}
         }
@@ -1212,7 +1212,7 @@ pub fn race_report(race: &Race) -> Vec<String> {
 
 /// Return the funeral lines for one race.
 pub fn funeral(race: &Race) -> Vec<String> {
-    let mut lines = vec![format!("funeral for {}", race.task.display())];
+    let mut lines = vec![format!("funeral for {}", race.task.display_line())];
     let (winner, loser) = decide_winner(race);
     let first = &race.attempts[0];
     let second = &race.attempts[1];
@@ -1228,8 +1228,8 @@ pub fn funeral(race: &Race) -> Vec<String> {
             for attempt in &race.attempts {
                 lines.push(format!(
                     "{} in {} {}",
-                    attempt.model.display(),
-                    attempt.environment.display(),
+                    attempt.model.display_line(),
+                    attempt.environment.display_line(),
                     outcome_phrase(attempt)
                 ));
             }
@@ -1239,14 +1239,14 @@ pub fn funeral(race: &Race) -> Vec<String> {
             let loser_attempt = &race.attempts[loser];
             lines.push(format!(
                 "winner {} in {} {}",
-                winner_attempt.model.display(),
-                winner_attempt.environment.display(),
+                winner_attempt.model.display_line(),
+                winner_attempt.environment.display_line(),
                 outcome_phrase(winner_attempt)
             ));
             lines.push(format!(
                 "loser {} in {} {}",
-                loser_attempt.model.display(),
-                loser_attempt.environment.display(),
+                loser_attempt.model.display_line(),
+                loser_attempt.environment.display_line(),
                 outcome_phrase(loser_attempt)
             ));
         }
@@ -1263,14 +1263,14 @@ pub fn funeral(race: &Race) -> Vec<String> {
                 let winner = winner.expect("a decided winner");
                 lines.push(format!(
                     "decided by adjudication, {} chose {} at confidence {}",
-                    entry.adjudicator.display(),
-                    race.attempts[winner].model.display(),
+                    entry.adjudicator.display_line(),
+                    race.attempts[winner].model.display_line(),
                     format_seconds(&entry.confidence)
                 ));
             }
             "abstained" => lines.push(format!(
                 "close call, adjudication by {} abstained at confidence {}, the race stands as a dead heat",
-                entry.adjudicator.display(),
+                entry.adjudicator.display_line(),
                 format_confidence(&entry.confidence)
             )),
             "unrecorded" => lines.push(
@@ -1304,7 +1304,7 @@ pub fn funeral(race: &Race) -> Vec<String> {
 pub fn close_call_report(race: &Race) -> Vec<String> {
     let first = &race.attempts[0];
     let second = &race.attempts[1];
-    let mut lines = vec![format!("closecall {}", race.task.display())];
+    let mut lines = vec![format!("closecall {}", race.task.display_line())];
     if first.result == SuiteResult::Green && second.result == SuiteResult::Green {
         let first_finish = finish_reading(first);
         let second_finish = finish_reading(second);
@@ -1347,21 +1347,21 @@ pub fn close_call_report(race: &Race) -> Vec<String> {
                 let winner = winner.expect("a decided winner");
                 lines.push(format!(
                     "adjudication by {} chose {} at confidence {}, the race is decided for {}",
-                    entry.adjudicator.display(),
-                    race.attempts[winner].model.display(),
+                    entry.adjudicator.display_line(),
+                    race.attempts[winner].model.display_line(),
                     format_seconds(&entry.confidence),
-                    race.attempts[winner].model.display()
+                    race.attempts[winner].model.display_line()
                 ));
             }
             "abstained" => lines.push(format!(
                 "adjudication by {} abstained at confidence {}, below the threshold of {}",
-                entry.adjudicator.display(),
+                entry.adjudicator.display_line(),
                 format_confidence(&entry.confidence),
                 format_seconds_fraction(&confidence_threshold())
             )),
             "not needed" => lines.push(format!(
                 "adjudication by {} not needed, the race stands outside the close call band",
-                entry.adjudicator.display()
+                entry.adjudicator.display_line()
             )),
             _ => {}
         }
@@ -1373,7 +1373,7 @@ pub fn close_call_report(race: &Race) -> Vec<String> {
         None => lines.push("verdict, no winner".to_string()),
         Some(winner) => lines.push(format!(
             "verdict, {} wins",
-            race.attempts[winner].model.display()
+            race.attempts[winner].model.display_line()
         )),
     }
     lines
@@ -1680,7 +1680,7 @@ pub fn standings_table(standings: &Standings) -> Vec<String> {
     for (name, entry) in sorted {
         lines.push(format!(
             "{}, {} wins, {} losses, {} no results, {} tokens, {} unreported",
-            name.display(),
+            name.display_line(),
             entry.wins,
             entry.losses,
             entry.no_results,

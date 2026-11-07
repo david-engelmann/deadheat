@@ -2,13 +2,161 @@
 
 Deadheat races two attempts at the same task, one attempt per model, and decides the winner from the recorded results.
 
-## What this is
+Deadheat is a Rust library with a command line tool of the same name. It reads recorded race, series, and championship files in JSON, decides each race from the record alone, and prints readings over the records. A local runner can build a race record by running one shell command per attempt, each in its own directory, and taking the suite result, the elapsed time, the token spend, and the patch from what the command leaves behind.
 
-Deadheat is a Rust library with a command line tool of the same name. A race pairs two attempts at one task. Each attempt record names the model that made the attempt, the environment it ran in, its suite result of green, red, or unfinished, its finish time in seconds where the suite finished, its token spend where the spend was reported, and the patch it left. The records live in JSON files. A local runner can build a race record by running one shell command per attempt, each in its own directory, and taking the suite result, the elapsed time, the token spend, and the patch from what the command leaves behind.
+[![ci](https://github.com/david-engelmann/deadheat/actions/workflows/ci.yml/badge.svg)](https://github.com/david-engelmann/deadheat/actions/workflows/ci.yml)
 
-Deadheat decides the winner from the record alone. A green attempt beats an attempt that did not go green. Between two green attempts the earlier finish wins, and a per attempt adjustment in seconds is applied to the finish before the comparison. An exact tie goes to the attempt that stands first in the record. When the attempts land in the close call band, a recorded adjudication entry with a confidence of four fifths or higher decides the race, and a panel of recorded entries decides the race when the entries meeting that threshold agree. A close call that no entry decides has no winner.
+```text
+totals
+prime-1, 14 races, 6 wins, 1 losses, 7 no results, 1017000 tokens
+shadow-1, 14 races, 1 wins, 6 losses, 7 no results, 1073200 tokens
+totals, 2 series, 14 races, 2 models
+```
 
-The commands print readings over the recorded files and keep the score. The race command prints the race report and the funeral for one recorded race, and with a standings file named it updates that file with the result. The closecall command states whether one race sits in the close call band and what decided it. The series command reads a series file of races between the same two models and prints the result of each race and the winner of the series. The championship command reads a championship file naming series files and prints the championship table over them. The flip command reads a series file and stands the scratch winner of each race beside the adjusted winner, stating whether the race flipped, held, or had no result. The standings command prints the standings table held in a standings file. The adopt command writes the losing attempt patch into a patches folder and the discard command removes it. The commands work offline over the files they are given.
+## Install
+
+```sh
+git clone https://github.com/david-engelmann/deadheat.git
+cd deadheat
+cargo install --path .
+```
+
+## Quickstart
+
+Run the totals command over the championship example from the root of the clone.
+
+```sh
+deadheat totals examples/championship.json
+```
+
+```text
+totals
+prime-1, 14 races, 6 wins, 1 losses, 7 no results, 1017000 tokens
+shadow-1, 14 races, 1 wins, 6 losses, 7 no results, 1073200 tokens
+totals, 2 series, 14 races, 2 models
+```
+
+## Usage
+
+Deadheat decides the winner from the record alone. A green attempt beats an attempt that did not go green. Between two green attempts the earlier finish wins, and a per attempt adjustment in seconds is applied to the finish before the comparison. An exact tie goes to the attempt that stands first in the record. When the attempts land in the close call band, a recorded adjudication entry with a confidence of four fifths or higher decides the race, and a panel of recorded entries decides the race when the entries meeting that threshold agree. A close call that no entry decides has no winner. The commands work offline over the files they are given.
+
+The race command prints the race report and the funeral for one recorded race, and with a standings file named it updates that file with the result.
+
+```sh
+deadheat race examples/shadow-wins.json
+```
+
+```text
+race land the settings migration
+prime-1 in home worktree, red in 812.4 seconds, 152300 tokens
+shadow-1 in shadow worktree, green in 640.75 seconds, 121900 tokens
+verdict, shadow-1 wins
+funeral for land the settings migration
+winner shadow-1 in shadow worktree went green in 640.75 seconds
+loser prime-1 in home worktree went red in 812.4 seconds
+margin 171.65 seconds between the two finishes
+```
+
+The closecall command states whether one race sits in the close call band and what decided it.
+
+```sh
+deadheat closecall examples/close-call-decided.json
+```
+
+```text
+closecall tighten the retry budget
+in the band, both attempts went green and the gap of 12 seconds is within five percent of the slower finish of 300 seconds
+adjudication by judge-2 chose prime-1 at confidence 0.87, the race is decided for prime-1
+verdict, prime-1 wins
+```
+
+The series command reads a series file of races between the same two models and prints the result of each race and the winner of the series.
+
+```sh
+deadheat series examples/series-decided.json
+```
+
+```text
+series the nightly import saga
+prime-1 against shadow-1, first to 3 wins
+race 1, import race one, prime-1 wins
+tally, prime-1 1 wins, shadow-1 0 wins, 0 no results
+race 2, import race two, shadow-1 wins
+tally, prime-1 1 wins, shadow-1 1 wins, 0 no results
+race 3, import race three, no result
+tally, prime-1 1 wins, shadow-1 1 wins, 1 no results
+race 4, import race four, prime-1 wins
+tally, prime-1 2 wins, shadow-1 1 wins, 1 no results
+race 5, import race five, prime-1 wins
+tally, prime-1 3 wins, shadow-1 1 wins, 1 no results
+race 6, import race six, beyond the decision
+series winner, prime-1
+```
+
+The championship command reads a championship file naming series files and prints the championship table over them.
+
+```sh
+deadheat championship examples/championship.json
+```
+
+```text
+championship
+series 1, the recorded close call pilot
+prime-1 against shadow-1, first to 3 wins
+series winner, prime-1
+series 2, the recorded close call panel
+prime-1 against shadow-1, first to 3 wins
+series winner, prime-1
+championship table
+prime-1, 2 series won, 2 series stood in, 6 race wins, 7 no results, aggregate margin 45.25 seconds
+shadow-1, 0 series won, 2 series stood in, 1 race wins, 7 no results, aggregate margin 10 seconds
+```
+
+The flip command reads a series file and stands the scratch winner of each race beside the adjusted winner, stating whether the race flipped, held, or had no result.
+
+```sh
+deadheat flip examples/handicap-series.json
+```
+
+```text
+series the ledger import season
+prime-1 against shadow-1, first to 2 wins
+race 1, ledger import one, scratch prime-1, adjusted prime-1, held
+race 2, balance the ledger import, scratch prime-1, adjusted shadow-1, flipped
+race 3, ledger import three, scratch shadow-1, adjusted shadow-1, held
+flips, 3 races, 1 flipped, 2 held, 0 no results
+```
+
+The totals command reads a championship file and tallies the counted races per model, the races entered, won, lost, and left without a result, and the token spend the attempts reported.
+
+```sh
+deadheat totals examples/championship.json
+```
+
+```text
+totals
+prime-1, 14 races, 6 wins, 1 losses, 7 no results, 1017000 tokens
+shadow-1, 14 races, 1 wins, 6 losses, 7 no results, 1073200 tokens
+totals, 2 series, 14 races, 2 models
+```
+
+The pairing command reads a championship file and states the head to head record of each pair of models over the series they stood in together.
+
+```sh
+deadheat pairing examples/championship.json
+```
+
+```text
+pairings
+pairing, prime-1, against, shadow-1
+series read, 2
+races read, 14
+prime-1, 2 series won, 6 race wins, 7 no results, aggregate margin 45.25 seconds
+shadow-1, 0 series won, 1 race wins, 7 no results, aggregate margin 10 seconds
+pairings, 1 pairings, 2 series, 14 races
+```
+
+The standings command prints the standings table held in a standings file. The adopt command writes the losing attempt patch into a patches folder and the discard command removes it.
 
 ## Status
 
@@ -33,6 +181,8 @@ Seeded in October 2026. Setup has landed, and Rounds 1 to 8 have closed, with al
 - Slice 8 has landed. It carries the flip reading over a recorded series, the scratch winner and the adjusted winner of each race and the standing of the race as flipped, held, or no result, with the closing counts of races, flipped, held, and no results, with the flip example over the handicap series and its golden under examples, and the flip command beside race, closecall, series, and championship.
 - Contract, DH-17 and DH-18 met. They stand in full form in CONTRACT.md under the Round 8 obligations, and Round 8 closed on the merged slice 9 after three reviews, no repair pass, and the standards mutation condition discharged on executed runs.
 - Slice 9 has landed. It carries the totals reading over a recorded championship, the races entered, won, lost, and left without a result by each model and the token spend its attempts reported, counted under the counting walk that stops at each series decision, with the closing counts of series, races, and models, with the totals example over the standing championship and its golden under examples, and the totals command beside race, closecall, series, championship, and flip.
+- Contract, DH-19 and DH-20 now stand in full form in CONTRACT.md under the Round 9 obligations, and their standing is not claimed here, as Round 9 has not closed.
+- Slice 10 is built and in review. It carries the pairing reading over a recorded championship, the head to head record of each pair of models over the series they stood in together, with the closing counts of pairings, series, and races, with the pairing example over the standing championship and its golden under examples, and the pairing command beside race, closecall, series, championship, flip, and totals, and the fencing of the printed fields at the library surface under FIX-DH-16, and the README brought to the fleet README standard.
 - The Rust port has landed. It carries the behavior the Python package carried, checked against the same goldens, and the Python tree stands removed under PORT-13.
 - Local gate, cargo run --bin codepoint_scan, cargo fmt --check, cargo clippy --all-targets -- -D warnings, and cargo test. CI runs the same commands.
 

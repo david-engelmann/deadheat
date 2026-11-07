@@ -209,9 +209,11 @@ fn the_totals_over_one_series_equal_the_series_reading_outcome_counts() {
             line
         );
     }
-    // The closing figure relation: the races won summed over
-    // the models are the races read less the no result races,
-    // and the entered counts sum to two per counted race.
+    // The closing figure relation the code below makes. The
+    // wins summed over the models, counted off the series
+    // report lines above, plus the no result races counted
+    // the same way, are the counted races themselves. The
+    // pin reads no entered count and makes no entered sum.
     let total_won: usize = wins.iter().map(|(_, count)| count).sum();
     assert_eq!(total_won + no_results, counted);
 }

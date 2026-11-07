@@ -32,7 +32,7 @@ pub fn has_seat(race: &Race) -> bool {
 /// Return the summary text the seat presents for one race. The
 /// form is the one DH-7 states.
 pub fn attempt_summary(race: &Race) -> String {
-    let mut parts = vec![format!("task {}", race.task.display())];
+    let mut parts = vec![format!("task {}", race.task.display_line())];
     for attempt in &race.attempts {
         let finish = if attempt.result == SuiteResult::Unfinished {
             "never finished".to_string()
@@ -48,13 +48,13 @@ pub fn attempt_summary(race: &Race) -> String {
         };
         parts.push(format!(
             "attempt, model {}, environment {}, result {}, {}, {}",
-            attempt.model.display(),
-            attempt.environment.display(),
+            attempt.model.display_line(),
+            attempt.environment.display_line(),
             attempt.result.as_str(),
             finish,
             spend
         ));
-        parts.push(format!("patch of {}", attempt.model.display()));
+        parts.push(format!("patch of {}", attempt.model.display_line()));
         parts.push(attempt.patch.display());
     }
     parts.join("\n")

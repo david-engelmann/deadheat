@@ -2,6 +2,7 @@
 name = "deadheat"
 version = "0.1.0"
 edition = "2021"
+description = "Deadheat races two attempts at the same task, one attempt per model, and decides the winner from the recorded results."
 
 [lib]
 path = "rust/src/lib.rs"
@@ -52,6 +53,14 @@ path = "rust/tests/test_flips.rs"
 [[test]]
 name = "test_totals"
 path = "rust/tests/test_totals.rs"
+
+[[test]]
+name = "test_pairings"
+path = "rust/tests/test_pairings.rs"
+
+[[test]]
+name = "test_fencing"
+path = "rust/tests/test_fencing.rs"
 
 [[test]]
 name = "test_cli"
