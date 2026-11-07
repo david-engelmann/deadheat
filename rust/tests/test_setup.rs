@@ -25,7 +25,7 @@ fn agents_carries_the_canonical_marker() {
 #[test]
 fn readme_states_the_closed_round_count() {
     let text = read(&repo_root().join("README.md"));
-    assert!(text.contains("Closed perfection rounds, 9 of 100"));
+    assert!(text.contains("Closed perfection rounds, 10 of 100"));
 }
 
 #[test]
@@ -84,15 +84,16 @@ fn readme_reports_the_round_four_status() {
     // Slice 10 stood in review while Round 9 was built, so
     // the count was one again until the Round 9 closure
     // landed slice 10 and the count returned to zero.
-    // Slice 11 stands in review while Round 10 is built, so
-    // the count is one again. The round five pin
+    // Slice 11 stood in review while Round 10 was built, so
+    // the count was one again until the Round 10 closure
+    // landed slice 11 and the count returned to zero. The round five pin
     // below holds the slice 6 line itself, the round six pin
     // below holds the slice 7 line, the round seven pin
     // below holds the slice 8 line, the round eight pin
     // below holds the slice 9 line, the round nine pin
     // below holds the slice 10 line, and the round ten pin
     // below holds the slice 11 line.
-    assert_eq!(text.matches("built and in review").count(), 1);
+    assert_eq!(text.matches("built and in review").count(), 0);
 }
 
 #[test]
@@ -141,11 +142,11 @@ fn readme_reports_the_round_nine_status() {
 }
 
 #[test]
-fn readme_reports_the_round_ten_slice() {
+fn readme_reports_the_round_ten_status() {
     let text = read(&repo_root().join("README.md"));
-    let standing = "- Contract, DH-21 and DH-22 now stand in full form in CONTRACT.md under the Round 10 obligations, and their standing is not claimed here, as Round 10 has not closed.";
+    let standing = "- Contract, DH-21 and DH-22 met. They stand in full form in CONTRACT.md under the Round 10 obligations, and Round 10 closed on the merged slice 11 after three reviews approving with no findings.";
     assert!(text.lines().any(|line| line == standing));
-    let slice_line = "- Slice 11 is built and in review. It carries the comeback reading over a recorded championship, the classification of each series by its first decided race as won from behind or won from the front, one section for each series won from behind naming its decided races in race order and the loss of its winner in the first decided race and its winner with its race split, with the closing counts of series, from behind, and from the front, with the comeback example over the standing championship in its empty form and the constructed comeback example and their goldens under examples, and the comeback command beside race, closecall, series, championship, flip, totals, and pairing.";
+    let slice_line = "- Slice 11 has landed. It carries the comeback reading over a recorded championship, the classification of each series by its first decided race as won from behind or won from the front, one section for each series won from behind naming its decided races in race order and the loss of its winner in the first decided race and its winner with its race split, with the closing counts of series, from behind, and from the front, with the comeback example over the standing championship in its empty form and the constructed comeback example and their goldens under examples, and the comeback command beside race, closecall, series, championship, flip, totals, and pairing.";
     assert!(text.lines().any(|line| line == slice_line));
 }
 
