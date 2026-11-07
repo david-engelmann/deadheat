@@ -25,7 +25,7 @@ fn agents_carries_the_canonical_marker() {
 #[test]
 fn readme_states_the_closed_round_count() {
     let text = read(&repo_root().join("README.md"));
-    assert!(text.contains("Closed perfection rounds, 8 of 100"));
+    assert!(text.contains("Closed perfection rounds, 9 of 100"));
 }
 
 #[test]
@@ -82,13 +82,14 @@ fn readme_reports_the_round_four_status() {
     // built, so the count was one again until the Round 8
     // closure landed slice 9 and the count returned to zero.
     // Slice 10 stands in review while Round 9 is built, so
-    // the count is one again. The round five pin
+    // the count is one again until the Round 9 closure
+    // landed slice 10 and the count returned to zero. The round five pin
     // below holds the slice 6 line itself, the round six pin
     // below holds the slice 7 line, the round seven pin
     // below holds the slice 8 line, the round eight pin
     // below holds the slice 9 line, and the round nine pin
     // below holds the slice 10 line.
-    assert_eq!(text.matches("built and in review").count(), 1);
+    assert_eq!(text.matches("built and in review").count(), 0);
 }
 
 #[test]
@@ -128,11 +129,11 @@ fn readme_reports_the_round_eight_status() {
 }
 
 #[test]
-fn readme_reports_the_round_nine_slice() {
+fn readme_reports_the_round_nine_status() {
     let text = read(&repo_root().join("README.md"));
-    let standing = "- Contract, DH-19 and DH-20 now stand in full form in CONTRACT.md under the Round 9 obligations, and their standing is not claimed here, as Round 9 has not closed.";
+    let standing = "- Contract, DH-19 and DH-20 met. They stand in full form in CONTRACT.md under the Round 9 obligations, and Round 9 closed on the merged slice 10 after three reviews, a repair pass, and a discharging re-review.";
     assert!(text.lines().any(|line| line == standing));
-    let slice_line = "- Slice 10 is built and in review. It carries the pairing reading over a recorded championship, the head to head record of each pair of models over the series they stood in together, with the closing counts of pairings, series, and races, with the pairing example over the standing championship and its golden under examples, and the pairing command beside race, closecall, series, championship, flip, and totals, and the fencing of the printed fields at the library surface under FIX-DH-16, and the README brought to the fleet README standard.";
+    let slice_line = "- Slice 10 has landed. It carries the pairing reading over a recorded championship, the head to head record of each pair of models over the series they stood in together, with the closing counts of pairings, series, and races, with the pairing example over the standing championship and its golden under examples, and the pairing command beside race, closecall, series, championship, flip, and totals, and the fencing of the printed fields at the library surface under FIX-DH-16, and the README brought to the fleet README standard.";
     assert!(text.lines().any(|line| line == slice_line));
 }
 
