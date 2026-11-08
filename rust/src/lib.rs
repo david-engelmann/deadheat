@@ -9,6 +9,7 @@
 pub mod championship;
 pub mod cli;
 pub mod comebacks;
+pub mod distances;
 pub mod flips;
 pub mod json;
 pub mod makers;

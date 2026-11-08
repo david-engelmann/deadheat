@@ -67,7 +67,8 @@ fn readme_reports_the_round_four_status() {
     // consequence, and again at the Round 6 slice for the same
     // consequence, and again at the Round 7 slice, and again
     // at the Round 8 slice, and again at the Round 9 slice,
-    // and again at the Round 10 slice. This count
+    // and again at the Round 10 slice, and again at the
+    // Round 11 slice. This count
     // holds the slices standing in review across the whole
     // README. It stood at zero when Round 4 closed, and slice
     // 6 stood in review while Round 5 was built, so the count
@@ -86,14 +87,17 @@ fn readme_reports_the_round_four_status() {
     // landed slice 10 and the count returned to zero.
     // Slice 11 stood in review while Round 10 was built, so
     // the count was one again until the Round 10 closure
-    // landed slice 11 and the count returned to zero. The round five pin
+    // landed slice 11 and the count returned to zero.
+    // Slice 12 stands in review while Round 11 is built, so
+    // the count is one again. The round five pin
     // below holds the slice 6 line itself, the round six pin
     // below holds the slice 7 line, the round seven pin
     // below holds the slice 8 line, the round eight pin
     // below holds the slice 9 line, the round nine pin
-    // below holds the slice 10 line, and the round ten pin
-    // below holds the slice 11 line.
-    assert_eq!(text.matches("built and in review").count(), 0);
+    // below holds the slice 10 line, the round ten pin
+    // below holds the slice 11 line, and the round eleven
+    // pin below holds the slice 12 line.
+    assert_eq!(text.matches("built and in review").count(), 1);
 }
 
 #[test]
@@ -147,6 +151,15 @@ fn readme_reports_the_round_ten_status() {
     let standing = "- Contract, DH-21 and DH-22 met. They stand in full form in CONTRACT.md under the Round 10 obligations, and Round 10 closed on the merged slice 11 after three reviews approving with no findings.";
     assert!(text.lines().any(|line| line == standing));
     let slice_line = "- Slice 11 has landed. It carries the comeback reading over a recorded championship, the classification of each series by its first decided race as won from behind or won from the front, one section for each series won from behind naming its decided races in race order and the loss of its winner in the first decided race and its winner with its race split, with the closing counts of series, from behind, and from the front, with the comeback example over the standing championship in its empty form and the constructed comeback example and their goldens under examples, and the comeback command beside race, closecall, series, championship, flip, totals, and pairing.";
+    assert!(text.lines().any(|line| line == slice_line));
+}
+
+#[test]
+fn readme_reports_the_round_eleven_slice() {
+    let text = read(&repo_root().join("README.md"));
+    let standing = "- Contract, DH-23 and DH-24 now stand in full form in CONTRACT.md under the Round 11 obligations, and their standing is not claimed here, as Round 11 has not closed.";
+    assert!(text.lines().any(|line| line == standing));
+    let slice_line = "- Slice 12 is built and in review. It carries the distance reading over a recorded championship, the classification of each series by the wins of its loser when the decision fell as standing the distance, standing without reply, or standing in between, one section for each series gone the distance naming its decided races in race order and its winner with its race split, with the closing counts of series, the distance, without reply, in between, and no winner, with the distance example over the standing championship in its empty form and the constructed distance example and their goldens under examples, and the distance command beside race, closecall, series, championship, flip, totals, pairing, and comeback.";
     assert!(text.lines().any(|line| line == slice_line));
 }
 
