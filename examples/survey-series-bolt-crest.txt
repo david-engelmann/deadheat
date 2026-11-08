@@ -1,0 +1,20 @@
+series the constructed survey series, bolt-1 against crest-1
+bolt-1 against crest-1, first to 4 wins
+race 1, survey race one, bolt-1 wins
+tally, bolt-1 1 wins, crest-1 0 wins, 0 no results
+race 2, survey race two, crest-1 wins
+tally, bolt-1 1 wins, crest-1 1 wins, 0 no results
+race 3, survey race three, bolt-1 wins
+tally, bolt-1 2 wins, crest-1 1 wins, 0 no results
+race 4, survey race four, bolt-1 wins
+tally, bolt-1 3 wins, crest-1 1 wins, 0 no results
+race 5, survey race five, bolt-1 wins
+tally, bolt-1 4 wins, crest-1 1 wins, 0 no results
+race 6, survey race six, beyond the decision
+race 7, survey race seven, beyond the decision
+race 8, survey race eight, beyond the decision
+race 9, survey race nine, beyond the decision
+race 10, survey race ten, beyond the decision
+race 11, survey race eleven, beyond the decision
+race 12, survey race twelve, beyond the decision
+series winner, bolt-1

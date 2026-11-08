@@ -17,5 +17,6 @@
    "output_tokens": 1843,
    "route": "openai"
   }
- }
+ },
+ "version": 1
 }

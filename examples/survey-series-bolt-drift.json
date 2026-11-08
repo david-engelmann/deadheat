@@ -1,0 +1,178 @@
+{
+ "models": [
+  "bolt-1",
+  "drift-1"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 93.662,
+     "model": "bolt-1",
+     "patch": "survey diff",
+     "result": "green",
+     "tokens": 28428
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 543.519,
+     "model": "drift-1",
+     "patch": "survey diff",
+     "result": "red",
+     "tokens": 64276
+    }
+   ],
+   "task": "survey race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 475.615,
+     "model": "bolt-1",
+     "patch": "survey diff",
+     "result": "red",
+     "tokens": 39565
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 461.276,
+     "model": "drift-1",
+     "patch": "survey diff",
+     "result": "green",
+     "tokens": 103808
+    }
+   ],
+   "task": "survey race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 353.169,
+     "model": "bolt-1",
+     "patch": "survey diff",
+     "result": "red",
+     "tokens": 114940
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 278.776,
+     "model": "drift-1",
+     "patch": "survey diff",
+     "result": "green",
+     "tokens": 48441
+    }
+   ],
+   "task": "survey race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 463.665,
+     "model": "bolt-1",
+     "patch": "survey diff",
+     "result": "red",
+     "tokens": 28449
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 289.79,
+     "model": "drift-1",
+     "patch": "survey diff",
+     "result": "green",
+     "tokens": 18800
+    }
+   ],
+   "task": "survey race four"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 293.46,
+     "model": "bolt-1",
+     "patch": "survey diff",
+     "result": "red",
+     "tokens": 174017
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 227.711,
+     "model": "drift-1",
+     "patch": "survey diff",
+     "result": "green",
+     "tokens": 148584
+    }
+   ],
+   "task": "survey race five"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 245.143,
+     "model": "bolt-1",
+     "patch": "survey diff",
+     "result": "green",
+     "tokens": 61855
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 668.684,
+     "model": "drift-1",
+     "patch": "survey diff",
+     "result": "red",
+     "tokens": 94440
+    }
+   ],
+   "task": "survey race six"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 598.566,
+     "model": "bolt-1",
+     "patch": "survey diff",
+     "result": "red",
+     "tokens": 79452
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 442.462,
+     "model": "drift-1",
+     "patch": "survey diff",
+     "result": "green",
+     "tokens": 54813
+    }
+   ],
+   "task": "survey race seven"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 200.859,
+     "model": "bolt-1",
+     "patch": "survey diff",
+     "result": "red",
+     "tokens": 58299
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 103.085,
+     "model": "drift-1",
+     "patch": "survey diff",
+     "result": "red",
+     "tokens": 49838
+    }
+   ],
+   "task": "survey race eight"
+  }
+ ],
+ "task": "the constructed survey series, bolt-1 against drift-1",
+ "wins_target": 5
+}

@@ -254,6 +254,54 @@ pub fn format_seconds(value: &Num) -> String {
     format_seconds_fraction(&exact(value))
 }
 
+/// How a stated version field stands against FIX-DH-17.
+///
+/// A format object this repo owns may carry the field version.
+/// Where the field stands absent or as the integer 1 the object
+/// reads as version 1. Where it stands as an integer other than
+/// 1 it names an unsupported version. Where it stands in any
+/// other form, a number that is not an integer among them, it
+/// has the wrong type, because a version is an integer count
+/// and not a measured figure. Each surface that reads a format
+/// object names the two refusals in its own phrasing, and this
+/// reading of the field stands in this one home.
+pub(crate) enum VersionStanding {
+    Current,
+    WrongType,
+    Unsupported,
+}
+
+/// Read the version field of one format object under FIX-DH-17.
+pub(crate) fn version_standing(data: &JsonValue) -> VersionStanding {
+    match data.get("version") {
+        None => VersionStanding::Current,
+        Some(JsonValue::Num(Num::Int(digits))) => {
+            if *digits == BigInt::from(1) {
+                VersionStanding::Current
+            } else {
+                VersionStanding::Unsupported
+            }
+        }
+        Some(_) => VersionStanding::WrongType,
+    }
+}
+
+/// Name the version refusal of one format object in the
+/// phrasing of the surface that reads it, under FIX-DH-17. An
+/// object standing at version 1 draws no defect.
+pub(crate) fn check_version(
+    data: &JsonValue,
+    wrong_type: &str,
+    unsupported: &str,
+    defects: &mut Vec<String>,
+) {
+    match version_standing(data) {
+        VersionStanding::Current => {}
+        VersionStanding::WrongType => defects.push(wrong_type.to_string()),
+        VersionStanding::Unsupported => defects.push(unsupported.to_string()),
+    }
+}
+
 fn check_text_field(data: &JsonValue, name: &str, defects: &mut Vec<String>) -> Option<PText> {
     let value = match data.get(name) {
         None => {
@@ -626,6 +674,12 @@ fn load_adjudication(
         defects.push("field adjudication is not an object".to_string());
         return None;
     }
+    check_version(
+        entry,
+        "adjudication field version has the wrong type",
+        "adjudication field version names an unsupported version",
+        defects,
+    );
     let before = defects.len();
     let adjudicator = check_adjudication_text(entry, "adjudicator", defects);
     let chosen = check_adjudication_text(entry, "chosen", defects);
@@ -708,6 +762,15 @@ fn load_panel_entry(
         defects.push(format!("panel entry {} is not an object", index));
         return None;
     }
+    check_version(
+        entry,
+        &format!("panel entry {} field version has the wrong type", index),
+        &format!(
+            "panel entry {} field version names an unsupported version",
+            index
+        ),
+        defects,
+    );
     let before = defects.len();
     let adjudicator = check_panel_entry_text(entry, index, "adjudicator", defects);
     let chosen = check_panel_entry_text(entry, index, "chosen", defects);
@@ -791,6 +854,12 @@ fn load_panel(
 /// read the race through here.
 pub fn load_race_data(data: &JsonValue) -> (Option<Race>, Vec<String>) {
     let mut defects = Vec::new();
+    check_version(
+        data,
+        "field version has the wrong type",
+        "field version names an unsupported version",
+        &mut defects,
+    );
     let task = check_text_field(data, "task", &mut defects);
     let attempts = load_attempts(data, &mut defects);
     let adjudication = load_adjudication(data, attempts.as_ref(), &mut defects);
@@ -1617,6 +1686,12 @@ pub fn load_standings_text(text: &str) -> (Option<Standings>, Vec<String>) {
         return (None, vec!["input is not a JSON object".to_string()]);
     }
     let mut defects = Vec::new();
+    check_version(
+        &data,
+        "field version has the wrong type",
+        "field version names an unsupported version",
+        &mut defects,
+    );
     let mut models = None;
     match data.get("models") {
         None => defects.push("missing field models".to_string()),

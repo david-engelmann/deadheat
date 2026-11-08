@@ -1,0 +1,22 @@
+series the constructed survey series, apex-1 against bolt-1
+apex-1 against bolt-1, first to 3 wins
+race 1, survey race one, apex-1 wins
+tally, apex-1 1 wins, bolt-1 0 wins, 0 no results
+race 2, survey race two, no result
+tally, apex-1 1 wins, bolt-1 0 wins, 1 no results
+race 3, survey race three, bolt-1 wins
+tally, apex-1 1 wins, bolt-1 1 wins, 1 no results
+race 4, survey race four, bolt-1 wins
+tally, apex-1 1 wins, bolt-1 2 wins, 1 no results
+race 5, survey race five, apex-1 wins
+tally, apex-1 2 wins, bolt-1 2 wins, 1 no results
+race 6, survey race six, apex-1 wins
+tally, apex-1 3 wins, bolt-1 2 wins, 1 no results
+race 7, survey race seven, beyond the decision
+race 8, survey race eight, beyond the decision
+race 9, survey race nine, beyond the decision
+race 10, survey race ten, beyond the decision
+race 11, survey race eleven, beyond the decision
+race 12, survey race twelve, beyond the decision
+race 13, survey race thirteen, beyond the decision
+series winner, apex-1

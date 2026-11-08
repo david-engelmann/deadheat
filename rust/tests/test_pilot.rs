@@ -253,15 +253,22 @@ fn the_run_record_recomputes_from_the_envelopes() {
             (figures.model.clone(), object)
         })
         .collect();
-    let recomputed = obj(vec![(
-        "models",
-        JsonValue::object(
-            models
-                .into_iter()
-                .map(|(key, value)| (deadheat::pytext::PText::from_text(&key), value))
-                .collect(),
+    // The expected record carries the version field the
+    // maker writes under FIX-DH-17, a mechanical consequence
+    // of that amendment standing beside the figures this pin
+    // recomputes.
+    let recomputed = obj(vec![
+        (
+            "models",
+            JsonValue::object(
+                models
+                    .into_iter()
+                    .map(|(key, value)| (deadheat::pytext::PText::from_text(&key), value))
+                    .collect(),
+            ),
         ),
-    )]);
+        ("version", i(1)),
+    ]);
     let recorded = load_json(&pilot().join("run_record.json"));
     assert_eq!(normalized(&recorded), normalized(&recomputed));
 }
@@ -575,4 +582,36 @@ fn the_pilot_series_counts_the_jev_records() {
     assert!(golden.contains("race 1, pin the cache key, prime-1 wins"));
     assert!(golden.contains("race 7, shrink the prompt budget, shadow-1 wins"));
     assert_eq!(golden.lines().last(), Some("series winner, prime-1"));
+}
+
+#[test]
+fn the_committed_run_record_stands_at_version_1() {
+    // The maker writes the run record at version 1 under
+    // FIX-DH-17, and the committed record carries the field,
+    // so a maker that stops writing it fails here beside the
+    // regeneration pin.
+    let text = std::fs::read_to_string(pilot().join("run_record.json")).unwrap();
+    let record = deadheat::json::parse(&text).expect("the record parses");
+    assert_eq!(record.get("version"), Some(&i(1)));
+    assert!(deadheat::makers::check_run_record_version(&record).is_ok());
+}
+
+#[test]
+fn a_run_record_at_version_2_is_refused_on_read_back() {
+    // The read back refuses a stated version the maker does
+    // not know, in the refusal posture PORT-11 states.
+    let record = obj(vec![("models", obj(vec![])), ("version", i(2))]);
+    assert!(deadheat::makers::check_run_record_version(&record).is_err());
+}
+
+#[test]
+fn a_run_record_with_a_text_version_is_refused_on_read_back() {
+    let record = obj(vec![("models", obj(vec![])), ("version", s("1"))]);
+    assert!(deadheat::makers::check_run_record_version(&record).is_err());
+}
+
+#[test]
+fn a_run_record_with_no_version_field_reads_as_version_1() {
+    let record = obj(vec![("models", obj(vec![]))]);
+    assert!(deadheat::makers::check_run_record_version(&record).is_ok());
 }

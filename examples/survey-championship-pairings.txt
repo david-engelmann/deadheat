@@ -1,0 +1,32 @@
+pairings
+pairing, apex-1, against, bolt-1
+series read, 1
+races read, 6
+apex-1, 1 series won, 3 race wins, 1 no results, aggregate margin 318.016 seconds
+bolt-1, 0 series won, 2 race wins, 1 no results, aggregate margin 346.62 seconds
+pairing, apex-1, against, crest-1
+series read, 1
+races read, 6
+apex-1, 0 series won, 2 race wins, 0 no results, aggregate margin 790.304 seconds
+crest-1, 1 series won, 4 race wins, 0 no results, aggregate margin 893.558 seconds
+pairing, apex-1, against, drift-1
+series read, 1
+races read, 9
+apex-1, 0 series won, 4 race wins, 0 no results, aggregate margin 774.929 seconds
+drift-1, 1 series won, 5 race wins, 0 no results, aggregate margin 1764.007 seconds
+pairing, bolt-1, against, crest-1
+series read, 1
+races read, 5
+bolt-1, 1 series won, 4 race wins, 0 no results, aggregate margin 601.778 seconds
+crest-1, 0 series won, 1 race wins, 0 no results, aggregate margin 1070.563 seconds
+pairing, bolt-1, against, drift-1
+series read, 1
+races read, 7
+bolt-1, 0 series won, 2 race wins, 0 no results, aggregate margin 873.398 seconds
+drift-1, 1 series won, 5 race wins, 0 no results, aggregate margin 484.46 seconds
+pairing, crest-1, against, drift-1
+series read, 1
+races read, 7
+crest-1, 0 series won, 1 race wins, 3 no results, aggregate margin 175.591 seconds
+drift-1, 1 series won, 3 race wins, 3 no results, aggregate margin 314.082 seconds
+pairings, 6 pairings, 6 series, 40 races

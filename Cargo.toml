@@ -94,6 +94,22 @@ path = "rust/tests/test_scan.rs"
 name = "test_setup"
 path = "rust/tests/test_setup.rs"
 
+[[test]]
+name = "test_formats"
+path = "rust/tests/test_formats.rs"
+
+[[test]]
+name = "test_runs"
+path = "rust/tests/test_runs.rs"
+
+[[test]]
+name = "test_rallies"
+path = "rust/tests/test_rallies.rs"
+
+[[test]]
+name = "test_survey"
+path = "rust/tests/test_survey.rs"
+
 [dependencies]
 num-bigint = "0.4"
 num-rational = "0.4"

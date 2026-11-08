@@ -338,3 +338,63 @@ fn a_run_race_record_loads_clean() {
     assert_eq!(loaded.attempts[0].result, SuiteResult::Green);
     assert_eq!(loaded.attempts[1].result, SuiteResult::Red);
 }
+
+#[test]
+fn a_result_file_at_version_2_is_ignored_whole_and_the_exit_code_decides() {
+    // The stated exception to FIX-DH-7, under FIX-DH-17. The
+    // result file names a green result and a token count, and
+    // the exit code stands at one. At version 2 the file is
+    // unreadable as a result file, so it is ignored whole and
+    // the attempt stands red by the exit code, with its token
+    // count unreported, exactly as a malformed file reads.
+    let dir = temp_dir("runner-result-version-2");
+    let attempt = run_attempt(
+        &dir,
+        "lane",
+        &text("model-a"),
+        &text("local shell"),
+        "printf '%s' '{\"result\": \"green\", \"tokens\": 7, \"version\": 2}' > result.json; exit 1",
+        None,
+    )
+    .expect("the attempt runs");
+    assert_eq!(attempt.result, SuiteResult::Red);
+    assert_eq!(attempt.tokens, None);
+}
+
+#[test]
+fn a_result_file_at_version_1_reads_field_by_field_as_before() {
+    // The same file at version 1 reads the way FIX-DH-7
+    // states, so this pin fails if the version reading ever
+    // refuses a current file.
+    let dir = temp_dir("runner-result-version-1");
+    let attempt = run_attempt(
+        &dir,
+        "lane",
+        &text("model-a"),
+        &text("local shell"),
+        "printf '%s' '{\"result\": \"green\", \"tokens\": 7, \"version\": 1}' > result.json; exit 1",
+        None,
+    )
+    .expect("the attempt runs");
+    assert_eq!(attempt.result, SuiteResult::Green);
+    assert_eq!(attempt.tokens, Some(num_bigint::BigInt::from(7)));
+}
+
+#[test]
+fn a_result_file_with_a_text_version_is_ignored_whole() {
+    // The wrong type form of the same exception. A version
+    // standing as text is not the integer 1, so the file is
+    // ignored whole and the exit code decides.
+    let dir = temp_dir("runner-result-version-text");
+    let attempt = run_attempt(
+        &dir,
+        "lane",
+        &text("model-a"),
+        &text("local shell"),
+        "printf '%s' '{\"result\": \"green\", \"tokens\": 7, \"version\": \"1\"}' > result.json; exit 1",
+        None,
+    )
+    .expect("the attempt runs");
+    assert_eq!(attempt.result, SuiteResult::Red);
+    assert_eq!(attempt.tokens, None);
+}

@@ -68,7 +68,7 @@ fn readme_reports_the_round_four_status() {
     // consequence, and again at the Round 7 slice, and again
     // at the Round 8 slice, and again at the Round 9 slice,
     // and again at the Round 10 slice, and again at the
-    // Round 11 slice. This count
+    // Round 11 slice, and again at the Round 12 slice. This count
     // holds the slices standing in review across the whole
     // README. It stood at zero when Round 4 closed, and slice
     // 6 stood in review while Round 5 was built, so the count
@@ -90,15 +90,18 @@ fn readme_reports_the_round_four_status() {
     // landed slice 11 and the count returned to zero.
     // Slice 12 stood in review while Round 11 was built, so
     // the count was one again until the Round 11 closure
-    // landed slice 12 and the count returned to zero. The round five pin
+    // landed slice 12 and the count returned to zero.
+    // Slice 13 stands in review while Round 12 is built, so
+    // the count is one again. The round five pin
     // below holds the slice 6 line itself, the round six pin
     // below holds the slice 7 line, the round seven pin
     // below holds the slice 8 line, the round eight pin
     // below holds the slice 9 line, the round nine pin
     // below holds the slice 10 line, the round ten pin
-    // below holds the slice 11 line, and the round eleven
-    // pin below holds the slice 12 line.
-    assert_eq!(text.matches("built and in review").count(), 0);
+    // below holds the slice 11 line, the round eleven
+    // pin below holds the slice 12 line, and the round
+    // twelve pin below holds the slice 13 line.
+    assert_eq!(text.matches("built and in review").count(), 1);
 }
 
 #[test]
@@ -165,6 +168,15 @@ fn readme_reports_the_round_eleven_status() {
 }
 
 #[test]
+fn readme_reports_the_round_twelve_status() {
+    let text = read(&repo_root().join("README.md"));
+    let standing = "- Contract, DH-25 to DH-28 now stand in full form in CONTRACT.md under the Round 12 obligations, and their standing is not claimed here, as Round 12 has not closed.";
+    assert!(text.lines().any(|line| line == standing));
+    let slice_line = "- Slice 13 is built and in review. It carries the format version rule under FIX-DH-17, every format this repo owns standing at version 1 with the version refused in the phrasing of the surface that reads it, the formats reference at FORMATS.md restating every shape in one place, the race specification and the run command that runs its two attempts through the local runner and writes its race record, with the duel example and its pins under examples, the rally reading over a recorded championship, the classification of each decided series by whether its winner ever stood behind on the tally of decided races as a rally or wire to wire, one section for each rally series naming its decided races in race order and the deepest its winner stood behind and its winner with its race split, with the closing counts of series, rally, wire to wire, and no winner, with the rally example over the standing championship in its empty form and the constructed rally example and their goldens under examples, the survey championship over six constructed series at drawn realistic shapes with its goldens under examples, and the switchyard later obligation retired under FIX-DH-18, and the run and rally commands beside race, closecall, series, championship, flip, totals, pairing, comeback, and distance.";
+    assert!(text.lines().any(|line| line == slice_line));
+}
+
+#[test]
 fn the_gate_lines_name_the_standing_gate() {
     // A port repair pin, updated at the removal under PORT-13.
     // The README gate line and the AGENTS annex gate sentence
@@ -214,4 +226,89 @@ fn ci_carries_the_cargo_steps() {
         "the lint step"
     );
     assert!(live.contains("cargo test"), "the test step");
+}
+
+#[test]
+fn formats_reference_names_every_format_its_version_and_its_test_file() {
+    // The reference FIX-DH-17 names. Each versioned shape's
+    // section states its version posture and the test file
+    // that pins the shape, so a shape dropped from the
+    // reference, a version dropped from a section, or a test
+    // file dropped from a section fails here.
+    let text = read(&repo_root().join("FORMATS.md"));
+    let sections: Vec<&str> = text.split("\n## ").collect();
+    let section = |name: &str| -> String {
+        sections
+            .iter()
+            .find(|part| part.starts_with(name))
+            .map(|part| part.to_string())
+            .unwrap_or_else(|| panic!("FORMATS.md names no section {name}"))
+    };
+    let versioned = [
+        ("The race record", "test_races.rs"),
+        ("The runner result file", "test_runner.rs"),
+        ("The adjudication entry", "test_close_calls.rs"),
+        ("The panel", "test_panels.rs"),
+        ("The series file", "test_series.rs"),
+        ("The championship file", "test_championship.rs"),
+        ("The standings file", "test_races.rs"),
+        ("The pilot run record", "test_pilot.rs"),
+        ("The race specification", "test_runs.rs"),
+    ];
+    for (name, test_file) in versioned {
+        let body = section(name);
+        assert!(
+            body.contains("version 1 under FIX-DH-17"),
+            "the {name} section states no version"
+        );
+        assert!(
+            body.contains(test_file),
+            "the {name} section names no test file"
+        );
+    }
+}
+
+#[test]
+fn formats_reference_names_no_version_for_the_envelopes() {
+    // The second pin FIX-DH-17 names. The envelope shapes are
+    // the routes' own shapes and carry no deadheat version, so
+    // a version stated for them in the reference fails here.
+    let text = read(&repo_root().join("FORMATS.md"));
+    let start = text
+        .find("\n## The envelopes")
+        .expect("FORMATS.md names the envelope section");
+    let body = &text[start..];
+    assert!(body.contains("no deadheat version"));
+    assert!(!body.contains("version 1 under FIX-DH-17"));
+    assert!(body.contains("test_seats.rs"));
+}
+
+#[test]
+fn agents_annex_states_the_local_directory_runner() {
+    // The annex refresh FIX-DH-18 states. The gate sentence
+    // lost the switchyard sentence whole, and the refreshed
+    // sentence stands in its place, so a stale annex fails
+    // here.
+    let agents = read(&repo_root().join("AGENTS.md"));
+    assert!(agents.contains(
+        "The runner runs each attempt in its own local directory under one race workspace."
+    ));
+    assert!(!agents.contains("switchyard"));
+    assert!(!agents.contains("Switchyard"));
+}
+
+#[test]
+fn readme_shows_the_comeback_distance_rally_and_run_sections() {
+    // The Usage sections the Round 12 rounds stand on. Each
+    // section lead stands in the README, so a dropped
+    // section fails here.
+    let readme = read(&repo_root().join("README.md"));
+    for lead in [
+        "The comeback command reads a championship file",
+        "The distance command reads a championship file",
+        "The rally command reads a championship file",
+        "The run command takes a race specification file",
+    ] {
+        assert!(readme.contains(lead), "the README shows no section: {lead}");
+    }
 }

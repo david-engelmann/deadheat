@@ -64,3 +64,12 @@ same day, and a live round runs against it without a further
 approval step. Raising the cap means amending this section with
 the reason recorded, in the open, and the spend ledger still
 closes every round.
+
+A live adjudication round needs a Typesafe API key for the Jev
+route and an OpenRouter API key for the chat route. The shipped
+crate contains no live caller and makes no live call, as PORT-6
+states. A live round is a maintainer harness act through the
+routes those keys serve, not a command of this tool. The
+recordings a live round produces then join the fixtures, with
+the spend record standing in the programme ledger this roadmap
+names above, outside this repo.

@@ -26,6 +26,7 @@ use deadheat::races::{
     close_call_report, funeral, race_report, standings_table, Adjudication, Attempt, Race,
     StandingEntry, Standings, SuiteResult,
 };
+use deadheat::rallies::rally_report;
 use deadheat::seats::attempt_summary;
 use deadheat::series::{series_report, Series};
 use deadheat::totals::totals_report;
@@ -432,6 +433,68 @@ fn the_distance_report_fences_its_fields() {
             "race 3, race three,  wins",
             "series winner, ,  2 race wins, beta-1 1 race wins, 0 no results",
             "distance, 1 series, 1 the distance, 0 without reply, 0 in between, 0 no winner",
+        ]
+    );
+}
+
+#[test]
+fn the_rally_report_fences_its_fields() {
+    let mut series = bad_series();
+    // The series is rebuilt to a target of two over three
+    // races, the same shape the comeback and distance pins
+    // stand on. The second model takes the first race and
+    // the first model takes the next two, so the series
+    // stands a rally and its section prints the series
+    // task, the race tasks, and both model labels, and
+    // every field holding a break stands fenced to the
+    // empty field on this surface as on the others.
+    series.wins_target = BigInt::from(2);
+    series.races = vec![
+        Race {
+            task: text("race one"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Red, 130.0),
+                attempt(text("beta-1"), "lane two", SuiteResult::Green, 100.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+        Race {
+            task: bad("race task"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Green, 100.0),
+                attempt(text("beta-1"), "lane two", SuiteResult::Red, 130.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+        Race {
+            task: text("race three"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Green, 100.0),
+                attempt(text("beta-1"), "lane two", SuiteResult::Red, 130.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+    ];
+    let championship = Championship {
+        series: vec![series],
+    };
+    let lines = rally_report(&championship);
+    assert_no_forgery(&lines);
+    assert_eq!(
+        lines,
+        vec![
+            "rally",
+            "series 1, ",
+            " against beta-1, first to 2 wins",
+            "race 1, race one, beta-1 wins",
+            "race 2, ,  wins",
+            "race 3, race three,  wins",
+            "stood behind by 1 race wins at the deepest",
+            "series winner, ,  2 race wins, beta-1 1 race wins, 0 no results",
+            "rally, 1 series, 1 rally, 0 wire to wire, 0 no winner",
         ]
     );
 }

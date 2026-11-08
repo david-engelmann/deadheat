@@ -56,4 +56,4 @@ Verify claims from the thing itself. A result is read from the file on disk, the
 
 Deadheat is a duel with a winner. Myriad, in this same line, is a survey with a map. Deadheat races exactly two attempts at one task and myriad never declares a winner.
 
-The local gate is cargo run --bin codepoint_scan, cargo fmt --check, cargo clippy --all-targets -- -D warnings, and cargo test, and the suite runs offline on recorded or locally run attempts. Switchyard, owned by the Fleet Operations chat, is seed only at the time of writing, so the first slice races in separate local directories and states the switchyard environment as a later obligation. Every fixture is synthetic and written for this repo.
+The local gate is cargo run --bin codepoint_scan, cargo fmt --check, cargo clippy --all-targets -- -D warnings, and cargo test, and the suite runs offline on recorded or locally run attempts. The runner runs each attempt in its own local directory under one race workspace. Every fixture is synthetic and written for this repo.

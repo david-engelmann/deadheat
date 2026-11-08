@@ -110,6 +110,12 @@ pub fn load_championship_text(text: &str, base_dir: &Path) -> (Option<Championsh
         return (None, vec!["input is not a JSON object".to_string()]);
     }
     let mut defects = Vec::new();
+    crate::races::check_version(
+        &data,
+        "field version has the wrong type",
+        "field version names an unsupported version",
+        &mut defects,
+    );
     let entries = load_entries(&data, &mut defects);
     let mut loaded = Vec::new();
     if let Some(entries) = &entries {

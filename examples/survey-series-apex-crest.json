@@ -1,0 +1,283 @@
+{
+ "models": [
+  "apex-1",
+  "crest-1"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 762.332,
+     "model": "apex-1",
+     "patch": "survey diff",
+     "result": "red",
+     "tokens": 99884
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 597.574,
+     "model": "crest-1",
+     "patch": "survey diff",
+     "result": "green",
+     "tokens": 33113
+    }
+   ],
+   "task": "survey race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 544.305,
+     "model": "apex-1",
+     "patch": "survey diff",
+     "result": "red",
+     "tokens": 48206
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 392.011,
+     "model": "crest-1",
+     "patch": "survey diff",
+     "result": "green",
+     "tokens": 16649
+    }
+   ],
+   "task": "survey race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 656.036,
+     "model": "apex-1",
+     "patch": "survey diff",
+     "result": "red",
+     "tokens": 55622
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 169.776,
+     "model": "crest-1",
+     "patch": "survey diff",
+     "result": "green",
+     "tokens": 78574
+    }
+   ],
+   "task": "survey race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 617.953,
+     "model": "apex-1",
+     "patch": "survey diff",
+     "result": "green",
+     "tokens": 43551
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 1119.001,
+     "model": "crest-1",
+     "patch": "survey diff",
+     "result": "red",
+     "tokens": 88423
+    }
+   ],
+   "task": "survey race four"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 276.76,
+     "model": "apex-1",
+     "patch": "survey diff",
+     "result": "green",
+     "tokens": 73640
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 566.016,
+     "model": "crest-1",
+     "patch": "survey diff",
+     "result": "red",
+     "tokens": 62328
+    }
+   ],
+   "task": "survey race five"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 496.704,
+     "model": "apex-1",
+     "patch": "survey diff",
+     "result": "red",
+     "tokens": 26617
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 406.458,
+     "model": "crest-1",
+     "patch": "survey diff",
+     "result": "green",
+     "tokens": 19061
+    }
+   ],
+   "task": "survey race six"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 407.974,
+     "model": "apex-1",
+     "patch": "survey diff",
+     "result": "green",
+     "tokens": 44793
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 809.181,
+     "model": "crest-1",
+     "patch": "survey diff",
+     "result": "red",
+     "tokens": 151842
+    }
+   ],
+   "task": "survey race seven"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 358.058,
+     "model": "apex-1",
+     "patch": "survey diff",
+     "result": "green",
+     "tokens": 74893
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 375.755,
+     "model": "crest-1",
+     "patch": "survey diff",
+     "result": "red",
+     "tokens": 55523
+    }
+   ],
+   "task": "survey race eight"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 366.642,
+     "model": "apex-1",
+     "patch": "survey diff",
+     "result": "green",
+     "tokens": 49842
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 676.727,
+     "model": "crest-1",
+     "patch": "survey diff",
+     "result": "red",
+     "tokens": 30592
+    }
+   ],
+   "task": "survey race nine"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 711.406,
+     "model": "apex-1",
+     "patch": "survey diff",
+     "result": "red",
+     "tokens": 328605
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 271.489,
+     "model": "crest-1",
+     "patch": "survey diff",
+     "result": "green",
+     "tokens": 53376
+    }
+   ],
+   "task": "survey race ten"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 1019.018,
+     "model": "apex-1",
+     "patch": "survey diff",
+     "result": "red",
+     "tokens": 72280
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 360.029,
+     "model": "crest-1",
+     "patch": "survey diff",
+     "result": "green",
+     "tokens": 93643
+    }
+   ],
+   "task": "survey race eleven"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 284.359,
+     "model": "apex-1",
+     "patch": "survey diff",
+     "result": "green",
+     "tokens": 42736
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 423.736,
+     "model": "crest-1",
+     "patch": "survey diff",
+     "result": "red",
+     "tokens": 61215
+    }
+   ],
+   "task": "survey race twelve"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 439.537,
+     "model": "apex-1",
+     "patch": "survey diff",
+     "result": "red",
+     "tokens": 30587
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 326.004,
+     "model": "crest-1",
+     "patch": "survey diff",
+     "result": "green",
+     "tokens": 65066
+    }
+   ],
+   "task": "survey race thirteen"
+  }
+ ],
+ "task": "the constructed survey series, apex-1 against crest-1",
+ "wins_target": 4
+}

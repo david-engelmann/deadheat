@@ -390,3 +390,127 @@ fn the_panel_series_matches_its_golden() {
     let rendered = series_report(&series.expect("a series")).join("\n") + "\n";
     assert_eq!(rendered, golden);
 }
+
+#[test]
+fn the_rally_example_matches_its_golden() {
+    // The standing championship holds no rally series, both
+    // of its series standing wire to wire under DH-25, so
+    // the golden is the empty form of DH-26, the head line
+    // and the closing counts and no section.
+    let source = examples().join("championship.json");
+    let out = run_ok(&["rally", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("championship-rally.txt"));
+    assert_eq!(out, golden);
+    assert_eq!(
+        out,
+        "rally\nrally, 2 series, 0 rally, 2 wire to wire, 0 no winner\n"
+    );
+    let (championship, defects) =
+        deadheat::championship::load_championship_file(&examples().join("championship.json"));
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered =
+        deadheat::rallies::rally_report(&championship.expect("a championship")).join("\n") + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_constructed_rally_example_matches_its_golden() {
+    // The constructed championship of DH-26, labelled as
+    // constructed in its file names and its task text and
+    // never presented as recorded. Its one series stands a
+    // rally, its winner standing behind by two race wins at
+    // the deepest, so the golden carries the section form,
+    // and its ninth race stands beyond the decision and is
+    // named nowhere in the reading.
+    let source = examples().join("constructed-rally.json");
+    let out = run_ok(&["rally", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("constructed-rally-rally.txt"));
+    assert_eq!(out, golden);
+    assert!(out.contains("series 1, the constructed rally drill"));
+    assert!(out.contains("stood behind by 2 race wins at the deepest"));
+    assert!(!out.contains("rally drill race nine"));
+    assert!(out
+        .trim_end()
+        .ends_with("rally, 1 series, 1 rally, 0 wire to wire, 0 no winner"));
+    let (championship, defects) =
+        deadheat::championship::load_championship_file(&examples().join("constructed-rally.json"));
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered =
+        deadheat::rallies::rally_report(&championship.expect("a championship")).join("\n") + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_survey_championship_matches_its_goldens() {
+    // The survey championship of DH-28, drawn at realistic
+    // shapes and labelled as constructed in its file names
+    // and its task texts. Every championship reading over
+    // it is pinned byte for byte against the golden the
+    // real command produced, at the CLI and at the library
+    // surface both.
+    let source = examples().join("survey-championship.json");
+    let source_arg = source.to_str().expect("utf8");
+    let (championship, defects) = deadheat::championship::load_championship_file(&source);
+    assert_eq!(defects, Vec::<String>::new());
+    let championship = championship.expect("a championship");
+    let readings: Vec<(&str, String, &str)> = vec![
+        (
+            "championship",
+            deadheat::championship::championship_report(&championship).join("\n") + "\n",
+            "survey-championship.txt",
+        ),
+        (
+            "totals",
+            deadheat::totals::totals_report(&championship).join("\n") + "\n",
+            "survey-championship-totals.txt",
+        ),
+        (
+            "pairing",
+            deadheat::pairings::pairing_report(&championship).join("\n") + "\n",
+            "survey-championship-pairings.txt",
+        ),
+        (
+            "comeback",
+            deadheat::comebacks::comeback_report(&championship).join("\n") + "\n",
+            "survey-championship-comebacks.txt",
+        ),
+        (
+            "distance",
+            deadheat::distances::distance_report(&championship).join("\n") + "\n",
+            "survey-championship-distance.txt",
+        ),
+        (
+            "rally",
+            deadheat::rallies::rally_report(&championship).join("\n") + "\n",
+            "survey-championship-rally.txt",
+        ),
+    ];
+    for (command, rendered, golden_name) in readings {
+        let golden = read_text(&examples().join(golden_name));
+        assert_eq!(run_ok(&[command, source_arg]), golden, "{command} cli");
+        assert_eq!(rendered, golden, "{command} library");
+    }
+}
+
+#[test]
+fn the_survey_series_match_their_goldens() {
+    // One series rendering per survey series, pinned byte
+    // for byte the same way.
+    for name in [
+        "survey-series-apex-bolt",
+        "survey-series-apex-crest",
+        "survey-series-apex-drift",
+        "survey-series-bolt-crest",
+        "survey-series-bolt-drift",
+        "survey-series-crest-drift",
+    ] {
+        let source = examples().join(format!("{name}.json"));
+        let out = run_ok(&["series", source.to_str().expect("utf8")]);
+        let golden = read_text(&examples().join(format!("{name}.txt")));
+        assert_eq!(out, golden, "{name} cli");
+        let (series, defects) = load_series_file(&source);
+        assert_eq!(defects, Vec::<String>::new());
+        let rendered = series_report(&series.expect("a series")).join("\n") + "\n";
+        assert_eq!(rendered, golden, "{name} library");
+    }
+}
