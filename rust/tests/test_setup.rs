@@ -25,7 +25,7 @@ fn agents_carries_the_canonical_marker() {
 #[test]
 fn readme_states_the_closed_round_count() {
     let text = read(&repo_root().join("README.md"));
-    assert!(text.contains("Closed perfection rounds, 11 of 100"));
+    assert!(text.contains("Closed perfection rounds, 12 of 100"));
 }
 
 #[test]
@@ -91,8 +91,9 @@ fn readme_reports_the_round_four_status() {
     // Slice 12 stood in review while Round 11 was built, so
     // the count was one again until the Round 11 closure
     // landed slice 12 and the count returned to zero.
-    // Slice 13 stands in review while Round 12 is built, so
-    // the count is one again. The round five pin
+    // Slice 13 stood in review while Round 12 was built, so
+    // the count was one again until the Round 12 closure
+    // landed slice 13 and the count returned to zero. The round five pin
     // below holds the slice 6 line itself, the round six pin
     // below holds the slice 7 line, the round seven pin
     // below holds the slice 8 line, the round eight pin
@@ -101,7 +102,7 @@ fn readme_reports_the_round_four_status() {
     // below holds the slice 11 line, the round eleven
     // pin below holds the slice 12 line, and the round
     // twelve pin below holds the slice 13 line.
-    assert_eq!(text.matches("built and in review").count(), 1);
+    assert_eq!(text.matches("built and in review").count(), 0);
 }
 
 #[test]
@@ -170,9 +171,9 @@ fn readme_reports_the_round_eleven_status() {
 #[test]
 fn readme_reports_the_round_twelve_status() {
     let text = read(&repo_root().join("README.md"));
-    let standing = "- Contract, DH-25 to DH-28 now stand in full form in CONTRACT.md under the Round 12 obligations, and their standing is not claimed here, as Round 12 has not closed.";
+    let standing = "- Contract, DH-25 to DH-28 met, with FIX-DH-17, FIX-DH-18, and FIX-DH-19. They stand in full form in CONTRACT.md under the Round 12 obligations, and Round 12 closed on the merged slice 13 after three reviews, with the repair pass landed before the merge.";
     assert!(text.lines().any(|line| line == standing));
-    let slice_line = "- Slice 13 is built and in review. It carries the format version rule under FIX-DH-17, every format this repo owns standing at version 1 with the version refused in the phrasing of the surface that reads it, the formats reference at FORMATS.md restating every shape in one place, the race specification and the run command that runs its two attempts through the local runner and writes its race record, with the duel example and its pins under examples, the rally reading over a recorded championship, the classification of each decided series by whether its winner ever stood behind on the tally of decided races as a rally or wire to wire, one section for each rally series naming its decided races in race order and the deepest its winner stood behind and its winner with its race split, with the closing counts of series, rally, wire to wire, and no winner, with the rally example over the standing championship in its empty form and the constructed rally example and their goldens under examples, the survey championship over six constructed series at drawn realistic shapes with its goldens under examples, and the switchyard later obligation retired under FIX-DH-18, and the run and rally commands beside race, closecall, series, championship, flip, totals, pairing, comeback, and distance.";
+    let slice_line = "- Slice 13 has landed. It carries the format version rule under FIX-DH-17, every format this repo owns standing at version 1 with the version refused in the phrasing of the surface that reads it, the formats reference at FORMATS.md restating every shape in one place, the race specification and the run command that runs its two attempts through the local runner and writes its race record, with the duel example and its pins under examples, the rally reading over a recorded championship, the classification of each decided series by whether its winner ever stood behind on the tally of decided races as a rally or wire to wire, one section for each rally series naming its decided races in race order and the deepest its winner stood behind and its winner with its race split, with the closing counts of series, rally, wire to wire, and no winner, with the rally example over the standing championship in its empty form and the constructed rally example and their goldens under examples, the survey championship over six constructed series at drawn realistic shapes with its goldens under examples, and the switchyard later obligation retired under FIX-DH-18, and the run and rally commands beside race, closecall, series, championship, flip, totals, pairing, comeback, and distance.";
     assert!(text.lines().any(|line| line == slice_line));
 }
 
