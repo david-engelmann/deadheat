@@ -25,6 +25,22 @@ use crate::series::{series_report, Series};
 
 const ROUTES: [&str; 2] = ["jev", "openai"];
 
+/// Read back one pilot run record value under FIX-DH-17.
+///
+/// The maker writes the run record at version 1, and a record
+/// read back carrying a stated version in any other form is
+/// refused in the posture PORT-11 states for the maker, an
+/// error and nothing written. A record carrying no version
+/// field reads as version 1, as every other shape in this repo
+/// reads. The suite's recomputation of the run record stands
+/// on this reading beside the writer.
+pub fn check_run_record_version(record: &JsonValue) -> Result<(), String> {
+    match crate::races::version_standing(record) {
+        crate::races::VersionStanding::Current => Ok(()),
+        _ => Err("the run record names a version the maker cannot read".to_string()),
+    }
+}
+
 fn race_names() -> Vec<String> {
     (1..=10).map(|index| format!("race-{:02}", index)).collect()
 }
@@ -397,10 +413,13 @@ pub fn make_pilot(pilot_dir: &Path) -> Result<(), String> {
         }
         model_pairs.push((model.clone(), JsonValue::object(pairs)));
     }
-    let run_record = JsonValue::object(vec![(
-        PText::from_text("models"),
-        JsonValue::object(model_pairs),
-    )]);
+    let run_record = JsonValue::object(vec![
+        (PText::from_text("models"), JsonValue::object(model_pairs)),
+        (
+            PText::from_text("version"),
+            JsonValue::Num(Num::from_i64(1)),
+        ),
+    ]);
     if json::has_int_past_digit_limit(&run_record) {
         return Err(
             "a summed figure in the run record passes the digit limit the rendering enforces"

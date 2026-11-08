@@ -1,0 +1,21 @@
+series the constructed survey series, crest-1 against drift-1
+crest-1 against drift-1, first to 3 wins
+race 1, survey race one, no result
+tally, crest-1 0 wins, drift-1 0 wins, 1 no results
+race 2, survey race two, crest-1 wins
+tally, crest-1 1 wins, drift-1 0 wins, 1 no results
+race 3, survey race three, no result
+tally, crest-1 1 wins, drift-1 0 wins, 2 no results
+race 4, survey race four, drift-1 wins
+tally, crest-1 1 wins, drift-1 1 wins, 2 no results
+race 5, survey race five, no result
+tally, crest-1 1 wins, drift-1 1 wins, 3 no results
+race 6, survey race six, drift-1 wins
+tally, crest-1 1 wins, drift-1 2 wins, 3 no results
+race 7, survey race seven, drift-1 wins
+tally, crest-1 1 wins, drift-1 3 wins, 3 no results
+race 8, survey race eight, beyond the decision
+race 9, survey race nine, beyond the decision
+race 10, survey race ten, beyond the decision
+race 11, survey race eleven, beyond the decision
+series winner, drift-1

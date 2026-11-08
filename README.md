@@ -57,6 +57,45 @@ loser prime-1 in home worktree went red in 812.4 seconds
 margin 171.65 seconds between the two finishes
 ```
 
+The run command takes a race specification file, runs its two attempts in local directories under the workspace the specification names, writes the race record to the path it names, and prints the report and the funeral over the record it built. The specification at examples/duel-spec.json names the task, the workspace, the record file, and the two attempts with their models, environments, and shell commands.
+
+```json
+{
+ "attempts": [
+  {
+   "command": "printf 'attempt one patch line\n' > patch.diff",
+   "environment": "local shell",
+   "model": "duel-1"
+  },
+  {
+   "command": "printf 'attempt two patch line\n' > patch.diff; exit 1",
+   "environment": "local shell",
+   "model": "duel-2"
+  }
+ ],
+ "record": "duel-record.json",
+ "task": "the example duel",
+ "workspace": "duel-workspace"
+}
+```
+
+```sh
+deadheat run examples/duel-spec.json
+```
+
+```text
+race the example duel
+duel-1 in local shell, green in 0.03774 seconds, tokens unreported
+duel-2 in local shell, red in 0.028695 seconds, tokens unreported
+verdict, duel-1 wins
+funeral for the example duel
+winner duel-1 in local shell went green in 0.03774 seconds
+loser duel-2 in local shell went red in 0.028695 seconds
+margin 0.009045 seconds between the two finishes
+```
+
+The seconds in that output are the runner's measured figures of one run and differ between runs, while the verdict of this example does not, because a green attempt beats a red attempt at any figures.
+
 The closecall command states whether one race sits in the close call band and what decided it.
 
 ```sh
@@ -156,6 +195,39 @@ shadow-1, 0 series won, 1 race wins, 7 no results, aggregate margin 10 seconds
 pairings, 1 pairings, 2 series, 14 races
 ```
 
+The comeback command reads a championship file and reports the series that were won from behind, standing the decided races of each beside its winner and its race split.
+
+```sh
+deadheat comeback examples/championship.json
+```
+
+```text
+comebacks
+comebacks, 2 series, 0 from behind, 2 from the front
+```
+
+The distance command reads a championship file and reports the series that went the distance, whose loser stood one win short of the wins target when the decision fell.
+
+```sh
+deadheat distance examples/championship.json
+```
+
+```text
+distance
+distance, 2 series, 0 the distance, 1 without reply, 1 in between, 0 no winner
+```
+
+The rally command reads a championship file and reports the series whose winner ever stood behind on the tally of decided races, standing the decided races of each beside the deepest the winner stood behind and its race split.
+
+```sh
+deadheat rally examples/championship.json
+```
+
+```text
+rally
+rally, 2 series, 0 rally, 2 wire to wire, 0 no winner
+```
+
 The standings command prints the standings table held in a standings file. The adopt command writes the losing attempt patch into a patches folder and the discard command removes it.
 
 ## Status
@@ -187,6 +259,8 @@ Seeded in October 2026. Setup has landed, and Rounds 1 to 11 have closed, with a
 - Slice 11 has landed. It carries the comeback reading over a recorded championship, the classification of each series by its first decided race as won from behind or won from the front, one section for each series won from behind naming its decided races in race order and the loss of its winner in the first decided race and its winner with its race split, with the closing counts of series, from behind, and from the front, with the comeback example over the standing championship in its empty form and the constructed comeback example and their goldens under examples, and the comeback command beside race, closecall, series, championship, flip, totals, and pairing.
 - Contract, DH-23 and DH-24 met. They stand in full form in CONTRACT.md under the Round 11 obligations, and Round 11 closed on the merged slice 12 after three reviews, with the standards lane's two findings repaired and corrected before landing.
 - Slice 12 has landed. It carries the distance reading over a recorded championship, the classification of each series by the wins of its loser when the decision fell as standing the distance, standing without reply, or standing in between, one section for each series gone the distance naming its decided races in race order and its winner with its race split, with the closing counts of series, the distance, without reply, in between, and no winner, with the distance example over the standing championship in its empty form and the constructed distance example and their goldens under examples, and the distance command beside race, closecall, series, championship, flip, totals, pairing, and comeback.
+- Contract, DH-25 to DH-28 now stand in full form in CONTRACT.md under the Round 12 obligations, and their standing is not claimed here, as Round 12 has not closed.
+- Slice 13 is built and in review. It carries the format version rule under FIX-DH-17, every format this repo owns standing at version 1 with the version refused in the phrasing of the surface that reads it, the formats reference at FORMATS.md restating every shape in one place, the race specification and the run command that runs its two attempts through the local runner and writes its race record, with the duel example and its pins under examples, the rally reading over a recorded championship, the classification of each decided series by whether its winner ever stood behind on the tally of decided races as a rally or wire to wire, one section for each rally series naming its decided races in race order and the deepest its winner stood behind and its winner with its race split, with the closing counts of series, rally, wire to wire, and no winner, with the rally example over the standing championship in its empty form and the constructed rally example and their goldens under examples, the survey championship over six constructed series at drawn realistic shapes with its goldens under examples, and the switchyard later obligation retired under FIX-DH-18, and the run and rally commands beside race, closecall, series, championship, flip, totals, pairing, comeback, and distance.
 - The Rust port has landed. It carries the behavior the Python package carried, checked against the same goldens, and the Python tree stands removed under PORT-13.
 - Local gate, cargo run --bin codepoint_scan, cargo fmt --check, cargo clippy --all-targets -- -D warnings, and cargo test. CI runs the same commands.
 

@@ -1,0 +1,10 @@
+{
+ "series": [
+  "survey-series-apex-bolt.json",
+  "survey-series-apex-crest.json",
+  "survey-series-apex-drift.json",
+  "survey-series-bolt-crest.json",
+  "survey-series-bolt-drift.json",
+  "survey-series-crest-drift.json"
+ ]
+}

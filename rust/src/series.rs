@@ -159,6 +159,12 @@ pub fn load_series_text(text: &str) -> (Option<Series>, Vec<String>) {
         return (None, vec!["input is not a JSON object".to_string()]);
     }
     let mut defects = Vec::new();
+    crate::races::check_version(
+        &data,
+        "field version has the wrong type",
+        "field version names an unsupported version",
+        &mut defects,
+    );
     let task = check_text_field_shared(&data, "task", &mut defects);
     let models = load_models(&data, &mut defects);
     let wins_target = load_wins_target(&data, &mut defects);

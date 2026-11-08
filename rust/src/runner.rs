@@ -57,8 +57,18 @@ fn read_result_file(directory: &Path) -> ResultRead {
         None => return ResultRead::Value(empty),
         Some(text) => text,
     };
+    // The one stated exception to the field by field reading
+    // of FIX-DH-7 stands here, under FIX-DH-17. A result file
+    // carrying a version field in any form other than absent
+    // or the integer 1 is unreadable as a result file, so it is
+    // ignored whole like a malformed file and the attempt falls
+    // back to the exit code reading, exactly as a file that
+    // cannot be read as an object does below.
     match json::parse(&text) {
-        Ok(value) if value.as_object().is_some() => ResultRead::Value(value),
+        Ok(value) if value.as_object().is_some() => match crate::races::version_standing(&value) {
+            crate::races::VersionStanding::Current => ResultRead::Value(value),
+            _ => ResultRead::Value(empty),
+        },
         Ok(_) => ResultRead::Value(empty),
         Err(json::ParseError::TooDeep) => ResultRead::TooDeep,
         Err(json::ParseError::Malformed) => ResultRead::Value(empty),

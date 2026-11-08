@@ -1,0 +1,17 @@
+{
+ "attempts": [
+  {
+   "command": "printf 'attempt one patch line\n' > patch.diff",
+   "environment": "local shell",
+   "model": "duel-1"
+  },
+  {
+   "command": "printf 'attempt two patch line\n' > patch.diff; exit 1",
+   "environment": "local shell",
+   "model": "duel-2"
+  }
+ ],
+ "record": "duel-record.json",
+ "task": "the example duel",
+ "workspace": "duel-workspace"
+}

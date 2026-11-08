@@ -675,6 +675,37 @@ fn every_standing_golden_still_matches_byte_for_byte() {
             assert_eq!(rendered, golden, "{name}");
             continue;
         }
+        // Altered at the Round 12 slice for its named mechanical
+        // consequence. The rally examples of DH-26 add two goldens
+        // whose stems name championships rather than a race, and
+        // the survey championship of DH-28 adds a third over its
+        // own stem, so the sweep reads them through the championship
+        // loader and the rally report before the generic race
+        // reading can misread their sources. The two counts below
+        // rise by fourteen each this round, the three rally goldens
+        // here, the five survey championship goldens the standing
+        // arms and the generic championship reading already read,
+        // and the six survey series goldens the generic series
+        // reading already reads, the unadjusted count rising with
+        // them because every race of the three championships and
+        // the six series stands unadjusted.
+        if let Some(stem) = name.strip_suffix("-rally.txt") {
+            let source = golden_path.with_file_name(format!("{stem}.json"));
+            let (championship, defects) = deadheat::championship::load_championship_file(&source);
+            assert_eq!(defects, Vec::<String>::new(), "{name}");
+            let championship = championship.expect("a championship");
+            if championship
+                .series
+                .iter()
+                .flat_map(|series| series.races.iter())
+                .all(race_is_unadjusted)
+            {
+                unadjusted += 1;
+            }
+            let rendered = deadheat::rallies::rally_report(&championship).join("\n") + "\n";
+            assert_eq!(rendered, golden, "{name}");
+            continue;
+        }
         let source = golden_path.with_extension("json");
         let (race, _) = load_race_file(&source);
         if let Some(race) = race {
@@ -718,6 +749,6 @@ fn every_standing_golden_still_matches_byte_for_byte() {
         let rendered = deadheat::championship::championship_report(&championship).join("\n") + "\n";
         assert_eq!(rendered, golden, "{name}");
     }
-    assert_eq!(goldens.len(), 55);
-    assert_eq!(unadjusted, 51);
+    assert_eq!(goldens.len(), 69);
+    assert_eq!(unadjusted, 65);
 }

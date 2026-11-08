@@ -21,9 +21,10 @@ use crate::pairings::pairing_report;
 use crate::pytext::PText;
 use crate::races::{
     close_call_report, decide_winner, empty_standings, funeral, load_race_file,
-    load_standings_file, patch_file_name, race_report, standings_table, standings_text,
-    update_standings,
+    load_standings_file, patch_file_name, race_report, race_to_json, standings_table,
+    standings_text, update_standings,
 };
+use crate::rallies::rally_report;
 use crate::series::{load_series_file, series_report};
 use crate::totals::totals_report;
 
@@ -341,7 +342,7 @@ fn spec_max_invocation(spec: &ParserSpec) -> usize {
 
 fn top_spec() -> ParserSpec {
     let mut commands = action(
-        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance}",
+        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally}",
         None,
     );
     commands.subactions = vec![
@@ -384,16 +385,24 @@ fn top_spec() -> ParserSpec {
             "distance",
             Some("print the distance report for one championship file"),
         ),
+        action(
+            "run",
+            Some("run the two attempts of one race specification and print its report and funeral"),
+        ),
+        action(
+            "rally",
+            Some("print the rally report for one championship file"),
+        ),
     ];
     let mut spec = ParserSpec {
         prog: "deadheat",
         description: Some("Race two attempts at one task and keep the standings."),
         opt_usage: "[-h]",
         pos_usage:
-            "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance} ...",
+            "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally} ...",
         opt_parts: vec!["[-h]"],
         pos_parts: vec![
-            "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance}",
+            "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally}",
             "...",
         ],
         positionals: vec![commands],
@@ -510,6 +519,22 @@ fn sub_spec(command: &str) -> ParserSpec {
         ),
         "distance" => (
             "deadheat distance",
+            vec![action("file", None)],
+            vec![help_action()],
+            "[-h]",
+            "file",
+            vec!["file"],
+        ),
+        "run" => (
+            "deadheat run",
+            vec![action("file", None)],
+            vec![help_action()],
+            "[-h]",
+            "file",
+            vec!["file"],
+        ),
+        "rally" => (
+            "deadheat rally",
             vec![action("file", None)],
             vec![help_action()],
             "[-h]",
@@ -953,7 +978,7 @@ fn is_help_token(text: &PText, has_standings: bool) -> bool {
     false
 }
 
-const COMMANDS: [&str; 12] = [
+const COMMANDS: [&str; 14] = [
     "race",
     "adopt",
     "discard",
@@ -966,6 +991,8 @@ const COMMANDS: [&str; 12] = [
     "pairing",
     "comeback",
     "distance",
+    "run",
+    "rally",
 ];
 
 /// Run the command line over the given arguments at the given
@@ -1041,7 +1068,7 @@ fn invalid_choice(spec: &ParserSpec, columns: usize, value: &PText) -> Outcome {
         spec,
         columns,
         &format!(
-            "argument command: invalid choice: {} (choose from 'race', 'adopt', 'discard', 'standings', 'closecall', 'series', 'championship', 'flip', 'totals', 'pairing', 'comeback', 'distance')",
+            "argument command: invalid choice: {} (choose from 'race', 'adopt', 'discard', 'standings', 'closecall', 'series', 'championship', 'flip', 'totals', 'pairing', 'comeback', 'distance', 'run', 'rally')",
             py_repr(value)
         ),
     )
@@ -1206,6 +1233,8 @@ fn run_subcommand(
         "pairing" => command_pairing(&values[0]),
         "comeback" => command_comeback(&values[0]),
         "distance" => command_distance(&values[0]),
+        "run" => command_run(&values[0]),
+        "rally" => command_rally(&values[0]),
         _ => unreachable!("a known command"),
     }
 }
@@ -1267,6 +1296,17 @@ fn command_race(file: &PText, standings_arg: Option<&PText>) -> Outcome {
     let mut lines = race_report(&race);
     lines.extend(funeral(&race));
     Outcome::plain(lines, 0)
+}
+
+fn command_rally(file: &PText) -> Outcome {
+    let (championship, defects) = load_championship_file(&path_from_arg(file));
+    if !defects.is_empty() {
+        return print_defects("invalid championship file", defects);
+    }
+    Outcome::plain(
+        rally_report(&championship.expect("a clean championship")),
+        0,
+    )
 }
 
 fn command_adopt(file: &PText, patches: &PText) -> Outcome {
@@ -1413,4 +1453,34 @@ fn command_distance(file: &PText) -> Outcome {
         distance_report(&championship.expect("a clean championship")),
         0,
     )
+}
+
+fn command_run(file: &PText) -> Outcome {
+    let (spec, defects) = crate::specs::load_spec_file(&path_from_arg(file));
+    if !defects.is_empty() {
+        return print_defects("invalid race specification file", defects);
+    }
+    let spec = spec.expect("a clean specification");
+    let workspace = PathBuf::from(spec.workspace.display());
+    let race = match crate::runner::run_race(&workspace, &spec.task, &spec.attempts) {
+        Ok(race) => race,
+        Err(error) => return Outcome::plain(vec![error], 1),
+    };
+    let record_value = race_to_json(&race);
+    if crate::json::has_int_past_digit_limit(&record_value) {
+        return Outcome::plain(Vec::new(), 1);
+    }
+    let record_path = PathBuf::from(spec.record.display());
+    if let Some(parent) = record_path.parent() {
+        if !parent.as_os_str().is_empty() {
+            let _ = std::fs::create_dir_all(parent);
+        }
+    }
+    let record_text = format!("{}\n", crate::json::dumps(&record_value, Some(1), true));
+    if std::fs::write(&record_path, record_text).is_err() {
+        return Outcome::plain(Vec::new(), 1);
+    }
+    let mut lines = race_report(&race);
+    lines.extend(funeral(&race));
+    Outcome::plain(lines, 0)
 }
