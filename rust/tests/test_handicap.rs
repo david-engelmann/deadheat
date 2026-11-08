@@ -648,6 +648,33 @@ fn every_standing_golden_still_matches_byte_for_byte() {
             assert_eq!(rendered, golden, "{name}");
             continue;
         }
+        // Altered at the Round 11 slice for its named mechanical
+        // consequence. The distance examples of DH-24 add two
+        // goldens whose stems name championships rather than a
+        // race, so the sweep reads them through the championship
+        // loader and the distance report before the generic race
+        // reading can misread their sources, and the two counts
+        // below rise by two each, the golden count for the two
+        // new goldens and the unadjusted count because every
+        // race under the two recorded series and every race of
+        // the two constructed series stands unadjusted.
+        if let Some(stem) = name.strip_suffix("-distance.txt") {
+            let source = golden_path.with_file_name(format!("{stem}.json"));
+            let (championship, defects) = deadheat::championship::load_championship_file(&source);
+            assert_eq!(defects, Vec::<String>::new(), "{name}");
+            let championship = championship.expect("a championship");
+            if championship
+                .series
+                .iter()
+                .flat_map(|series| series.races.iter())
+                .all(race_is_unadjusted)
+            {
+                unadjusted += 1;
+            }
+            let rendered = deadheat::distances::distance_report(&championship).join("\n") + "\n";
+            assert_eq!(rendered, golden, "{name}");
+            continue;
+        }
         let source = golden_path.with_extension("json");
         let (race, _) = load_race_file(&source);
         if let Some(race) = race {
@@ -691,6 +718,6 @@ fn every_standing_golden_still_matches_byte_for_byte() {
         let rendered = deadheat::championship::championship_report(&championship).join("\n") + "\n";
         assert_eq!(rendered, golden, "{name}");
     }
-    assert_eq!(goldens.len(), 53);
-    assert_eq!(unadjusted, 49);
+    assert_eq!(goldens.len(), 55);
+    assert_eq!(unadjusted, 51);
 }

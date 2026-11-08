@@ -168,7 +168,8 @@ pub(crate) struct SeriesCount {
     /// each standing as the count of the race in the record
     /// and the side that won it. The comeback reading of
     /// DH-21 reads the decided races of a series from this
-    /// record of the one walk.
+    /// record of the one walk, and the distance reading of
+    /// DH-23 reads them from this record as well.
     pub decided: Vec<(u64, usize)>,
 }
 
@@ -183,9 +184,10 @@ pub(crate) struct SeriesCount {
 /// This is the one counting walk of the crate. The
 /// championship reading and the pairing reading both
 /// consume it, so their figures derive from one
-/// computation, and the comeback reading reads the
-/// decided races of a series from the record this walk
-/// leaves beside those figures.
+/// computation, and the comeback reading and the
+/// distance reading read the decided races of a series
+/// from the record this walk leaves beside those
+/// figures.
 pub(crate) fn count_series(series: &Series, first: &PText) -> SeriesCount {
     let mut count = SeriesCount {
         wins: [0, 0],

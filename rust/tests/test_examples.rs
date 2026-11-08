@@ -322,6 +322,61 @@ fn the_constructed_comeback_example_matches_its_golden() {
 }
 
 #[test]
+fn the_distance_example_matches_its_golden() {
+    // The standing championship holds no series standing
+    // the distance, the pilot series standing in between
+    // and the panel series standing without reply, so the
+    // golden is the empty form of DH-24, the head line and
+    // the closing counts and no section.
+    let source = examples().join("championship.json");
+    let out = run_ok(&["distance", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("championship-distance.txt"));
+    assert_eq!(out, golden);
+    assert_eq!(
+        out,
+        "distance\ndistance, 2 series, 0 the distance, 1 without reply, 1 in between, 0 no winner\n"
+    );
+    let (championship, defects) =
+        deadheat::championship::load_championship_file(&examples().join("championship.json"));
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered = deadheat::distances::distance_report(&championship.expect("a championship"))
+        .join("\n")
+        + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_constructed_distance_example_matches_its_golden() {
+    // The constructed championship of DH-24, labelled as
+    // constructed in its file names and its task text and
+    // never presented as recorded. Its first series stands
+    // the distance, so the golden carries the section form,
+    // its second series stands without reply, and the sixth
+    // race of the first series and the fourth race of the
+    // second stand beyond their decisions and are named
+    // nowhere in the reading.
+    let source = examples().join("constructed-distance.json");
+    let out = run_ok(&["distance", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("constructed-distance-distance.txt"));
+    assert_eq!(out, golden);
+    assert!(out.contains("series 1, the constructed distance drill"));
+    assert!(out.contains("series winner, alpha-1, alpha-1 3 race wins, beta-1 2 race wins"));
+    assert!(!out.contains("distance drill race six"));
+    assert!(!out.contains("reply drill race four"));
+    assert!(out.trim_end().ends_with(
+        "distance, 2 series, 1 the distance, 1 without reply, 0 in between, 0 no winner"
+    ));
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("constructed-distance.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered = deadheat::distances::distance_report(&championship.expect("a championship"))
+        .join("\n")
+        + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
 fn the_panel_series_matches_its_golden() {
     let source = examples().join("panel-series.json");
     let out = run_ok(&["series", source.to_str().expect("utf8")]);
