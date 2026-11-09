@@ -25,7 +25,7 @@ fn agents_carries_the_canonical_marker() {
 #[test]
 fn readme_states_the_closed_round_count() {
     let text = read(&repo_root().join("README.md"));
-    assert!(text.contains("Closed perfection rounds, 12 of 100"));
+    assert!(text.contains("Closed perfection rounds, 13 of 100"));
 }
 
 #[test]
@@ -95,8 +95,9 @@ fn readme_reports_the_round_four_status() {
     // Slice 13 stood in review while Round 12 was built, so
     // the count was one again until the Round 12 closure
     // landed slice 13 and the count returned to zero.
-    // Slice 14 stands in review while Round 13 is built, so
-    // the count is one again. The round five pin
+    // Slice 14 stood in review while Round 13 was built, so
+    // the count was one again until the Round 13 closure
+    // landed slice 14 and the count returned to zero. The round five pin
     // below holds the slice 6 line itself, the round six pin
     // below holds the slice 7 line, the round seven pin
     // below holds the slice 8 line, the round eight pin
@@ -106,7 +107,7 @@ fn readme_reports_the_round_four_status() {
     // pin below holds the slice 12 line, the round
     // twelve pin below holds the slice 13 line, and the
     // round thirteen pin below holds the slice 14 line.
-    assert_eq!(text.matches("built and in review").count(), 1);
+    assert_eq!(text.matches("built and in review").count(), 0);
 }
 
 #[test]
@@ -184,9 +185,9 @@ fn readme_reports_the_round_twelve_status() {
 #[test]
 fn readme_reports_the_round_thirteen_status() {
     let text = read(&repo_root().join("README.md"));
-    let standing = "- Contract, DH-29 to DH-31 now stand in full form in CONTRACT.md under the Round 13 obligations, with FIX-DH-20, and their standing is not claimed here, as Round 13 has not closed.";
+    let standing = "- Contract, DH-29 to DH-31 met, with FIX-DH-20. They stand in full form in CONTRACT.md under the Round 13 obligations, and Round 13 closed on the merged slice 14 after three reviews, with the record corrections settled by execution before the merge.";
     assert!(text.lines().any(|line| line == standing));
-    let slice_line = "- Slice 14 is built and in review. It carries the deadlock reading over a recorded championship, the classification of each decided series by whether its two tallies ever stood level on the way to the decision as deadlocked or clear, one section for each deadlocked series naming its decided races in race order and the count of its decided races that left the tallies level and its winner with its race split, with the closing counts of series, deadlocked, clear, and no winner, with the deadlock example over the standing championship in its empty form and the constructed deadlock example and their goldens under examples, the league championship over ten constructed series at drawn realistic shapes with its goldens under examples, the specification loader pins completed under FIX-DH-20, and the deadlock command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, and rally.";
+    let slice_line = "- Slice 14 has landed. It carries the deadlock reading over a recorded championship, the classification of each decided series by whether its two tallies ever stood level on the way to the decision as deadlocked or clear, one section for each deadlocked series naming its decided races in race order and the count of its decided races that left the tallies level and its winner with its race split, with the closing counts of series, deadlocked, clear, and no winner, with the deadlock example over the standing championship in its empty form and the constructed deadlock example and their goldens under examples, the league championship over ten constructed series at drawn realistic shapes with its goldens under examples, the specification loader pins completed under FIX-DH-20, and the deadlock command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, and rally.";
     assert!(text.lines().any(|line| line == slice_line));
 }
 
