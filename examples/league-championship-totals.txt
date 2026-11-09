@@ -1,0 +1,7 @@
+totals
+apex-1, 23 races, 12 wins, 9 losses, 2 no results, 1597727 tokens
+bolt-1, 26 races, 12 wins, 11 losses, 3 no results, 2013003 tokens
+crest-1, 23 races, 10 wins, 11 losses, 2 no results, 1495075 tokens
+drift-1, 19 races, 10 wins, 6 losses, 3 no results, 1291801 tokens
+ember-1, 21 races, 6 wins, 13 losses, 2 no results, 1399457 tokens
+totals, 10 series, 56 races, 5 models

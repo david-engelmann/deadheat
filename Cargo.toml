@@ -110,6 +110,14 @@ path = "rust/tests/test_rallies.rs"
 name = "test_survey"
 path = "rust/tests/test_survey.rs"
 
+[[test]]
+name = "test_deadlocks"
+path = "rust/tests/test_deadlocks.rs"
+
+[[test]]
+name = "test_league"
+path = "rust/tests/test_league.rs"
+
 [dependencies]
 num-bigint = "0.4"
 num-rational = "0.4"

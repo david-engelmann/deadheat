@@ -1,0 +1,28 @@
+series the constructed league series, crest-1 against drift-1
+crest-1 against drift-1, first to 2 wins
+race 1, league race one, no result
+tally, crest-1 0 wins, drift-1 0 wins, 1 no results
+race 2, league race two, drift-1 wins
+tally, crest-1 0 wins, drift-1 1 wins, 1 no results
+race 3, league race three, no result
+tally, crest-1 0 wins, drift-1 1 wins, 2 no results
+race 4, league race four, crest-1 wins
+tally, crest-1 1 wins, drift-1 1 wins, 2 no results
+race 5, league race five, drift-1 wins
+tally, crest-1 1 wins, drift-1 2 wins, 2 no results
+race 6, league race six, beyond the decision
+race 7, league race seven, beyond the decision
+race 8, league race eight, beyond the decision
+race 9, league race nine, beyond the decision
+race 10, league race ten, beyond the decision
+race 11, league race eleven, beyond the decision
+race 12, league race twelve, beyond the decision
+race 13, league race thirteen, beyond the decision
+race 14, league race fourteen, beyond the decision
+race 15, league race fifteen, beyond the decision
+race 16, league race sixteen, beyond the decision
+race 17, league race seventeen, beyond the decision
+race 18, league race eighteen, beyond the decision
+race 19, league race nineteen, beyond the decision
+race 20, league race twenty, beyond the decision
+series winner, drift-1

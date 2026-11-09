@@ -15,6 +15,7 @@ use std::path::PathBuf;
 
 use crate::championship::{championship_report, load_championship_file};
 use crate::comebacks::comeback_report;
+use crate::deadlocks::deadlock_report;
 use crate::distances::distance_report;
 use crate::flips::flip_report;
 use crate::pairings::pairing_report;
@@ -342,7 +343,7 @@ fn spec_max_invocation(spec: &ParserSpec) -> usize {
 
 fn top_spec() -> ParserSpec {
     let mut commands = action(
-        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally}",
+        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock}",
         None,
     );
     commands.subactions = vec![
@@ -393,16 +394,20 @@ fn top_spec() -> ParserSpec {
             "rally",
             Some("print the rally report for one championship file"),
         ),
+        action(
+            "deadlock",
+            Some("print the deadlock report for one championship file"),
+        ),
     ];
     let mut spec = ParserSpec {
         prog: "deadheat",
         description: Some("Race two attempts at one task and keep the standings."),
         opt_usage: "[-h]",
         pos_usage:
-            "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally} ...",
+            "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock} ...",
         opt_parts: vec!["[-h]"],
         pos_parts: vec![
-            "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally}",
+            "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock}",
             "...",
         ],
         positionals: vec![commands],
@@ -535,6 +540,14 @@ fn sub_spec(command: &str) -> ParserSpec {
         ),
         "rally" => (
             "deadheat rally",
+            vec![action("file", None)],
+            vec![help_action()],
+            "[-h]",
+            "file",
+            vec!["file"],
+        ),
+        "deadlock" => (
+            "deadheat deadlock",
             vec![action("file", None)],
             vec![help_action()],
             "[-h]",
@@ -978,7 +991,7 @@ fn is_help_token(text: &PText, has_standings: bool) -> bool {
     false
 }
 
-const COMMANDS: [&str; 14] = [
+const COMMANDS: [&str; 15] = [
     "race",
     "adopt",
     "discard",
@@ -993,6 +1006,7 @@ const COMMANDS: [&str; 14] = [
     "distance",
     "run",
     "rally",
+    "deadlock",
 ];
 
 /// Run the command line over the given arguments at the given
@@ -1068,7 +1082,7 @@ fn invalid_choice(spec: &ParserSpec, columns: usize, value: &PText) -> Outcome {
         spec,
         columns,
         &format!(
-            "argument command: invalid choice: {} (choose from 'race', 'adopt', 'discard', 'standings', 'closecall', 'series', 'championship', 'flip', 'totals', 'pairing', 'comeback', 'distance', 'run', 'rally')",
+            "argument command: invalid choice: {} (choose from 'race', 'adopt', 'discard', 'standings', 'closecall', 'series', 'championship', 'flip', 'totals', 'pairing', 'comeback', 'distance', 'run', 'rally', 'deadlock')",
             py_repr(value)
         ),
     )
@@ -1235,6 +1249,7 @@ fn run_subcommand(
         "distance" => command_distance(&values[0]),
         "run" => command_run(&values[0]),
         "rally" => command_rally(&values[0]),
+        "deadlock" => command_deadlock(&values[0]),
         _ => unreachable!("a known command"),
     }
 }
@@ -1305,6 +1320,17 @@ fn command_rally(file: &PText) -> Outcome {
     }
     Outcome::plain(
         rally_report(&championship.expect("a clean championship")),
+        0,
+    )
+}
+
+fn command_deadlock(file: &PText) -> Outcome {
+    let (championship, defects) = load_championship_file(&path_from_arg(file));
+    if !defects.is_empty() {
+        return print_defects("invalid championship file", defects);
+    }
+    Outcome::plain(
+        deadlock_report(&championship.expect("a clean championship")),
         0,
     )
 }

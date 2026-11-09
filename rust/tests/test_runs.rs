@@ -17,7 +17,7 @@ use std::process::Command;
 
 use deadheat::json::{self, JsonValue};
 use deadheat::races::{load_race_file, SuiteResult};
-use deadheat::specs::load_spec_text;
+use deadheat::specs::{load_spec_file, load_spec_text};
 use shared::{arr, bigint, f, i, obj, s, set, temp_dir, without};
 
 fn attempt_value(model: &str) -> JsonValue {
@@ -329,6 +329,107 @@ fn an_attempt_environment_holding_an_unpaired_surrogate_draws_its_defect() {
     assert_eq!(
         defects,
         phrases(&["attempt 0 field environment holds an unpaired surrogate"])
+    );
+}
+
+// The seven pins of FIX-DH-20 in the Round 13 section of
+// CONTRACT.md. Every one of the seven passes on the pre
+// round tree by design, stated in so many words, the
+// loader's behaviour already standing as the pins hold it
+// through the shared helpers, and the Round 12 finding
+// they close was a coverage finding, not a behaviour
+// finding. Their discrimination is against the stated
+// mutation of the routing each pins, named in each pin's
+// own comment, and no claim stands here or in the header
+// above that any of them fails pre round.
+
+#[test]
+fn a_specification_text_that_is_not_json_draws_the_preamble_defect() {
+    // Fails under the mutation renaming or dropping the
+    // loader preamble's not valid JSON defect.
+    let (spec, defects) = load_spec_text("this is not json");
+    assert!(spec.is_none());
+    assert_eq!(defects, phrases(&["input is not valid JSON"]));
+}
+
+#[test]
+fn a_specification_holding_a_list_draws_the_not_an_object_defect() {
+    // Fails under the mutation reading a non object
+    // specification as an empty object, or misphrasing
+    // the defect.
+    let (spec, defects) = load_spec_text("[1, 2]");
+    assert!(spec.is_none());
+    assert_eq!(defects, phrases(&["input is not a JSON object"]));
+}
+
+#[test]
+fn a_specification_file_that_cannot_be_read_draws_its_defect() {
+    // Fails under the mutation reading an unreadable file
+    // as an empty specification.
+    let dir = temp_dir("runs-unreadable");
+    let (spec, defects) = load_spec_file(&dir.join("no-such-spec.json"));
+    assert!(spec.is_none());
+    assert_eq!(defects, phrases(&["file cannot be read"]));
+}
+
+#[test]
+fn a_record_of_the_wrong_type_draws_its_defect() {
+    // Fails under the mutation reading the record field
+    // without the shared wrong type check, a numeric
+    // record standing accepted.
+    assert_eq!(
+        defects_of(&set(&spec_value(), "record", i(3))),
+        phrases(&["field record has the wrong type"])
+    );
+}
+
+#[test]
+fn an_attempt_environment_of_the_wrong_type_draws_its_defect() {
+    // Fails under the mutation applying the shared attempt
+    // text check to the model field alone among the
+    // attempt's label fields.
+    let attempt = set(&attempt_value("duel-1"), "environment", i(3));
+    let value = set(
+        &spec_value(),
+        "attempts",
+        arr(vec![attempt, attempt_value("duel-2")]),
+    );
+    assert_eq!(
+        defects_of(&value),
+        phrases(&["attempt 0 field environment has the wrong type"])
+    );
+}
+
+#[test]
+fn an_empty_attempt_environment_draws_its_defect() {
+    // Fails under the same routing mutation in its empty
+    // form, the check applied to model and not to
+    // environment.
+    let attempt = set(&attempt_value("duel-1"), "environment", s(""));
+    let value = set(
+        &spec_value(),
+        "attempts",
+        arr(vec![attempt, attempt_value("duel-2")]),
+    );
+    assert_eq!(
+        defects_of(&value),
+        phrases(&["attempt 0 field environment is empty"])
+    );
+}
+
+#[test]
+fn an_attempt_environment_holding_a_newline_draws_its_defect() {
+    // Fails under the same routing mutation in its newline
+    // form.
+    let attempt = set(&attempt_value("duel-1"), "environment", s("two\nlines"));
+    let value = set(
+        &spec_value(),
+        "attempts",
+        arr(vec![attempt, attempt_value("duel-2")]),
+    );
+    assert_eq!(
+        defects_of(&value),
+        phrases(&["attempt 0 field environment holds a newline"])
     );
 }
 

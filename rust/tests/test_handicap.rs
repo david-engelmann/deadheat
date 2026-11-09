@@ -706,6 +706,40 @@ fn every_standing_golden_still_matches_byte_for_byte() {
             assert_eq!(rendered, golden, "{name}");
             continue;
         }
+        // Altered at the Round 13 slice for its named mechanical
+        // consequence. The deadlock examples of DH-30 add three
+        // goldens whose stems name championships rather than a
+        // race, and the league championship of DH-31 adds a
+        // fourth over its own stem, so the sweep reads them
+        // through the championship loader and the deadlock
+        // report before the generic race reading can misread
+        // their sources. The two counts below rise by twenty
+        // one each this round, the four deadlock goldens here,
+        // the constructed rally golden the rally arm above
+        // reads, the six league championship goldens the
+        // standing arms and the generic championship reading
+        // already read, and the ten league series goldens the
+        // generic series reading already reads, the unadjusted
+        // count rising with them because every race of the
+        // four championships and the ten series stands
+        // unadjusted.
+        if let Some(stem) = name.strip_suffix("-deadlock.txt") {
+            let source = golden_path.with_file_name(format!("{stem}.json"));
+            let (championship, defects) = deadheat::championship::load_championship_file(&source);
+            assert_eq!(defects, Vec::<String>::new(), "{name}");
+            let championship = championship.expect("a championship");
+            if championship
+                .series
+                .iter()
+                .flat_map(|series| series.races.iter())
+                .all(race_is_unadjusted)
+            {
+                unadjusted += 1;
+            }
+            let rendered = deadheat::deadlocks::deadlock_report(&championship).join("\n") + "\n";
+            assert_eq!(rendered, golden, "{name}");
+            continue;
+        }
         let source = golden_path.with_extension("json");
         let (race, _) = load_race_file(&source);
         if let Some(race) = race {
@@ -749,6 +783,10 @@ fn every_standing_golden_still_matches_byte_for_byte() {
         let rendered = deadheat::championship::championship_report(&championship).join("\n") + "\n";
         assert_eq!(rendered, golden, "{name}");
     }
-    assert_eq!(goldens.len(), 69);
-    assert_eq!(unadjusted, 65);
+    // The counts stand at ninety goldens and eighty six
+    // unadjusted after the Round 13 enrolment counted at
+    // the deadlock arm above, twenty one of each over the
+    // sixty nine and sixty five the Round 12 slice left.
+    assert_eq!(goldens.len(), 90);
+    assert_eq!(unadjusted, 86);
 }
