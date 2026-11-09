@@ -17,6 +17,7 @@ use num_bigint::BigInt;
 
 use deadheat::championship::{championship_report, Championship};
 use deadheat::comebacks::comeback_report;
+use deadheat::deadlocks::deadlock_report;
 use deadheat::distances::distance_report;
 use deadheat::flips::flip_report;
 use deadheat::pairings::pairing_report;
@@ -495,6 +496,71 @@ fn the_rally_report_fences_its_fields() {
             "stood behind by 1 race wins at the deepest",
             "series winner, ,  2 race wins, beta-1 1 race wins, 0 no results",
             "rally, 1 series, 1 rally, 0 wire to wire, 0 no winner",
+        ]
+    );
+}
+
+#[test]
+fn the_deadlock_report_fences_its_fields() {
+    // F-1 of the Round 13 discrimination plan. The same
+    // rebuilt series the rally pin stands on, read under
+    // DH-30. The second model takes the first race and the
+    // first model takes the next two, so the tallies stand
+    // level after the second decided race and the series
+    // stands deadlocked, and its section prints the series
+    // task, the race tasks, and both model labels, every
+    // field holding a break standing fenced to the empty
+    // field through the one helper of FIX-DH-16, as on the
+    // sibling surfaces. Its failure mode is a second
+    // fencing path standing in the new module.
+    let mut series = bad_series();
+    series.wins_target = BigInt::from(2);
+    series.races = vec![
+        Race {
+            task: text("race one"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Red, 130.0),
+                attempt(text("beta-1"), "lane two", SuiteResult::Green, 100.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+        Race {
+            task: bad("race task"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Green, 100.0),
+                attempt(text("beta-1"), "lane two", SuiteResult::Red, 130.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+        Race {
+            task: text("race three"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Green, 100.0),
+                attempt(text("beta-1"), "lane two", SuiteResult::Red, 130.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+    ];
+    let championship = Championship {
+        series: vec![series],
+    };
+    let lines = deadlock_report(&championship);
+    assert_no_forgery(&lines);
+    assert_eq!(
+        lines,
+        vec![
+            "deadlock",
+            "series 1, ",
+            " against beta-1, first to 2 wins",
+            "race 1, race one, beta-1 wins",
+            "race 2, ,  wins",
+            "race 3, race three,  wins",
+            "stood level after 1 of its decided races",
+            "series winner, ,  2 race wins, beta-1 1 race wins, 0 no results",
+            "deadlock, 1 series, 1 deadlocked, 0 clear, 0 no winner",
         ]
     );
 }

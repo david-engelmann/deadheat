@@ -1,0 +1,115 @@
+{
+ "models": [
+  "kappa-1",
+  "lambda-1"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "kappa-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 41000
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "lambda-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45500
+    }
+   ],
+   "task": "deadlock drill race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 140.0,
+     "model": "kappa-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 43000
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 110.0,
+     "model": "lambda-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 39800
+    }
+   ],
+   "task": "deadlock drill race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 105.0,
+     "model": "kappa-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 44700
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 125.0,
+     "model": "lambda-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 40200
+    }
+   ],
+   "task": "deadlock drill race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 95.0,
+     "model": "kappa-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 38900
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 150.0,
+     "model": "lambda-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 47600
+    }
+   ],
+   "task": "deadlock drill race four"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 120.0,
+     "model": "kappa-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 41500
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "lambda-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 44100
+    }
+   ],
+   "task": "deadlock drill race five"
+  }
+ ],
+ "task": "the constructed deadlock drill",
+ "wins_target": 3
+}

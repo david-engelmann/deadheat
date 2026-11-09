@@ -1,0 +1,17 @@
+series the constructed league series, apex-1 against ember-1
+apex-1 against ember-1, first to 2 wins
+race 1, league race one, apex-1 wins
+tally, apex-1 1 wins, ember-1 0 wins, 0 no results
+race 2, league race two, ember-1 wins
+tally, apex-1 1 wins, ember-1 1 wins, 0 no results
+race 3, league race three, ember-1 wins
+tally, apex-1 1 wins, ember-1 2 wins, 0 no results
+race 4, league race four, beyond the decision
+race 5, league race five, beyond the decision
+race 6, league race six, beyond the decision
+race 7, league race seven, beyond the decision
+race 8, league race eight, beyond the decision
+race 9, league race nine, beyond the decision
+race 10, league race ten, beyond the decision
+race 11, league race eleven, beyond the decision
+series winner, ember-1

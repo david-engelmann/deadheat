@@ -441,6 +441,183 @@ fn the_constructed_rally_example_matches_its_golden() {
 }
 
 #[test]
+fn the_deadlock_example_matches_its_golden() {
+    // E-1 of the Round 13 enrolment. The standing
+    // championship holds no deadlocked series, both of its
+    // series standing clear under DH-29, so the golden is
+    // the empty form of DH-30, the head line and the
+    // closing counts and no section.
+    let source = examples().join("championship.json");
+    let out = run_ok(&["deadlock", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("championship-deadlock.txt"));
+    assert_eq!(out, golden);
+    assert_eq!(
+        out,
+        "deadlock\ndeadlock, 2 series, 0 deadlocked, 2 clear, 0 no winner\n"
+    );
+    let (championship, defects) =
+        deadheat::championship::load_championship_file(&examples().join("championship.json"));
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered = deadheat::deadlocks::deadlock_report(&championship.expect("a championship"))
+        .join("\n")
+        + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_survey_championship_deadlock_matches_its_golden() {
+    // E-2. The survey championship under the deadlock
+    // command, in the section form it falls out in, pinned
+    // at the CLI and at the library surface both.
+    let source = examples().join("survey-championship.json");
+    let out = run_ok(&["deadlock", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("survey-championship-deadlock.txt"));
+    assert_eq!(out, golden);
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("survey-championship.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered = deadheat::deadlocks::deadlock_report(&championship.expect("a championship"))
+        .join("\n")
+        + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_constructed_deadlock_example_matches_its_golden() {
+    // E-3. The constructed championship of DH-30, labelled
+    // as constructed in its file names and its task text
+    // and never presented as recorded. Its one series
+    // stands deadlocked, its winner never standing behind,
+    // so the golden carries the section form, and its
+    // fifth race stands beyond the decision and is named
+    // nowhere in the reading.
+    let source = examples().join("constructed-deadlock.json");
+    let out = run_ok(&["deadlock", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("constructed-deadlock-deadlock.txt"));
+    assert_eq!(out, golden);
+    assert!(out.contains("series 1, the constructed deadlock drill"));
+    assert!(out.contains("stood level after 1 of its decided races"));
+    assert!(!out.contains("deadlock drill race five"));
+    assert!(out
+        .trim_end()
+        .ends_with("deadlock, 1 series, 1 deadlocked, 0 clear, 0 no winner"));
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("constructed-deadlock.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered = deadheat::deadlocks::deadlock_report(&championship.expect("a championship"))
+        .join("\n")
+        + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_constructed_deadlock_example_under_rally_matches_its_golden() {
+    // E-4. The same constructed file under the rally
+    // command, the empty form, so the distinction between
+    // the two readings stands pinned over shipped data
+    // byte for byte against the pin above.
+    let source = examples().join("constructed-deadlock.json");
+    let out = run_ok(&["rally", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("constructed-deadlock-rally.txt"));
+    assert_eq!(out, golden);
+    assert_eq!(
+        out,
+        "rally\nrally, 1 series, 0 rally, 1 wire to wire, 0 no winner\n"
+    );
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("constructed-deadlock.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered =
+        deadheat::rallies::rally_report(&championship.expect("a championship")).join("\n") + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_league_championship_matches_its_goldens() {
+    // E-5. The league championship of DH-31, drawn at
+    // realistic shapes and labelled as constructed in its
+    // file names and its task texts. Every championship
+    // reading over it is pinned byte for byte against the
+    // golden the real command produced, at the CLI and at
+    // the library surface both.
+    let source = examples().join("league-championship.json");
+    let source_arg = source.to_str().expect("utf8");
+    let (championship, defects) = deadheat::championship::load_championship_file(&source);
+    assert_eq!(defects, Vec::<String>::new());
+    let championship = championship.expect("a championship");
+    let readings: Vec<(&str, String, &str)> = vec![
+        (
+            "championship",
+            deadheat::championship::championship_report(&championship).join("\n") + "\n",
+            "league-championship.txt",
+        ),
+        (
+            "totals",
+            deadheat::totals::totals_report(&championship).join("\n") + "\n",
+            "league-championship-totals.txt",
+        ),
+        (
+            "pairing",
+            deadheat::pairings::pairing_report(&championship).join("\n") + "\n",
+            "league-championship-pairings.txt",
+        ),
+        (
+            "comeback",
+            deadheat::comebacks::comeback_report(&championship).join("\n") + "\n",
+            "league-championship-comebacks.txt",
+        ),
+        (
+            "distance",
+            deadheat::distances::distance_report(&championship).join("\n") + "\n",
+            "league-championship-distance.txt",
+        ),
+        (
+            "rally",
+            deadheat::rallies::rally_report(&championship).join("\n") + "\n",
+            "league-championship-rally.txt",
+        ),
+        (
+            "deadlock",
+            deadheat::deadlocks::deadlock_report(&championship).join("\n") + "\n",
+            "league-championship-deadlock.txt",
+        ),
+    ];
+    for (command, rendered, golden_name) in readings {
+        let golden = read_text(&examples().join(golden_name));
+        assert_eq!(run_ok(&[command, source_arg]), golden, "{command} cli");
+        assert_eq!(rendered, golden, "{command} library");
+    }
+}
+
+#[test]
+fn the_league_series_match_their_goldens() {
+    // E-5 continued. One series rendering per league
+    // series, pinned byte for byte the same way, the ten
+    // goldens completing the seventeen of DH-31 with the
+    // seven championship renderings above.
+    for name in [
+        "league-series-apex-bolt",
+        "league-series-apex-crest",
+        "league-series-apex-drift",
+        "league-series-apex-ember",
+        "league-series-bolt-crest",
+        "league-series-bolt-drift",
+        "league-series-bolt-ember",
+        "league-series-crest-drift",
+        "league-series-crest-ember",
+        "league-series-drift-ember",
+    ] {
+        let source = examples().join(format!("{name}.json"));
+        let out = run_ok(&["series", source.to_str().expect("utf8")]);
+        let golden = read_text(&examples().join(format!("{name}.txt")));
+        assert_eq!(out, golden, "{name}");
+    }
+}
+
+#[test]
 fn the_survey_championship_matches_its_goldens() {
     // The survey championship of DH-28, drawn at realistic
     // shapes and labelled as constructed in its file names

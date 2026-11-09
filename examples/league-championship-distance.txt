@@ -1,0 +1,32 @@
+distance
+series 1, the constructed league series, apex-1 against bolt-1
+apex-1 against bolt-1, first to 3 wins
+race 2, league race two, apex-1 wins
+race 3, league race three, bolt-1 wins
+race 4, league race four, bolt-1 wins
+race 5, league race five, apex-1 wins
+race 6, league race six, bolt-1 wins
+series winner, bolt-1, apex-1 2 race wins, bolt-1 3 race wins, 1 no results
+series 4, the constructed league series, apex-1 against ember-1
+apex-1 against ember-1, first to 2 wins
+race 1, league race one, apex-1 wins
+race 2, league race two, ember-1 wins
+race 3, league race three, ember-1 wins
+series winner, ember-1, apex-1 1 race wins, ember-1 2 race wins, 0 no results
+series 5, the constructed league series, bolt-1 against crest-1
+bolt-1 against crest-1, first to 4 wins
+race 1, league race one, bolt-1 wins
+race 2, league race two, bolt-1 wins
+race 3, league race three, bolt-1 wins
+race 4, league race four, crest-1 wins
+race 5, league race five, crest-1 wins
+race 6, league race six, crest-1 wins
+race 7, league race seven, bolt-1 wins
+series winner, bolt-1, bolt-1 4 race wins, crest-1 3 race wins, 0 no results
+series 8, the constructed league series, crest-1 against drift-1
+crest-1 against drift-1, first to 2 wins
+race 2, league race two, drift-1 wins
+race 4, league race four, crest-1 wins
+race 5, league race five, drift-1 wins
+series winner, drift-1, crest-1 1 race wins, drift-1 2 race wins, 2 no results
+distance, 10 series, 4 the distance, 2 without reply, 4 in between, 0 no winner

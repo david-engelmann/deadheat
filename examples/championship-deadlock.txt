@@ -1,0 +1,2 @@
+deadlock
+deadlock, 2 series, 0 deadlocked, 2 clear, 0 no winner

@@ -1,0 +1,14 @@
+{
+ "series": [
+  "league-series-apex-bolt.json",
+  "league-series-apex-crest.json",
+  "league-series-apex-drift.json",
+  "league-series-apex-ember.json",
+  "league-series-bolt-crest.json",
+  "league-series-bolt-drift.json",
+  "league-series-bolt-ember.json",
+  "league-series-crest-drift.json",
+  "league-series-crest-ember.json",
+  "league-series-drift-ember.json"
+ ]
+}

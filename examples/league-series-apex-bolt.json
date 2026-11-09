@@ -1,0 +1,262 @@
+{
+ "models": [
+  "apex-1",
+  "bolt-1"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 860.028,
+     "model": "apex-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 61058
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 334.1,
+     "model": "bolt-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 66737
+    }
+   ],
+   "task": "league race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 1427.8,
+     "model": "apex-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 30551
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 386.08,
+     "model": "bolt-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 42532
+    }
+   ],
+   "task": "league race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 244.471,
+     "model": "apex-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 108882
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 341.083,
+     "model": "bolt-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 63328
+    }
+   ],
+   "task": "league race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 751.968,
+     "model": "apex-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 57512
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 273.408,
+     "model": "bolt-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 46855
+    }
+   ],
+   "task": "league race four"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 2914.907,
+     "model": "apex-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 24931
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 631.591,
+     "model": "bolt-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 61199
+    }
+   ],
+   "task": "league race five"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 858.01,
+     "model": "apex-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 154782
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 249.485,
+     "model": "bolt-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 84311
+    }
+   ],
+   "task": "league race six"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 404.735,
+     "model": "apex-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 21790
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 224.322,
+     "model": "bolt-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 44733
+    }
+   ],
+   "task": "league race seven"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 310.135,
+     "model": "apex-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 84115
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 432.808,
+     "model": "bolt-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 125180
+    }
+   ],
+   "task": "league race eight"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 631.934,
+     "model": "apex-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 22824
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 215.957,
+     "model": "bolt-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 29285
+    }
+   ],
+   "task": "league race nine"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 929.895,
+     "model": "apex-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 110376
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 419.424,
+     "model": "bolt-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 214763
+    }
+   ],
+   "task": "league race ten"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 587.052,
+     "model": "apex-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 65156
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 493.699,
+     "model": "bolt-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 78614
+    }
+   ],
+   "task": "league race eleven"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 189.906,
+     "model": "apex-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 73095
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 408.452,
+     "model": "bolt-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 38735
+    }
+   ],
+   "task": "league race twelve"
+  }
+ ],
+ "task": "the constructed league series, apex-1 against bolt-1",
+ "wins_target": 3
+}

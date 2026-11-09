@@ -1,0 +1,37 @@
+championship
+series 1, the constructed league series, apex-1 against bolt-1
+apex-1 against bolt-1, first to 3 wins
+series winner, bolt-1
+series 2, the constructed league series, apex-1 against crest-1
+apex-1 against crest-1, first to 4 wins
+series winner, apex-1
+series 3, the constructed league series, apex-1 against drift-1
+apex-1 against drift-1, first to 5 wins
+series winner, apex-1
+series 4, the constructed league series, apex-1 against ember-1
+apex-1 against ember-1, first to 2 wins
+series winner, ember-1
+series 5, the constructed league series, bolt-1 against crest-1
+bolt-1 against crest-1, first to 4 wins
+series winner, bolt-1
+series 6, the constructed league series, bolt-1 against drift-1
+bolt-1 against drift-1, first to 3 wins
+series winner, drift-1
+series 7, the constructed league series, bolt-1 against ember-1
+bolt-1 against ember-1, first to 5 wins
+series winner, bolt-1
+series 8, the constructed league series, crest-1 against drift-1
+crest-1 against drift-1, first to 2 wins
+series winner, drift-1
+series 9, the constructed league series, crest-1 against ember-1
+crest-1 against ember-1, first to 4 wins
+series winner, crest-1
+series 10, the constructed league series, drift-1 against ember-1
+drift-1 against ember-1, first to 3 wins
+series winner, drift-1
+championship table
+bolt-1, 3 series won, 4 series stood in, 12 race wins, 3 no results, aggregate margin 2818.98 seconds
+drift-1, 3 series won, 4 series stood in, 10 race wins, 3 no results, aggregate margin 3288.044 seconds
+apex-1, 2 series won, 4 series stood in, 12 race wins, 2 no results, aggregate margin 7879.661 seconds
+crest-1, 1 series won, 4 series stood in, 10 race wins, 2 no results, aggregate margin 3207.457 seconds
+ember-1, 1 series won, 4 series stood in, 6 race wins, 2 no results, aggregate margin 1446.131 seconds

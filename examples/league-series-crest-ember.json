@@ -1,0 +1,283 @@
+{
+ "models": [
+  "crest-1",
+  "ember-1"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 371.19,
+     "model": "crest-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 90375
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 395.795,
+     "model": "ember-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 106014
+    }
+   ],
+   "task": "league race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 326.579,
+     "model": "crest-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 57319
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 476.774,
+     "model": "ember-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 22099
+    }
+   ],
+   "task": "league race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 1022.633,
+     "model": "crest-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 115538
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 252.804,
+     "model": "ember-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 98378
+    }
+   ],
+   "task": "league race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 988.079,
+     "model": "crest-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 88216
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 561.109,
+     "model": "ember-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 58258
+    }
+   ],
+   "task": "league race four"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 479.789,
+     "model": "crest-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 110786
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 666.583,
+     "model": "ember-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 23807
+    }
+   ],
+   "task": "league race five"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 446.695,
+     "model": "crest-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 25282
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 505.473,
+     "model": "ember-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 34602
+    }
+   ],
+   "task": "league race six"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 707.209,
+     "model": "crest-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 144778
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 475.192,
+     "model": "ember-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 55134
+    }
+   ],
+   "task": "league race seven"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 625.795,
+     "model": "crest-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 72580
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 273.338,
+     "model": "ember-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 29717
+    }
+   ],
+   "task": "league race eight"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 517.613,
+     "model": "crest-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 54445
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 473.247,
+     "model": "ember-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 126993
+    }
+   ],
+   "task": "league race nine"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 1006.424,
+     "model": "crest-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 103238
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 324.932,
+     "model": "ember-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 30301
+    }
+   ],
+   "task": "league race ten"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 236.326,
+     "model": "crest-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 61397
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 643.049,
+     "model": "ember-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 19537
+    }
+   ],
+   "task": "league race eleven"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 137.546,
+     "model": "crest-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 31702
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 527.812,
+     "model": "ember-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 36991
+    }
+   ],
+   "task": "league race twelve"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 699.054,
+     "model": "crest-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 61510
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 354.49,
+     "model": "ember-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 52365
+    }
+   ],
+   "task": "league race thirteen"
+  }
+ ],
+ "task": "the constructed league series, crest-1 against ember-1",
+ "wins_target": 4
+}

@@ -1,0 +1,52 @@
+pairings
+pairing, apex-1, against, bolt-1
+series read, 1
+races read, 6
+apex-1, 0 series won, 2 race wins, 1 no results, aggregate margin 3325.036 seconds
+bolt-1, 1 series won, 3 race wins, 1 no results, aggregate margin 1183.697 seconds
+pairing, apex-1, against, crest-1
+series read, 1
+races read, 6
+apex-1, 1 series won, 4 race wins, 0 no results, aggregate margin 1516.41 seconds
+crest-1, 0 series won, 2 race wins, 0 no results, aggregate margin 332.228 seconds
+pairing, apex-1, against, drift-1
+series read, 1
+races read, 8
+apex-1, 1 series won, 5 race wins, 1 no results, aggregate margin 3038.194 seconds
+drift-1, 0 series won, 2 race wins, 1 no results, aggregate margin 1187.845 seconds
+pairing, apex-1, against, ember-1
+series read, 1
+races read, 3
+apex-1, 0 series won, 1 race wins, 0 no results, aggregate margin 0.021 seconds
+ember-1, 1 series won, 2 race wins, 0 no results, aggregate margin 380.143 seconds
+pairing, bolt-1, against, crest-1
+series read, 1
+races read, 7
+bolt-1, 1 series won, 4 race wins, 0 no results, aggregate margin 765.726 seconds
+crest-1, 0 series won, 3 race wins, 0 no results, aggregate margin 1178.68 seconds
+pairing, bolt-1, against, drift-1
+series read, 1
+races read, 3
+bolt-1, 0 series won, 0 race wins, 0 no results, aggregate margin 0 seconds
+drift-1, 1 series won, 3 race wins, 0 no results, aggregate margin 427.29 seconds
+pairing, bolt-1, against, ember-1
+series read, 1
+races read, 10
+bolt-1, 1 series won, 5 race wins, 2 no results, aggregate margin 869.557 seconds
+ember-1, 0 series won, 3 race wins, 2 no results, aggregate margin 915.793 seconds
+pairing, crest-1, against, drift-1
+series read, 1
+races read, 5
+crest-1, 0 series won, 1 race wins, 2 no results, aggregate margin 288.351 seconds
+drift-1, 1 series won, 2 race wins, 2 no results, aggregate margin 698.221 seconds
+pairing, crest-1, against, ember-1
+series read, 1
+races read, 5
+crest-1, 1 series won, 4 race wins, 0 no results, aggregate margin 1408.198 seconds
+ember-1, 0 series won, 1 race wins, 0 no results, aggregate margin 150.195 seconds
+pairing, drift-1, against, ember-1
+series read, 1
+races read, 3
+drift-1, 1 series won, 3 race wins, 0 no results, aggregate margin 974.688 seconds
+ember-1, 0 series won, 0 race wins, 0 no results, aggregate margin 0 seconds
+pairings, 10 pairings, 10 series, 56 races

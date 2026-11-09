@@ -1,0 +1,430 @@
+{
+ "models": [
+  "apex-1",
+  "drift-1"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 200.471,
+     "model": "apex-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 110862
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 618.09,
+     "model": "drift-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 65042
+    }
+   ],
+   "task": "league race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 365.237,
+     "model": "apex-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 67751
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 377.465,
+     "model": "drift-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 44002
+    }
+   ],
+   "task": "league race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 1646.142,
+     "model": "apex-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 65935
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 405.808,
+     "model": "drift-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 44197
+    }
+   ],
+   "task": "league race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 443.554,
+     "model": "apex-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 20196
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 355.318,
+     "model": "drift-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 42265
+    }
+   ],
+   "task": "league race four"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 245.835,
+     "model": "apex-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 129017
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 1037.821,
+     "model": "drift-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 54720
+    }
+   ],
+   "task": "league race five"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 226.166,
+     "model": "apex-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 38195
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 231.901,
+     "model": "drift-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 74446
+    }
+   ],
+   "task": "league race six"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 1031.526,
+     "model": "apex-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 34467
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 261.3,
+     "model": "drift-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 37341
+    }
+   ],
+   "task": "league race seven"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 340.374,
+     "model": "apex-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 29717
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 1252.277,
+     "model": "drift-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 98446
+    }
+   ],
+   "task": "league race eight"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 221.784,
+     "model": "apex-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 61698
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 667.532,
+     "model": "drift-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 47885
+    }
+   ],
+   "task": "league race nine"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 370.721,
+     "model": "apex-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 130711
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 519.287,
+     "model": "drift-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 25121
+    }
+   ],
+   "task": "league race ten"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 408.093,
+     "model": "apex-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 199045
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 170.709,
+     "model": "drift-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 36557
+    }
+   ],
+   "task": "league race eleven"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 400.66,
+     "model": "apex-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 81276
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 422.669,
+     "model": "drift-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 62470
+    }
+   ],
+   "task": "league race twelve"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 458.578,
+     "model": "apex-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 146822
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 345.27,
+     "model": "drift-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 26449
+    }
+   ],
+   "task": "league race thirteen"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 342.402,
+     "model": "apex-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 104243
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 285.933,
+     "model": "drift-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 47530
+    }
+   ],
+   "task": "league race fourteen"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 423.7,
+     "model": "apex-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 117617
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 1073.596,
+     "model": "drift-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 14855
+    }
+   ],
+   "task": "league race fifteen"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 220.512,
+     "model": "apex-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 67902
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 381.869,
+     "model": "drift-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 79639
+    }
+   ],
+   "task": "league race sixteen"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 390.869,
+     "model": "apex-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 78044
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 1025.186,
+     "model": "drift-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 94936
+    }
+   ],
+   "task": "league race seventeen"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 911.443,
+     "model": "apex-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 87265
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 346.877,
+     "model": "drift-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 27283
+    }
+   ],
+   "task": "league race eighteen"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 139.738,
+     "model": "apex-1",
+     "patch": "league diff",
+     "result": "green",
+     "tokens": 63868
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 447.089,
+     "model": "drift-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 33505
+    }
+   ],
+   "task": "league race nineteen"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 1078.332,
+     "model": "apex-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 85114
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 921.805,
+     "model": "drift-1",
+     "patch": "league diff",
+     "result": "red",
+     "tokens": 57186
+    }
+   ],
+   "task": "league race twenty"
+  }
+ ],
+ "task": "the constructed league series, apex-1 against drift-1",
+ "wins_target": 5
+}
