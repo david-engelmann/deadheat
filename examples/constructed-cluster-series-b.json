@@ -1,0 +1,157 @@
+{
+ "models": [
+  "umbra-1",
+  "vesper-1"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "umbra-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 40800
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "vesper-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45200
+    }
+   ],
+   "task": "cluster drill two race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 140.0,
+     "model": "umbra-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 43600
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 110.0,
+     "model": "vesper-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 39500
+    }
+   ],
+   "task": "cluster drill two race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 105.0,
+     "model": "umbra-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 41900
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 125.0,
+     "model": "vesper-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 44800
+    }
+   ],
+   "task": "cluster drill two race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 138.0,
+     "model": "umbra-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42900
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 112.0,
+     "model": "vesper-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 40100
+    }
+   ],
+   "task": "cluster drill two race four"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 103.0,
+     "model": "umbra-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 41400
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 127.0,
+     "model": "vesper-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 44500
+    }
+   ],
+   "task": "cluster drill two race five"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 136.0,
+     "model": "umbra-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 44000
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 109.0,
+     "model": "vesper-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 39700
+    }
+   ],
+   "task": "cluster drill two race six"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 133.0,
+     "model": "umbra-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 43300
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 111.0,
+     "model": "vesper-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 40300
+    }
+   ],
+   "task": "cluster drill two race seven"
+  }
+ ],
+ "task": "the constructed cluster drill two",
+ "wins_target": 3
+}
