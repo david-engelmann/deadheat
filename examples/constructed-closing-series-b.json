@@ -1,0 +1,115 @@
+{
+ "models": [
+  "gamma-1",
+  "delta-1"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 139.0,
+     "model": "gamma-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45200
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 111.0,
+     "model": "delta-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 39600
+    }
+   ],
+   "task": "closing drill two race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "gamma-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 40800
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 131.0,
+     "model": "delta-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45100
+    }
+   ],
+   "task": "closing drill two race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 141.0,
+     "model": "gamma-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 44600
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 109.0,
+     "model": "delta-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 39900
+    }
+   ],
+   "task": "closing drill two race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 104.0,
+     "model": "gamma-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 41200
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 126.0,
+     "model": "delta-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 44800
+    }
+   ],
+   "task": "closing drill two race four"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 101.0,
+     "model": "gamma-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 41900
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 129.0,
+     "model": "delta-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 44300
+    }
+   ],
+   "task": "closing drill two race five"
+  }
+ ],
+ "task": "the constructed closing drill two",
+ "wins_target": 3
+}

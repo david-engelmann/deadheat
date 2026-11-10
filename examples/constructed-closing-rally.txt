@@ -1,0 +1,11 @@
+rally
+series 2, the constructed closing drill two
+gamma-1 against delta-1, first to 3 wins
+race 1, closing drill two race one, delta-1 wins
+race 2, closing drill two race two, gamma-1 wins
+race 3, closing drill two race three, delta-1 wins
+race 4, closing drill two race four, gamma-1 wins
+race 5, closing drill two race five, gamma-1 wins
+stood behind by 1 race wins at the deepest
+series winner, gamma-1, gamma-1 3 race wins, delta-1 2 race wins, 0 no results
+rally, 2 series, 1 rally, 1 wire to wire, 0 no winner
