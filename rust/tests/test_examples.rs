@@ -850,3 +850,178 @@ fn the_constructed_streak_example_under_rally_and_comeback_matches_its_goldens()
         read_text(&examples().join("constructed-streak-comebacks.txt"))
     );
 }
+
+#[test]
+fn the_cluster_example_matches_its_golden() {
+    // E-1 of the Round 15 enrolment. The standing
+    // championship holds neither of its series clustered
+    // under DH-34, so the golden is the empty form of
+    // DH-35, the two-line report standing exact.
+    let source = examples().join("championship.json");
+    let out = run_ok(&["cluster", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("championship-cluster.txt"));
+    assert_eq!(out, golden);
+    assert_eq!(
+        out,
+        "cluster\ncluster, 2 series, 0 clustered, 2 scattered, 0 no winner\n"
+    );
+    let (championship, defects) =
+        deadheat::championship::load_championship_file(&examples().join("championship.json"));
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered = deadheat::clusters::cluster_report(&championship.expect("a championship"))
+        .join("\n")
+        + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_survey_championship_cluster_matches_its_golden() {
+    // E-2. The survey championship under the cluster
+    // command, in the section form it falls out in, pinned
+    // at the CLI and at the library surface both.
+    let source = examples().join("survey-championship.json");
+    let out = run_ok(&["cluster", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("survey-championship-cluster.txt"));
+    assert_eq!(out, golden);
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("survey-championship.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered = deadheat::clusters::cluster_report(&championship.expect("a championship"))
+        .join("\n")
+        + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_league_championship_cluster_matches_its_golden() {
+    // E-3. The league championship under the cluster
+    // command, three of its series standing clustered and
+    // seven standing scattered, pinned at the CLI and at
+    // the library surface both.
+    let source = examples().join("league-championship.json");
+    let out = run_ok(&["cluster", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("league-championship-cluster.txt"));
+    assert_eq!(out, golden);
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("league-championship.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered = deadheat::clusters::cluster_report(&championship.expect("a championship"))
+        .join("\n")
+        + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_constructed_cluster_example_matches_its_golden() {
+    // E-4. The constructed championship of DH-35, labelled
+    // as constructed in its file names and its task texts
+    // and never presented as recorded. Its first series
+    // stands clustered while standing in the unmarked
+    // class of every sibling reading, so the golden
+    // carries its section alone, and its eighth race
+    // stands beyond the decision and is named nowhere in
+    // the reading.
+    let source = examples().join("constructed-cluster.json");
+    let out = run_ok(&["cluster", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("constructed-cluster-cluster.txt"));
+    assert_eq!(out, golden);
+    assert!(out.contains("series 1, the constructed cluster drill one"));
+    assert!(out.contains("longest run against 2 consecutive decided race wins"));
+    assert!(!out.contains("series 2,"));
+    assert!(!out.contains("cluster drill one race eight"));
+    assert!(out
+        .trim_end()
+        .ends_with("cluster, 2 series, 1 clustered, 1 scattered, 0 no winner"));
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("constructed-cluster.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered = deadheat::clusters::cluster_report(&championship.expect("a championship"))
+        .join("\n")
+        + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_constructed_cluster_example_under_deadlock_streak_and_distance_matches_its_goldens() {
+    // E-5. The same constructed file under the deadlock,
+    // streak, and distance commands, the second series
+    // standing deadlocked and the distance in its section
+    // alone under each of those and the first series
+    // standing strung in its section alone under the
+    // streak command, so the distinction between the
+    // readings stands pinned over shipped data byte for
+    // byte against the pin above.
+    let source = examples().join("constructed-cluster.json");
+    let source_arg = source.to_str().expect("utf8");
+    let out = run_ok(&["deadlock", source_arg]);
+    let golden = read_text(&examples().join("constructed-cluster-deadlock.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["streak", source_arg]);
+    let golden = read_text(&examples().join("constructed-cluster-streak.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["distance", source_arg]);
+    let golden = read_text(&examples().join("constructed-cluster-distance.txt"));
+    assert_eq!(out, golden);
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("constructed-cluster.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let championship = championship.expect("a championship");
+    let rendered = deadheat::deadlocks::deadlock_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-cluster-deadlock.txt"))
+    );
+    let rendered = deadheat::streaks::streak_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-cluster-streak.txt"))
+    );
+    let rendered = deadheat::distances::distance_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-cluster-distance.txt"))
+    );
+}
+
+#[test]
+fn the_constructed_cluster_example_under_rally_and_comeback_matches_its_goldens() {
+    // E-6. The same constructed file under the rally and
+    // comeback commands, the empty form under each,
+    // neither winner ever standing behind and each winner
+    // having won its first decided race.
+    let source = examples().join("constructed-cluster.json");
+    let source_arg = source.to_str().expect("utf8");
+    let out = run_ok(&["rally", source_arg]);
+    let golden = read_text(&examples().join("constructed-cluster-rally.txt"));
+    assert_eq!(out, golden);
+    assert_eq!(
+        out,
+        "rally\nrally, 2 series, 0 rally, 2 wire to wire, 0 no winner\n"
+    );
+    let out = run_ok(&["comeback", source_arg]);
+    let golden = read_text(&examples().join("constructed-cluster-comebacks.txt"));
+    assert_eq!(out, golden);
+    assert_eq!(
+        out,
+        "comebacks\ncomebacks, 2 series, 0 from behind, 2 from the front\n"
+    );
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("constructed-cluster.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let championship = championship.expect("a championship");
+    let rendered = deadheat::rallies::rally_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-cluster-rally.txt"))
+    );
+    let rendered = deadheat::comebacks::comeback_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-cluster-comebacks.txt"))
+    );
+}

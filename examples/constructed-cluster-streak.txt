@@ -1,0 +1,13 @@
+streak
+series 1, the constructed cluster drill one
+sable-1 against sorrel-1, first to 5 wins
+race 1, cluster drill one race one, sable-1 wins
+race 2, cluster drill one race two, sable-1 wins
+race 3, cluster drill one race three, sable-1 wins
+race 4, cluster drill one race four, sorrel-1 wins
+race 5, cluster drill one race five, sorrel-1 wins
+race 6, cluster drill one race six, sable-1 wins
+race 7, cluster drill one race seven, sable-1 wins
+longest run of 3 consecutive decided race wins
+series winner, sable-1, sable-1 5 race wins, sorrel-1 2 race wins, 0 no results
+streak, 2 series, 1 strung, 1 single, 0 no winner

@@ -16,6 +16,7 @@ mod shared;
 use num_bigint::BigInt;
 
 use deadheat::championship::{championship_report, Championship};
+use deadheat::clusters::cluster_report;
 use deadheat::comebacks::comeback_report;
 use deadheat::deadlocks::deadlock_report;
 use deadheat::distances::distance_report;
@@ -628,6 +629,92 @@ fn the_streak_report_fences_its_fields() {
             "longest run of 2 consecutive decided race wins",
             "series winner, ,  2 race wins, beta-1 1 race wins, 0 no results",
             "streak, 1 series, 1 strung, 0 single, 0 no winner",
+        ]
+    );
+}
+
+#[test]
+fn the_cluster_report_fences_its_fields() {
+    // F-1 of the Round 15 discrimination plan. A series
+    // rebuilt by hand on the bad series frame, read under
+    // DH-35. The second model takes the first two races
+    // and the first model takes the next three, so the
+    // second model's wins stand in a run of two and the
+    // series stands clustered, its loser standing as the
+    // side the figure reads, and its section prints the
+    // series task, the race tasks, and both model labels,
+    // every field holding a break standing fenced to the
+    // empty field through the one helper of FIX-DH-16, as
+    // on the sibling surfaces. Its failure mode is a
+    // second fencing path standing in the new module.
+    let mut series = bad_series();
+    series.wins_target = BigInt::from(3);
+    series.races = vec![
+        Race {
+            task: text("race one"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Red, 130.0),
+                attempt(text("beta-1"), "lane two", SuiteResult::Green, 100.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+        Race {
+            task: bad("race task"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Red, 130.0),
+                attempt(text("beta-1"), "lane two", SuiteResult::Green, 100.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+        Race {
+            task: text("race three"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Green, 100.0),
+                attempt(text("beta-1"), "lane two", SuiteResult::Red, 130.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+        Race {
+            task: text("race four"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Green, 100.0),
+                attempt(text("beta-1"), "lane two", SuiteResult::Red, 130.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+        Race {
+            task: text("race five"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Green, 100.0),
+                attempt(text("beta-1"), "lane two", SuiteResult::Red, 130.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+    ];
+    let championship = Championship {
+        series: vec![series],
+    };
+    let lines = cluster_report(&championship);
+    assert_no_forgery(&lines);
+    assert_eq!(
+        lines,
+        vec![
+            "cluster",
+            "series 1, ",
+            " against beta-1, first to 3 wins",
+            "race 1, race one, beta-1 wins",
+            "race 2, , beta-1 wins",
+            "race 3, race three,  wins",
+            "race 4, race four,  wins",
+            "race 5, race five,  wins",
+            "longest run against 2 consecutive decided race wins",
+            "series winner, ,  3 race wins, beta-1 2 race wins, 0 no results",
+            "cluster, 1 series, 1 clustered, 0 scattered, 0 no winner",
         ]
     );
 }
