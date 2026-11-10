@@ -25,7 +25,7 @@ fn agents_carries_the_canonical_marker() {
 #[test]
 fn readme_states_the_closed_round_count() {
     let text = read(&repo_root().join("README.md"));
-    assert!(text.contains("Closed perfection rounds, 17 of 100"));
+    assert!(text.contains("Closed perfection rounds, 18 of 100"));
 }
 
 #[test]
