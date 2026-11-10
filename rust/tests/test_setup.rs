@@ -25,7 +25,7 @@ fn agents_carries_the_canonical_marker() {
 #[test]
 fn readme_states_the_closed_round_count() {
     let text = read(&repo_root().join("README.md"));
-    assert!(text.contains("Closed perfection rounds, 13 of 100"));
+    assert!(text.contains("Closed perfection rounds, 14 of 100"));
 }
 
 #[test]
@@ -99,8 +99,9 @@ fn readme_reports_the_round_four_status() {
     // Slice 14 stood in review while Round 13 was built, so
     // the count was one again until the Round 13 closure
     // landed slice 14 and the count returned to zero.
-    // Slice 15 stands in review while Round 14 is built, so
-    // the count is one again. The round five pin
+    // Slice 15 stood in review while Round 14 was built, so
+    // the count was one again until the Round 14 closure
+    // landed slice 15 and the count returned to zero. The round five pin
     // below holds the slice 6 line itself, the round six pin
     // below holds the slice 7 line, the round seven pin
     // below holds the slice 8 line, the round eight pin
@@ -111,7 +112,7 @@ fn readme_reports_the_round_four_status() {
     // twelve pin below holds the slice 13 line, the round
     // thirteen pin below holds the slice 14 line, and the
     // round fourteen pin below holds the slice 15 line.
-    assert_eq!(text.matches("built and in review").count(), 1);
+    assert_eq!(text.matches("built and in review").count(), 0);
 }
 
 #[test]
@@ -198,9 +199,9 @@ fn readme_reports_the_round_thirteen_status() {
 #[test]
 fn readme_reports_the_round_fourteen_status() {
     let text = read(&repo_root().join("README.md"));
-    let standing = "- Contract, DH-32 and DH-33 now stand in full form in CONTRACT.md under the Round 14 obligations, and their standing is not claimed here, as Round 14 has not closed.";
+    let standing = "- Contract, DH-32 and DH-33 met. They stand in full form in CONTRACT.md under the Round 14 obligations, and Round 14 closed on the merged slice 15 after three reviews, with the record corrections settled by execution before the merge.";
     assert!(text.lines().any(|line| line == standing));
-    let slice_line = "- Slice 15 is built and in review. It carries the streak reading over a recorded championship, the classification of each decided series by the longest run of consecutive decided races won by its winner as strung or single, one section for each strung series naming its decided races in race order and the longest run of its winner and its winner with its race split, with the closing counts of series, strung, single, and no winner, with the streak example over the standing championship in section form and the constructed streak example and their goldens under examples, the closing counts helper of the test suite standing in one home in the shared test module, and the streak command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, and deadlock.";
+    let slice_line = "- Slice 15 has landed. It carries the streak reading over a recorded championship, the classification of each decided series by the longest run of consecutive decided races won by its winner as strung or single, one section for each strung series naming its decided races in race order and the longest run of its winner and its winner with its race split, with the closing counts of series, strung, single, and no winner, with the streak example over the standing championship in section form and the constructed streak example and their goldens under examples, the closing counts helper of the test suite standing in one home in the shared test module, and the streak command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, and deadlock.";
     assert!(text.lines().any(|line| line == slice_line));
 }
 
