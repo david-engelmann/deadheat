@@ -69,7 +69,8 @@ fn readme_reports_the_round_four_status() {
     // at the Round 8 slice, and again at the Round 9 slice,
     // and again at the Round 10 slice, and again at the
     // Round 11 slice, and again at the Round 12 slice, and
-    // again at the Round 13 slice. This count
+    // again at the Round 13 slice, and again at the
+    // Round 14 slice. This count
     // holds the slices standing in review across the whole
     // README. It stood at zero when Round 4 closed, and slice
     // 6 stood in review while Round 5 was built, so the count
@@ -97,7 +98,9 @@ fn readme_reports_the_round_four_status() {
     // landed slice 13 and the count returned to zero.
     // Slice 14 stood in review while Round 13 was built, so
     // the count was one again until the Round 13 closure
-    // landed slice 14 and the count returned to zero. The round five pin
+    // landed slice 14 and the count returned to zero.
+    // Slice 15 stands in review while Round 14 is built, so
+    // the count is one again. The round five pin
     // below holds the slice 6 line itself, the round six pin
     // below holds the slice 7 line, the round seven pin
     // below holds the slice 8 line, the round eight pin
@@ -105,9 +108,10 @@ fn readme_reports_the_round_four_status() {
     // below holds the slice 10 line, the round ten pin
     // below holds the slice 11 line, the round eleven
     // pin below holds the slice 12 line, the round
-    // twelve pin below holds the slice 13 line, and the
-    // round thirteen pin below holds the slice 14 line.
-    assert_eq!(text.matches("built and in review").count(), 0);
+    // twelve pin below holds the slice 13 line, the round
+    // thirteen pin below holds the slice 14 line, and the
+    // round fourteen pin below holds the slice 15 line.
+    assert_eq!(text.matches("built and in review").count(), 1);
 }
 
 #[test]
@@ -188,6 +192,15 @@ fn readme_reports_the_round_thirteen_status() {
     let standing = "- Contract, DH-29 to DH-31 met, with FIX-DH-20. They stand in full form in CONTRACT.md under the Round 13 obligations, and Round 13 closed on the merged slice 14 after three reviews, with the record corrections settled by execution before the merge.";
     assert!(text.lines().any(|line| line == standing));
     let slice_line = "- Slice 14 has landed. It carries the deadlock reading over a recorded championship, the classification of each decided series by whether its two tallies ever stood level on the way to the decision as deadlocked or clear, one section for each deadlocked series naming its decided races in race order and the count of its decided races that left the tallies level and its winner with its race split, with the closing counts of series, deadlocked, clear, and no winner, with the deadlock example over the standing championship in its empty form and the constructed deadlock example and their goldens under examples, the league championship over ten constructed series at drawn realistic shapes with its goldens under examples, the specification loader pins completed under FIX-DH-20, and the deadlock command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, and rally.";
+    assert!(text.lines().any(|line| line == slice_line));
+}
+
+#[test]
+fn readme_reports_the_round_fourteen_status() {
+    let text = read(&repo_root().join("README.md"));
+    let standing = "- Contract, DH-32 and DH-33 now stand in full form in CONTRACT.md under the Round 14 obligations, and their standing is not claimed here, as Round 14 has not closed.";
+    assert!(text.lines().any(|line| line == standing));
+    let slice_line = "- Slice 15 is built and in review. It carries the streak reading over a recorded championship, the classification of each decided series by the longest run of consecutive decided races won by its winner as strung or single, one section for each strung series naming its decided races in race order and the longest run of its winner and its winner with its race split, with the closing counts of series, strung, single, and no winner, with the streak example over the standing championship in section form and the constructed streak example and their goldens under examples, the closing counts helper of the test suite standing in one home in the shared test module, and the streak command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, and deadlock.";
     assert!(text.lines().any(|line| line == slice_line));
 }
 
@@ -313,16 +326,21 @@ fn agents_annex_states_the_local_directory_runner() {
 }
 
 #[test]
-fn readme_shows_the_comeback_distance_rally_deadlock_and_run_sections() {
-    // The Usage sections the Round 12 and Round 13 rounds
-    // stand on. Each section lead stands in the README, so
-    // a dropped section fails here.
+fn readme_shows_the_comeback_distance_rally_deadlock_streak_and_run_sections() {
+    // The Usage sections the Round 12, Round 13, and
+    // Round 14 rounds stand on. Each section lead stands
+    // in the README, so a dropped section fails here.
+    // Altered at the Round 14 slice for its named
+    // mechanical consequence, the streak section standing
+    // new in the README, so the pin gains its lead and
+    // its name grows by it.
     let readme = read(&repo_root().join("README.md"));
     for lead in [
         "The comeback command reads a championship file",
         "The distance command reads a championship file",
         "The rally command reads a championship file",
         "The deadlock command reads a championship file",
+        "The streak command reads a championship file",
         "The run command takes a race specification file",
     ] {
         assert!(readme.contains(lead), "the README shows no section: {lead}");

@@ -239,6 +239,32 @@ deadlock
 deadlock, 2 series, 0 deadlocked, 2 clear, 0 no winner
 ```
 
+The streak command reads a championship file and reports the series that stood strung, whose winner took two or more decided races in a row on the way to the decision, standing the decided races of each beside the longest run of its winner and its race split.
+
+```sh
+deadheat streak examples/championship.json
+```
+
+```text
+streak
+series 1, the recorded close call pilot
+prime-1 against shadow-1, first to 3 wins
+race 1, pin the cache key, prime-1 wins
+race 5, name the worker pool, prime-1 wins
+race 7, shrink the prompt budget, shadow-1 wins
+race 9, sort the seed list, prime-1 wins
+longest run of 2 consecutive decided race wins
+series winner, prime-1, prime-1 3 race wins, shadow-1 1 race wins, 5 no results
+series 2, the recorded close call panel
+prime-1 against shadow-1, first to 3 wins
+race 1, pin the cache key, prime-1 wins
+race 2, trim the import list, prime-1 wins
+race 5, name the worker pool, prime-1 wins
+longest run of 3 consecutive decided race wins
+series winner, prime-1, prime-1 3 race wins, shadow-1 0 race wins, 2 no results
+streak, 2 series, 2 strung, 0 single, 0 no winner
+```
+
 The standings command prints the standings table held in a standings file. The adopt command writes the losing attempt patch into a patches folder and the discard command removes it.
 
 ## Status
@@ -274,6 +300,8 @@ Seeded in October 2026. Setup has landed, and Rounds 1 to 13 have closed, with a
 - Slice 13 has landed. It carries the format version rule under FIX-DH-17, every format this repo owns standing at version 1 with the version refused in the phrasing of the surface that reads it, the formats reference at FORMATS.md restating every shape in one place, the race specification and the run command that runs its two attempts through the local runner and writes its race record, with the duel example and its pins under examples, the rally reading over a recorded championship, the classification of each decided series by whether its winner ever stood behind on the tally of decided races as a rally or wire to wire, one section for each rally series naming its decided races in race order and the deepest its winner stood behind and its winner with its race split, with the closing counts of series, rally, wire to wire, and no winner, with the rally example over the standing championship in its empty form and the constructed rally example and their goldens under examples, the survey championship over six constructed series at drawn realistic shapes with its goldens under examples, and the switchyard later obligation retired under FIX-DH-18, and the run and rally commands beside race, closecall, series, championship, flip, totals, pairing, comeback, and distance.
 - Contract, DH-29 to DH-31 met, with FIX-DH-20. They stand in full form in CONTRACT.md under the Round 13 obligations, and Round 13 closed on the merged slice 14 after three reviews, with the record corrections settled by execution before the merge.
 - Slice 14 has landed. It carries the deadlock reading over a recorded championship, the classification of each decided series by whether its two tallies ever stood level on the way to the decision as deadlocked or clear, one section for each deadlocked series naming its decided races in race order and the count of its decided races that left the tallies level and its winner with its race split, with the closing counts of series, deadlocked, clear, and no winner, with the deadlock example over the standing championship in its empty form and the constructed deadlock example and their goldens under examples, the league championship over ten constructed series at drawn realistic shapes with its goldens under examples, the specification loader pins completed under FIX-DH-20, and the deadlock command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, and rally.
+- Contract, DH-32 and DH-33 now stand in full form in CONTRACT.md under the Round 14 obligations, and their standing is not claimed here, as Round 14 has not closed.
+- Slice 15 is built and in review. It carries the streak reading over a recorded championship, the classification of each decided series by the longest run of consecutive decided races won by its winner as strung or single, one section for each strung series naming its decided races in race order and the longest run of its winner and its winner with its race split, with the closing counts of series, strung, single, and no winner, with the streak example over the standing championship in section form and the constructed streak example and their goldens under examples, the closing counts helper of the test suite standing in one home in the shared test module, and the streak command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, and deadlock.
 - The Rust port has landed. It carries the behavior the Python package carried, checked against the same goldens, and the Python tree stands removed under PORT-13.
 - Local gate, cargo run --bin codepoint_scan, cargo fmt --check, cargo clippy --all-targets -- -D warnings, and cargo test. CI runs the same commands.
 

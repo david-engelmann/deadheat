@@ -138,22 +138,6 @@ fn golden(name: &str) -> String {
     std::fs::read_to_string(examples().join(name)).expect("a golden")
 }
 
-/// The counts of one closing line, the integer at the head
-/// of each comma separated field after the first.
-fn closing_counts(line: &str) -> Vec<u64> {
-    line.split(", ")
-        .skip(1)
-        .map(|field| {
-            field
-                .split(' ')
-                .next()
-                .expect("a field")
-                .parse::<u64>()
-                .expect("a count")
-        })
-        .collect()
-}
-
 #[test]
 fn the_standing_championship_renders_the_empty_form() {
     // D-1. The two standing series never stand level, so

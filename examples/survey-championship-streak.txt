@@ -1,0 +1,62 @@
+streak
+series 1, the constructed survey series, apex-1 against bolt-1
+apex-1 against bolt-1, first to 3 wins
+race 1, survey race one, apex-1 wins
+race 3, survey race three, bolt-1 wins
+race 4, survey race four, bolt-1 wins
+race 5, survey race five, apex-1 wins
+race 6, survey race six, apex-1 wins
+longest run of 2 consecutive decided race wins
+series winner, apex-1, apex-1 3 race wins, bolt-1 2 race wins, 1 no results
+series 2, the constructed survey series, apex-1 against crest-1
+apex-1 against crest-1, first to 4 wins
+race 1, survey race one, crest-1 wins
+race 2, survey race two, crest-1 wins
+race 3, survey race three, crest-1 wins
+race 4, survey race four, apex-1 wins
+race 5, survey race five, apex-1 wins
+race 6, survey race six, crest-1 wins
+longest run of 3 consecutive decided race wins
+series winner, crest-1, apex-1 2 race wins, crest-1 4 race wins, 0 no results
+series 3, the constructed survey series, apex-1 against drift-1
+apex-1 against drift-1, first to 5 wins
+race 1, survey race one, drift-1 wins
+race 2, survey race two, apex-1 wins
+race 3, survey race three, drift-1 wins
+race 4, survey race four, drift-1 wins
+race 5, survey race five, apex-1 wins
+race 6, survey race six, apex-1 wins
+race 7, survey race seven, apex-1 wins
+race 8, survey race eight, drift-1 wins
+race 9, survey race nine, drift-1 wins
+longest run of 2 consecutive decided race wins
+series winner, drift-1, apex-1 4 race wins, drift-1 5 race wins, 0 no results
+series 4, the constructed survey series, bolt-1 against crest-1
+bolt-1 against crest-1, first to 4 wins
+race 1, survey race one, bolt-1 wins
+race 2, survey race two, crest-1 wins
+race 3, survey race three, bolt-1 wins
+race 4, survey race four, bolt-1 wins
+race 5, survey race five, bolt-1 wins
+longest run of 3 consecutive decided race wins
+series winner, bolt-1, bolt-1 4 race wins, crest-1 1 race wins, 0 no results
+series 5, the constructed survey series, bolt-1 against drift-1
+bolt-1 against drift-1, first to 5 wins
+race 1, survey race one, bolt-1 wins
+race 2, survey race two, drift-1 wins
+race 3, survey race three, drift-1 wins
+race 4, survey race four, drift-1 wins
+race 5, survey race five, drift-1 wins
+race 6, survey race six, bolt-1 wins
+race 7, survey race seven, drift-1 wins
+longest run of 4 consecutive decided race wins
+series winner, drift-1, bolt-1 2 race wins, drift-1 5 race wins, 0 no results
+series 6, the constructed survey series, crest-1 against drift-1
+crest-1 against drift-1, first to 3 wins
+race 2, survey race two, crest-1 wins
+race 4, survey race four, drift-1 wins
+race 6, survey race six, drift-1 wins
+race 7, survey race seven, drift-1 wins
+longest run of 3 consecutive decided race wins
+series winner, drift-1, crest-1 1 race wins, drift-1 3 race wins, 3 no results
+streak, 6 series, 6 strung, 0 single, 0 no winner

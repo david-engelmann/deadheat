@@ -1,0 +1,10 @@
+distance
+series 2, the constructed streak drill two
+gamma-1 against delta-1, first to 3 wins
+race 1, streak drill two race one, gamma-1 wins
+race 2, streak drill two race two, delta-1 wins
+race 3, streak drill two race three, gamma-1 wins
+race 4, streak drill two race four, delta-1 wins
+race 5, streak drill two race five, gamma-1 wins
+series winner, gamma-1, gamma-1 3 race wins, delta-1 2 race wins, 0 no results
+distance, 2 series, 1 the distance, 0 without reply, 1 in between, 0 no winner

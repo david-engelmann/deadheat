@@ -691,3 +691,162 @@ fn the_survey_series_match_their_goldens() {
         assert_eq!(rendered, golden, "{name} library");
     }
 }
+
+#[test]
+fn the_streak_example_matches_its_golden() {
+    // E-1 of the Round 14 enrolment. The standing
+    // championship holds both of its series strung under
+    // DH-32, so the golden is the section form of DH-33,
+    // the first classification golden over this fixture
+    // carrying a section for each of its series.
+    let source = examples().join("championship.json");
+    let out = run_ok(&["streak", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("championship-streak.txt"));
+    assert_eq!(out, golden);
+    assert!(out.contains("longest run of 2 consecutive decided race wins"));
+    assert!(out.contains("longest run of 3 consecutive decided race wins"));
+    assert!(out
+        .trim_end()
+        .ends_with("streak, 2 series, 2 strung, 0 single, 0 no winner"));
+    let (championship, defects) =
+        deadheat::championship::load_championship_file(&examples().join("championship.json"));
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered =
+        deadheat::streaks::streak_report(&championship.expect("a championship")).join("\n") + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_survey_championship_streak_matches_its_golden() {
+    // E-2. The survey championship under the streak
+    // command, in the section form it falls out in, pinned
+    // at the CLI and at the library surface both.
+    let source = examples().join("survey-championship.json");
+    let out = run_ok(&["streak", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("survey-championship-streak.txt"));
+    assert_eq!(out, golden);
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("survey-championship.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered =
+        deadheat::streaks::streak_report(&championship.expect("a championship")).join("\n") + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_league_championship_streak_matches_its_golden() {
+    // E-3. The league championship under the streak
+    // command, nine of its series standing strung and one
+    // standing single, pinned at the CLI and at the
+    // library surface both.
+    let source = examples().join("league-championship.json");
+    let out = run_ok(&["streak", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("league-championship-streak.txt"));
+    assert_eq!(out, golden);
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("league-championship.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered =
+        deadheat::streaks::streak_report(&championship.expect("a championship")).join("\n") + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_constructed_streak_example_matches_its_golden() {
+    // E-4. The constructed championship of DH-33, labelled
+    // as constructed in its file names and its task texts
+    // and never presented as recorded. Its first series
+    // stands strung while standing in the unmarked class
+    // of every sibling reading, so the golden carries its
+    // section alone, and its fifth race stands beyond the
+    // decision and is named nowhere in the reading.
+    let source = examples().join("constructed-streak.json");
+    let out = run_ok(&["streak", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("constructed-streak-streak.txt"));
+    assert_eq!(out, golden);
+    assert!(out.contains("series 1, the constructed streak drill one"));
+    assert!(out.contains("longest run of 2 consecutive decided race wins"));
+    assert!(!out.contains("series 2,"));
+    assert!(!out.contains("streak drill one race five"));
+    assert!(out
+        .trim_end()
+        .ends_with("streak, 2 series, 1 strung, 1 single, 0 no winner"));
+    let (championship, defects) =
+        deadheat::championship::load_championship_file(&examples().join("constructed-streak.json"));
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered =
+        deadheat::streaks::streak_report(&championship.expect("a championship")).join("\n") + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_constructed_streak_example_under_distance_and_deadlock_matches_its_goldens() {
+    // E-5. The same constructed file under the distance
+    // and deadlock commands, the second series standing
+    // the distance and deadlocked in its section alone
+    // under each, so the distinction between the readings
+    // stands pinned over shipped data byte for byte
+    // against the pin above.
+    let source = examples().join("constructed-streak.json");
+    let source_arg = source.to_str().expect("utf8");
+    let out = run_ok(&["distance", source_arg]);
+    let golden = read_text(&examples().join("constructed-streak-distance.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["deadlock", source_arg]);
+    let golden = read_text(&examples().join("constructed-streak-deadlock.txt"));
+    assert_eq!(out, golden);
+    let (championship, defects) =
+        deadheat::championship::load_championship_file(&examples().join("constructed-streak.json"));
+    assert_eq!(defects, Vec::<String>::new());
+    let championship = championship.expect("a championship");
+    let rendered = deadheat::distances::distance_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-streak-distance.txt"))
+    );
+    let rendered = deadheat::deadlocks::deadlock_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-streak-deadlock.txt"))
+    );
+}
+
+#[test]
+fn the_constructed_streak_example_under_rally_and_comeback_matches_its_goldens() {
+    // E-6. The same constructed file under the rally and
+    // comeback commands, the empty form under each,
+    // neither winner ever standing behind and each winner
+    // having won its first decided race.
+    let source = examples().join("constructed-streak.json");
+    let source_arg = source.to_str().expect("utf8");
+    let out = run_ok(&["rally", source_arg]);
+    let golden = read_text(&examples().join("constructed-streak-rally.txt"));
+    assert_eq!(out, golden);
+    assert_eq!(
+        out,
+        "rally\nrally, 2 series, 0 rally, 2 wire to wire, 0 no winner\n"
+    );
+    let out = run_ok(&["comeback", source_arg]);
+    let golden = read_text(&examples().join("constructed-streak-comebacks.txt"));
+    assert_eq!(out, golden);
+    assert_eq!(
+        out,
+        "comebacks\ncomebacks, 2 series, 0 from behind, 2 from the front\n"
+    );
+    let (championship, defects) =
+        deadheat::championship::load_championship_file(&examples().join("constructed-streak.json"));
+    assert_eq!(defects, Vec::<String>::new());
+    let championship = championship.expect("a championship");
+    let rendered = deadheat::rallies::rally_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-streak-rally.txt"))
+    );
+    let rendered = deadheat::comebacks::comeback_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-streak-comebacks.txt"))
+    );
+}

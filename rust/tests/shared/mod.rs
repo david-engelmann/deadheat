@@ -170,3 +170,19 @@ pub fn run_cli_columns(args: &[&str], columns: usize) -> (String, String, i32) {
 pub fn lines_of(text: &str) -> Vec<String> {
     text.lines().map(|line| line.to_string()).collect()
 }
+
+/// The counts of one closing line, the integer at the head
+/// of each comma separated field after the first.
+pub fn closing_counts(line: &str) -> Vec<u64> {
+    line.split(", ")
+        .skip(1)
+        .map(|field| {
+            field
+                .split(' ')
+                .next()
+                .expect("a field")
+                .parse::<u64>()
+                .expect("a count")
+        })
+        .collect()
+}

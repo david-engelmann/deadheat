@@ -26,4 +26,5 @@ pub mod scan;
 pub mod seats;
 pub mod series;
 pub mod specs;
+pub mod streaks;
 pub mod totals;
