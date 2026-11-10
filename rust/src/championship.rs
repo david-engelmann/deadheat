@@ -230,6 +230,33 @@ pub(crate) fn count_series(series: &Series, first: &PText) -> SeriesCount {
     count
 }
 
+/// The longest run of consecutive decided races won by
+/// one side over the decided record of a series, the
+/// record standing as the pairs of the count of the
+/// race in the record and the side that won it that
+/// the one walk leaves. A race holding no winner
+/// stands in no decided record, so it neither extends
+/// nor breaks a run, and the runs stand read over the
+/// decided record alone. The streak reading of DH-32
+/// reads this figure for the winner of a series and
+/// the cluster reading of DH-34 reads it for the
+/// loser, and no other reading reads it.
+pub(crate) fn longest_run_of(decided: &[(u64, usize)], side: usize) -> u64 {
+    let mut longest = 0u64;
+    let mut run = 0u64;
+    for (_, winner) in decided {
+        if *winner == side {
+            run += 1;
+            if run > longest {
+                longest = run;
+            }
+        } else {
+            run = 0;
+        }
+    }
+    longest
+}
+
 /// Fold one series into the championship standings. Each
 /// model of the series is stood in once for the series,
 /// and the counted figures of the one counting walk are

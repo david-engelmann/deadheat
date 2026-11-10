@@ -17,7 +17,7 @@
 //! rule and no second counting walk stands in this
 //! module.
 
-use crate::championship::{count_series, Championship};
+use crate::championship::{count_series, longest_run_of, Championship};
 
 /// Return the streak report lines for one championship.
 pub fn streak_report(championship: &Championship) -> Vec<String> {
@@ -35,23 +35,10 @@ pub fn streak_report(championship: &Championship) -> Vec<String> {
             }
         };
         // The longest run of consecutive decided races won
-        // by the series winner, read over the decided
-        // record the walk leaves. A race holding no winner
-        // stands in no decided record, so it neither
-        // extends nor breaks a run, and the runs stand
-        // read over the decided record alone.
-        let mut longest = 0u64;
-        let mut run = 0u64;
-        for (_, side) in &count.decided {
-            if *side == champion {
-                run += 1;
-                if run > longest {
-                    longest = run;
-                }
-            } else {
-                run = 0;
-            }
-        }
+        // by the series winner, read by the one helper of
+        // the championship module over the decided record
+        // the walk leaves.
+        let longest = longest_run_of(&count.decided, champion);
         if longest < 2 {
             single += 1;
             continue;

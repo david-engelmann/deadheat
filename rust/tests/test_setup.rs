@@ -112,7 +112,9 @@ fn readme_reports_the_round_four_status() {
     // landed slice 17 and the count returned to zero.
     // Slice 18 stood in review while Round 17 was built,
     // so the count was one again until the Round 17 closure
-    // landed slice 18 and the count returned to zero. The round five pin
+    // landed slice 18 and the count returned to zero.
+    // Slice 19 stands in review while Round 18 is built,
+    // so the count is one again. The round five pin
     // below holds the slice 6 line itself, the round six pin
     // below holds the slice 7 line, the round seven pin
     // below holds the slice 8 line, the round eight pin
@@ -126,8 +128,9 @@ fn readme_reports_the_round_four_status() {
     // and the round fifteen pin below holds the slice 16
     // line, and the round sixteen pin below holds the
     // slice 17 line, and the round seventeen pin below
-    // holds the slice 18 line.
-    assert_eq!(text.matches("built and in review").count(), 0);
+    // holds the slice 18 line, and the round eighteen
+    // pin below holds the slice 19 line.
+    assert_eq!(text.matches("built and in review").count(), 1);
 }
 
 #[test]
@@ -244,6 +247,15 @@ fn readme_reports_the_round_seventeen_status() {
     let standing = "- Contract, DH-38 and DH-39 met. They stand in full form in CONTRACT.md under the Round 17 obligations, and Round 17 closed on the merged slice 18 after three reviews, with the two Minors of the reviews repaired in the slice.";
     assert!(text.lines().any(|line| line == standing));
     let slice_line = "- Slice 18 has landed. It carries the opening reading over a recorded championship, the classification of each decided series by the opening run of consecutive decided races won by its winner as in a run, alone, or from behind, one section for each series in a run naming its decided races in race order and the opening run of its winner and its winner with its race split, with the closing counts of series, in a run, alone, from behind, and no winner, with the opening example over the standing championship with both of its series in section form and the constructed opening example and their goldens under examples, and the opening command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, and closing.";
+    assert!(text.lines().any(|line| line == slice_line));
+}
+
+#[test]
+fn readme_reports_the_round_eighteen_status() {
+    let text = read(&repo_root().join("README.md"));
+    let standing = "- Contract, the repair amendment FIX-DH-23 now stands in full form in CONTRACT.md under the Round 18 obligations, and its standing is not claimed here, as Round 18 has not closed.";
+    assert!(text.lines().any(|line| line == standing));
+    let slice_line = "- Slice 19 is built and in review. It carries the fold of the longest run computation of the streak reading and the cluster reading into the one helper of the championship module, both readings reading the longest run of a series from the one home from this round, with no command added, no figure moved, and no golden changed, under the repair amendment FIX-DH-23.";
     assert!(text.lines().any(|line| line == slice_line));
 }
 
