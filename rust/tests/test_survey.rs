@@ -24,29 +24,13 @@ use deadheat::pairings::pairing_report;
 use deadheat::races::decide_winner;
 use deadheat::rallies::rally_report;
 use deadheat::totals::totals_report;
-use shared::examples;
+use shared::{closing_counts, examples};
 
 fn survey() -> Championship {
     let (championship, defects) =
         load_championship_file(&examples().join("survey-championship.json"));
     assert_eq!(defects, Vec::<String>::new());
     championship.expect("a championship")
-}
-
-/// The counts of one closing line, the integer at the head
-/// of each comma separated field after the first.
-fn closing_counts(line: &str) -> Vec<u64> {
-    line.split(", ")
-        .skip(1)
-        .map(|field| {
-            field
-                .split(' ')
-                .next()
-                .expect("a field")
-                .parse::<u64>()
-                .expect("a count")
-        })
-        .collect()
 }
 
 #[test]

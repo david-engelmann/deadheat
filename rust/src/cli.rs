@@ -27,6 +27,7 @@ use crate::races::{
 };
 use crate::rallies::rally_report;
 use crate::series::{load_series_file, series_report};
+use crate::streaks::streak_report;
 use crate::totals::totals_report;
 
 /// The outcome of one command line run.
@@ -343,7 +344,7 @@ fn spec_max_invocation(spec: &ParserSpec) -> usize {
 
 fn top_spec() -> ParserSpec {
     let mut commands = action(
-        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock}",
+        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak}",
         None,
     );
     commands.subactions = vec![
@@ -398,16 +399,20 @@ fn top_spec() -> ParserSpec {
             "deadlock",
             Some("print the deadlock report for one championship file"),
         ),
+        action(
+            "streak",
+            Some("print the streak report for one championship file"),
+        ),
     ];
     let mut spec = ParserSpec {
         prog: "deadheat",
         description: Some("Race two attempts at one task and keep the standings."),
         opt_usage: "[-h]",
         pos_usage:
-            "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock} ...",
+            "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak} ...",
         opt_parts: vec!["[-h]"],
         pos_parts: vec![
-            "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock}",
+            "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak}",
             "...",
         ],
         positionals: vec![commands],
@@ -548,6 +553,14 @@ fn sub_spec(command: &str) -> ParserSpec {
         ),
         "deadlock" => (
             "deadheat deadlock",
+            vec![action("file", None)],
+            vec![help_action()],
+            "[-h]",
+            "file",
+            vec!["file"],
+        ),
+        "streak" => (
+            "deadheat streak",
             vec![action("file", None)],
             vec![help_action()],
             "[-h]",
@@ -991,7 +1004,7 @@ fn is_help_token(text: &PText, has_standings: bool) -> bool {
     false
 }
 
-const COMMANDS: [&str; 15] = [
+const COMMANDS: [&str; 16] = [
     "race",
     "adopt",
     "discard",
@@ -1007,6 +1020,7 @@ const COMMANDS: [&str; 15] = [
     "run",
     "rally",
     "deadlock",
+    "streak",
 ];
 
 /// Run the command line over the given arguments at the given
@@ -1082,7 +1096,7 @@ fn invalid_choice(spec: &ParserSpec, columns: usize, value: &PText) -> Outcome {
         spec,
         columns,
         &format!(
-            "argument command: invalid choice: {} (choose from 'race', 'adopt', 'discard', 'standings', 'closecall', 'series', 'championship', 'flip', 'totals', 'pairing', 'comeback', 'distance', 'run', 'rally', 'deadlock')",
+            "argument command: invalid choice: {} (choose from 'race', 'adopt', 'discard', 'standings', 'closecall', 'series', 'championship', 'flip', 'totals', 'pairing', 'comeback', 'distance', 'run', 'rally', 'deadlock', 'streak')",
             py_repr(value)
         ),
     )
@@ -1250,6 +1264,7 @@ fn run_subcommand(
         "run" => command_run(&values[0]),
         "rally" => command_rally(&values[0]),
         "deadlock" => command_deadlock(&values[0]),
+        "streak" => command_streak(&values[0]),
         _ => unreachable!("a known command"),
     }
 }
@@ -1331,6 +1346,17 @@ fn command_deadlock(file: &PText) -> Outcome {
     }
     Outcome::plain(
         deadlock_report(&championship.expect("a clean championship")),
+        0,
+    )
+}
+
+fn command_streak(file: &PText) -> Outcome {
+    let (championship, defects) = load_championship_file(&path_from_arg(file));
+    if !defects.is_empty() {
+        return print_defects("invalid championship file", defects);
+    }
+    Outcome::plain(
+        streak_report(&championship.expect("a clean championship")),
         0,
     )
 }
