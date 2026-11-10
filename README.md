@@ -294,6 +294,32 @@ series winner, prime-1, prime-1 3 race wins, shadow-1 0 race wins, 2 no results
 closing, 2 series, 1 in a run, 1 alone, 0 no winner
 ```
 
+The opening command reads a championship file and reports the series that stood in a run, whose winner opened the decided record with a run of two or more decided race wins, standing the decided races of each beside the opening run of its winner and its race split.
+
+```sh
+deadheat opening examples/championship.json
+```
+
+```text
+opening
+series 1, the recorded close call pilot
+prime-1 against shadow-1, first to 3 wins
+race 1, pin the cache key, prime-1 wins
+race 5, name the worker pool, prime-1 wins
+race 7, shrink the prompt budget, shadow-1 wins
+race 9, sort the seed list, prime-1 wins
+opening run of 2 consecutive decided race wins
+series winner, prime-1, prime-1 3 race wins, shadow-1 1 race wins, 5 no results
+series 2, the recorded close call panel
+prime-1 against shadow-1, first to 3 wins
+race 1, pin the cache key, prime-1 wins
+race 2, trim the import list, prime-1 wins
+race 5, name the worker pool, prime-1 wins
+opening run of 3 consecutive decided race wins
+series winner, prime-1, prime-1 3 race wins, shadow-1 0 race wins, 2 no results
+opening, 2 series, 2 in a run, 0 alone, 0 from behind, 0 no winner
+```
+
 The standings command prints the standings table held in a standings file. The adopt command writes the losing attempt patch into a patches folder and the discard command removes it.
 
 ## Status
@@ -335,6 +361,8 @@ Seeded in October 2026. Setup has landed, and Rounds 1 to 16 have closed, with a
 - Slice 16 has landed. It carries the cluster reading over a recorded championship, the classification of each decided series by the longest run of consecutive decided races won by its loser as clustered or scattered, one section for each clustered series naming its decided races in race order and the longest run of its loser and its winner with its race split, with the closing counts of series, clustered, scattered, and no winner, with the cluster example over the standing championship in its empty form and the constructed cluster example and their goldens under examples, and the cluster command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, and streak.
 - Contract, DH-36 and DH-37 met. They stand in full form in CONTRACT.md under the Round 16 obligations, and Round 16 closed on the merged slice 17 after three reviews, with the two test text Minors of the reviews repaired in the slice.
 - Slice 17 has landed. It carries the closing reading over a recorded championship, the classification of each decided series by the closing run of consecutive decided races won by its winner as in a run or alone, one section for each series in a run naming its decided races in race order and the closing run of its winner and its winner with its race split, with the closing counts of series, in a run, alone, and no winner, with the closing example over the standing championship with the panel series in its section alone and the constructed closing example and their goldens under examples, and the closing command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, and cluster.
+- Contract, DH-38 and DH-39 now stand in full form in CONTRACT.md under the Round 17 obligations, and their standing is not claimed here, as Round 17 has not closed.
+- Slice 18 is built and in review. It carries the opening reading over a recorded championship, the classification of each decided series by the opening run of consecutive decided races won by its winner as in a run, alone, or from behind, one section for each series in a run naming its decided races in race order and the opening run of its winner and its winner with its race split, with the closing counts of series, in a run, alone, from behind, and no winner, with the opening example over the standing championship with both of its series in section form and the constructed opening example and their goldens under examples, and the opening command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, and closing.
 - The Rust port has landed. It carries the behavior the Python package carried, checked against the same goldens, and the Python tree stands removed under PORT-13.
 - Local gate, cargo run --bin codepoint_scan, cargo fmt --check, cargo clippy --all-targets -- -D warnings, and cargo test. CI runs the same commands.
 
