@@ -1,0 +1,10 @@
+opening
+series 1, the constructed opening drill one
+alpha-1 against beta-1, first to 3 wins
+race 1, opening drill one race one, alpha-1 wins
+race 2, opening drill one race two, alpha-1 wins
+race 3, opening drill one race three, beta-1 wins
+race 4, opening drill one race four, alpha-1 wins
+opening run of 2 consecutive decided race wins
+series winner, alpha-1, alpha-1 3 race wins, beta-1 1 race wins, 0 no results
+opening, 2 series, 1 in a run, 0 alone, 1 from behind, 0 no winner

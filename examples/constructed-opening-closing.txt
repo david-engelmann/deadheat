@@ -1,0 +1,11 @@
+closing
+series 2, the constructed opening drill two
+gamma-1 against delta-1, first to 3 wins
+race 1, opening drill two race one, gamma-1 wins
+race 2, opening drill two race two, delta-1 wins
+race 3, opening drill two race three, gamma-1 wins
+race 4, opening drill two race four, delta-1 wins
+race 5, opening drill two race five, delta-1 wins
+closing run of 2 consecutive decided race wins
+series winner, delta-1, gamma-1 2 race wins, delta-1 3 race wins, 0 no results
+closing, 2 series, 1 in a run, 1 alone, 0 no winner

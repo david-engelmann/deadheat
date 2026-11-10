@@ -1219,3 +1219,208 @@ fn the_constructed_closing_example_under_cluster_matches_its_golden() {
         read_text(&examples().join("constructed-closing-cluster.txt"))
     );
 }
+
+#[test]
+fn the_opening_example_matches_its_golden() {
+    // E-1 of the Round 17 enrolment. The standing
+    // championship under the opening command, both of its
+    // series standing in a run, the pilot at a figure of
+    // two and the panel at three, so the golden carries
+    // two sections in championship order, pinned at the
+    // CLI and at the library surface both.
+    let source = examples().join("championship.json");
+    let out = run_ok(&["opening", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("championship-opening.txt"));
+    assert_eq!(out, golden);
+    assert!(out.contains("series 1, the recorded close call pilot"));
+    assert!(out.contains("series 2, the recorded close call panel"));
+    assert!(out
+        .trim_end()
+        .ends_with("opening, 2 series, 2 in a run, 0 alone, 0 from behind, 0 no winner"));
+    let (championship, defects) =
+        deadheat::championship::load_championship_file(&examples().join("championship.json"));
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered = deadheat::openings::opening_report(&championship.expect("a championship"))
+        .join("\n")
+        + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_survey_championship_opening_matches_its_golden() {
+    // E-2. The survey championship under the opening
+    // command, one of its series standing in a run, three
+    // standing alone, and two standing from behind,
+    // pinned at the CLI and at the library surface both.
+    let source = examples().join("survey-championship.json");
+    let out = run_ok(&["opening", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("survey-championship-opening.txt"));
+    assert_eq!(out, golden);
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("survey-championship.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered = deadheat::openings::opening_report(&championship.expect("a championship"))
+        .join("\n")
+        + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_league_championship_opening_matches_its_golden() {
+    // E-3. The league championship under the opening
+    // command, three of its series standing in a run,
+    // three standing alone, and four standing from
+    // behind, pinned at the CLI and at the library
+    // surface both. The golden also fails under M-B: the
+    // crest-drift series' counted record opens on a no
+    // result, so its opening run reads none against the
+    // golden's one, the series moving from alone to from
+    // behind and the league closing line moving as K-14
+    // names, 3 in a run, 3 alone, 4 from behind reading 3
+    // in a run, 2 alone, 5 from behind over the league's
+    // opening figures. Of this enrolment's other opening
+    // goldens, E-1 fails under M-B as K-1 states and E-2
+    // and E-4 pass under M-B by design, no no result
+    // standing inside any other enrolled opening span
+    // except as K-1 names for the standing championship;
+    // E-5 and E-6 render the sibling readings, which M-B
+    // does not touch.
+    let source = examples().join("league-championship.json");
+    let out = run_ok(&["opening", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("league-championship-opening.txt"));
+    assert_eq!(out, golden);
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("league-championship.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered = deadheat::openings::opening_report(&championship.expect("a championship"))
+        .join("\n")
+        + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_constructed_opening_example_matches_its_golden() {
+    // E-4. The constructed championship of DH-39, labelled
+    // as constructed in its file names and its task texts
+    // and never presented as recorded. Its first series
+    // stands in a run with an opening run of two while
+    // standing alone under DH-36, and its second stands
+    // from behind, so the golden carries the first
+    // series' section alone.
+    let source = examples().join("constructed-opening.json");
+    let out = run_ok(&["opening", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("constructed-opening-opening.txt"));
+    assert_eq!(out, golden);
+    assert!(out.contains("series 1, the constructed opening drill one"));
+    assert!(out.contains("opening run of 2 consecutive decided race wins"));
+    assert!(!out.contains("series 2,"));
+    assert!(out
+        .trim_end()
+        .ends_with("opening, 2 series, 1 in a run, 0 alone, 1 from behind, 0 no winner"));
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("constructed-opening.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered = deadheat::openings::opening_report(&championship.expect("a championship"))
+        .join("\n")
+        + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_constructed_opening_example_under_streak_rally_deadlock_distance_comeback_and_closing_matches_its_goldens(
+) {
+    // E-5. The same constructed file under the streak,
+    // rally, deadlock, distance, comeback, and closing
+    // commands, the six section-carrying sibling goldens:
+    // both series standing strung under the streak
+    // command, and the second series standing a rally and
+    // deadlocked in its section alone under those two,
+    // and standing the distance and from behind in its
+    // section alone under the distance and comeback
+    // commands, and standing in a run in its section
+    // alone under the closing command, so the round's
+    // parting stands pinned over shipped data byte for
+    // byte against the pin above.
+    let source = examples().join("constructed-opening.json");
+    let source_arg = source.to_str().expect("utf8");
+    let out = run_ok(&["streak", source_arg]);
+    let golden = read_text(&examples().join("constructed-opening-streak.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["rally", source_arg]);
+    let golden = read_text(&examples().join("constructed-opening-rally.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["deadlock", source_arg]);
+    let golden = read_text(&examples().join("constructed-opening-deadlock.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["distance", source_arg]);
+    let golden = read_text(&examples().join("constructed-opening-distance.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["comeback", source_arg]);
+    let golden = read_text(&examples().join("constructed-opening-comebacks.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["closing", source_arg]);
+    let golden = read_text(&examples().join("constructed-opening-closing.txt"));
+    assert_eq!(out, golden);
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("constructed-opening.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let championship = championship.expect("a championship");
+    let rendered = deadheat::streaks::streak_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-opening-streak.txt"))
+    );
+    let rendered = deadheat::rallies::rally_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-opening-rally.txt"))
+    );
+    let rendered = deadheat::deadlocks::deadlock_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-opening-deadlock.txt"))
+    );
+    let rendered = deadheat::distances::distance_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-opening-distance.txt"))
+    );
+    let rendered = deadheat::comebacks::comeback_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-opening-comebacks.txt"))
+    );
+    let rendered = deadheat::closings::closing_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-opening-closing.txt"))
+    );
+}
+
+#[test]
+fn the_constructed_opening_example_under_cluster_matches_its_golden() {
+    // E-6. The same constructed file under the cluster
+    // command, the one empty-form sibling golden: both
+    // series stand scattered there, so the report
+    // carries no section and closes in its closing
+    // line alone.
+    let source = examples().join("constructed-opening.json");
+    let source_arg = source.to_str().expect("utf8");
+    let out = run_ok(&["cluster", source_arg]);
+    let golden = read_text(&examples().join("constructed-opening-cluster.txt"));
+    assert_eq!(out, golden);
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("constructed-opening.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let championship = championship.expect("a championship");
+    let rendered = deadheat::clusters::cluster_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-opening-cluster.txt"))
+    );
+}

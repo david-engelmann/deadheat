@@ -1,0 +1,12 @@
+opening
+series 2, the constructed survey series, apex-1 against crest-1
+apex-1 against crest-1, first to 4 wins
+race 1, survey race one, crest-1 wins
+race 2, survey race two, crest-1 wins
+race 3, survey race three, crest-1 wins
+race 4, survey race four, apex-1 wins
+race 5, survey race five, apex-1 wins
+race 6, survey race six, crest-1 wins
+opening run of 3 consecutive decided race wins
+series winner, crest-1, apex-1 2 race wins, crest-1 4 race wins, 0 no results
+opening, 6 series, 1 in a run, 3 alone, 2 from behind, 0 no winner

@@ -16,6 +16,7 @@ pub mod distances;
 pub mod flips;
 pub mod json;
 pub mod makers;
+pub mod openings;
 pub mod pairings;
 pub mod panels;
 pub mod pynum;
