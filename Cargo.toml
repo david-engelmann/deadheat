@@ -126,6 +126,10 @@ path = "rust/tests/test_streaks.rs"
 name = "test_clusters"
 path = "rust/tests/test_clusters.rs"
 
+[[test]]
+name = "test_closings"
+path = "rust/tests/test_closings.rs"
+
 [dependencies]
 num-bigint = "0.4"
 num-rational = "0.4"

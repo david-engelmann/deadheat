@@ -276,6 +276,24 @@ cluster
 cluster, 2 series, 0 clustered, 2 scattered, 0 no winner
 ```
 
+The closing command reads a championship file and reports the series that stood in a run, whose winner took the deciding race at the end of a run of two or more decided race wins, standing the decided races of each beside the closing run of its winner and its race split.
+
+```sh
+deadheat closing examples/championship.json
+```
+
+```text
+closing
+series 2, the recorded close call panel
+prime-1 against shadow-1, first to 3 wins
+race 1, pin the cache key, prime-1 wins
+race 2, trim the import list, prime-1 wins
+race 5, name the worker pool, prime-1 wins
+closing run of 3 consecutive decided race wins
+series winner, prime-1, prime-1 3 race wins, shadow-1 0 race wins, 2 no results
+closing, 2 series, 1 in a run, 1 alone, 0 no winner
+```
+
 The standings command prints the standings table held in a standings file. The adopt command writes the losing attempt patch into a patches folder and the discard command removes it.
 
 ## Status
@@ -315,6 +333,8 @@ Seeded in October 2026. Setup has landed, and Rounds 1 to 15 have closed, with a
 - Slice 15 has landed. It carries the streak reading over a recorded championship, the classification of each decided series by the longest run of consecutive decided races won by its winner as strung or single, one section for each strung series naming its decided races in race order and the longest run of its winner and its winner with its race split, with the closing counts of series, strung, single, and no winner, with the streak example over the standing championship in section form and the constructed streak example and their goldens under examples, the closing counts helper of the test suite standing in one home in the shared test module, and the streak command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, and deadlock.
 - Contract, DH-34 and DH-35 met. They stand in full form in CONTRACT.md under the Round 15 obligations, and Round 15 closed on the merged slice 16 after three reviews approving with findings and no repair owed.
 - Slice 16 has landed. It carries the cluster reading over a recorded championship, the classification of each decided series by the longest run of consecutive decided races won by its loser as clustered or scattered, one section for each clustered series naming its decided races in race order and the longest run of its loser and its winner with its race split, with the closing counts of series, clustered, scattered, and no winner, with the cluster example over the standing championship in its empty form and the constructed cluster example and their goldens under examples, and the cluster command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, and streak.
+- Contract, DH-36 and DH-37 now stand in full form in CONTRACT.md under the Round 16 obligations, and their standing is not claimed here, as Round 16 has not closed.
+- Slice 17 is built and in review. It carries the closing reading over a recorded championship, the classification of each decided series by the closing run of consecutive decided races won by its winner as in a run or alone, one section for each series in a run naming its decided races in race order and the closing run of its winner and its winner with its race split, with the closing counts of series, in a run, alone, and no winner, with the closing example over the standing championship with the panel series in its section alone and the constructed closing example and their goldens under examples, and the closing command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, and cluster.
 - The Rust port has landed. It carries the behavior the Python package carried, checked against the same goldens, and the Python tree stands removed under PORT-13.
 - Local gate, cargo run --bin codepoint_scan, cargo fmt --check, cargo clippy --all-targets -- -D warnings, and cargo test. CI runs the same commands.
 
