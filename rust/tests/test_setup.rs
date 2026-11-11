@@ -118,7 +118,9 @@ fn readme_reports_the_round_four_status() {
     // landed slice 19 and the count returned to zero.
     // Slice 20 stood in review while Round 19 was built,
     // so the count was one again until the Round 19 closure
-    // landed slice 20 and the count returned to zero. The round five pin
+    // landed slice 20 and the count returned to zero.
+    // Slice 21 stands in review while Round 20 is built,
+    // so the count is one again. The round five pin
     // below holds the slice 6 line itself, the round six pin
     // below holds the slice 7 line, the round seven pin
     // below holds the slice 8 line, the round eight pin
@@ -134,8 +136,10 @@ fn readme_reports_the_round_four_status() {
     // slice 17 line, and the round seventeen pin below
     // holds the slice 18 line, and the round eighteen
     // pin below holds the slice 19 line, and the round
-    // nineteen pin below holds the slice 20 line.
-    assert_eq!(text.matches("built and in review").count(), 0);
+    // nineteen pin below holds the slice 20 line, and
+    // the round twenty pin below holds the slice 21
+    // line.
+    assert_eq!(text.matches("built and in review").count(), 1);
 }
 
 #[test]
@@ -270,6 +274,15 @@ fn readme_reports_the_round_nineteen_status() {
     let standing = "- Contract, DH-40 and DH-41 met. They stand in full form in CONTRACT.md under the Round 19 obligations, and Round 19 closed on the merged slice 20 after three reviews, with the pin comments restated to their executed postures in the slice.";
     assert!(text.lines().any(|line| line == standing));
     let slice_line = "- Slice 20 has landed. It carries the turns reading over a recorded championship, the classification of each decided series by the count of the changes of hand over its decided record as turned or steady, one section for each turned series naming its decided races in race order and the changes of hand of the series and its winner with its race split, with the closing counts of series, turned, steady, and no winner, with the turns example over the standing championship with the pilot series in its section alone and the constructed turns example and their goldens under examples, and the turns command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, and opening.";
+    assert!(text.lines().any(|line| line == slice_line));
+}
+
+#[test]
+fn readme_reports_the_round_twenty_status() {
+    let text = read(&repo_root().join("README.md"));
+    let standing = "- Contract, DH-42 and DH-43 now stand in full form in CONTRACT.md under the Round 20 obligations, and their standing is not claimed here, as Round 20 has not closed.";
+    assert!(text.lines().any(|line| line == standing));
+    let slice_line = "- Slice 21 is built and in review. It carries the lead reading over a recorded championship, the classification of each decided series by the largest lead either model held over its decided record read against the winning margin of the series as wide or narrow, one section for each wide series naming its decided races in race order and the largest lead of the series and its winner with its race split, with the closing counts of series, wide, narrow, and no winner, with the lead example over the standing championship in its empty form and the constructed lead example and their goldens under examples, and the lead command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, opening, and turns.";
     assert!(text.lines().any(|line| line == slice_line));
 }
 
@@ -423,7 +436,7 @@ fn agents_annex_states_the_local_directory_runner() {
 }
 
 #[test]
-fn readme_shows_the_comeback_distance_rally_deadlock_streak_cluster_closing_opening_turns_and_run_sections(
+fn readme_shows_the_comeback_distance_rally_deadlock_streak_cluster_closing_opening_turns_lead_and_run_sections(
 ) {
     // The Usage sections the Round 12, Round 13, Round
     // 14, Round 15, Round 16, and Round 17 rounds stand
@@ -442,7 +455,10 @@ fn readme_shows_the_comeback_distance_rally_deadlock_streak_cluster_closing_open
     // Round 19 slice for its named mechanical
     // consequence, the turns section standing new in
     // the README, so the pin gains its lead and its
-    // name grows by it.
+    // name grows by it. Altered at the Round 20 slice
+    // for its named mechanical consequence, the lead
+    // section standing new in the README, so the pin
+    // gains its lead and its name grows by it.
     let readme = read(&repo_root().join("README.md"));
     for lead in [
         "The comeback command reads a championship file",
@@ -454,6 +470,7 @@ fn readme_shows_the_comeback_distance_rally_deadlock_streak_cluster_closing_open
         "The closing command reads a championship file",
         "The opening command reads a championship file",
         "The turns command reads a championship file",
+        "The lead command reads a championship file",
         "The run command takes a race specification file",
     ] {
         assert!(readme.contains(lead), "the README shows no section: {lead}");

@@ -1,0 +1,25 @@
+lead
+series 2, the constructed survey series, apex-1 against crest-1
+apex-1 against crest-1, first to 4 wins
+race 1, survey race one, crest-1 wins
+race 2, survey race two, crest-1 wins
+race 3, survey race three, crest-1 wins
+race 4, survey race four, apex-1 wins
+race 5, survey race five, apex-1 wins
+race 6, survey race six, crest-1 wins
+largest lead 3 over the decided record
+series winner, crest-1, apex-1 2 race wins, crest-1 4 race wins, 0 no results
+series 3, the constructed survey series, apex-1 against drift-1
+apex-1 against drift-1, first to 5 wins
+race 1, survey race one, drift-1 wins
+race 2, survey race two, apex-1 wins
+race 3, survey race three, drift-1 wins
+race 4, survey race four, drift-1 wins
+race 5, survey race five, apex-1 wins
+race 6, survey race six, apex-1 wins
+race 7, survey race seven, apex-1 wins
+race 8, survey race eight, drift-1 wins
+race 9, survey race nine, drift-1 wins
+largest lead 2 over the decided record
+series winner, drift-1, apex-1 4 race wins, drift-1 5 race wins, 0 no results
+lead, 6 series, 2 wide, 4 narrow, 0 no winner
