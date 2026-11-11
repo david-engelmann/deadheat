@@ -25,7 +25,7 @@ fn agents_carries_the_canonical_marker() {
 #[test]
 fn readme_states_the_closed_round_count() {
     let text = read(&repo_root().join("README.md"));
-    assert!(text.contains("Closed perfection rounds, 18 of 100"));
+    assert!(text.contains("Closed perfection rounds, 19 of 100"));
 }
 
 #[test]
@@ -116,8 +116,9 @@ fn readme_reports_the_round_four_status() {
     // Slice 19 stood in review while Round 18 was built,
     // so the count was one again until the Round 18 closure
     // landed slice 19 and the count returned to zero.
-    // Slice 20 stands in review while Round 19 is built,
-    // so the count is one again. The round five pin
+    // Slice 20 stood in review while Round 19 was built,
+    // so the count was one again until the Round 19 closure
+    // landed slice 20 and the count returned to zero. The round five pin
     // below holds the slice 6 line itself, the round six pin
     // below holds the slice 7 line, the round seven pin
     // below holds the slice 8 line, the round eight pin
@@ -134,7 +135,7 @@ fn readme_reports_the_round_four_status() {
     // holds the slice 18 line, and the round eighteen
     // pin below holds the slice 19 line, and the round
     // nineteen pin below holds the slice 20 line.
-    assert_eq!(text.matches("built and in review").count(), 1);
+    assert_eq!(text.matches("built and in review").count(), 0);
 }
 
 #[test]
@@ -266,9 +267,9 @@ fn readme_reports_the_round_eighteen_status() {
 #[test]
 fn readme_reports_the_round_nineteen_status() {
     let text = read(&repo_root().join("README.md"));
-    let standing = "- Contract, DH-40 and DH-41 now stand in full form in CONTRACT.md under the Round 19 obligations, and their standing is not claimed here, as Round 19 has not closed.";
+    let standing = "- Contract, DH-40 and DH-41 met. They stand in full form in CONTRACT.md under the Round 19 obligations, and Round 19 closed on the merged slice 20 after three reviews, with the pin comments restated to their executed postures in the slice.";
     assert!(text.lines().any(|line| line == standing));
-    let slice_line = "- Slice 20 is built and in review. It carries the turns reading over a recorded championship, the classification of each decided series by the count of the changes of hand over its decided record as turned or steady, one section for each turned series naming its decided races in race order and the changes of hand of the series and its winner with its race split, with the closing counts of series, turned, steady, and no winner, with the turns example over the standing championship with the pilot series in its section alone and the constructed turns example and their goldens under examples, and the turns command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, and opening.";
+    let slice_line = "- Slice 20 has landed. It carries the turns reading over a recorded championship, the classification of each decided series by the count of the changes of hand over its decided record as turned or steady, one section for each turned series naming its decided races in race order and the changes of hand of the series and its winner with its race split, with the closing counts of series, turned, steady, and no winner, with the turns example over the standing championship with the pilot series in its section alone and the constructed turns example and their goldens under examples, and the turns command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, and opening.";
     assert!(text.lines().any(|line| line == slice_line));
 }
 
