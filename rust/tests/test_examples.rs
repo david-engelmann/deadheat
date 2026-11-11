@@ -1424,3 +1424,209 @@ fn the_constructed_opening_example_under_cluster_matches_its_golden() {
         read_text(&examples().join("constructed-opening-cluster.txt"))
     );
 }
+
+#[test]
+fn the_turns_example_matches_its_golden() {
+    // E-1 of the Round 19 enrolment. The standing
+    // championship under the turns command, the pilot
+    // series standing turned at a figure of two and
+    // the panel series standing steady, so the golden
+    // carries the pilot's section alone, pinned at the
+    // CLI and at the library surface both. It fails
+    // under M-B as executed, as K-1 states in its
+    // restated posture, the design note's narrative
+    // standing superseded by execution. The pilot's
+    // counted record stands at nine counted races with
+    // five no results, its decided races standing at
+    // races 1, 5, 7, and 9, no two decided races
+    // standing adjacent among the counted races, so
+    // the counted figure stands at none and the pilot's
+    // section vanishes under M-B, the mutant closing
+    // "turns, 2 series, 0 turned, 2 steady, 0 no
+    // winner". M-B is caught by K-1, K-2, K-13, K-15,
+    // E-1, E-2, and E-3.
+    let source = examples().join("championship.json");
+    let out = run_ok(&["turns", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("championship-turns.txt"));
+    assert_eq!(out, golden);
+    assert!(out.contains("series 1, the recorded close call pilot"));
+    assert!(out.contains("changes of hand 2 over the decided record"));
+    assert!(!out.contains("series 2,"));
+    assert!(out
+        .trim_end()
+        .ends_with("turns, 2 series, 1 turned, 1 steady, 0 no winner"));
+    let (championship, defects) =
+        deadheat::championship::load_championship_file(&examples().join("championship.json"));
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered =
+        deadheat::turns::turns_report(&championship.expect("a championship")).join("\n") + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_survey_championship_turns_matches_its_golden() {
+    // E-2. The survey championship under the turns
+    // command, five of its series standing turned and
+    // the crest-drift series standing steady, pinned
+    // at the CLI and at the library surface both. It
+    // fails under M-B as K-2 states.
+    let source = examples().join("survey-championship.json");
+    let out = run_ok(&["turns", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("survey-championship-turns.txt"));
+    assert_eq!(out, golden);
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("survey-championship.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered =
+        deadheat::turns::turns_report(&championship.expect("a championship")).join("\n") + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_league_championship_turns_matches_its_golden() {
+    // E-3. The league championship under the turns
+    // command, seven of its series standing turned and
+    // three standing steady, pinned at the CLI and at
+    // the library surface both. The golden also fails
+    // under M-B: the crest-drift series' counted
+    // record interposes no results between its decided
+    // races, so its counted figure reads one against
+    // the golden's two, the series moving from turned
+    // to steady and the league closing line moving as
+    // K-15 names. Of this enrolment's other turns
+    // goldens, E-1 fails under M-B as K-1 states as
+    // executed, E-2 fails under M-B as K-2 states, and
+    // E-4 passes under M-B by design as K-3 states;
+    // E-5 renders the sibling readings, which M-B
+    // does not touch.
+    let source = examples().join("league-championship.json");
+    let out = run_ok(&["turns", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("league-championship-turns.txt"));
+    assert_eq!(out, golden);
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("league-championship.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered =
+        deadheat::turns::turns_report(&championship.expect("a championship")).join("\n") + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_constructed_turns_example_matches_its_golden() {
+    // E-4. The constructed championship of DH-41,
+    // labelled as constructed in its file names and
+    // its task texts and never presented as recorded.
+    // Its first series stands turned at a figure of
+    // two while standing in a run under both edge
+    // readings, and its second stands steady with one
+    // change of hand, so the golden carries the first
+    // series' section alone.
+    let source = examples().join("constructed-turns.json");
+    let out = run_ok(&["turns", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("constructed-turns-turns.txt"));
+    assert_eq!(out, golden);
+    assert!(out.contains("series 1, the constructed turns drill one"));
+    assert!(out.contains("changes of hand 2 over the decided record"));
+    assert!(!out.contains("series 2,"));
+    assert!(out
+        .trim_end()
+        .ends_with("turns, 2 series, 1 turned, 1 steady, 0 no winner"));
+    let (championship, defects) =
+        deadheat::championship::load_championship_file(&examples().join("constructed-turns.json"));
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered =
+        deadheat::turns::turns_report(&championship.expect("a championship")).join("\n") + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_constructed_turns_example_under_its_sibling_readings_matches_its_goldens() {
+    // E-5. The same constructed file under the streak,
+    // cluster, rally, deadlock, distance, comeback,
+    // closing, and opening commands, the eight
+    // section-carrying sibling goldens: both series
+    // standing strung under the streak command and in
+    // a run under the closing command, the second
+    // series standing clustered, a rally, deadlocked,
+    // the distance, and from behind in its section
+    // alone under those five, and the first series
+    // standing in a run in its section alone under the
+    // opening command, so the round's partings stand
+    // pinned over shipped data byte for byte against
+    // the pin above. No E-6 stands in this round: no
+    // empty-form constructed sibling golden stands
+    // over the turns fixture, every sibling reading
+    // marking at least one of its two series.
+    let source = examples().join("constructed-turns.json");
+    let source_arg = source.to_str().expect("utf8");
+    let out = run_ok(&["streak", source_arg]);
+    let golden = read_text(&examples().join("constructed-turns-streak.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["cluster", source_arg]);
+    let golden = read_text(&examples().join("constructed-turns-cluster.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["rally", source_arg]);
+    let golden = read_text(&examples().join("constructed-turns-rally.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["deadlock", source_arg]);
+    let golden = read_text(&examples().join("constructed-turns-deadlock.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["distance", source_arg]);
+    let golden = read_text(&examples().join("constructed-turns-distance.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["comeback", source_arg]);
+    let golden = read_text(&examples().join("constructed-turns-comebacks.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["closing", source_arg]);
+    let golden = read_text(&examples().join("constructed-turns-closing.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["opening", source_arg]);
+    let golden = read_text(&examples().join("constructed-turns-opening.txt"));
+    assert_eq!(out, golden);
+    let (championship, defects) =
+        deadheat::championship::load_championship_file(&examples().join("constructed-turns.json"));
+    assert_eq!(defects, Vec::<String>::new());
+    let championship = championship.expect("a championship");
+    let rendered = deadheat::streaks::streak_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-turns-streak.txt"))
+    );
+    let rendered = deadheat::clusters::cluster_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-turns-cluster.txt"))
+    );
+    let rendered = deadheat::rallies::rally_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-turns-rally.txt"))
+    );
+    let rendered = deadheat::deadlocks::deadlock_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-turns-deadlock.txt"))
+    );
+    let rendered = deadheat::distances::distance_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-turns-distance.txt"))
+    );
+    let rendered = deadheat::comebacks::comeback_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-turns-comebacks.txt"))
+    );
+    let rendered = deadheat::closings::closing_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-turns-closing.txt"))
+    );
+    let rendered = deadheat::openings::opening_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-turns-opening.txt"))
+    );
+}

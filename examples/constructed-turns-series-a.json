@@ -1,0 +1,115 @@
+{
+ "models": [
+  "alpha-1",
+  "beta-1"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "alpha-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 41000
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "beta-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45500
+    }
+   ],
+   "task": "turns drill one race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 105.0,
+     "model": "alpha-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 44700
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 125.0,
+     "model": "beta-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 43200
+    }
+   ],
+   "task": "turns drill one race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 140.0,
+     "model": "alpha-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 41800
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 110.0,
+     "model": "beta-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 46300
+    }
+   ],
+   "task": "turns drill one race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 102.0,
+     "model": "alpha-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42600
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 128.0,
+     "model": "beta-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 44100
+    }
+   ],
+   "task": "turns drill one race four"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 108.0,
+     "model": "alpha-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 43500
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 132.0,
+     "model": "beta-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 44900
+    }
+   ],
+   "task": "turns drill one race five"
+  }
+ ],
+ "task": "the constructed turns drill one",
+ "wins_target": 4
+}

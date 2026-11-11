@@ -1,0 +1,20 @@
+streak
+series 1, the constructed turns drill one
+alpha-1 against beta-1, first to 4 wins
+race 1, turns drill one race one, alpha-1 wins
+race 2, turns drill one race two, alpha-1 wins
+race 3, turns drill one race three, beta-1 wins
+race 4, turns drill one race four, alpha-1 wins
+race 5, turns drill one race five, alpha-1 wins
+longest run of 2 consecutive decided race wins
+series winner, alpha-1, alpha-1 4 race wins, beta-1 1 race wins, 0 no results
+series 2, the constructed turns drill two
+gamma-1 against delta-1, first to 3 wins
+race 1, turns drill two race one, delta-1 wins
+race 2, turns drill two race two, delta-1 wins
+race 3, turns drill two race three, gamma-1 wins
+race 4, turns drill two race four, gamma-1 wins
+race 5, turns drill two race five, gamma-1 wins
+longest run of 3 consecutive decided race wins
+series winner, gamma-1, gamma-1 3 race wins, delta-1 2 race wins, 0 no results
+streak, 2 series, 2 strung, 0 single, 0 no winner

@@ -35,6 +35,7 @@ use deadheat::seats::attempt_summary;
 use deadheat::series::{series_report, Series};
 use deadheat::streaks::streak_report;
 use deadheat::totals::totals_report;
+use deadheat::turns::turns_report;
 
 const FORGED: &str = "FORGED";
 
@@ -849,6 +850,86 @@ fn the_opening_report_fences_its_fields() {
             "opening run of 2 consecutive decided race wins",
             "series winner, ,  2 race wins, beta-1 0 race wins, 0 no results",
             "opening, 1 series, 1 in a run, 0 alone, 0 from behind, 0 no winner",
+        ]
+    );
+}
+
+#[test]
+fn the_turns_report_fences_its_fields() {
+    // F-1 of the Round 19 discrimination plan. A
+    // four-race series rebuilt from the same hand-built
+    // shape the sibling pins stand on, read under
+    // DH-41: the first model takes the first race, the
+    // second model the second, and the first model the
+    // third and fourth at a wins target of three, so
+    // its record changes hands twice and the series
+    // stands turned, and its section prints the series
+    // task, the race tasks, and both model labels,
+    // every field holding a break standing fenced to
+    // the empty field through the one helper of
+    // FIX-DH-16, as on the sibling surfaces. Its
+    // failure mode is a second fencing path standing
+    // in the new module. It fails on the pre round
+    // tree by compile absence, the turns module
+    // standing absent there.
+    let mut series = bad_series();
+    series.wins_target = BigInt::from(3);
+    series.races = vec![
+        Race {
+            task: text("race one"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Green, 100.0),
+                attempt(text("beta-1"), "lane two", SuiteResult::Red, 130.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+        Race {
+            task: bad("race task"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Red, 130.0),
+                attempt(text("beta-1"), "lane two", SuiteResult::Green, 100.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+        Race {
+            task: text("race three"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Green, 100.0),
+                attempt(text("beta-1"), "lane two", SuiteResult::Red, 130.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+        Race {
+            task: text("race four"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Green, 100.0),
+                attempt(text("beta-1"), "lane two", SuiteResult::Red, 130.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+    ];
+    let championship = Championship {
+        series: vec![series],
+    };
+    let lines = turns_report(&championship);
+    assert_no_forgery(&lines);
+    assert_eq!(
+        lines,
+        vec![
+            "turns",
+            "series 1, ",
+            " against beta-1, first to 3 wins",
+            "race 1, race one,  wins",
+            "race 2, , beta-1 wins",
+            "race 3, race three,  wins",
+            "race 4, race four,  wins",
+            "changes of hand 2 over the decided record",
+            "series winner, ,  3 race wins, beta-1 1 race wins, 0 no results",
+            "turns, 1 series, 1 turned, 0 steady, 0 no winner",
         ]
     );
 }

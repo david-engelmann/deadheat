@@ -859,6 +859,36 @@ fn every_standing_golden_still_matches_byte_for_byte() {
             assert_eq!(rendered, golden, "{name}");
             continue;
         }
+        // Altered at the Round 19 slice for its named mechanical
+        // consequence. The turns examples of DH-41 add four
+        // goldens whose stems name championships rather than a
+        // race, so the sweep reads them through the championship
+        // loader and the turns report before the generic race
+        // reading can misread their sources. The two counts
+        // below rise by twelve each this round, the four turns
+        // goldens here and the eight constructed sibling goldens
+        // the standing streak, cluster, rally, deadlock,
+        // distance, comebacks, closing, and opening arms already
+        // read over the constructed turns stem, the unadjusted
+        // count rising with them because every race of the four
+        // championships stands unadjusted.
+        if let Some(stem) = name.strip_suffix("-turns.txt") {
+            let source = golden_path.with_file_name(format!("{stem}.json"));
+            let (championship, defects) = deadheat::championship::load_championship_file(&source);
+            assert_eq!(defects, Vec::<String>::new(), "{name}");
+            let championship = championship.expect("a championship");
+            if championship
+                .series
+                .iter()
+                .flat_map(|series| series.races.iter())
+                .all(race_is_unadjusted)
+            {
+                unadjusted += 1;
+            }
+            let rendered = deadheat::turns::turns_report(&championship).join("\n") + "\n";
+            assert_eq!(rendered, golden, "{name}");
+            continue;
+        }
         let source = golden_path.with_extension("json");
         let (race, _) = load_race_file(&source);
         if let Some(race) = race {
@@ -902,12 +932,12 @@ fn every_standing_golden_still_matches_byte_for_byte() {
         let rendered = deadheat::championship::championship_report(&championship).join("\n") + "\n";
         assert_eq!(rendered, golden, "{name}");
     }
-    // The counts stand at one hundred twenty eight goldens
-    // and one hundred twenty four unadjusted after the
-    // Round 17 enrolment counted at the opening arm
-    // above, eleven of each over the one hundred
-    // seventeen and one hundred thirteen the Round 16
-    // slice left.
-    assert_eq!(goldens.len(), 128);
-    assert_eq!(unadjusted, 124);
+    // The counts stand at one hundred forty goldens
+    // and one hundred thirty six unadjusted after the
+    // Round 19 enrolment counted at the turns arm
+    // above, twelve of each over the one hundred
+    // twenty eight and one hundred twenty four the
+    // Round 17 enrolment left standing.
+    assert_eq!(goldens.len(), 140);
+    assert_eq!(unadjusted, 136);
 }

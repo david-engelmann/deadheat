@@ -116,7 +116,8 @@ fn readme_reports_the_round_four_status() {
     // Slice 19 stood in review while Round 18 was built,
     // so the count was one again until the Round 18 closure
     // landed slice 19 and the count returned to zero.
-    // The round five pin
+    // Slice 20 stands in review while Round 19 is built,
+    // so the count is one again. The round five pin
     // below holds the slice 6 line itself, the round six pin
     // below holds the slice 7 line, the round seven pin
     // below holds the slice 8 line, the round eight pin
@@ -131,8 +132,9 @@ fn readme_reports_the_round_four_status() {
     // line, and the round sixteen pin below holds the
     // slice 17 line, and the round seventeen pin below
     // holds the slice 18 line, and the round eighteen
-    // pin below holds the slice 19 line.
-    assert_eq!(text.matches("built and in review").count(), 0);
+    // pin below holds the slice 19 line, and the round
+    // nineteen pin below holds the slice 20 line.
+    assert_eq!(text.matches("built and in review").count(), 1);
 }
 
 #[test]
@@ -258,6 +260,15 @@ fn readme_reports_the_round_eighteen_status() {
     let standing = "- Contract, the Round 18 fold and the repair amendment FIX-DH-23 met. They stand in full form in CONTRACT.md under the Round 18 obligations, and Round 18 closed on the merged slice 19 after three reviews, with the fold's neutrality proof executed at the fold commit and re-executed by the red team.";
     assert!(text.lines().any(|line| line == standing));
     let slice_line = "- Slice 19 has landed. It carries the fold of the longest run computation of the streak reading and the cluster reading into the one helper of the championship module, both readings reading the longest run of a series from the one home from this round, with no command added, no figure moved, and no golden changed, under the repair amendment FIX-DH-23.";
+    assert!(text.lines().any(|line| line == slice_line));
+}
+
+#[test]
+fn readme_reports_the_round_nineteen_status() {
+    let text = read(&repo_root().join("README.md"));
+    let standing = "- Contract, DH-40 and DH-41 now stand in full form in CONTRACT.md under the Round 19 obligations, and their standing is not claimed here, as Round 19 has not closed.";
+    assert!(text.lines().any(|line| line == standing));
+    let slice_line = "- Slice 20 is built and in review. It carries the turns reading over a recorded championship, the classification of each decided series by the count of the changes of hand over its decided record as turned or steady, one section for each turned series naming its decided races in race order and the changes of hand of the series and its winner with its race split, with the closing counts of series, turned, steady, and no winner, with the turns example over the standing championship with the pilot series in its section alone and the constructed turns example and their goldens under examples, and the turns command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, and opening.";
     assert!(text.lines().any(|line| line == slice_line));
 }
 
@@ -411,7 +422,7 @@ fn agents_annex_states_the_local_directory_runner() {
 }
 
 #[test]
-fn readme_shows_the_comeback_distance_rally_deadlock_streak_cluster_closing_opening_and_run_sections(
+fn readme_shows_the_comeback_distance_rally_deadlock_streak_cluster_closing_opening_turns_and_run_sections(
 ) {
     // The Usage sections the Round 12, Round 13, Round
     // 14, Round 15, Round 16, and Round 17 rounds stand
@@ -426,7 +437,11 @@ fn readme_shows_the_comeback_distance_rally_deadlock_streak_cluster_closing_open
     // grows by it. Altered at the Round 17 slice for its
     // named mechanical consequence, the opening section
     // standing new in the README, so the pin gains its
-    // lead and its name grows by it.
+    // lead and its name grows by it. Altered at the
+    // Round 19 slice for its named mechanical
+    // consequence, the turns section standing new in
+    // the README, so the pin gains its lead and its
+    // name grows by it.
     let readme = read(&repo_root().join("README.md"));
     for lead in [
         "The comeback command reads a championship file",
@@ -437,6 +452,7 @@ fn readme_shows_the_comeback_distance_rally_deadlock_streak_cluster_closing_open
         "The cluster command reads a championship file",
         "The closing command reads a championship file",
         "The opening command reads a championship file",
+        "The turns command reads a championship file",
         "The run command takes a race specification file",
     ] {
         assert!(readme.contains(lead), "the README shows no section: {lead}");
