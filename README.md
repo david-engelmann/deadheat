@@ -320,6 +320,25 @@ series winner, prime-1, prime-1 3 race wins, shadow-1 0 race wins, 2 no results
 opening, 2 series, 2 in a run, 0 alone, 0 from behind, 0 no winner
 ```
 
+The turns command reads a championship file and reports the series that stood turned, whose decided record changed hands two or more times, standing the decided races of each beside the changes of hand of the series and its race split.
+
+```sh
+deadheat turns examples/championship.json
+```
+
+```text
+turns
+series 1, the recorded close call pilot
+prime-1 against shadow-1, first to 3 wins
+race 1, pin the cache key, prime-1 wins
+race 5, name the worker pool, prime-1 wins
+race 7, shrink the prompt budget, shadow-1 wins
+race 9, sort the seed list, prime-1 wins
+changes of hand 2 over the decided record
+series winner, prime-1, prime-1 3 race wins, shadow-1 1 race wins, 5 no results
+turns, 2 series, 1 turned, 1 steady, 0 no winner
+```
+
 The standings command prints the standings table held in a standings file. The adopt command writes the losing attempt patch into a patches folder and the discard command removes it.
 
 ## Status
@@ -365,6 +384,8 @@ Seeded in October 2026. Setup has landed, and Rounds 1 to 18 have closed, with a
 - Slice 18 has landed. It carries the opening reading over a recorded championship, the classification of each decided series by the opening run of consecutive decided races won by its winner as in a run, alone, or from behind, one section for each series in a run naming its decided races in race order and the opening run of its winner and its winner with its race split, with the closing counts of series, in a run, alone, from behind, and no winner, with the opening example over the standing championship with both of its series in section form and the constructed opening example and their goldens under examples, and the opening command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, and closing.
 - Contract, the Round 18 fold and the repair amendment FIX-DH-23 met. They stand in full form in CONTRACT.md under the Round 18 obligations, and Round 18 closed on the merged slice 19 after three reviews, with the fold's neutrality proof executed at the fold commit and re-executed by the red team.
 - Slice 19 has landed. It carries the fold of the longest run computation of the streak reading and the cluster reading into the one helper of the championship module, both readings reading the longest run of a series from the one home from this round, with no command added, no figure moved, and no golden changed, under the repair amendment FIX-DH-23.
+- Contract, DH-40 and DH-41 now stand in full form in CONTRACT.md under the Round 19 obligations, and their standing is not claimed here, as Round 19 has not closed.
+- Slice 20 is built and in review. It carries the turns reading over a recorded championship, the classification of each decided series by the count of the changes of hand over its decided record as turned or steady, one section for each turned series naming its decided races in race order and the changes of hand of the series and its winner with its race split, with the closing counts of series, turned, steady, and no winner, with the turns example over the standing championship with the pilot series in its section alone and the constructed turns example and their goldens under examples, and the turns command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, and opening.
 - The Rust port has landed. It carries the behavior the Python package carried, checked against the same goldens, and the Python tree stands removed under PORT-13.
 - Local gate, cargo run --bin codepoint_scan, cargo fmt --check, cargo clippy --all-targets -- -D warnings, and cargo test. CI runs the same commands.
 
