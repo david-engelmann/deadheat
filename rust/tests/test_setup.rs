@@ -25,7 +25,7 @@ fn agents_carries_the_canonical_marker() {
 #[test]
 fn readme_states_the_closed_round_count() {
     let text = read(&repo_root().join("README.md"));
-    assert!(text.contains("Closed perfection rounds, 19 of 100"));
+    assert!(text.contains("Closed perfection rounds, 20 of 100"));
 }
 
 #[test]
@@ -119,8 +119,9 @@ fn readme_reports_the_round_four_status() {
     // Slice 20 stood in review while Round 19 was built,
     // so the count was one again until the Round 19 closure
     // landed slice 20 and the count returned to zero.
-    // Slice 21 stands in review while Round 20 is built,
-    // so the count is one again. The round five pin
+    // Slice 21 stood in review while Round 20 was built,
+    // so the count was one again until the Round 20 closure
+    // landed slice 21 and the count returned to zero. The round five pin
     // below holds the slice 6 line itself, the round six pin
     // below holds the slice 7 line, the round seven pin
     // below holds the slice 8 line, the round eight pin
@@ -139,7 +140,7 @@ fn readme_reports_the_round_four_status() {
     // nineteen pin below holds the slice 20 line, and
     // the round twenty pin below holds the slice 21
     // line.
-    assert_eq!(text.matches("built and in review").count(), 1);
+    assert_eq!(text.matches("built and in review").count(), 0);
 }
 
 #[test]
@@ -280,9 +281,9 @@ fn readme_reports_the_round_nineteen_status() {
 #[test]
 fn readme_reports_the_round_twenty_status() {
     let text = read(&repo_root().join("README.md"));
-    let standing = "- Contract, DH-42 and DH-43 now stand in full form in CONTRACT.md under the Round 20 obligations, and their standing is not claimed here, as Round 20 has not closed.";
+    let standing = "- Contract, DH-42 and DH-43 met. They stand in full form in CONTRACT.md under the Round 20 obligations, and Round 20 closed on the merged slice 21 after three reviews, with the red team clean on every charge, the formatting repair landed in the slice, and the two CodeRabbit findings repaired in the fix-forward under FIX-DH-25.";
     assert!(text.lines().any(|line| line == standing));
-    let slice_line = "- Slice 21 is built and in review. It carries the lead reading over a recorded championship, the classification of each decided series by the largest lead either model held over its decided record read against the winning margin of the series as wide or narrow, one section for each wide series naming its decided races in race order and the largest lead of the series and its winner with its race split, with the closing counts of series, wide, narrow, and no winner, with the lead example over the standing championship in its empty form and the constructed lead example and their goldens under examples, and the lead command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, opening, and turns.";
+    let slice_line = "- Slice 21 has landed. It carries the lead reading over a recorded championship, the classification of each decided series by the largest lead either model held over its decided record read against the winning margin of the series as wide or narrow, one section for each wide series naming its decided races in race order and the largest lead of the series and its winner with its race split, with the closing counts of series, wide, narrow, and no winner, with the lead example over the standing championship in its empty form and the constructed lead example and their goldens under examples, and the lead command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, opening, and turns.";
     assert!(text.lines().any(|line| line == slice_line));
 }
 
