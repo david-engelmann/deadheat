@@ -959,3 +959,20 @@ fn a_championship_holding_no_winner_stands_in_no_class() {
         vec!["lead", "lead, 2 series, 0 wide, 0 narrow, 2 no winner"]
     );
 }
+
+#[test]
+fn a_collection_holding_no_series_renders_the_empty_form_at_the_library_surface() {
+    // No championship file carries an empty collection,
+    // because the loader of DH-13 refuses a series list
+    // holding no names, so this form stands at the library
+    // surface alone, over a collection built by hand.
+    let championship = Championship { series: vec![] };
+    let lines = lead_report(&championship);
+    assert_eq!(
+        lines,
+        vec![
+            "lead",
+            "lead, 0 series, 0 wide, 0 narrow, 0 no winner"
+        ]
+    );
+}
