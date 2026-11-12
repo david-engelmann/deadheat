@@ -1630,3 +1630,202 @@ fn the_constructed_turns_example_under_its_sibling_readings_matches_its_goldens(
         read_text(&examples().join("constructed-turns-opening.txt"))
     );
 }
+
+#[test]
+fn the_lead_example_matches_its_golden() {
+    // E-1 of the Round 20 enrolment. The standing
+    // championship under the lead command, both of its
+    // series standing narrow, the pilot with a largest
+    // lead of two standing equal to its winning margin
+    // of two and the panel with a largest lead of three
+    // standing equal to its winning margin of three, so
+    // the golden carries no section, pinned at the CLI
+    // and at the library surface both.
+    let source = examples().join("championship.json");
+    let out = run_ok(&["lead", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("championship-lead.txt"));
+    assert_eq!(out, golden);
+    assert!(!out.contains("series 1,"));
+    assert!(out
+        .trim_end()
+        .ends_with("lead, 2 series, 0 wide, 2 narrow, 0 no winner"));
+    let (championship, defects) =
+        deadheat::championship::load_championship_file(&examples().join("championship.json"));
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered =
+        deadheat::leads::lead_report(&championship.expect("a championship")).join("\n") + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_survey_championship_lead_matches_its_golden() {
+    // E-2. The survey championship under the lead
+    // command, the apex-crest series standing wide at a
+    // figure of three and the apex-drift series
+    // standing wide at a figure of two, in that order,
+    // and the remaining four series standing narrow,
+    // pinned at the CLI and at the library surface
+    // both.
+    let source = examples().join("survey-championship.json");
+    let out = run_ok(&["lead", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("survey-championship-lead.txt"));
+    assert_eq!(out, golden);
+    assert!(out.contains("series 2, the constructed survey series, apex-1 against crest-1"));
+    assert!(out.contains("largest lead 3 over the decided record"));
+    assert!(out.contains("series 3, the constructed survey series, apex-1 against drift-1"));
+    assert!(out.contains("largest lead 2 over the decided record"));
+    assert!(out
+        .trim_end()
+        .ends_with("lead, 6 series, 2 wide, 4 narrow, 0 no winner"));
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("survey-championship.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered =
+        deadheat::leads::lead_report(&championship.expect("a championship")).join("\n") + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_league_championship_lead_matches_its_golden() {
+    // E-3. The league championship under the lead
+    // command, the bolt-crest series standing wide at a
+    // figure of three in its section alone and the
+    // remaining nine series standing narrow, pinned at
+    // the CLI and at the library surface both.
+    let source = examples().join("league-championship.json");
+    let out = run_ok(&["lead", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("league-championship-lead.txt"));
+    assert_eq!(out, golden);
+    assert!(out.contains("series 5, the constructed league series, bolt-1 against crest-1"));
+    assert!(out.contains("largest lead 3 over the decided record"));
+    assert!(!out.contains("series 1,"));
+    assert!(out
+        .trim_end()
+        .ends_with("lead, 10 series, 1 wide, 9 narrow, 0 no winner"));
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("league-championship.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered =
+        deadheat::leads::lead_report(&championship.expect("a championship")).join("\n") + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_constructed_lead_example_matches_its_golden() {
+    // E-4. The constructed championship of DH-43,
+    // labelled as constructed in its file names and
+    // its task texts and never presented as recorded.
+    // Its first series stands wide at a figure of
+    // three on its loser's height against its margin
+    // of one, and its second stands narrow at two
+    // equal to two, so the golden carries the first
+    // series' section alone.
+    let source = examples().join("constructed-lead.json");
+    let out = run_ok(&["lead", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("constructed-lead-lead.txt"));
+    assert_eq!(out, golden);
+    assert!(out.contains("series 1, the constructed lead drill one"));
+    assert!(out.contains("largest lead 3 over the decided record"));
+    assert!(!out.contains("series 2,"));
+    assert!(out
+        .trim_end()
+        .ends_with("lead, 2 series, 1 wide, 1 narrow, 0 no winner"));
+    let (championship, defects) =
+        deadheat::championship::load_championship_file(&examples().join("constructed-lead.json"));
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered =
+        deadheat::leads::lead_report(&championship.expect("a championship")).join("\n") + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_constructed_lead_example_under_its_sibling_readings_matches_its_goldens() {
+    // E-5. The same constructed file under the streak,
+    // cluster, rally, deadlock, distance, comeback,
+    // closing, and opening commands, the eight
+    // section-carrying sibling goldens: both series
+    // standing strung under the streak command, the
+    // first series standing clustered, a rally,
+    // deadlocked, the distance, from behind, and in a
+    // run at its closing in its section alone under
+    // those six, and the second series standing in a
+    // run in its section alone under the opening
+    // command, so the round's partings stand pinned
+    // over shipped data byte for byte against the pin
+    // above. No E-6 stands in this round: DH-43 stands
+    // no further golden over the constructed lead
+    // fixture, the eight sibling goldens above standing
+    // as its full sibling set.
+    let source = examples().join("constructed-lead.json");
+    let source_arg = source.to_str().expect("utf8");
+    let out = run_ok(&["streak", source_arg]);
+    let golden = read_text(&examples().join("constructed-lead-streak.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["cluster", source_arg]);
+    let golden = read_text(&examples().join("constructed-lead-cluster.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["rally", source_arg]);
+    let golden = read_text(&examples().join("constructed-lead-rally.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["deadlock", source_arg]);
+    let golden = read_text(&examples().join("constructed-lead-deadlock.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["distance", source_arg]);
+    let golden = read_text(&examples().join("constructed-lead-distance.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["comeback", source_arg]);
+    let golden = read_text(&examples().join("constructed-lead-comebacks.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["closing", source_arg]);
+    let golden = read_text(&examples().join("constructed-lead-closing.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["opening", source_arg]);
+    let golden = read_text(&examples().join("constructed-lead-opening.txt"));
+    assert_eq!(out, golden);
+    let (championship, defects) =
+        deadheat::championship::load_championship_file(&examples().join("constructed-lead.json"));
+    assert_eq!(defects, Vec::<String>::new());
+    let championship = championship.expect("a championship");
+    let rendered = deadheat::streaks::streak_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-lead-streak.txt"))
+    );
+    let rendered = deadheat::clusters::cluster_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-lead-cluster.txt"))
+    );
+    let rendered = deadheat::rallies::rally_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-lead-rally.txt"))
+    );
+    let rendered = deadheat::deadlocks::deadlock_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-lead-deadlock.txt"))
+    );
+    let rendered = deadheat::distances::distance_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-lead-distance.txt"))
+    );
+    let rendered = deadheat::comebacks::comeback_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-lead-comebacks.txt"))
+    );
+    let rendered = deadheat::closings::closing_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-lead-closing.txt"))
+    );
+    let rendered = deadheat::openings::opening_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-lead-opening.txt"))
+    );
+}

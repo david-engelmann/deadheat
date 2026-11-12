@@ -1,0 +1,94 @@
+{
+ "models": [
+  "kestrel-1",
+  "lapwing-1"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 102.0,
+     "model": "kestrel-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 41500
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 128.0,
+     "model": "lapwing-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 44600
+    }
+   ],
+   "task": "lead drill two race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 107.0,
+     "model": "kestrel-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42100
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 131.0,
+     "model": "lapwing-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45200
+    }
+   ],
+   "task": "lead drill two race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 136.0,
+     "model": "kestrel-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45800
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 105.0,
+     "model": "lapwing-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 41700
+    }
+   ],
+   "task": "lead drill two race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 110.0,
+     "model": "kestrel-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42900
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 135.0,
+     "model": "lapwing-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45500
+    }
+   ],
+   "task": "lead drill two race four"
+  }
+ ],
+ "task": "the constructed lead drill two",
+ "wins_target": 3
+}

@@ -15,6 +15,7 @@ pub mod deadlocks;
 pub mod distances;
 pub mod flips;
 pub mod json;
+pub mod leads;
 pub mod makers;
 pub mod openings;
 pub mod pairings;

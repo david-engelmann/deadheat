@@ -339,6 +339,17 @@ series winner, prime-1, prime-1 3 race wins, shadow-1 1 race wins, 5 no results
 turns, 2 series, 1 turned, 1 steady, 0 no winner
 ```
 
+The lead command reads a championship file and reports the series that stood wide, whose largest lead over the decided record stood above the winning margin of the series, standing the decided races of each beside the largest lead of the series and its race split.
+
+```sh
+deadheat lead examples/championship.json
+```
+
+```text
+lead
+lead, 2 series, 0 wide, 2 narrow, 0 no winner
+```
+
 The standings command prints the standings table held in a standings file. The adopt command writes the losing attempt patch into a patches folder and the discard command removes it.
 
 ## Status
@@ -386,6 +397,8 @@ Seeded in October 2026. Setup has landed, and Rounds 1 to 19 have closed, with a
 - Slice 19 has landed. It carries the fold of the longest run computation of the streak reading and the cluster reading into the one helper of the championship module, both readings reading the longest run of a series from the one home from this round, with no command added, no figure moved, and no golden changed, under the repair amendment FIX-DH-23.
 - Contract, DH-40 and DH-41 met. They stand in full form in CONTRACT.md under the Round 19 obligations, and Round 19 closed on the merged slice 20 after three reviews, with the pin comments restated to their executed postures in the slice.
 - Slice 20 has landed. It carries the turns reading over a recorded championship, the classification of each decided series by the count of the changes of hand over its decided record as turned or steady, one section for each turned series naming its decided races in race order and the changes of hand of the series and its winner with its race split, with the closing counts of series, turned, steady, and no winner, with the turns example over the standing championship with the pilot series in its section alone and the constructed turns example and their goldens under examples, and the turns command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, and opening.
+- Contract, DH-42 and DH-43 now stand in full form in CONTRACT.md under the Round 20 obligations, and their standing is not claimed here, as Round 20 has not closed.
+- Slice 21 is built and in review. It carries the lead reading over a recorded championship, the classification of each decided series by the largest lead either model held over its decided record read against the winning margin of the series as wide or narrow, one section for each wide series naming its decided races in race order and the largest lead of the series and its winner with its race split, with the closing counts of series, wide, narrow, and no winner, with the lead example over the standing championship in its empty form and the constructed lead example and their goldens under examples, and the lead command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, opening, and turns.
 - The Rust port has landed. It carries the behavior the Python package carried, checked against the same goldens, and the Python tree stands removed under PORT-13.
 - Local gate, cargo run --bin codepoint_scan, cargo fmt --check, cargo clippy --all-targets -- -D warnings, and cargo test. CI runs the same commands.
 
