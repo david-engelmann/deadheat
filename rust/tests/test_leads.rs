@@ -970,9 +970,6 @@ fn a_collection_holding_no_series_renders_the_empty_form_at_the_library_surface(
     let lines = lead_report(&championship);
     assert_eq!(
         lines,
-        vec![
-            "lead",
-            "lead, 0 series, 0 wide, 0 narrow, 0 no winner"
-        ]
+        vec!["lead", "lead, 0 series, 0 wide, 0 narrow, 0 no winner"]
     );
 }
