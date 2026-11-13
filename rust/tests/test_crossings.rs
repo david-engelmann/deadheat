@@ -57,6 +57,7 @@ use deadheat::json::JsonValue;
 use deadheat::leads::lead_report;
 use deadheat::openings::opening_report;
 use deadheat::rallies::rally_report;
+use deadheat::series::series_report;
 use deadheat::streaks::streak_report;
 use deadheat::turns::turns_report;
 use shared::*;
@@ -616,8 +617,8 @@ fn section_figures(lines: &[String]) -> Vec<u64> {
 /// report, its model name and its count of race wins,
 /// read from the field that names the model, its
 /// count, and the words race wins.
-fn winner_split(field: &str) -> (String, u64) {
-    let body = field.strip_suffix(" race wins").expect("a race wins field");
+fn tally_split(field: &str) -> (String, u64) {
+    let body = field.strip_suffix(" wins").expect("a wins field");
     let (model, count) = body.rsplit_once(' ').expect("a model and its count");
     (model.to_string(), count.parse::<u64>().expect("a count"))
 }
@@ -626,9 +627,10 @@ fn winner_split(field: &str) -> (String, u64) {
 /// championship, read from the printed readings alone.
 /// Both championships this helper reads hold a winner
 /// in every series, so the series winner lines of the
-/// championship report stand in championship order
-/// and name each series' loser by the side the
-/// champion is not.
+/// championship report stand in championship order,
+/// and the final tally of a series' own series report
+/// states its split, naming the series' loser by the
+/// side the champion is not.
 fn check_relations(championship: &Championship, series_count: u64) {
     let table = championship_report(championship);
     let winner_lines: Vec<&String> = table
@@ -720,11 +722,21 @@ fn check_relations(championship: &Championship, series_count: u64) {
     // in its championship block stands in a crossings
     // section, the series standing without reply
     // under DH-23 and through under DH-44.
-    for (index, line) in winner_lines.iter().enumerate() {
-        let fields: Vec<&str> = line.split(", ").collect();
-        let champion = fields[1];
-        let (first_model, first_wins) = winner_split(fields[2]);
-        let (_, second_wins) = winner_split(fields[3]);
+    for (index, series) in championship.series.iter().enumerate() {
+        let report = series_report(series);
+        let champion = report
+            .last()
+            .expect("a winner line")
+            .strip_prefix("series winner, ")
+            .expect("a series winner");
+        let tally = report
+            .iter()
+            .rev()
+            .find(|line| line.starts_with("tally, "))
+            .expect("a final tally");
+        let fields: Vec<&str> = tally.split(", ").collect();
+        let (first_model, first_wins) = tally_split(fields[1]);
+        let (_, second_wins) = tally_split(fields[2]);
         let loser_wins = if champion == first_model {
             second_wins
         } else {
