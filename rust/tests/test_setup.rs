@@ -130,7 +130,9 @@ fn readme_reports_the_round_four_status() {
     // landed slice 23 and the count returned to zero.
     // Slice 24 stood in review while Round 23 was built,
     // so the count was one again until the Round 23 closure
-    // landed slice 24 and the count returned to zero. The round five pin
+    // landed slice 24 and the count returned to zero.
+    // Slice 25 stands in review while Round 24 is built,
+    // so the count is one. The round five pin
     // below holds the slice 6 line itself, the round six pin
     // below holds the slice 7 line, the round seven pin
     // below holds the slice 8 line, the round eight pin
@@ -151,8 +153,10 @@ fn readme_reports_the_round_four_status() {
     // line, and the round twenty one pin below holds
     // the slice 22 line, and the round twenty two pin
     // below holds the slice 23 line, and the round
-    // twenty three pin below holds the slice 24 line.
-    assert_eq!(text.matches("built and in review").count(), 0);
+    // twenty three pin below holds the slice 24
+    // line, and the round twenty four pin below holds
+    // the slice 25 line.
+    assert_eq!(text.matches("built and in review").count(), 1);
 }
 
 #[test]
@@ -322,6 +326,15 @@ fn readme_reports_the_round_twenty_three_status() {
     let standing = "- Contract, DH-48 and DH-49 met. They stand in full form in CONTRACT.md under the Round 23 obligations, and Round 23 closed on the merged slice 24 after three reviews, with the standards review approving with findings at two Observations, the spec review approving with findings at one Major cured in the slice by the fencing repair and one Minor standing against the design record, the red team approving with findings at three Observations on executed recomputation, and CodeRabbit returning no comments.";
     assert!(text.lines().any(|line| line == standing));
     let slice_line = "- Slice 24 has landed. It carries the depths reading over a recorded championship, the classification of each decided series by the depth of its winner over the decided record read against the margin the series was won by as deep, matched, or shallow, one section for each series standing deep naming its decided races in race order and the deepest deficit of the series and its winner with its race split, with the closing counts of series, deep, matched, shallow, and no winner, with the depths example over the standing championship in its empty form and the constructed depths example and their goldens under examples, and the depths command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, opening, turns, lead, crossings, and tenure.";
+    assert!(text.lines().any(|line| line == slice_line));
+}
+
+#[test]
+fn readme_reports_the_round_twenty_four_status() {
+    let text = read(&repo_root().join("README.md"));
+    let standing = "- Contract, the Round 24 tally fold and the repair amendment FIX-DH-28 now stand in full form in CONTRACT.md under the Round 24 obligations, and their standing is not claimed here, as Round 24 has not closed.";
+    assert!(text.lines().any(|line| line == standing));
+    let slice_line = "- Slice 25 is built and in review. It carries the fold of the tally computation of the lead, crossings, deadlock, rally, tenure, and depths readings into the one helper of the championship module, all six readings reading the tallies of a decided series from the one home from this round, with no command added, no figure moved, and no golden changed, under the repair amendment FIX-DH-28.";
     assert!(text.lines().any(|line| line == slice_line));
 }
 
