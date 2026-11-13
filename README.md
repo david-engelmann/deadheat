@@ -394,6 +394,17 @@ series winner, prime-1, prime-1 3 race wins, shadow-1 0 race wins, 2 no results
 tenure, 2 series, 2 ahead, 0 level, 0 behind, 0 no winner
 ```
 
+The depths command reads a championship file and reports the series that stood deep, whose winner's largest deficit over the decided record stood above the margin the series was won by, standing the decided races of each beside the deepest deficit of the series and its race split.
+
+```sh
+deadheat depths examples/championship.json
+```
+
+```text
+depths
+depths, 2 series, 0 deep, 0 matched, 2 shallow, 0 no winner
+```
+
 The standings command prints the standings table held in a standings file. The adopt command writes the losing attempt patch into a patches folder and the discard command removes it.
 
 ## Status

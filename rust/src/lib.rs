@@ -13,6 +13,7 @@ pub mod clusters;
 pub mod comebacks;
 pub mod crossings;
 pub mod deadlocks;
+pub mod depths;
 pub mod distances;
 pub mod flips;
 pub mod json;
