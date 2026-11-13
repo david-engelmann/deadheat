@@ -19,8 +19,14 @@
 //! final tallies. F-5, the level count read as the count
 //! of the decided races after which the tallies stood
 //! apart. The postures stated in each pin's comment are
-//! the executed postures, read on this tree in the
-//! build's warm-up before this file was committed.
+//! the executed postures, read in the build's warm-up
+//! as this file was committed. The build's report was
+//! lost to a runtime restart after the slice's final
+//! commit. The round's reviews re-verified the
+//! postures at the seats they executed (the leads
+//! boundary set and the depths walk set exact against
+//! their stated sets) and the pins pass whole on the
+//! folded tree.
 
 mod shared;
 
@@ -257,6 +263,10 @@ fn the_crossings_and_deadlock_pair_stands_on_one_level_count() {
     // short, and its deadlock figure standing at one
     // with its section at the figure 1. The pin asserts
     // both reports whole over the one championship.
+    // The winner orders in both series part from the
+    // design's stated orders here, the landed orders
+    // carrying the designed figures, closings, and
+    // postures.
     // Fails under F-1, the standing before the first
     // race counted, the first series' crossings and
     // deadlock figures standing at three and the second
