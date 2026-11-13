@@ -300,6 +300,15 @@ fn readme_reports_the_round_twenty_one_status() {
 }
 
 #[test]
+fn readme_reports_the_round_twenty_two_status() {
+    let text = read(&repo_root().join("README.md"));
+    let standing = "- Contract, DH-46 and DH-47 now stand in full form in CONTRACT.md under the Round 22 obligations, and their standing is not claimed here, as Round 22 has not closed.";
+    assert!(text.lines().any(|line| line == standing));
+    let slice_line = "- Slice 23 is built and in review. It carries the tenure reading over a recorded championship, the classification of each decided series by the count of the decided races after which its winner's tally stood above its loser's read against the same count for its loser as ahead, level, or behind, one section for each series standing ahead naming its decided races in race order and the front count of the series and its winner with its race split, with the closing counts of series, ahead, level, behind, and no winner, with the tenure example over the standing championship with both of its series in section form and the constructed tenure example and their goldens under examples, and the tenure command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, opening, turns, lead, and crossings.";
+    assert!(text.lines().any(|line| line == slice_line));
+}
+
+#[test]
 fn contract_states_the_winner_line_in_the_house_form() {
     // The FIX-DH-21 pin. It fails on the pre repair tree by
     // content, where the DH-37 and DH-39 entries state the

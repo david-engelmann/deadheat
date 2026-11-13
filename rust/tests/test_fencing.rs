@@ -36,6 +36,7 @@ use deadheat::rallies::rally_report;
 use deadheat::seats::attempt_summary;
 use deadheat::series::{series_report, Series};
 use deadheat::streaks::streak_report;
+use deadheat::tenure::tenure_report;
 use deadheat::totals::totals_report;
 use deadheat::turns::turns_report;
 
@@ -1057,6 +1058,41 @@ fn the_crossings_report_fences_its_fields() {
             "crossings 0 over the decided record",
             "series winner, ,  1 race wins, beta-1 0 race wins, 0 no results",
             "crossings, 1 series, 1 through, 0 short, 0 no winner",
+        ]
+    );
+}
+
+#[test]
+fn the_tenure_report_fences_its_fields() {
+    // F-1 of the Round 22 discrimination plan. The
+    // hand-built series the sibling pins stand on, at
+    // its wins target of one with its one race won by
+    // its first model, read under DH-47: its winner's
+    // front count stands at one against its loser's
+    // none, so the series stands ahead and its section
+    // prints the series task, the race task, and both
+    // model labels, every field holding a break
+    // standing fenced to the empty field through the
+    // one helper of FIX-DH-16, as on the sibling
+    // surfaces. Its failure mode is a second fencing
+    // path standing in the new module. It fails on
+    // the pre round tree by compile absence, the
+    // tenure module standing absent there.
+    let championship = Championship {
+        series: vec![bad_series()],
+    };
+    let lines = tenure_report(&championship);
+    assert_no_forgery(&lines);
+    assert_eq!(
+        lines,
+        vec![
+            "tenure",
+            "series 1, ",
+            " against beta-1, first to 1 wins",
+            "race 1, ,  wins",
+            "front count 1 over the decided record",
+            "series winner, ,  1 race wins, beta-1 0 race wins, 0 no results",
+            "tenure, 1 series, 1 ahead, 0 level, 0 behind, 0 no winner",
         ]
     );
 }
