@@ -206,7 +206,10 @@ fn the_standing_championship_stands_through_in_the_panel_series() {
             "crossings, 2 series, 1 through, 1 short, 0 no winner",
         ]
     );
-    assert_eq!(lines.join("\n") + "\n", golden("championship-crossings.txt"));
+    assert_eq!(
+        lines.join("\n") + "\n",
+        golden("championship-crossings.txt")
+    );
 }
 
 #[test]
@@ -552,7 +555,10 @@ fn an_interposed_no_result_leaves_the_crossings_whole() {
     let lines = crossings_report(&championship);
     assert_eq!(
         lines,
-        vec!["crossings", "crossings, 1 series, 0 through, 1 short, 0 no winner"]
+        vec![
+            "crossings",
+            "crossings, 1 series, 0 through, 1 short, 0 no winner"
+        ]
     );
     let turns = turns_report(&championship);
     assert_eq!(
@@ -829,7 +835,10 @@ fn a_winners_lead_erased_to_level_stands_short() {
     let lines = crossings_report(&championship);
     assert_eq!(
         lines,
-        vec!["crossings", "crossings, 1 series, 0 through, 1 short, 0 no winner"]
+        vec![
+            "crossings",
+            "crossings, 1 series, 0 through, 1 short, 0 no winner"
+        ]
     );
     let deadlock = deadlock_report(&championship);
     assert_eq!(
@@ -851,7 +860,10 @@ fn a_winners_lead_erased_to_level_stands_short() {
     let rally = rally_report(&championship);
     assert_eq!(
         rally,
-        vec!["rally", "rally, 1 series, 0 rally, 1 wire to wire, 0 no winner"]
+        vec![
+            "rally",
+            "rally, 1 series, 0 rally, 1 wire to wire, 0 no winner"
+        ]
     );
 }
 
@@ -903,7 +915,10 @@ fn a_crossing_retaken_by_the_same_side_stands_short() {
     let lines = crossings_report(&championship);
     assert_eq!(
         lines,
-        vec!["crossings", "crossings, 1 series, 0 through, 1 short, 0 no winner"]
+        vec![
+            "crossings",
+            "crossings, 1 series, 0 through, 1 short, 0 no winner"
+        ]
     );
     let turns = turns_report(&championship);
     assert_eq!(
@@ -1020,7 +1035,10 @@ fn a_handicap_adjustment_moves_a_series_between_short_and_through() {
     );
     assert_eq!(
         plain,
-        vec!["crossings", "crossings, 1 series, 0 through, 1 short, 0 no winner"]
+        vec![
+            "crossings",
+            "crossings, 1 series, 0 through, 1 short, 0 no winner"
+        ]
     );
     let adjusted = crossings_for(
         &dir,
