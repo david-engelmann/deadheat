@@ -237,8 +237,9 @@ fn the_survey_championship_matches_its_crossings_golden() {
     // does not carry. Fails under M-F, the apex and
     // bolt series' winner standing behind on its
     // record, its level or behind count of three
-    // standing against its two changes of hand and
-    // its section leaving the report.
+    // standing as its crossings against its two
+    // changes of hand, the series standing through
+    // with its section at the figure three.
     let championship = load_example("survey-championship.json");
     let lines = crossings_report(&championship);
     assert!(lines.len() > 2, "the survey golden stands in section form");
@@ -273,8 +274,10 @@ fn the_league_championship_matches_its_crossings_golden() {
     // through with sections the golden does not
     // carry. Fails under M-F, the apex and crest
     // series' winner standing behind on its record,
-    // its level or behind count standing above its
-    // crossings and its section leaving the report.
+    // its level or behind count of three standing as
+    // its crossings against its two changes of hand,
+    // the series standing through with its section
+    // at the figure three.
     let championship = load_example("league-championship.json");
     let lines = crossings_report(&championship);
     assert!(lines.len() > 2, "the league golden stands in section form");
@@ -826,10 +829,10 @@ fn a_winners_lead_erased_to_level_stands_short() {
     // its one crossing erasing its winner's lead and
     // its counted crossings falling to none, the
     // series standing short as it stands. Passes
-    // under M-F, as the plan states for this pin and
-    // its touch sibling, its crossings assertions
-    // reading the class and the closing, which the
-    // mutation leaves standing on this fixture.
+    // under M-F, its winner's level or behind count
+    // of one standing as its crossings against its
+    // one change of hand, the series standing short
+    // as it stands and its class and closing standing.
     let dir = temp_dir("crossings-erasure");
     let series = series_json(
         "the erasure crossings saga",
