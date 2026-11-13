@@ -1082,7 +1082,7 @@ fn is_help_token(text: &PText, has_standings: bool) -> bool {
     false
 }
 
-const COMMANDS: [&str; 21] = [
+const COMMANDS: [&str; 22] = [
     "race",
     "adopt",
     "discard",
