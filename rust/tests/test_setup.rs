@@ -25,7 +25,7 @@ fn agents_carries_the_canonical_marker() {
 #[test]
 fn readme_states_the_closed_round_count() {
     let text = read(&repo_root().join("README.md"));
-    assert!(text.contains("Closed perfection rounds, 20 of 100"));
+    assert!(text.contains("Closed perfection rounds, 21 of 100"));
 }
 
 #[test]
@@ -122,8 +122,9 @@ fn readme_reports_the_round_four_status() {
     // Slice 21 stood in review while Round 20 was built,
     // so the count was one again until the Round 20 closure
     // landed slice 21 and the count returned to zero.
-    // Slice 22 stands in review while Round 21 is built,
-    // so the count is one again. The round five pin
+    // Slice 22 stood in review while Round 21 was built,
+    // so the count was one again until the Round 21 closure
+    // landed slice 22 and the count returned to zero. The round five pin
     // below holds the slice 6 line itself, the round six pin
     // below holds the slice 7 line, the round seven pin
     // below holds the slice 8 line, the round eight pin
@@ -143,7 +144,7 @@ fn readme_reports_the_round_four_status() {
     // the round twenty pin below holds the slice 21
     // line, and the round twenty one pin below holds
     // the slice 22 line.
-    assert_eq!(text.matches("built and in review").count(), 1);
+    assert_eq!(text.matches("built and in review").count(), 0);
 }
 
 #[test]
@@ -292,9 +293,9 @@ fn readme_reports_the_round_twenty_status() {
 #[test]
 fn readme_reports_the_round_twenty_one_status() {
     let text = read(&repo_root().join("README.md"));
-    let standing = "- Contract, DH-44 and DH-45, with FIX-DH-26, now stand in full form in CONTRACT.md under the Round 21 obligations, and their standing is not claimed here, as Round 21 has not closed.";
+    let standing = "- Contract, DH-44 and DH-45, with FIX-DH-26, met. They stand in full form in CONTRACT.md under the Round 21 obligations, and Round 21 closed on the merged slice 22 after three reviews, with the red team approving on recomputation of every crossings closing, the relations pin's winner line parse repaired to the series report's final tally, and the M-F clauses of L-4, L-16, and L-17 restated to their computed postures.";
     assert!(text.lines().any(|line| line == standing));
-    let slice_line = "- Slice 22 is built and in review. It carries the crossings reading over a recorded championship, the classification of each decided series by the count of the crossings over its decided record read against the count of its changes of hand as through or short, one section for each through series naming its decided races in race order and the crossings of the series and its winner with its race split, with the closing counts of series, through, short, and no winner, with the crossings example over the standing championship with the panel series in its section alone and the constructed crossings example and their goldens under examples, and the crossings command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, opening, turns, and lead.";
+    let slice_line = "- Slice 22 has landed. It carries the crossings reading over a recorded championship, the classification of each decided series by the count of the crossings over its decided record read against the count of its changes of hand as through or short, one section for each through series naming its decided races in race order and the crossings of the series and its winner with its race split, with the closing counts of series, through, short, and no winner, with the crossings example over the standing championship with the panel series in its section alone and the constructed crossings example and their goldens under examples, and the crossings command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, opening, turns, and lead.";
     assert!(text.lines().any(|line| line == slice_line));
 }
 
