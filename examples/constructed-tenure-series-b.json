@@ -1,0 +1,157 @@
+{
+ "models": [
+  "fulmar-1",
+  "shearwater-1"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 131.0,
+     "model": "fulmar-1",
+     "patch": "loser diff",
+     "result": "green",
+     "tokens": 41300
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 102.0,
+     "model": "shearwater-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42800
+    }
+   ],
+   "task": "tenure drill two race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 127.0,
+     "model": "fulmar-1",
+     "patch": "loser diff",
+     "result": "green",
+     "tokens": 41600
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 109.0,
+     "model": "shearwater-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 43050
+    }
+   ],
+   "task": "tenure drill two race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 101.0,
+     "model": "fulmar-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 41900
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 138.0,
+     "model": "shearwater-1",
+     "patch": "loser diff",
+     "result": "green",
+     "tokens": 43300
+    }
+   ],
+   "task": "tenure drill two race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 129.0,
+     "model": "fulmar-1",
+     "patch": "loser diff",
+     "result": "green",
+     "tokens": 42200
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 104.0,
+     "model": "shearwater-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 43550
+    }
+   ],
+   "task": "tenure drill two race four"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 107.0,
+     "model": "fulmar-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42500
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 133.0,
+     "model": "shearwater-1",
+     "patch": "loser diff",
+     "result": "green",
+     "tokens": 43800
+    }
+   ],
+   "task": "tenure drill two race five"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 103.0,
+     "model": "fulmar-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42800
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 128.0,
+     "model": "shearwater-1",
+     "patch": "loser diff",
+     "result": "green",
+     "tokens": 44050
+    }
+   ],
+   "task": "tenure drill two race six"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 105.0,
+     "model": "fulmar-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 43100
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "shearwater-1",
+     "patch": "loser diff",
+     "result": "green",
+     "tokens": 44300
+    }
+   ],
+   "task": "tenure drill two race seven"
+  }
+ ],
+ "task": "the constructed tenure drill two",
+ "wins_target": 4
+}

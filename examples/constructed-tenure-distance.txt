@@ -1,0 +1,12 @@
+distance
+series 2, the constructed tenure drill two
+fulmar-1 against shearwater-1, first to 4 wins
+race 1, tenure drill two race one, shearwater-1 wins
+race 2, tenure drill two race two, shearwater-1 wins
+race 3, tenure drill two race three, fulmar-1 wins
+race 4, tenure drill two race four, shearwater-1 wins
+race 5, tenure drill two race five, fulmar-1 wins
+race 6, tenure drill two race six, fulmar-1 wins
+race 7, tenure drill two race seven, fulmar-1 wins
+series winner, fulmar-1, fulmar-1 4 race wins, shearwater-1 3 race wins, 0 no results
+distance, 2 series, 1 the distance, 0 without reply, 1 in between, 0 no winner

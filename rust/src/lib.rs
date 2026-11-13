@@ -32,5 +32,6 @@ pub mod seats;
 pub mod series;
 pub mod specs;
 pub mod streaks;
+pub mod tenure;
 pub mod totals;
 pub mod turns;

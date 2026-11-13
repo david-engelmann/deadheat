@@ -2046,3 +2046,220 @@ fn the_constructed_crossings_example_under_its_sibling_readings_matches_its_gold
         read_text(&examples().join("constructed-crossings-opening.txt"))
     );
 }
+
+#[test]
+fn the_tenure_example_matches_its_golden() {
+    // E-1 of the Round 22 enrolment. The standing
+    // championship under the tenure command, both of
+    // its series standing ahead, the pilot at a figure
+    // of four and the panel at a figure of three, in
+    // that order, pinned at the CLI and at the library
+    // surface both.
+    let source = examples().join("championship.json");
+    let out = run_ok(&["tenure", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("championship-tenure.txt"));
+    assert_eq!(out, golden);
+    assert!(out.contains("series 1, the recorded close call pilot"));
+    assert!(out.contains("front count 4 over the decided record"));
+    assert!(out.contains("series 2, the recorded close call panel"));
+    assert!(out.contains("front count 3 over the decided record"));
+    assert!(out
+        .trim_end()
+        .ends_with("tenure, 2 series, 2 ahead, 0 level, 0 behind, 0 no winner"));
+    let (championship, defects) =
+        deadheat::championship::load_championship_file(&examples().join("championship.json"));
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered =
+        deadheat::tenure::tenure_report(&championship.expect("a championship")).join("\n") + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_survey_championship_tenure_matches_its_golden() {
+    // E-2. The survey championship under the tenure
+    // command, all six of its series standing ahead at
+    // the figures 2, 6, 5, 4, 5, and 2 in championship
+    // order, pinned at the CLI and at the library
+    // surface both.
+    let source = examples().join("survey-championship.json");
+    let out = run_ok(&["tenure", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("survey-championship-tenure.txt"));
+    assert_eq!(out, golden);
+    assert!(out.contains("series 1, the constructed survey series, apex-1 against bolt-1"));
+    assert!(out.contains("front count 2 over the decided record"));
+    assert!(out.contains("series 2, the constructed survey series, apex-1 against crest-1"));
+    assert!(out.contains("front count 6 over the decided record"));
+    assert!(out.contains("series 3, the constructed survey series, apex-1 against drift-1"));
+    assert!(out.contains("front count 5 over the decided record"));
+    assert!(out.contains("series 4, the constructed survey series, bolt-1 against crest-1"));
+    assert!(out.contains("front count 4 over the decided record"));
+    assert!(out.contains("series 6, the constructed survey series, crest-1 against drift-1"));
+    assert!(out
+        .trim_end()
+        .ends_with("tenure, 6 series, 6 ahead, 0 level, 0 behind, 0 no winner"));
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("survey-championship.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered =
+        deadheat::tenure::tenure_report(&championship.expect("a championship")).join("\n") + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_league_championship_tenure_matches_its_golden() {
+    // E-3. The league championship under the tenure
+    // command, the eight ahead series standing in
+    // section form at the figures 2, 3, 5, 6, 3, 2, 4,
+    // and 3 in championship order, the apex and ember
+    // series standing level and the bolt and ember
+    // series standing behind, pinned at the CLI and at
+    // the library surface both.
+    let source = examples().join("league-championship.json");
+    let out = run_ok(&["tenure", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("league-championship-tenure.txt"));
+    assert_eq!(out, golden);
+    assert!(out.contains("series 1, the constructed league series, apex-1 against bolt-1"));
+    assert!(out.contains("front count 2 over the decided record"));
+    assert!(out.contains("series 2, the constructed league series, apex-1 against crest-1"));
+    assert!(out.contains("front count 3 over the decided record"));
+    assert!(out.contains("series 3, the constructed league series, apex-1 against drift-1"));
+    assert!(out.contains("front count 5 over the decided record"));
+    assert!(out.contains("series 5, the constructed league series, bolt-1 against crest-1"));
+    assert!(out.contains("front count 6 over the decided record"));
+    assert!(out.contains("series 6, the constructed league series, bolt-1 against drift-1"));
+    assert!(out.contains("series 8, the constructed league series, crest-1 against drift-1"));
+    assert!(out.contains("series 9, the constructed league series, crest-1 against ember-1"));
+    assert!(out.contains("front count 4 over the decided record"));
+    assert!(out.contains("series 10, the constructed league series, drift-1 against ember-1"));
+    assert!(!out.contains("series 4,"));
+    assert!(!out.contains("series 7,"));
+    assert!(out
+        .trim_end()
+        .ends_with("tenure, 10 series, 8 ahead, 1 level, 1 behind, 0 no winner"));
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("league-championship.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered =
+        deadheat::tenure::tenure_report(&championship.expect("a championship")).join("\n") + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_constructed_tenure_example_matches_its_golden() {
+    // E-4. The constructed championship of DH-47,
+    // labelled as constructed in its file names and
+    // its task texts and never presented as recorded.
+    // Its first series stands ahead at a figure of
+    // five against none, and its second stands behind
+    // at one against five, so the golden carries the
+    // first series' section alone.
+    let source = examples().join("constructed-tenure.json");
+    let out = run_ok(&["tenure", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("constructed-tenure-tenure.txt"));
+    assert_eq!(out, golden);
+    assert!(out.contains("series 1, the constructed tenure drill one"));
+    assert!(out.contains("front count 5 over the decided record"));
+    assert!(!out.contains("series 2,"));
+    assert!(out
+        .trim_end()
+        .ends_with("tenure, 2 series, 1 ahead, 0 level, 1 behind, 0 no winner"));
+    let (championship, defects) =
+        deadheat::championship::load_championship_file(&examples().join("constructed-tenure.json"));
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered =
+        deadheat::tenure::tenure_report(&championship.expect("a championship")).join("\n") + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_constructed_tenure_example_under_its_sibling_readings_matches_its_goldens() {
+    // E-5. The same constructed file under the
+    // streak, cluster, rally, deadlock, distance,
+    // comeback, closing, and opening commands, the
+    // eight sibling goldens: both series standing
+    // strung and deadlocked in their sections under
+    // those two, the second series standing clustered,
+    // a rally, the distance, from behind, and in a run
+    // at its closing in its section alone under those
+    // five, and the opening golden carrying no
+    // section, the first series standing alone and the
+    // second from behind under the opening command, so
+    // the round's partings stand pinned over shipped
+    // data byte for byte against the pin above. No
+    // E-6 stands in this round: DH-47 stands no
+    // further golden over the constructed tenure
+    // fixture, the eight sibling goldens above standing
+    // as its full sibling set.
+    let source = examples().join("constructed-tenure.json");
+    let source_arg = source.to_str().expect("utf8");
+    let out = run_ok(&["streak", source_arg]);
+    let golden = read_text(&examples().join("constructed-tenure-streak.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["cluster", source_arg]);
+    let golden = read_text(&examples().join("constructed-tenure-cluster.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["rally", source_arg]);
+    let golden = read_text(&examples().join("constructed-tenure-rally.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["deadlock", source_arg]);
+    let golden = read_text(&examples().join("constructed-tenure-deadlock.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["distance", source_arg]);
+    let golden = read_text(&examples().join("constructed-tenure-distance.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["comeback", source_arg]);
+    let golden = read_text(&examples().join("constructed-tenure-comebacks.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["closing", source_arg]);
+    let golden = read_text(&examples().join("constructed-tenure-closing.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["opening", source_arg]);
+    let golden = read_text(&examples().join("constructed-tenure-opening.txt"));
+    assert_eq!(out, golden);
+    let (championship, defects) =
+        deadheat::championship::load_championship_file(&examples().join("constructed-tenure.json"));
+    assert_eq!(defects, Vec::<String>::new());
+    let championship = championship.expect("a championship");
+    let rendered = deadheat::streaks::streak_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-tenure-streak.txt"))
+    );
+    let rendered = deadheat::clusters::cluster_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-tenure-cluster.txt"))
+    );
+    let rendered = deadheat::rallies::rally_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-tenure-rally.txt"))
+    );
+    let rendered = deadheat::deadlocks::deadlock_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-tenure-deadlock.txt"))
+    );
+    let rendered = deadheat::distances::distance_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-tenure-distance.txt"))
+    );
+    let rendered = deadheat::comebacks::comeback_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-tenure-comebacks.txt"))
+    );
+    let rendered = deadheat::closings::closing_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-tenure-closing.txt"))
+    );
+    let rendered = deadheat::openings::opening_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-tenure-opening.txt"))
+    );
+}

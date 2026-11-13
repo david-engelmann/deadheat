@@ -1,0 +1,12 @@
+tenure
+series 1, the constructed tenure drill one
+merlin-1 against hobby-1, first to 4 wins
+race 1, tenure drill one race one, merlin-1 wins
+race 2, tenure drill one race two, hobby-1 wins
+race 3, tenure drill one race three, merlin-1 wins
+race 4, tenure drill one race four, merlin-1 wins
+race 5, tenure drill one race five, hobby-1 wins
+race 6, tenure drill one race six, merlin-1 wins
+front count 5 over the decided record
+series winner, merlin-1, merlin-1 4 race wins, hobby-1 2 race wins, 0 no results
+tenure, 2 series, 1 ahead, 0 level, 1 behind, 0 no winner
