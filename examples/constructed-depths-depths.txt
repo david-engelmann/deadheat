@@ -1,0 +1,13 @@
+depths
+series 1, the constructed depths drill one
+merlin-1 against saker-1, first to 4 wins
+race 1, depths drill one race one, saker-1 wins
+race 2, depths drill one race two, saker-1 wins
+race 3, depths drill one race three, merlin-1 wins
+race 4, depths drill one race four, saker-1 wins
+race 5, depths drill one race five, merlin-1 wins
+race 6, depths drill one race six, merlin-1 wins
+race 7, depths drill one race seven, merlin-1 wins
+deepest deficit 2 over the decided record
+series winner, merlin-1, merlin-1 4 race wins, saker-1 3 race wins, 0 no results
+depths, 2 series, 1 deep, 1 matched, 0 shallow, 0 no winner

@@ -127,7 +127,9 @@ fn readme_reports_the_round_four_status() {
     // landed slice 22 and the count returned to zero.
     // Slice 23 stood in review while Round 22 was built,
     // so the count was one again until the Round 22 closure
-    // landed slice 23 and the count returned to zero. The round five pin
+    // landed slice 23 and the count returned to zero.
+    // Slice 24 stands in review while Round 23 is built,
+    // so the count is one again. The round five pin
     // below holds the slice 6 line itself, the round six pin
     // below holds the slice 7 line, the round seven pin
     // below holds the slice 8 line, the round eight pin
@@ -147,8 +149,9 @@ fn readme_reports_the_round_four_status() {
     // the round twenty pin below holds the slice 21
     // line, and the round twenty one pin below holds
     // the slice 22 line, and the round twenty two pin
-    // below holds the slice 23 line.
-    assert_eq!(text.matches("built and in review").count(), 0);
+    // below holds the slice 23 line, and the round
+    // twenty three pin below holds the slice 24 line.
+    assert_eq!(text.matches("built and in review").count(), 1);
 }
 
 #[test]
@@ -309,6 +312,15 @@ fn readme_reports_the_round_twenty_two_status() {
     let standing = "- Contract, DH-46 and DH-47, with FIX-DH-27, met. They stand in full form in CONTRACT.md under the Round 22 obligations, and Round 22 closed on the merged slice 23 after three reviews, with the three reviews approving with findings and every finding cured in the repair commit, FIX-DH-27 restating the DH-47 examples clause in place with the wrong sentence confined to the amendment's quotation, pin M-21 asserting the restated form with its split executed both ways, and the M-13 and M-15 comments restated to their true and executed postures.";
     assert!(text.lines().any(|line| line == standing));
     let slice_line = "- Slice 23 has landed. It carries the tenure reading over a recorded championship, the classification of each decided series by the count of the decided races after which its winner's tally stood above its loser's read against the same count for its loser as ahead, level, or behind, one section for each series standing ahead naming its decided races in race order and the front count of the series and its winner with its race split, with the closing counts of series, ahead, level, behind, and no winner, with the tenure example over the standing championship with both of its series in section form and the constructed tenure example and their goldens under examples, and the tenure command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, opening, turns, lead, and crossings.";
+    assert!(text.lines().any(|line| line == slice_line));
+}
+
+#[test]
+fn readme_reports_the_round_twenty_three_status() {
+    let text = read(&repo_root().join("README.md"));
+    let standing = "- Contract, DH-48 and DH-49 now stand in full form in CONTRACT.md under the Round 23 obligations, and their standing is not claimed here, as Round 23 has not closed.";
+    assert!(text.lines().any(|line| line == standing));
+    let slice_line = "- Slice 24 is built and in review. It carries the depths reading over a recorded championship, the classification of each decided series by the depth of its winner over the decided record read against the margin the series was won by as deep, matched, or shallow, one section for each series standing deep naming its decided races in race order and the deepest deficit of the series and its winner with its race split, with the closing counts of series, deep, matched, shallow, and no winner, with the depths example over the standing championship in its empty form and the constructed depths example and their goldens under examples, and the depths command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, opening, turns, lead, crossings, and tenure.";
     assert!(text.lines().any(|line| line == slice_line));
 }
 

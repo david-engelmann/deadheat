@@ -2263,3 +2263,151 @@ fn the_constructed_tenure_example_under_its_sibling_readings_matches_its_goldens
         read_text(&examples().join("constructed-tenure-opening.txt"))
     );
 }
+
+#[test]
+fn the_championship_depths_examples_match_their_goldens() {
+    // E-1 of the Round 23 enrolment. The three
+    // championships under the depths command, no series
+    // of any of them standing deep, so each golden
+    // carries no section, pinned at the CLI and at the
+    // library surface both, at the closings DH-49's
+    // examples entry states.
+    for (source_name, golden_name, closing) in [
+        (
+            "championship.json",
+            "championship-depths.txt",
+            "depths, 2 series, 0 deep, 0 matched, 2 shallow, 0 no winner",
+        ),
+        (
+            "survey-championship.json",
+            "survey-championship-depths.txt",
+            "depths, 6 series, 0 deep, 2 matched, 4 shallow, 0 no winner",
+        ),
+        (
+            "league-championship.json",
+            "league-championship-depths.txt",
+            "depths, 10 series, 0 deep, 3 matched, 7 shallow, 0 no winner",
+        ),
+    ] {
+        let source = examples().join(source_name);
+        let out = run_ok(&["depths", source.to_str().expect("utf8")]);
+        let golden = read_text(&examples().join(golden_name));
+        assert_eq!(out, golden, "{golden_name}");
+        assert!(out.trim_end().ends_with(closing), "{golden_name}");
+        let (championship, defects) =
+            deadheat::championship::load_championship_file(&examples().join(source_name));
+        assert_eq!(defects, Vec::<String>::new());
+        let rendered = deadheat::depths::depths_report(&championship.expect("a championship"))
+            .join("\n")
+            + "\n";
+        assert_eq!(rendered, golden, "{golden_name}");
+    }
+}
+
+#[test]
+fn the_constructed_depths_example_matches_its_golden() {
+    // E-2 of the Round 23 enrolment. The constructed
+    // championship of DH-49, labelled as constructed in
+    // its file names and its task texts and never
+    // presented as recorded. Its first series stands
+    // deep at a depth of two against a margin of one,
+    // and its second stands matched at a depth of one
+    // against a margin of one, so the golden carries
+    // the first series' section alone.
+    let source = examples().join("constructed-depths.json");
+    let out = run_ok(&["depths", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("constructed-depths-depths.txt"));
+    assert_eq!(out, golden);
+    assert!(out.contains("series 1, the constructed depths drill one"));
+    assert!(out.contains("deepest deficit 2 over the decided record"));
+    assert!(!out.contains("series 2,"));
+    assert!(out
+        .trim_end()
+        .ends_with("depths, 2 series, 1 deep, 1 matched, 0 shallow, 0 no winner"));
+    let (championship, defects) =
+        deadheat::championship::load_championship_file(&examples().join("constructed-depths.json"));
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered =
+        deadheat::depths::depths_report(&championship.expect("a championship")).join("\n") + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_constructed_depths_example_under_its_sibling_readings_matches_its_goldens() {
+    // E-3 of the Round 23 enrolment. The same
+    // constructed file under the comeback, closing,
+    // cluster, crossings, deadlock, distance, opening,
+    // rally, streak, and tenure commands, the ten
+    // sibling goldens, both series standing from
+    // behind, in a run at the closing, deadlocked, the
+    // distance, rally, and strung in their sections
+    // under those readings, the first standing
+    // clustered and the second scattered under the
+    // cluster command, both standing short under the
+    // crossings command, both standing from behind
+    // under the opening command, and both standing
+    // behind under the tenure command, so the round's
+    // partings stand pinned over shipped data byte for
+    // byte. No lead golden and no turns golden stands
+    // over the pair, following the crossings pair's
+    // enrolment exactly.
+    let source = examples().join("constructed-depths.json");
+    let source_arg = source.to_str().expect("utf8");
+    for (command, golden_name, closing) in [
+        (
+            "comeback",
+            "constructed-depths-comebacks.txt",
+            "comebacks, 2 series, 2 from behind, 0 from the front",
+        ),
+        (
+            "closing",
+            "constructed-depths-closing.txt",
+            "closing, 2 series, 2 in a run, 0 alone, 0 no winner",
+        ),
+        (
+            "cluster",
+            "constructed-depths-cluster.txt",
+            "cluster, 2 series, 1 clustered, 1 scattered, 0 no winner",
+        ),
+        (
+            "crossings",
+            "constructed-depths-crossings.txt",
+            "crossings, 2 series, 0 through, 2 short, 0 no winner",
+        ),
+        (
+            "deadlock",
+            "constructed-depths-deadlock.txt",
+            "deadlock, 2 series, 2 deadlocked, 0 clear, 0 no winner",
+        ),
+        (
+            "distance",
+            "constructed-depths-distance.txt",
+            "distance, 2 series, 2 the distance, 0 without reply, 0 in between, 0 no winner",
+        ),
+        (
+            "opening",
+            "constructed-depths-opening.txt",
+            "opening, 2 series, 0 in a run, 0 alone, 2 from behind, 0 no winner",
+        ),
+        (
+            "rally",
+            "constructed-depths-rally.txt",
+            "rally, 2 series, 2 rally, 0 wire to wire, 0 no winner",
+        ),
+        (
+            "streak",
+            "constructed-depths-streak.txt",
+            "streak, 2 series, 2 strung, 0 single, 0 no winner",
+        ),
+        (
+            "tenure",
+            "constructed-depths-tenure.txt",
+            "tenure, 2 series, 0 ahead, 0 level, 2 behind, 0 no winner",
+        ),
+    ] {
+        let out = run_ok(&[command, source_arg]);
+        let golden = read_text(&examples().join(golden_name));
+        assert_eq!(out, golden, "{golden_name}");
+        assert!(out.trim_end().ends_with(closing), "{golden_name}");
+    }
+}

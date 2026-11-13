@@ -1,0 +1,115 @@
+{
+ "models": [
+  "hobby-1",
+  "tiercel-1"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "hobby-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 41300
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "tiercel-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 43700
+    }
+   ],
+   "task": "depths drill two race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "hobby-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 43500
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "tiercel-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42900
+    }
+   ],
+   "task": "depths drill two race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "hobby-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42700
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "tiercel-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45100
+    }
+   ],
+   "task": "depths drill two race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "hobby-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 44900
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "tiercel-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 44300
+    }
+   ],
+   "task": "depths drill two race four"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "hobby-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45600
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "tiercel-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 45000
+    }
+   ],
+   "task": "depths drill two race five"
+  }
+ ],
+ "task": "the constructed depths drill two",
+ "wins_target": 3
+}
