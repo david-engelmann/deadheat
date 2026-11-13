@@ -1,0 +1,136 @@
+{
+ "models": [
+  "merlin-1",
+  "hobby-1"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 102.0,
+     "model": "merlin-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 41300
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 131.0,
+     "model": "hobby-1",
+     "patch": "loser diff",
+     "result": "green",
+     "tokens": 42800
+    }
+   ],
+   "task": "tenure drill one race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 127.0,
+     "model": "merlin-1",
+     "patch": "loser diff",
+     "result": "green",
+     "tokens": 41600
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 109.0,
+     "model": "hobby-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 43050
+    }
+   ],
+   "task": "tenure drill one race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 101.0,
+     "model": "merlin-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 41900
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 138.0,
+     "model": "hobby-1",
+     "patch": "loser diff",
+     "result": "green",
+     "tokens": 43300
+    }
+   ],
+   "task": "tenure drill one race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 104.0,
+     "model": "merlin-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42200
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 129.0,
+     "model": "hobby-1",
+     "patch": "loser diff",
+     "result": "green",
+     "tokens": 43550
+    }
+   ],
+   "task": "tenure drill one race four"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 133.0,
+     "model": "merlin-1",
+     "patch": "loser diff",
+     "result": "green",
+     "tokens": 42500
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 107.0,
+     "model": "hobby-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 43800
+    }
+   ],
+   "task": "tenure drill one race five"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 103.0,
+     "model": "merlin-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42800
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 128.0,
+     "model": "hobby-1",
+     "patch": "loser diff",
+     "result": "green",
+     "tokens": 44050
+    }
+   ],
+   "task": "tenure drill one race six"
+  }
+ ],
+ "task": "the constructed tenure drill one",
+ "wins_target": 4
+}

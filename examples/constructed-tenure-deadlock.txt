@@ -1,0 +1,23 @@
+deadlock
+series 1, the constructed tenure drill one
+merlin-1 against hobby-1, first to 4 wins
+race 1, tenure drill one race one, merlin-1 wins
+race 2, tenure drill one race two, hobby-1 wins
+race 3, tenure drill one race three, merlin-1 wins
+race 4, tenure drill one race four, merlin-1 wins
+race 5, tenure drill one race five, hobby-1 wins
+race 6, tenure drill one race six, merlin-1 wins
+stood level after 1 of its decided races
+series winner, merlin-1, merlin-1 4 race wins, hobby-1 2 race wins, 0 no results
+series 2, the constructed tenure drill two
+fulmar-1 against shearwater-1, first to 4 wins
+race 1, tenure drill two race one, shearwater-1 wins
+race 2, tenure drill two race two, shearwater-1 wins
+race 3, tenure drill two race three, fulmar-1 wins
+race 4, tenure drill two race four, shearwater-1 wins
+race 5, tenure drill two race five, fulmar-1 wins
+race 6, tenure drill two race six, fulmar-1 wins
+race 7, tenure drill two race seven, fulmar-1 wins
+stood level after 1 of its decided races
+series winner, fulmar-1, fulmar-1 4 race wins, shearwater-1 3 race wins, 0 no results
+deadlock, 2 series, 2 deadlocked, 0 clear, 0 no winner
