@@ -154,6 +154,10 @@ path = "rust/tests/test_tenure.rs"
 name = "test_depths"
 path = "rust/tests/test_depths.rs"
 
+[[test]]
+name = "test_fold"
+path = "rust/tests/test_fold.rs"
+
 [dependencies]
 num-bigint = "0.4"
 num-rational = "0.4"
