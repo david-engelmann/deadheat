@@ -22,7 +22,7 @@
 //! second winner rule and no second counting walk
 //! stands in this module.
 
-use crate::championship::{count_series, Championship};
+use crate::championship::{count_series, tally_standings_of, Championship};
 
 /// Return the lead report lines for one championship.
 pub fn lead_report(championship: &Championship) -> Vec<String> {
@@ -40,25 +40,20 @@ pub fn lead_report(championship: &Championship) -> Vec<String> {
             }
         };
         // The largest lead of each model over the
-        // decided record the walk leaves, the largest
-        // count by which its tally of decided wins
-        // stood above the other model's tally after a
-        // decided race of the series, standing at none
-        // where its tally never stood above. The
-        // largest lead of the series is the larger of
-        // the two models' largest leads, and the
+        // decided record the walk leaves, read by the
+        // one helper of the championship module, the
+        // largest count by which its tally of decided
+        // wins stood above the other model's tally
+        // after a decided race of the series, standing
+        // at none where its tally never stood above.
+        // The largest lead of the series is the larger
+        // of the two models' largest leads, and the
         // winning margin is the count of the winner's
         // decided wins less the count of the loser's
         // decided wins, the figure the walk leaves at
         // the decision.
-        let mut tallies: [u64; 2] = [0, 0];
-        let mut largest: [u64; 2] = [0, 0];
-        for (_, side) in &count.decided {
-            tallies[*side] += 1;
-            let lead = tallies[*side].saturating_sub(tallies[1 - *side]);
-            largest[*side] = largest[*side].max(lead);
-        }
-        let height = largest[0].max(largest[1]);
+        let standings = tally_standings_of(&count.decided);
+        let height = standings[0].max(standings[1]);
         let margin = count.wins[champion] - count.wins[1 - champion];
         if height <= margin {
             narrow += 1;

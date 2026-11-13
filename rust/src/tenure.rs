@@ -21,7 +21,7 @@
 //! record that walk leaves, so no second winner rule
 //! and no second counting walk stands in this module.
 
-use crate::championship::{count_series, Championship};
+use crate::championship::{count_series, tally_standings_of, Championship};
 
 /// Return the tenure report lines for one championship.
 pub fn tenure_report(championship: &Championship) -> Vec<String> {
@@ -39,27 +39,22 @@ pub fn tenure_report(championship: &Championship) -> Vec<String> {
                 continue;
             }
         };
-        // The front count of each model over the decided
-        // record the walk leaves, one standing counted at
-        // each decided race after which that model's tally
-        // stood above the other model's tally. Every
-        // decided race leaves the tallies apart for one
-        // model or apart for the other or level, so the
-        // two front counts and the count of the standings
-        // at level sum to the count of the decided races,
-        // and the deciding race always stands counted for
-        // the winner, whose front count therefore stands
-        // at one or more on every decided series.
-        let mut tallies: [u64; 2] = [0, 0];
-        let mut front: [u64; 2] = [0, 0];
-        for (_, side) in &count.decided {
-            tallies[*side] += 1;
-            if tallies[0] > tallies[1] {
-                front[0] += 1;
-            } else if tallies[1] > tallies[0] {
-                front[1] += 1;
-            }
-        }
+        // The front count of each model over the
+        // decided record the walk leaves, read by
+        // the one helper of the championship module,
+        // one standing counted at each decided race
+        // after which that model's tally stood above
+        // the other model's tally. Every decided race
+        // leaves the tallies apart for one model or
+        // apart for the other or level, so the two
+        // front counts and the count of the standings
+        // at level sum to the count of the decided
+        // races, and the deciding race always stands
+        // counted for the winner, whose front count
+        // therefore stands at one or more on every
+        // decided series.
+        let standings = tally_standings_of(&count.decided);
+        let front: [u64; 2] = [standings[3], standings[4]];
         if front[champion] < front[1 - champion] {
             behind += 1;
             continue;
