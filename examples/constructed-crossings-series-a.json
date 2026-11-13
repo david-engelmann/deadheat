@@ -1,0 +1,157 @@
+{
+ "models": [
+  "oriole-1",
+  "osprey-1"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 104.0,
+     "model": "oriole-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 41300
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 131.0,
+     "model": "osprey-1",
+     "patch": "loser diff",
+     "result": "green",
+     "tokens": 44900
+    }
+   ],
+   "task": "crossings drill one race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 109.0,
+     "model": "oriole-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42800
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 127.0,
+     "model": "osprey-1",
+     "patch": "loser diff",
+     "result": "green",
+     "tokens": 43600
+    }
+   ],
+   "task": "crossings drill one race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 138.0,
+     "model": "oriole-1",
+     "patch": "loser diff",
+     "result": "green",
+     "tokens": 46100
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 101.0,
+     "model": "osprey-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 40700
+    }
+   ],
+   "task": "crossings drill one race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 129.0,
+     "model": "oriole-1",
+     "patch": "loser diff",
+     "result": "green",
+     "tokens": 44300
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 106.0,
+     "model": "osprey-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 41900
+    }
+   ],
+   "task": "crossings drill one race four"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 112.0,
+     "model": "oriole-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 43200
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 134.0,
+     "model": "osprey-1",
+     "patch": "loser diff",
+     "result": "green",
+     "tokens": 45700
+    }
+   ],
+   "task": "crossings drill one race five"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 126.0,
+     "model": "oriole-1",
+     "patch": "loser diff",
+     "result": "green",
+     "tokens": 43900
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 103.0,
+     "model": "osprey-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 41000
+    }
+   ],
+   "task": "crossings drill one race six"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 108.0,
+     "model": "oriole-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42400
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 133.0,
+     "model": "osprey-1",
+     "patch": "loser diff",
+     "result": "green",
+     "tokens": 45100
+    }
+   ],
+   "task": "crossings drill one race seven"
+  }
+ ],
+ "task": "the constructed crossings drill one",
+ "wins_target": 4
+}

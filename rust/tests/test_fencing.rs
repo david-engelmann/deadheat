@@ -19,6 +19,7 @@ use deadheat::championship::{championship_report, Championship};
 use deadheat::closings::closing_report;
 use deadheat::clusters::cluster_report;
 use deadheat::comebacks::comeback_report;
+use deadheat::crossings::crossings_report;
 use deadheat::deadlocks::deadlock_report;
 use deadheat::distances::distance_report;
 use deadheat::flips::flip_report;
@@ -1021,6 +1022,41 @@ fn the_lead_report_fences_its_fields() {
             "largest lead 2 over the decided record",
             "series winner, ,  3 race wins, beta-1 2 race wins, 0 no results",
             "lead, 1 series, 1 wide, 0 narrow, 0 no winner",
+        ]
+    );
+}
+
+#[test]
+fn the_crossings_report_fences_its_fields() {
+    // F-1 of the Round 21 discrimination plan. The
+    // hand-built series the sibling pins stand on, at
+    // its wins target of one with its one race won by
+    // its first model, read under DH-45: its crossings
+    // stand at none and its changes of hand at none,
+    // so the series stands through and its section
+    // prints the series task, the race task, and both
+    // model labels, every field holding a break
+    // standing fenced to the empty field through the
+    // one helper of FIX-DH-16, as on the sibling
+    // surfaces. Its failure mode is a second fencing
+    // path standing in the new module. It fails on
+    // the pre round tree by compile absence, the
+    // crossings module standing absent there.
+    let championship = Championship {
+        series: vec![bad_series()],
+    };
+    let lines = crossings_report(&championship);
+    assert_no_forgery(&lines);
+    assert_eq!(
+        lines,
+        vec![
+            "crossings",
+            "series 1, ",
+            " against beta-1, first to 1 wins",
+            "race 1, ,  wins",
+            "crossings 0 over the decided record",
+            "series winner, ,  1 race wins, beta-1 0 race wins, 0 no results",
+            "crossings, 1 series, 1 through, 0 short, 0 no winner",
         ]
     );
 }

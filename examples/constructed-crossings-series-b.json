@@ -1,0 +1,157 @@
+{
+ "models": [
+  "petrel-1",
+  "puffin-1"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 102.0,
+     "model": "petrel-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 41500
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 128.0,
+     "model": "puffin-1",
+     "patch": "loser diff",
+     "result": "green",
+     "tokens": 44600
+    }
+   ],
+   "task": "crossings drill two race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 136.0,
+     "model": "petrel-1",
+     "patch": "loser diff",
+     "result": "green",
+     "tokens": 45800
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 107.0,
+     "model": "puffin-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42100
+    }
+   ],
+   "task": "crossings drill two race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 131.0,
+     "model": "petrel-1",
+     "patch": "loser diff",
+     "result": "green",
+     "tokens": 45200
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 105.0,
+     "model": "puffin-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 41700
+    }
+   ],
+   "task": "crossings drill two race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 110.0,
+     "model": "petrel-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42900
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 135.0,
+     "model": "puffin-1",
+     "patch": "loser diff",
+     "result": "green",
+     "tokens": 45500
+    }
+   ],
+   "task": "crossings drill two race four"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 108.0,
+     "model": "petrel-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42400
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 133.0,
+     "model": "puffin-1",
+     "patch": "loser diff",
+     "result": "green",
+     "tokens": 45100
+    }
+   ],
+   "task": "crossings drill two race five"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 129.0,
+     "model": "petrel-1",
+     "patch": "loser diff",
+     "result": "green",
+     "tokens": 44300
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 102.0,
+     "model": "puffin-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 41000
+    }
+   ],
+   "task": "crossings drill two race six"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 134.0,
+     "model": "petrel-1",
+     "patch": "loser diff",
+     "result": "green",
+     "tokens": 45700
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 109.0,
+     "model": "puffin-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42800
+    }
+   ],
+   "task": "crossings drill two race seven"
+  }
+ ],
+ "task": "the constructed crossings drill two",
+ "wins_target": 4
+}
