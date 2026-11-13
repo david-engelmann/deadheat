@@ -368,6 +368,32 @@ series winner, prime-1, prime-1 3 race wins, shadow-1 0 race wins, 2 no results
 crossings, 2 series, 1 through, 1 short, 0 no winner
 ```
 
+The tenure command reads a championship file and reports the series that stood ahead, whose winner stood in front after more decided races than its loser did over the decided record, standing the decided races of each beside the front count of the series and its race split.
+
+```sh
+deadheat tenure examples/championship.json
+```
+
+```text
+tenure
+series 1, the recorded close call pilot
+prime-1 against shadow-1, first to 3 wins
+race 1, pin the cache key, prime-1 wins
+race 5, name the worker pool, prime-1 wins
+race 7, shrink the prompt budget, shadow-1 wins
+race 9, sort the seed list, prime-1 wins
+front count 4 over the decided record
+series winner, prime-1, prime-1 3 race wins, shadow-1 1 race wins, 5 no results
+series 2, the recorded close call panel
+prime-1 against shadow-1, first to 3 wins
+race 1, pin the cache key, prime-1 wins
+race 2, trim the import list, prime-1 wins
+race 5, name the worker pool, prime-1 wins
+front count 3 over the decided record
+series winner, prime-1, prime-1 3 race wins, shadow-1 0 race wins, 2 no results
+tenure, 2 series, 2 ahead, 0 level, 0 behind, 0 no winner
+```
+
 The standings command prints the standings table held in a standings file. The adopt command writes the losing attempt patch into a patches folder and the discard command removes it.
 
 ## Status
