@@ -1,0 +1,157 @@
+{
+ "models": [
+  "merlin-1",
+  "saker-1"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "merlin-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42800
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "saker-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42200
+    }
+   ],
+   "task": "depths drill one race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "merlin-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 43500
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "saker-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42900
+    }
+   ],
+   "task": "depths drill one race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "merlin-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42700
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "saker-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45100
+    }
+   ],
+   "task": "depths drill one race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "merlin-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 44900
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "saker-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 44300
+    }
+   ],
+   "task": "depths drill one race four"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "merlin-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 44100
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "saker-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 46500
+    }
+   ],
+   "task": "depths drill one race five"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "merlin-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 44800
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "saker-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 47200
+    }
+   ],
+   "task": "depths drill one race six"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "merlin-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 45500
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "saker-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 47900
+    }
+   ],
+   "task": "depths drill one race seven"
+  }
+ ],
+ "task": "the constructed depths drill one",
+ "wins_target": 4
+}
