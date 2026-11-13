@@ -306,7 +306,7 @@ fn the_constructed_example_carries_the_second_series_alone() {
     // crossing too many against its changes of hand
     // and leaving its section. Fails under M-F, the
     // second series' winner standing behind on its
-    // record, its level or behind count of four
+    // record, its level or behind count of five
     // standing against its three crossings. Passes
     // under M-A by design, neither constructed series
     // holding a recorded race beyond its decision.
@@ -907,9 +907,10 @@ fn a_crossing_retaken_by_the_same_side_stands_short() {
     // its counted crossings standing at two against
     // three changes of hand and the series standing
     // short as it stands.
-    // Passes under M-F, its crossings assertions
-    // reading the class and the closing, which the
-    // mutation leaves standing on this fixture.
+    // Fails under M-F, its winner standing behind
+    // on its record, its counted crossings standing
+    // at four against its three changes of hand and
+    // the series standing through in its section.
     let dir = temp_dir("crossings-touch");
     let series = series_json(
         "the touch crossings saga",
