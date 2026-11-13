@@ -1059,7 +1059,14 @@ fn every_standing_golden_still_matches_byte_for_byte() {
     // after the Round 23 enrolment counted at the
     // depths arm above, fourteen of each over the one
     // hundred seventy six and one hundred seventy two
-    // the Round 22 enrolment left standing.
+    // the Round 22 enrolment left standing. The
+    // Round 24 fold moved no figure the sweep reads,
+    // the tally computation of the six tally readings
+    // standing folded into the one helper of the
+    // championship module under FIX-DH-28 with every
+    // golden standing byte for byte as it stood, so no
+    // golden joins at that round, no arm joins the
+    // chain, and the counts stand unmoved.
     assert_eq!(goldens.len(), 190);
     assert_eq!(unadjusted, 186);
 }
