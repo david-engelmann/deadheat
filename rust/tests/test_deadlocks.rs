@@ -11,7 +11,18 @@
 //! stated mutation of DH-29 beside it. Five mutations are
 //! named for the whole file. M-A, the tallies read over
 //! every recorded race, races beyond the decision among
-//! them. M-B, the standing before the first decided race
+//! them. On the folded tree M-A fails D-2, D-3, and
+//! D-9. The folded helper counts the level standing at
+//! the record's final position, where the pre fold loop
+//! set the last entry aside before counting. The two
+//! forms agree on every record the true walk leaves
+//! and part only under the mutant walk past the
+//! decision, where D-9's fixture stands level at its
+//! final position past the decision. The Round 24
+//! execution record proves this by its pre fold
+//! control, which reproduces the stated set on the
+//! pre fold tree. M-B, the standing before the first
+//! decided race
 //! read as a level standing, nought against nought counted
 //! as level. M-C, stood level read as stood behind, the
 //! rally test of DH-25 substituted for the level test of
@@ -366,7 +377,16 @@ fn a_series_decided_early_keeps_its_class_against_its_later_races() {
     // counts nothing beyond the decision. Fails under
     // M-A, under which the recorded tallies pass through
     // two to one to two to two and the series stands
-    // deadlocked.
+    // deadlocked. On the folded tree this failure
+    // stands, the folded helper counting the level
+    // standing at the record's final position where
+    // the pre fold loop set the last entry aside, so
+    // the level standing past the decision is counted
+    // here and was set aside there. The two forms
+    // agree on every record the true walk leaves and
+    // part only under the mutant walk past the
+    // decision, as the Round 24 execution record
+    // proves by its pre fold control.
     let dir = temp_dir("deadlocks-beyond");
     let series = series_json(
         "the early saga",
