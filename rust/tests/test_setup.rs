@@ -25,7 +25,7 @@ fn agents_carries_the_canonical_marker() {
 #[test]
 fn readme_states_the_closed_round_count() {
     let text = read(&repo_root().join("README.md"));
-    assert!(text.contains("Closed perfection rounds, 23 of 100"));
+    assert!(text.contains("Closed perfection rounds, 24 of 100"));
 }
 
 #[test]
@@ -131,8 +131,9 @@ fn readme_reports_the_round_four_status() {
     // Slice 24 stood in review while Round 23 was built,
     // so the count was one again until the Round 23 closure
     // landed slice 24 and the count returned to zero.
-    // Slice 25 stands in review while Round 24 is built,
-    // so the count is one. The round five pin
+    // Slice 25 stood in review while Round 24 was built,
+    // so the count was one again until the Round 24 closure
+    // landed slice 25 and the count returned to zero. The round five pin
     // below holds the slice 6 line itself, the round six pin
     // below holds the slice 7 line, the round seven pin
     // below holds the slice 8 line, the round eight pin
@@ -156,7 +157,7 @@ fn readme_reports_the_round_four_status() {
     // twenty three pin below holds the slice 24
     // line, and the round twenty four pin below holds
     // the slice 25 line.
-    assert_eq!(text.matches("built and in review").count(), 1);
+    assert_eq!(text.matches("built and in review").count(), 0);
 }
 
 #[test]
@@ -332,9 +333,9 @@ fn readme_reports_the_round_twenty_three_status() {
 #[test]
 fn readme_reports_the_round_twenty_four_status() {
     let text = read(&repo_root().join("README.md"));
-    let standing = "- Contract, the Round 24 tally fold and the repair amendment FIX-DH-28 now stand in full form in CONTRACT.md under the Round 24 obligations, and their standing is not claimed here, as Round 24 has not closed.";
+    let standing = "- Contract, the Round 24 tally fold, with FIX-DH-28, met. They stand in full form in CONTRACT.md under the Round 24 obligations, and Round 24 closed on the merged slice 25 after three reviews, with FIX-DH-28 standing spent on the fold, the spec review approving with findings at two Majors, three Minors, and two Observations, its census Major standing against the design record, whose 894 stands as its own arithmetic erratum against the settled census of 893, and its evidence Major discharged by the executions, the standards review approving with findings at one Minor and one Observation, its Minor on the positional return dismissed as the contracted form FIX-DH-28 names, and the red team approving with findings at two Minors and three Observations, neutrality standing byte identical over 96 renderings and both identities attacked exhaustively with no reachable parting, the executions standing at 39 sets with 38 exact and one moved set, the deadlocks M-A set failing D-2, D-3, and D-9 against its stated D-2 and D-3, the movement mechanised to the mutant walk producing a level final standing past the decision, a shape the true walk cannot leave, proven by the pre fold control reproducing the stated set and no shipped behaviour moving, and the baseline tripwire settled at 398 recorded and 244 walked over the 44 series files now standing and at 386 recorded and 232 walked over the 42 that stood at the Round 23 base, the parting standing in the constructed depths pair Round 23 itself landed, with count_series standing byte identical.";
     assert!(text.lines().any(|line| line == standing));
-    let slice_line = "- Slice 25 is built and in review. It carries the fold of the tally computation of the lead, crossings, deadlock, rally, tenure, and depths readings into the one helper of the championship module, all six readings reading the tallies of a decided series from the one home from this round, with no command added, no figure moved, and no golden changed, under the repair amendment FIX-DH-28.";
+    let slice_line = "- Slice 25 has landed. It carries the fold of the tally computation of the lead, crossings, deadlock, rally, tenure, and depths readings into the one helper of the championship module, all six readings reading the tallies of a decided series from the one home from this round, with no command added, no figure moved, and no golden changed, under the repair amendment FIX-DH-28.";
     assert!(text.lines().any(|line| line == slice_line));
 }
 
