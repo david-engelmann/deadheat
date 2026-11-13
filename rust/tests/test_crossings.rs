@@ -175,10 +175,11 @@ fn the_standing_championship_stands_through_in_the_panel_series() {
     // holding races beyond its decision under which
     // its changes of hand stand at two against no
     // crossing, its section leaving the report.
-    // Fails under M-B, the panel standing at two
-    // changes of hand on the turns figure and leaving
-    // its section, and the pilot standing through in
-    // its place. Fails under M-D, the panel carrying
+    // Fails under M-B, the pilot standing through on
+    // the turns figure at two crossings against its
+    // two changes of hand and gaining its section,
+    // and the panel standing at no change of hand,
+    // its section standing where it stands. Fails under M-D, the panel carrying
     // one crossing too many against no change of hand
     // and leaving its section. Passes under M-C, each
     // series of the standing championship standing at
@@ -878,10 +879,10 @@ fn a_crossing_retaken_by_the_same_side_stands_short() {
     // below its changes of hand and the series moving
     // to through. Passes under M-A by design, no race
     // standing beyond its decision. Passes under M-C,
-    // one of its crossings erasing its winner's lead
-    // and one its loser's, its counted crossings
-    // falling to one against three changes of hand
-    // and the series standing short as it stands.
+    // both of its crossings erasing its loser's lead,
+    // its counted crossings standing at two against
+    // three changes of hand and the series standing
+    // short as it stands.
     // Passes under M-F, its crossings assertions
     // reading the class and the closing, which the
     // mutation leaves standing on this fixture.
