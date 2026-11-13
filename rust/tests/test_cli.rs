@@ -712,3 +712,58 @@ sys.exit(1 if failed else 0)
         String::from_utf8_lossy(&output.stdout)
     );
 }
+
+#[test]
+fn the_depths_command_stands_named_among_the_twenty_four_in_the_help_text() {
+    // The Round 23 enrolment. The top level help names
+    // all twenty four commands in their standing order
+    // with depths last after tenure, and the subcommand
+    // list carries the depths line with its own text.
+    let (out, _, code) = run_cli(&["--help"]);
+    assert_eq!(code, 0);
+    assert!(out.contains(
+        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths}"
+    ));
+    assert!(out.contains("print the depths report for one championship file"));
+}
+
+#[test]
+fn the_depths_command_refuses_a_missing_file_and_a_near_miss_name() {
+    // The Round 23 enrolment. The depths command with
+    // no file named draws the required argument refusal
+    // in its own name at exit status 2, and the near
+    // miss command name depth is refused as an invalid
+    // choice naming all twenty four commands, as every
+    // sibling near miss stands refused.
+    let (_, err, code) = run_cli(&["depths"]);
+    assert_eq!(code, 2);
+    let last = err.lines().last().expect("an error line").to_string();
+    assert_eq!(
+        last,
+        "deadheat depths: error: the following arguments are required: file"
+    );
+    let source = examples().join("championship.json");
+    let (_, err, code) = run_cli(&["depth", source.to_str().expect("utf8")]);
+    assert_eq!(code, 2);
+    let last = err.lines().last().expect("an error line").to_string();
+    assert!(last.contains("invalid choice: 'depth' (choose from 'race'"));
+    assert!(last.ends_with("'crossings', 'tenure', 'depths')"));
+}
+
+#[test]
+fn the_depths_command_prints_the_report_for_the_constructed_pair() {
+    // The Round 23 enrolment. The depths report over
+    // the constructed depths pair read from the
+    // dispatch, byte for byte against its golden, the
+    // first series standing in section form at the
+    // figure two and the second taking no section.
+    let source = examples().join("constructed-depths.json");
+    let (out, _, code) = run_cli(&["depths", source.to_str().expect("utf8")]);
+    assert_eq!(code, 0);
+    let golden = std::fs::read_to_string(examples().join("constructed-depths-depths.txt"))
+        .expect("a golden");
+    assert_eq!(out, golden);
+    assert!(out.contains("series 1, the constructed depths drill one"));
+    assert!(out.contains("deepest deficit 2 over the decided record"));
+    assert!(!out.contains("series 2,"));
+}
