@@ -124,7 +124,9 @@ fn readme_reports_the_round_four_status() {
     // landed slice 21 and the count returned to zero.
     // Slice 22 stood in review while Round 21 was built,
     // so the count was one again until the Round 21 closure
-    // landed slice 22 and the count returned to zero. The round five pin
+    // landed slice 22 and the count returned to zero.
+    // Slice 23 stands in review while Round 22 is built,
+    // so the count is one again. The round five pin
     // below holds the slice 6 line itself, the round six pin
     // below holds the slice 7 line, the round seven pin
     // below holds the slice 8 line, the round eight pin
@@ -143,8 +145,9 @@ fn readme_reports_the_round_four_status() {
     // nineteen pin below holds the slice 20 line, and
     // the round twenty pin below holds the slice 21
     // line, and the round twenty one pin below holds
-    // the slice 22 line.
-    assert_eq!(text.matches("built and in review").count(), 0);
+    // the slice 22 line, and the round twenty two pin
+    // below holds the slice 23 line.
+    assert_eq!(text.matches("built and in review").count(), 1);
 }
 
 #[test]
