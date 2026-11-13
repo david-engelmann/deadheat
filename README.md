@@ -350,6 +350,24 @@ lead
 lead, 2 series, 0 wide, 2 narrow, 0 no winner
 ```
 
+The crossings command reads a championship file and reports the series that stood through, whose count of crossings over the decided record stood equal to the count of its changes of hand, standing the decided races of each beside the crossings of the series and its race split.
+
+```sh
+deadheat crossings examples/championship.json
+```
+
+```text
+crossings
+series 2, the recorded close call panel
+prime-1 against shadow-1, first to 3 wins
+race 1, pin the cache key, prime-1 wins
+race 2, trim the import list, prime-1 wins
+race 5, name the worker pool, prime-1 wins
+crossings 0 over the decided record
+series winner, prime-1, prime-1 3 race wins, shadow-1 0 race wins, 2 no results
+crossings, 2 series, 1 through, 1 short, 0 no winner
+```
+
 The standings command prints the standings table held in a standings file. The adopt command writes the losing attempt patch into a patches folder and the discard command removes it.
 
 ## Status
