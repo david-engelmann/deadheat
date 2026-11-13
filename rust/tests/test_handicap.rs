@@ -919,6 +919,37 @@ fn every_standing_golden_still_matches_byte_for_byte() {
             assert_eq!(rendered, golden, "{name}");
             continue;
         }
+
+        // Altered at the Round 21 slice for its named mechanical
+        // consequence. The crossings examples of DH-45 add four
+        // goldens whose stems name championships rather than a
+        // race, so the sweep reads them through the championship
+        // loader and the crossings report before the generic race
+        // reading can misread their sources. The two counts
+        // below rise by twelve each this round, the four crossings
+        // goldens here and the eight constructed sibling goldens
+        // the standing streak, cluster, rally, deadlock,
+        // distance, comebacks, closing, and opening arms already
+        // read over the constructed crossings stem, the unadjusted
+        // count rising with them because every race of the four
+        // championships stands unadjusted.
+        if let Some(stem) = name.strip_suffix("-crossings.txt") {
+            let source = golden_path.with_file_name(format!("{stem}.json"));
+            let (championship, defects) = deadheat::championship::load_championship_file(&source);
+            assert_eq!(defects, Vec::<String>::new(), "{name}");
+            let championship = championship.expect("a championship");
+            if championship
+                .series
+                .iter()
+                .flat_map(|series| series.races.iter())
+                .all(race_is_unadjusted)
+            {
+                unadjusted += 1;
+            }
+            let rendered = deadheat::crossings::crossings_report(&championship).join("\n") + "\n";
+            assert_eq!(rendered, golden, "{name}");
+            continue;
+        }
         let source = golden_path.with_extension("json");
         let (race, _) = load_race_file(&source);
         if let Some(race) = race {
@@ -962,12 +993,12 @@ fn every_standing_golden_still_matches_byte_for_byte() {
         let rendered = deadheat::championship::championship_report(&championship).join("\n") + "\n";
         assert_eq!(rendered, golden, "{name}");
     }
-    // The counts stand at one hundred fifty two
-    // goldens and one hundred forty eight unadjusted
-    // after the Round 20 enrolment counted at the lead
+    // The counts stand at one hundred sixty four
+    // goldens and one hundred sixty unadjusted after
+    // the Round 21 enrolment counted at the crossings
     // arm above, twelve of each over the one hundred
-    // forty and one hundred thirty six the Round 19
-    // enrolment left standing.
-    assert_eq!(goldens.len(), 152);
-    assert_eq!(unadjusted, 148);
+    // fifty two and one hundred forty eight the Round
+    // 20 enrolment left standing.
+    assert_eq!(goldens.len(), 164);
+    assert_eq!(unadjusted, 160);
 }

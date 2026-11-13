@@ -1829,3 +1829,214 @@ fn the_constructed_lead_example_under_its_sibling_readings_matches_its_goldens()
         read_text(&examples().join("constructed-lead-opening.txt"))
     );
 }
+
+#[test]
+fn the_crossings_example_matches_its_golden() {
+    // E-1 of the Round 21 enrolment. The standing
+    // championship under the crossings command, the
+    // panel series standing through at a figure of
+    // zero in its section alone and the pilot
+    // standing short at two changes of hand and no
+    // crossing, pinned at the CLI and at the library
+    // surface both.
+    let source = examples().join("championship.json");
+    let out = run_ok(&["crossings", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("championship-crossings.txt"));
+    assert_eq!(out, golden);
+    assert!(out.contains("series 2, the recorded close call panel"));
+    assert!(out.contains("crossings 0 over the decided record"));
+    assert!(!out.contains("series 1,"));
+    assert!(out
+        .trim_end()
+        .ends_with("crossings, 2 series, 1 through, 1 short, 0 no winner"));
+    let (championship, defects) =
+        deadheat::championship::load_championship_file(&examples().join("championship.json"));
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered =
+        deadheat::crossings::crossings_report(&championship.expect("a championship")).join("\n") + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_survey_championship_crossings_matches_its_golden() {
+    // E-2. The survey championship under the
+    // crossings command, the apex and bolt series
+    // standing through at a figure of two and the
+    // crest and drift series standing through at a
+    // figure of one, in that order, and the remaining
+    // four series standing short, pinned at the CLI
+    // and at the library surface both.
+    let source = examples().join("survey-championship.json");
+    let out = run_ok(&["crossings", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("survey-championship-crossings.txt"));
+    assert_eq!(out, golden);
+    assert!(out.contains("series 1, the constructed survey series, apex-1 against bolt-1"));
+    assert!(out.contains("crossings 2 over the decided record"));
+    assert!(out.contains("series 6, the constructed survey series, crest-1 against drift-1"));
+    assert!(out.contains("crossings 1 over the decided record"));
+    assert!(out
+        .trim_end()
+        .ends_with("crossings, 6 series, 2 through, 4 short, 0 no winner"));
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("survey-championship.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered =
+        deadheat::crossings::crossings_report(&championship.expect("a championship")).join("\n") + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_league_championship_crossings_matches_its_golden() {
+    // E-3. The league championship under the
+    // crossings command, the apex and crest series
+    // standing through at a figure of two, the apex
+    // and ember series at a figure of one, the bolt
+    // and drift series at a figure of zero, and the
+    // drift and ember series at a figure of zero, in
+    // that order, and the remaining six series
+    // standing short, pinned at the CLI and at the
+    // library surface both.
+    let source = examples().join("league-championship.json");
+    let out = run_ok(&["crossings", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("league-championship-crossings.txt"));
+    assert_eq!(out, golden);
+    assert!(out.contains("series 2, the constructed league series, apex-1 against crest-1"));
+    assert!(out.contains("crossings 2 over the decided record"));
+    assert!(out.contains("series 4, the constructed league series, apex-1 against ember-1"));
+    assert!(out.contains("crossings 1 over the decided record"));
+    assert!(out.contains("series 6, the constructed league series, bolt-1 against drift-1"));
+    assert!(out.contains("crossings 0 over the decided record"));
+    assert!(out.contains("series 10, the constructed league series, drift-1 against ember-1"));
+    assert!(!out.contains("series 1,"));
+    assert!(out
+        .trim_end()
+        .ends_with("crossings, 10 series, 4 through, 6 short, 0 no winner"));
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("league-championship.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered =
+        deadheat::crossings::crossings_report(&championship.expect("a championship")).join("\n") + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_constructed_crossings_example_matches_its_golden() {
+    // E-4. The constructed championship of DH-45,
+    // labelled as constructed in its file names and
+    // its task texts and never presented as recorded.
+    // Its second series stands through at a figure of
+    // three, every change of hand passing through
+    // level, and its first stands short at two
+    // crossings against four changes of hand, so the
+    // golden carries the second series' section
+    // alone.
+    let source = examples().join("constructed-crossings.json");
+    let out = run_ok(&["crossings", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("constructed-crossings-crossings.txt"));
+    assert_eq!(out, golden);
+    assert!(out.contains("series 2, the constructed crossings drill two"));
+    assert!(out.contains("crossings 3 over the decided record"));
+    assert!(!out.contains("series 1,"));
+    assert!(out
+        .trim_end()
+        .ends_with("crossings, 2 series, 1 through, 1 short, 0 no winner"));
+    let (championship, defects) =
+        deadheat::championship::load_championship_file(&examples().join("constructed-crossings.json"));
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered =
+        deadheat::crossings::crossings_report(&championship.expect("a championship")).join("\n") + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_constructed_crossings_example_under_its_sibling_readings_matches_its_goldens() {
+    // E-5. The same constructed file under the
+    // streak, cluster, rally, deadlock, distance,
+    // comeback, closing, and opening commands, the
+    // eight section-carrying sibling goldens: both
+    // series standing strung, clustered, deadlocked,
+    // and the distance in their sections under those
+    // four, the second series standing a rally, from
+    // behind, and in a run at its closing in its
+    // section alone under those three, and the first
+    // series standing in a run in its section alone
+    // under the opening command, so the round's
+    // partings stand pinned over shipped data byte
+    // for byte against the pin above. No E-6 stands
+    // in this round: DH-45 stands no further golden
+    // over the constructed crossings fixture, the
+    // eight sibling goldens above standing as its
+    // full sibling set.
+    let source = examples().join("constructed-crossings.json");
+    let source_arg = source.to_str().expect("utf8");
+    let out = run_ok(&["streak", source_arg]);
+    let golden = read_text(&examples().join("constructed-crossings-streak.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["cluster", source_arg]);
+    let golden = read_text(&examples().join("constructed-crossings-cluster.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["rally", source_arg]);
+    let golden = read_text(&examples().join("constructed-crossings-rally.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["deadlock", source_arg]);
+    let golden = read_text(&examples().join("constructed-crossings-deadlock.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["distance", source_arg]);
+    let golden = read_text(&examples().join("constructed-crossings-distance.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["comeback", source_arg]);
+    let golden = read_text(&examples().join("constructed-crossings-comebacks.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["closing", source_arg]);
+    let golden = read_text(&examples().join("constructed-crossings-closing.txt"));
+    assert_eq!(out, golden);
+    let out = run_ok(&["opening", source_arg]);
+    let golden = read_text(&examples().join("constructed-crossings-opening.txt"));
+    assert_eq!(out, golden);
+    let (championship, defects) =
+        deadheat::championship::load_championship_file(&examples().join("constructed-crossings.json"));
+    assert_eq!(defects, Vec::<String>::new());
+    let championship = championship.expect("a championship");
+    let rendered = deadheat::streaks::streak_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-crossings-streak.txt"))
+    );
+    let rendered = deadheat::clusters::cluster_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-crossings-cluster.txt"))
+    );
+    let rendered = deadheat::rallies::rally_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-crossings-rally.txt"))
+    );
+    let rendered = deadheat::deadlocks::deadlock_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-crossings-deadlock.txt"))
+    );
+    let rendered = deadheat::distances::distance_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-crossings-distance.txt"))
+    );
+    let rendered = deadheat::comebacks::comeback_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-crossings-comebacks.txt"))
+    );
+    let rendered = deadheat::closings::closing_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-crossings-closing.txt"))
+    );
+    let rendered = deadheat::openings::opening_report(&championship).join("\n") + "\n";
+    assert_eq!(
+        rendered,
+        read_text(&examples().join("constructed-crossings-opening.txt"))
+    );
+}
