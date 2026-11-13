@@ -43,6 +43,16 @@
 //! own comments state, and pass under M-A to M-F and
 //! the classing and champion drop mutations by design,
 //! the mutations touching the tenure module alone.
+//! One pin stands apart from the twenty, M-21, the
+//! cure pin of FIX-DH-27. It reads CONTRACT.md
+//! itself, a surface no other pin in this file
+//! reads, and asserts the restated opening clause
+//! of the DH-47 examples entry and the confinement
+//! of the sentence it replaced to the quotation of
+//! FIX-DH-27. It fails on the pre repair tree by
+//! construction, the wrong sentence standing
+//! unquoted in the entry there and no amendment
+//! standing, and it passes on the repaired tree.
 
 mod shared;
 
@@ -463,8 +473,7 @@ fn a_series_of_target_one_stands_ahead() {
     // carrying its section at the figure 1 and
     // closing "tenure, 1 series, 1 ahead, 0 level, 0
     // behind, 0 no winner". Fails under the classing
-    // mutation alone among the named mutations besides
-    // M-C and M-D, the lone-decider series standing
+    // mutation, the lone-decider series standing
     // unclassed and its closing moving. Fails under
     // M-C, the series standing behind on the swapped
     // counts. Fails under M-D, its one standing added
@@ -811,13 +820,11 @@ fn the_tenure_counts_stand_in_their_stated_relations() {
     // championship. Fails under M-C, the league's
     // behind count standing at eight against a rally
     // count of five and its inclusion breaking.
-    // Passes under M-A as a stated coincidence, the
-    // relations surviving the mutation on the shipped
-    // championships, the sums and the no winner
-    // equality standing untouched and the behind count
-    // standing at one against a rally count of four in
-    // the survey and at none in the league, the golden
-    // pins carrying the mutation. Passes under M-B as
+    // Fails under M-A, its per-series arm reading the
+    // decided record's front counts from the series
+    // report, and the walk that does not stop moving
+    // survey apex-bolt out of its section, the arm
+    // standing unmet there. Passes under M-B as
     // a stated coincidence, every decided series
     // standing ahead under the mutation, so its
     // inclusions hold and its sums stand. Passes under
@@ -1198,5 +1205,59 @@ fn a_collection_holding_no_series_renders_the_empty_form_at_the_library_surface(
             "tenure",
             "tenure, 0 series, 0 ahead, 0 level, 0 behind, 0 no winner",
         ]
+    );
+}
+
+#[test]
+fn the_dh47_examples_entry_states_the_opening_golden_with_no_section() {
+    // M-21. The cure pin of FIX-DH-27. The DH-47
+    // examples entry states the opening golden over
+    // the constructed example in its restated form,
+    // carrying no section, its first series standing
+    // alone and its second standing from behind, and
+    // the sentence the entry first carried, claiming
+    // its section standing over the first series,
+    // stands nowhere in CONTRACT.md outside the
+    // quotation of FIX-DH-27. The pin fails on the
+    // pre repair tree by construction, the wrong
+    // sentence standing unquoted in the entry there
+    // and no amendment standing, and it passes on
+    // the repaired tree. It names no mutation, the
+    // defect standing in the contract text alone and
+    // no figure, rendering, or golden moving under
+    // the amendment.
+    let contract = std::fs::read_to_string(repo_root().join("CONTRACT.md")).expect("the contract");
+    let entry_start = contract
+        .find("- DH-47 examples.")
+        .expect("the examples entry");
+    let entry_end = entry_start
+        + contract[entry_start..]
+            .find("\n\n- FIX-DH-27.")
+            .expect("the amendment after the entry");
+    let entry = &contract[entry_start..entry_end];
+    assert!(
+        entry.contains(
+            "Its opening golden closing opening, 2 series, 0 in a run, 1 alone, 1 from behind, 0 no winner, carrying no section, its first series standing alone and its second standing from behind."
+        ),
+        "the entry states the restated form"
+    );
+    let wrong = "Its opening golden closing opening, 2 series, 0 in a run, 1 alone, 1 from behind, 0 no winner, its section standing over the first series.";
+    assert!(
+        !entry.contains(wrong),
+        "the entry carries no wrong sentence"
+    );
+    assert_eq!(
+        contract.matches(wrong).count(),
+        1,
+        "the wrong sentence stands once"
+    );
+    let amendment_start = contract.find("- FIX-DH-27.").expect("the amendment");
+    let command_start = contract
+        .find("- The tenure command.")
+        .expect("the command entry");
+    let quoted = contract.find(wrong).expect("the quotation");
+    assert!(
+        quoted > amendment_start && quoted < command_start,
+        "the one standing of the wrong sentence stands inside the amendment"
     );
 }
