@@ -257,6 +257,45 @@ pub(crate) fn longest_run_of(decided: &[(u64, usize)], side: usize) -> u64 {
     longest
 }
 
+/// The standings of the decided record of a series, the
+/// record standing as the pairs of the count of the
+/// race in the record and the side that won it that
+/// the one walk leaves. The standings stand as five
+/// counts in a fixed order, the largest lead of side
+/// zero, the largest lead of side one, the count of
+/// the level standings after the first decided race,
+/// the front count of side zero, and the front count
+/// of side one, each read off the standings after
+/// each decided race of the record. The lead reading
+/// of DH-42 reads the two largest leads, the crossings
+/// reading of DH-44 and the deadlock reading of DH-29
+/// read the level count, the rally reading of DH-25
+/// reads the largest lead of its loser's side, the
+/// tenure reading of DH-46 reads the two front
+/// counts, and the depths reading of DH-48 reads the
+/// largest lead of its loser's side, and no other
+/// reading reads these standings.
+pub(crate) fn tally_standings_of(decided: &[(u64, usize)]) -> [u64; 5] {
+    let mut tallies: [u64; 2] = [0, 0];
+    let mut largest: [u64; 2] = [0, 0];
+    let mut level: u64 = 0;
+    let mut front: [u64; 2] = [0, 0];
+    for (index, (_, side)) in decided.iter().enumerate() {
+        tallies[*side] += 1;
+        let lead = tallies[*side].saturating_sub(tallies[1 - *side]);
+        largest[*side] = largest[*side].max(lead);
+        if index > 0 && tallies[0] == tallies[1] {
+            level += 1;
+        }
+        if tallies[0] > tallies[1] {
+            front[0] += 1;
+        } else if tallies[1] > tallies[0] {
+            front[1] += 1;
+        }
+    }
+    [largest[0], largest[1], level, front[0], front[1]]
+}
+
 /// Fold one series into the championship standings. Each
 /// model of the series is stood in once for the series,
 /// and the counted figures of the one counting walk are

@@ -18,7 +18,7 @@
 //! winner rule and no second counting walk stands in this
 //! module.
 
-use crate::championship::{count_series, Championship};
+use crate::championship::{count_series, tally_standings_of, Championship};
 
 /// Return the deadlock report lines for one championship.
 pub fn deadlock_report(championship: &Championship) -> Vec<String> {
@@ -35,28 +35,24 @@ pub fn deadlock_report(championship: &Championship) -> Vec<String> {
                 continue;
             }
         };
-        // The count of decided races that left the tallies
-        // level, read over the decided record the walk
-        // leaves with the deciding race set aside, because
-        // the tallies cannot stand equal after the deciding
-        // race and a level standing read there would be the
-        // closing tally. A series holding no winner never
-        // reaches this count, because the classes of this
-        // reading are classes of decided series alone, and a
-        // series of target one holds only the deciding race
-        // in its record and so always stands clear.
-        let mut tallies = [0u64; 2];
-        let mut level = 0u64;
-        let decided_count = count.decided.len();
-        for (position, (_, side)) in count.decided.iter().enumerate() {
-            tallies[*side] += 1;
-            if position + 1 == decided_count {
-                break;
-            }
-            if tallies[0] == tallies[1] {
-                level += 1;
-            }
-        }
+        // The count of decided races that left the
+        // tallies level, read by the one helper of
+        // the championship module over the decided
+        // record the walk leaves. The helper's level
+        // count stands as this count stands, the
+        // deciding race never leaving the tallies
+        // level and the first decided race never
+        // leaving them level, so the level standings
+        // after the first decided race are the level
+        // standings this reading counts with the
+        // deciding race set aside. A series holding
+        // no winner never reaches this count, because
+        // the classes of this reading are classes of
+        // decided series alone, and a series of target
+        // one holds only the deciding race in its
+        // record and so always stands clear.
+        let standings = tally_standings_of(&count.decided);
+        let level = standings[2];
         if level == 0 {
             clear += 1;
             continue;

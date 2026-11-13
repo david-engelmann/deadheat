@@ -17,7 +17,7 @@
 //! record that walk leaves, so no second winner rule and
 //! no second counting walk stands in this module.
 
-use crate::championship::{count_series, Championship};
+use crate::championship::{count_series, tally_standings_of, Championship};
 
 /// Return the rally report lines for one championship.
 pub fn rally_report(championship: &Championship) -> Vec<String> {
@@ -34,28 +34,24 @@ pub fn rally_report(championship: &Championship) -> Vec<String> {
                 continue;
             }
         };
-        // The deepest the winner stood behind, read over the
-        // decided record the walk leaves with the deciding
-        // race set aside, because a tally read after the
-        // deciding race is the closing tally and never a
-        // deficit. A level tally stands as not behind, so a
-        // winner who only ever stood level stands wire to
-        // wire, and a series of target one holds only the
-        // deciding race in its record and so always stands
-        // wire to wire.
-        let mut tallies = [0u64; 2];
-        let mut deepest = 0u64;
-        let decided_count = count.decided.len();
-        for (position, (_, side)) in count.decided.iter().enumerate() {
-            tallies[*side] += 1;
-            if position + 1 == decided_count {
-                break;
-            }
-            let deficit = tallies[1 - champion].saturating_sub(tallies[champion]);
-            if deficit > deepest {
-                deepest = deficit;
-            }
-        }
+        // The deepest the winner stood behind, read
+        // by the one helper of the championship
+        // module over the decided record the walk
+        // leaves, as the largest lead of the loser's
+        // side. The figure stands as the deepest
+        // deficit before the deciding race stood,
+        // the deciding race itself never carrying a
+        // deficit, its winner standing above at the
+        // decision, so the largest lead of the loser
+        // over the whole record is the deepest the
+        // winner stood behind before it. A level
+        // tally stands as not behind, so a winner who
+        // only ever stood level stands wire to
+        // wire, and a series of target one holds only
+        // the deciding race in its record and so
+        // always stands wire to wire.
+        let standings = tally_standings_of(&count.decided);
+        let deepest = standings[1 - champion];
         if deepest == 0 {
             wire_to_wire += 1;
             continue;

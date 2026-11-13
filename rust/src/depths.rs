@@ -21,7 +21,7 @@
 //! second winner rule and no second counting walk
 //! stands in this module.
 
-use crate::championship::{count_series, Championship};
+use crate::championship::{count_series, tally_standings_of, Championship};
 
 /// Return the depths report lines for one championship.
 pub fn depths_report(championship: &Championship) -> Vec<String> {
@@ -40,22 +40,18 @@ pub fn depths_report(championship: &Championship) -> Vec<String> {
             }
         };
         // The depth of the series over the decided
-        // record the walk leaves, the largest count by
-        // which the loser's tally of decided wins
-        // stood above the winner's tally after a
-        // decided race of the series, standing at none
-        // where the winner never stood behind. The
-        // winning margin is the count of the winner's
-        // decided wins less the count of the loser's
-        // decided wins, the figure DH-42 states and
-        // the walk leaves at the decision.
-        let mut tallies: [u64; 2] = [0, 0];
-        let mut depth: u64 = 0;
-        for (_, side) in &count.decided {
-            tallies[*side] += 1;
-            let deficit = tallies[1 - champion].saturating_sub(tallies[champion]);
-            depth = depth.max(deficit);
-        }
+        // record the walk leaves, read by the one
+        // helper of the championship module, the
+        // largest count by which the loser's tally of
+        // decided wins stood above the winner's tally
+        // after a decided race of the series, standing
+        // at none where the winner never stood behind.
+        // The winning margin is the count of the
+        // winner's decided wins less the count of the
+        // loser's decided wins, the figure DH-42
+        // states and the walk leaves at the decision.
+        let standings = tally_standings_of(&count.decided);
+        let depth = standings[1 - champion];
         let margin = count.wins[champion] - count.wins[1 - champion];
         if depth < margin {
             shallow += 1;
