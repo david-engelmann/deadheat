@@ -146,6 +146,10 @@ path = "rust/tests/test_leads.rs"
 name = "test_crossings"
 path = "rust/tests/test_crossings.rs"
 
+[[test]]
+name = "test_tenure"
+path = "rust/tests/test_tenure.rs"
+
 [dependencies]
 num-bigint = "0.4"
 num-rational = "0.4"
