@@ -216,17 +216,15 @@ fn the_standing_championship_stands_unbroken_in_every_series() {
     // R-1. The standing championship golden, no section
     // standing, closing "reigns, 2 series, 2 unbroken, 0
     // broken, 0 no winner", the pilot and the panel both
-    // standing unbroken, the pilot at a reign of two in
-    // a front count of two and the panel at three in
+    // standing unbroken, the pilot at a reign of four in
+    // a front count of four and the panel at three in
     // three. Fails under V-1, the closing counts
     // exchanging. Fails under V-3, the pilot's reign
-    // reading as its largest lead of two against a
-    // front count of two standing equal, and the
-    // panel's reign reading as its largest lead of two
-    // in a front count of three and classing broken
-    // with a section. Fails under V-5, the panel's reign
+    // reading as its largest lead of two in a front
+    // count of four and the series classing broken with
+    // a section. Fails under V-5, the pilot's reign
     // reading as its longest win run of two in a front
-    // count of three, the same parting. Fails under
+    // count of four, the same parting. Fails under
     // V-6, both front counts reading as behind counts
     // of nought and both series classing broken. Fails
     // under V-9, both unbroken series gaining sections.
@@ -317,10 +315,10 @@ fn the_survey_championship_matches_its_reigns_golden() {
     // unbroken at six in six, and bolt and crest's
     // reign reading nine in ten over its full record.
     // Fails under V-7, the figure lines of apex and
-    // drift and bolt and crest printing their front
-    // counts in place of their reigns. Passes under
-    // V-8 alone, no series of the six holding no
-    // winner.
+    // bolt, apex and drift, and bolt and crest printing
+    // their front counts in place of their reigns.
+    // Passes under V-8 alone, no series of the six
+    // holding no winner.
     let championship = load_example("survey-championship.json");
     let lines = reigns_report(&championship);
     assert_eq!(reign_figures(&lines), vec![1, 3, 3]);
