@@ -25,7 +25,7 @@ fn agents_carries_the_canonical_marker() {
 #[test]
 fn readme_states_the_closed_round_count() {
     let text = read(&repo_root().join("README.md"));
-    assert!(text.contains("Closed perfection rounds, 24 of 100"));
+    assert!(text.contains("Closed perfection rounds, 25 of 100"));
 }
 
 #[test]
@@ -133,7 +133,10 @@ fn readme_reports_the_round_four_status() {
     // landed slice 24 and the count returned to zero.
     // Slice 25 stood in review while Round 24 was built,
     // so the count was one again until the Round 24 closure
-    // landed slice 25 and the count returned to zero. The round five pin
+    // landed slice 25 and the count returned to zero.
+    // Slice 26 stood in review while Round 25 was built,
+    // so the count was one again until the Round 25 closure
+    // landed slice 26 and the count returned to zero. The round five pin
     // below holds the slice 6 line itself, the round six pin
     // below holds the slice 7 line, the round seven pin
     // below holds the slice 8 line, the round eight pin
@@ -158,7 +161,7 @@ fn readme_reports_the_round_four_status() {
     // line, and the round twenty four pin below holds
     // the slice 25 line, and the round twenty five
     // pin below holds the slice 26 line.
-    assert_eq!(text.matches("built and in review").count(), 1);
+    assert_eq!(text.matches("built and in review").count(), 0);
 }
 
 #[test]
@@ -343,9 +346,9 @@ fn readme_reports_the_round_twenty_four_status() {
 #[test]
 fn readme_reports_the_round_twenty_five_status() {
     let text = read(&repo_root().join("README.md"));
-    let standing = "- Contract, DH-50 and DH-51 now stand in full form in CONTRACT.md under the Round 25 obligations, and their standing is not claimed here, as Round 25 has not closed.";
+    let standing = "- Contract, DH-50 and DH-51 met. They stand in full form in CONTRACT.md under the Round 25 obligations, and Round 25 closed on the merged slice 26 after three reviews, with the spec review approving with findings at one Minor and four Observations, its Minor standing against the design record on the sibling golden count, the standards review approving with findings at two Observations, and the red team approving with findings at one Minor and two Observations, its Minor standing against the design record on the comebacks closing prose, and CodeRabbit returning no comments on the slice, with FIX-DH-29 standing free and unspent, the sibling golden count standing as a named residual and not as met work, the design record's section 1.9 list naming depths among the spells pair's sibling readings while no depths golden stands over the pair, the depths closing over the pair standing computed in that section and driven true on the shipped binary, and the repair priced at one golden, one E-3 arm, and C-1 at 205 and 201, the design record standing corrected at four further places as its errata, its section 1.8 golden names standing as shorthand where the shipped goldens stand in the family's championship form, its W-13 prose standing at a depth of 3 where its own engine computes 2 and the shipped pin states 2, its section 1.7 naming the survey's bolt and crest and bolt and drift series and the league's apex and ember and bolt and drift series the other way round with every figure and closing unaffected, and its section 1.9 comebacks closing prose carrying a no winner segment the report never prints with E-3 asserting the true rendered tail, the build's fresh extraction gate re-run standing unexecuted on the write fault and carried as unexecuted, its place discharged by the staged tree standing blob identical to the pushed tree and by the hosted gate standing green on the exact head, and the red team's whole suite grain observation standing on its V-4 and V-7 spot executions, the split's universe standing as the pin file with both executions exact at that grain and the same mutants felling the enrolment, fencing, and sweep pins that assert the same renderings through other files at the whole suite grain.";
     assert!(text.lines().any(|line| line == standing));
-    let slice_line = "- Slice 26 is built and in review. It carries the spells reading over a recorded championship, the classification of each decided series by the longest spell its winner stood behind over the decided record read against the behind count of the series as unbroken, broken, or never behind, one section for each series standing broken naming its decided races in race order and the longest spell and behind count of the series and its winner with its race split, with the closing counts of series, unbroken, broken, never behind, and no winner, with the spells example over the standing championship in its empty form and the constructed spells example and their goldens under examples, and the spells command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, opening, turns, lead, crossings, tenure, and depths.";
+    let slice_line = "- Slice 26 has landed. It carries the spells reading over a recorded championship, the classification of each decided series by the longest spell its winner stood behind over the decided record read against the behind count of the series as unbroken, broken, or never behind, one section for each series standing broken naming its decided races in race order and the longest spell and behind count of the series and its winner with its race split, with the closing counts of series, unbroken, broken, never behind, and no winner, with the spells example over the standing championship in its empty form and the constructed spells example and their goldens under examples, and the spells command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, opening, turns, lead, crossings, tenure, and depths.";
     assert!(text.lines().any(|line| line == slice_line));
 }
 
