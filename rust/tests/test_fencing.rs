@@ -36,6 +36,7 @@ use deadheat::races::{
 use deadheat::rallies::rally_report;
 use deadheat::seats::attempt_summary;
 use deadheat::series::{series_report, Series};
+use deadheat::spells::spells_report;
 use deadheat::streaks::streak_report;
 use deadheat::tenure::tenure_report;
 use deadheat::totals::totals_report;
@@ -1186,6 +1187,99 @@ fn the_depths_report_fences_its_fields() {
             "deepest deficit 2 over the decided record",
             "series winner, ,  3 race wins,  2 race wins, 0 no results",
             "depths, 1 series, 1 deep, 0 matched, 0 shallow, 0 no winner",
+        ]
+    );
+}
+
+#[test]
+fn the_spells_report_fences_its_fields() {
+    // F-1 of the Round 25 discrimination plan. A
+    // series rebuilt by hand on the bad series frame,
+    // read under DH-51, its second model standing
+    // break bearing as its first does. The second
+    // model takes the first and third races and the
+    // first model takes the second, fourth, and fifth
+    // at a wins target of three, so the first model
+    // stood behind in two runs of one against a behind
+    // count of two and the series stands broken, and
+    // its section prints the series task, the race
+    // tasks, and both model labels, every field
+    // holding a break standing fenced to the empty
+    // field through the one helper of FIX-DH-16, as on
+    // the sibling surfaces. Its failure mode is a
+    // second fencing path standing in the new module.
+    // It fails on the pre round tree by compile
+    // absence, the spells module standing absent
+    // there.
+    let mut series = bad_series();
+    series.models[1] = bad("beta");
+    series.wins_target = BigInt::from(3);
+    series.races = vec![
+        Race {
+            task: text("race one"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Red, 130.0),
+                attempt(bad("beta"), "lane two", SuiteResult::Green, 100.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+        Race {
+            task: bad("race task"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Green, 100.0),
+                attempt(bad("beta"), "lane two", SuiteResult::Red, 130.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+        Race {
+            task: text("race three"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Red, 130.0),
+                attempt(bad("beta"), "lane two", SuiteResult::Green, 100.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+        Race {
+            task: text("race four"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Green, 100.0),
+                attempt(bad("beta"), "lane two", SuiteResult::Red, 130.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+        Race {
+            task: text("race five"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Green, 100.0),
+                attempt(bad("beta"), "lane two", SuiteResult::Red, 130.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+    ];
+    let championship = Championship {
+        series: vec![series],
+    };
+    let lines = spells_report(&championship);
+    assert_no_forgery(&lines);
+    assert_eq!(
+        lines,
+        vec![
+            "spells",
+            "series 1, ",
+            " against , first to 3 wins",
+            "race 1, race one,  wins",
+            "race 2, ,  wins",
+            "race 3, race three,  wins",
+            "race 4, race four,  wins",
+            "race 5, race five,  wins",
+            "longest spell 1, behind count 2 over the decided record",
+            "series winner, ,  3 race wins,  2 race wins, 0 no results",
+            "spells, 1 series, 0 unbroken, 1 broken, 0 never behind, 0 no winner",
         ]
     );
 }
