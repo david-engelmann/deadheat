@@ -32,6 +32,7 @@ pub mod scan;
 pub mod seats;
 pub mod series;
 pub mod specs;
+pub mod spells;
 pub mod streaks;
 pub mod tenure;
 pub mod totals;
