@@ -155,6 +155,10 @@ name = "test_depths"
 path = "rust/tests/test_depths.rs"
 
 [[test]]
+name = "test_spells"
+path = "rust/tests/test_spells.rs"
+
+[[test]]
 name = "test_fold"
 path = "rust/tests/test_fold.rs"
 
