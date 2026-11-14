@@ -1042,6 +1042,39 @@ fn every_standing_golden_still_matches_byte_for_byte() {
             assert_eq!(rendered, golden, "{name}");
             continue;
         }
+        // Altered at the Round 26 slice for its named mechanical
+        // consequence. The reigns examples of DH-53 add four
+        // goldens whose stems name championships rather than a
+        // race, so the sweep reads them through the championship
+        // loader and the reigns report before the generic race
+        // reading can misread their sources. The two counts
+        // below rise by seventeen each this round, the four
+        // reigns goldens here, the twelve constructed sibling
+        // goldens the standing streak, cluster, rally, deadlock,
+        // distance, comebacks, closing, opening, crossings,
+        // tenure, depths, and spells arms already read over the
+        // constructed reigns stem, and the one residual depths
+        // golden the standing depths arm already reads over the
+        // constructed spells stem, the unadjusted count rising
+        // with them because every race of the championships
+        // stands unadjusted.
+        if let Some(stem) = name.strip_suffix("-reigns.txt") {
+            let source = golden_path.with_file_name(format!("{stem}.json"));
+            let (championship, defects) = deadheat::championship::load_championship_file(&source);
+            assert_eq!(defects, Vec::<String>::new(), "{name}");
+            let championship = championship.expect("a championship");
+            if championship
+                .series
+                .iter()
+                .flat_map(|series| series.races.iter())
+                .all(race_is_unadjusted)
+            {
+                unadjusted += 1;
+            }
+            let rendered = deadheat::reigns::reigns_report(&championship).join("\n") + "\n";
+            assert_eq!(rendered, golden, "{name}");
+            continue;
+        }
         let source = golden_path.with_extension("json");
         let (race, _) = load_race_file(&source);
         if let Some(race) = race {
@@ -1085,12 +1118,15 @@ fn every_standing_golden_still_matches_byte_for_byte() {
         let rendered = deadheat::championship::championship_report(&championship).join("\n") + "\n";
         assert_eq!(rendered, golden, "{name}");
     }
-    // The counts stand at two hundred four
-    // goldens and two hundred unadjusted after the
-    // Round 25 enrolment counted at the spells arm
-    // above, fourteen of each over the one hundred
-    // ninety and one hundred eighty six the Round 23
-    // enrolment left standing. The
+    // The counts stand at two hundred twenty one
+    // goldens and two hundred seventeen unadjusted
+    // after the Round 26 enrolment counted at the
+    // reigns arm above, seventeen of each over the
+    // two hundred four and two hundred the Round 25
+    // enrolment left standing after counting at the
+    // spells arm, fourteen of each over the one
+    // hundred ninety and one hundred eighty six the
+    // Round 23 enrolment left standing. The
     // Round 24 fold moved no figure the sweep reads,
     // the tally computation of the six tally readings
     // standing folded into the one helper of the
@@ -1098,6 +1134,6 @@ fn every_standing_golden_still_matches_byte_for_byte() {
     // golden standing byte for byte as it stood, so no
     // golden joins at that round, no arm joins the
     // chain, and the counts stand unmoved.
-    assert_eq!(goldens.len(), 204);
-    assert_eq!(unadjusted, 200);
+    assert_eq!(goldens.len(), 221);
+    assert_eq!(unadjusted, 217);
 }

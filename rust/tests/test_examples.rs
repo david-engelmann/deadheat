@@ -2568,3 +2568,178 @@ fn the_constructed_spells_example_under_its_sibling_readings_matches_its_goldens
         assert!(out.trim_end().ends_with(closing), "{golden_name}");
     }
 }
+
+#[test]
+fn the_championship_reigns_examples_match_their_goldens() {
+    // E-1 of the Round 26 enrolment. The three
+    // championships under the reigns command, the
+    // standing championship carrying no section, the
+    // survey carrying three sections and the league
+    // five, pinned at the CLI and at the library
+    // surface both, at the closings DH-53's examples
+    // entry states.
+    for (source_name, golden_name, closing) in [
+        (
+            "championship.json",
+            "championship-reigns.txt",
+            "reigns, 2 series, 2 unbroken, 0 broken, 0 no winner",
+        ),
+        (
+            "survey-championship.json",
+            "survey-championship-reigns.txt",
+            "reigns, 6 series, 3 unbroken, 3 broken, 0 no winner",
+        ),
+        (
+            "league-championship.json",
+            "league-championship-reigns.txt",
+            "reigns, 10 series, 5 unbroken, 5 broken, 0 no winner",
+        ),
+    ] {
+        let source = examples().join(source_name);
+        let out = run_ok(&["reigns", source.to_str().expect("utf8")]);
+        let golden = read_text(&examples().join(golden_name));
+        assert_eq!(out, golden, "{golden_name}");
+        assert!(out.trim_end().ends_with(closing), "{golden_name}");
+        let (championship, defects) =
+            deadheat::championship::load_championship_file(&examples().join(source_name));
+        assert_eq!(defects, Vec::<String>::new());
+        let rendered = deadheat::reigns::reigns_report(&championship.expect("a championship"))
+            .join("\n")
+            + "\n";
+        assert_eq!(rendered, golden, "{golden_name}");
+    }
+}
+
+#[test]
+fn the_constructed_reigns_example_matches_its_golden() {
+    // E-2 of the Round 26 enrolment. The constructed
+    // championship of DH-53, labelled as constructed in
+    // its file names and its task texts and never
+    // presented as recorded. Its first series stands
+    // broken at a reign of three in a front count of
+    // five, and its second stands unbroken at a reign
+    // of five in a front count of five, so the golden
+    // carries the first series' section alone.
+    let source = examples().join("constructed-reigns.json");
+    let out = run_ok(&["reigns", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("constructed-reigns-reigns.txt"));
+    assert_eq!(out, golden);
+    assert!(out.contains("series 1, the constructed reigns drill one"));
+    assert!(out.contains("longest reign 3, front count 5 over the decided record"));
+    assert!(!out.contains("series 2,"));
+    assert!(out
+        .trim_end()
+        .ends_with("reigns, 2 series, 1 unbroken, 1 broken, 0 no winner"));
+    let (championship, defects) =
+        deadheat::championship::load_championship_file(&examples().join("constructed-reigns.json"));
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered =
+        deadheat::reigns::reigns_report(&championship.expect("a championship")).join("\n") + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_constructed_reigns_example_under_its_sibling_readings_matches_its_goldens() {
+    // E-3 of the Round 26 enrolment. The same
+    // constructed file under the comeback, closing,
+    // cluster, crossings, deadlock, depths, distance,
+    // opening, rally, spells, streak, and tenure
+    // commands, the twelve sibling goldens, the pair
+    // standing one from behind and one from the front
+    // under the comeback command, both in a run at the
+    // closing, both scattered under the cluster
+    // command, both short under the crossings command,
+    // both deadlocked, both shallow under the depths
+    // command, both in between under the distance
+    // command, one alone and one from behind under the
+    // opening command, one rally and one wire to wire,
+    // the first standing never behind and the second
+    // unbroken under the spells command, both strung
+    // under the streak command, and both ahead under
+    // the tenure command, so the round's partings stand
+    // pinned over shipped data byte for byte. One
+    // further arm stands in this pin over the
+    // constructed spells pair under the depths command,
+    // the residual golden the Round 25 closure record
+    // priced and this round discharges, both series of
+    // that pair standing deep at depths of two and
+    // three. No lead golden and no turns golden stands
+    // over either pair, following the crossings pair's
+    // enrolment exactly.
+    let source = examples().join("constructed-reigns.json");
+    let source_arg = source.to_str().expect("utf8");
+    for (command, golden_name, closing) in [
+        (
+            "comeback",
+            "constructed-reigns-comebacks.txt",
+            "comebacks, 2 series, 1 from behind, 1 from the front",
+        ),
+        (
+            "closing",
+            "constructed-reigns-closing.txt",
+            "closing, 2 series, 2 in a run, 0 alone, 0 no winner",
+        ),
+        (
+            "cluster",
+            "constructed-reigns-cluster.txt",
+            "cluster, 2 series, 0 clustered, 2 scattered, 0 no winner",
+        ),
+        (
+            "crossings",
+            "constructed-reigns-crossings.txt",
+            "crossings, 2 series, 0 through, 2 short, 0 no winner",
+        ),
+        (
+            "deadlock",
+            "constructed-reigns-deadlock.txt",
+            "deadlock, 2 series, 2 deadlocked, 0 clear, 0 no winner",
+        ),
+        (
+            "depths",
+            "constructed-reigns-depths.txt",
+            "depths, 2 series, 0 deep, 0 matched, 2 shallow, 0 no winner",
+        ),
+        (
+            "distance",
+            "constructed-reigns-distance.txt",
+            "distance, 2 series, 0 the distance, 0 without reply, 2 in between, 0 no winner",
+        ),
+        (
+            "opening",
+            "constructed-reigns-opening.txt",
+            "opening, 2 series, 0 in a run, 1 alone, 1 from behind, 0 no winner",
+        ),
+        (
+            "rally",
+            "constructed-reigns-rally.txt",
+            "rally, 2 series, 1 rally, 1 wire to wire, 0 no winner",
+        ),
+        (
+            "spells",
+            "constructed-reigns-spells.txt",
+            "spells, 2 series, 1 unbroken, 0 broken, 1 never behind, 0 no winner",
+        ),
+        (
+            "streak",
+            "constructed-reigns-streak.txt",
+            "streak, 2 series, 2 strung, 0 single, 0 no winner",
+        ),
+        (
+            "tenure",
+            "constructed-reigns-tenure.txt",
+            "tenure, 2 series, 2 ahead, 0 level, 0 behind, 0 no winner",
+        ),
+    ] {
+        let out = run_ok(&[command, source_arg]);
+        let golden = read_text(&examples().join(golden_name));
+        assert_eq!(out, golden, "{golden_name}");
+        assert!(out.trim_end().ends_with(closing), "{golden_name}");
+    }
+    let spells_source = examples().join("constructed-spells.json");
+    let out = run_ok(&["depths", spells_source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("constructed-spells-depths.txt"));
+    assert_eq!(out, golden, "constructed-spells-depths.txt");
+    assert!(out
+        .trim_end()
+        .ends_with("depths, 2 series, 2 deep, 0 matched, 0 shallow, 0 no winner"));
+}

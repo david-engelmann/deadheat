@@ -714,19 +714,22 @@ sys.exit(1 if failed else 0)
 }
 
 #[test]
-fn the_depths_command_stands_named_among_the_twenty_five_in_the_help_text() {
+fn the_depths_command_stands_named_among_the_twenty_six_in_the_help_text() {
     // The Round 23 enrolment, its brace list restated
     // at the Round 25 enrolment as the charged
     // mechanical consequence of the spells command
-    // joining the list. The top level help names all
-    // twenty five commands in their standing order
-    // with depths standing after tenure and spells
-    // last after depths, and the subcommand list
-    // carries the depths line with its own text.
+    // joining the list and restated again at the Round
+    // 26 enrolment as the charged mechanical
+    // consequence of the reigns command joining it.
+    // The top level help names all twenty six commands
+    // in their standing order with depths standing
+    // after tenure and reigns last after spells, and
+    // the subcommand list carries the depths line with
+    // its own text.
     let (out, _, code) = run_cli(&["--help"]);
     assert_eq!(code, 0);
     assert!(out.contains(
-        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells}"
+        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns}"
     ));
     assert!(out.contains("print the depths report for one championship file"));
 }
@@ -737,11 +740,13 @@ fn the_depths_command_refuses_a_missing_file_and_a_near_miss_name() {
     // no file named draws the required argument refusal
     // in its own name at exit status 2, and the near
     // miss command name depth is refused as an invalid
-    // choice naming all twenty five commands, the
+    // choice naming all twenty six commands, the
     // choice list restated at the Round 25 enrolment
     // as the charged mechanical consequence of the
-    // spells command joining it, as every sibling near
-    // miss stands refused.
+    // spells command joining it and restated again at
+    // the Round 26 enrolment as the charged mechanical
+    // consequence of the reigns command joining it, as
+    // every sibling near miss stands refused.
     let (_, err, code) = run_cli(&["depths"]);
     assert_eq!(code, 2);
     let last = err.lines().last().expect("an error line").to_string();
@@ -754,7 +759,7 @@ fn the_depths_command_refuses_a_missing_file_and_a_near_miss_name() {
     assert_eq!(code, 2);
     let last = err.lines().last().expect("an error line").to_string();
     assert!(last.contains("invalid choice: 'depth' (choose from 'race'"));
-    assert!(last.ends_with("'tenure', 'depths', 'spells')"));
+    assert!(last.ends_with("'tenure', 'depths', 'spells', 'reigns')"));
 }
 
 #[test]
@@ -776,15 +781,18 @@ fn the_depths_command_prints_the_report_for_the_constructed_pair() {
 }
 
 #[test]
-fn the_spells_command_stands_named_among_the_twenty_five_in_the_help_text() {
-    // The Round 25 enrolment. The top level help names
-    // all twenty five commands in their standing order
-    // with spells last after depths, and the subcommand
-    // list carries the spells line with its own text.
+fn the_spells_command_stands_named_among_the_twenty_six_in_the_help_text() {
+    // The Round 25 enrolment, its brace list restated
+    // at the Round 26 enrolment as the charged
+    // mechanical consequence of the reigns command
+    // joining the list. The top level help names all
+    // twenty six commands in their standing order with
+    // reigns last after spells, and the subcommand list
+    // carries the spells line with its own text.
     let (out, _, code) = run_cli(&["--help"]);
     assert_eq!(code, 0);
     assert!(out.contains(
-        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells}"
+        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns}"
     ));
     assert!(out.contains("print the spells report for one championship file"));
 }
@@ -795,8 +803,11 @@ fn the_spells_command_refuses_a_missing_file_and_a_near_miss_name() {
     // no file named draws the required argument refusal
     // in its own name at exit status 2, and the near
     // miss command name spell is refused as an invalid
-    // choice naming all twenty five commands, as every
-    // sibling near miss stands refused.
+    // choice naming all twenty six commands, the choice
+    // list restated at the Round 26 enrolment as the
+    // charged mechanical consequence of the reigns
+    // command joining it, as every sibling near miss
+    // stands refused.
     let (_, err, code) = run_cli(&["spells"]);
     assert_eq!(code, 2);
     let last = err.lines().last().expect("an error line").to_string();
@@ -809,7 +820,7 @@ fn the_spells_command_refuses_a_missing_file_and_a_near_miss_name() {
     assert_eq!(code, 2);
     let last = err.lines().last().expect("an error line").to_string();
     assert!(last.contains("invalid choice: 'spell' (choose from 'race'"));
-    assert!(last.ends_with("'tenure', 'depths', 'spells')"));
+    assert!(last.ends_with("'tenure', 'depths', 'spells', 'reigns')"));
 }
 
 #[test]
@@ -828,5 +839,61 @@ fn the_spells_command_prints_the_report_for_the_constructed_pair() {
     assert_eq!(out, golden);
     assert!(out.contains("series 1, the constructed spells drill one"));
     assert!(out.contains("longest spell 3, behind count 5 over the decided record"));
+    assert!(!out.contains("series 2,"));
+}
+
+#[test]
+fn the_reigns_command_stands_named_among_the_twenty_six_in_the_help_text() {
+    // The Round 26 enrolment. The top level help names
+    // all twenty six commands in their standing order
+    // with reigns last after spells, and the subcommand
+    // list carries the reigns line with its own text.
+    let (out, _, code) = run_cli(&["--help"]);
+    assert_eq!(code, 0);
+    assert!(out.contains(
+        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns}"
+    ));
+    assert!(out.contains("print the reigns report for one championship file"));
+}
+
+#[test]
+fn the_reigns_command_refuses_a_missing_file_and_a_near_miss_name() {
+    // The Round 26 enrolment. The reigns command with
+    // no file named draws the required argument refusal
+    // in its own name at exit status 2, and the near
+    // miss command name reign is refused as an invalid
+    // choice naming all twenty six commands, as every
+    // sibling near miss stands refused.
+    let (_, err, code) = run_cli(&["reigns"]);
+    assert_eq!(code, 2);
+    let last = err.lines().last().expect("an error line").to_string();
+    assert_eq!(
+        last,
+        "deadheat reigns: error: the following arguments are required: file"
+    );
+    let source = examples().join("championship.json");
+    let (_, err, code) = run_cli(&["reign", source.to_str().expect("utf8")]);
+    assert_eq!(code, 2);
+    let last = err.lines().last().expect("an error line").to_string();
+    assert!(last.contains("invalid choice: 'reign' (choose from 'race'"));
+    assert!(last.ends_with("'tenure', 'depths', 'spells', 'reigns')"));
+}
+
+#[test]
+fn the_reigns_command_prints_the_report_for_the_constructed_pair() {
+    // The Round 26 enrolment. The reigns report over
+    // the constructed reigns pair read from the
+    // dispatch, byte for byte against its golden, the
+    // first series standing in section form at the
+    // figure three in a front count of five and the
+    // second taking no section.
+    let source = examples().join("constructed-reigns.json");
+    let (out, _, code) = run_cli(&["reigns", source.to_str().expect("utf8")]);
+    assert_eq!(code, 0);
+    let golden = std::fs::read_to_string(examples().join("constructed-reigns-reigns.txt"))
+        .expect("a golden");
+    assert_eq!(out, golden);
+    assert!(out.contains("series 1, the constructed reigns drill one"));
+    assert!(out.contains("longest reign 3, front count 5 over the decided record"));
     assert!(!out.contains("series 2,"));
 }
