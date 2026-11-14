@@ -1,0 +1,199 @@
+{
+ "models": [
+  "harrier-1",
+  "curlew-1"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "harrier-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 41800
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "curlew-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 41843
+    }
+   ],
+   "task": "spells drill one race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "harrier-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 41937
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "curlew-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 41904
+    }
+   ],
+   "task": "spells drill one race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "harrier-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42074
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "curlew-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 41965
+    }
+   ],
+   "task": "spells drill one race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "harrier-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42211
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "curlew-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42026
+    }
+   ],
+   "task": "spells drill one race four"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "harrier-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42348
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "curlew-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42087
+    }
+   ],
+   "task": "spells drill one race five"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "harrier-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42485
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "curlew-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42148
+    }
+   ],
+   "task": "spells drill one race six"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "harrier-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42622
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "curlew-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42209
+    }
+   ],
+   "task": "spells drill one race seven"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "harrier-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42759
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "curlew-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42270
+    }
+   ],
+   "task": "spells drill one race eight"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "harrier-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42896
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "curlew-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42331
+    }
+   ],
+   "task": "spells drill one race nine"
+  }
+ ],
+ "task": "the constructed spells drill one",
+ "wins_target": 5
+}

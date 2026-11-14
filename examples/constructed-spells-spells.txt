@@ -1,0 +1,15 @@
+spells
+series 1, the constructed spells drill one
+harrier-1 against curlew-1, first to 5 wins
+race 1, spells drill one race one, curlew-1 wins
+race 2, spells drill one race two, curlew-1 wins
+race 3, spells drill one race three, harrier-1 wins
+race 4, spells drill one race four, harrier-1 wins
+race 5, spells drill one race five, curlew-1 wins
+race 6, spells drill one race six, harrier-1 wins
+race 7, spells drill one race seven, curlew-1 wins
+race 8, spells drill one race eight, harrier-1 wins
+race 9, spells drill one race nine, harrier-1 wins
+longest spell 3, behind count 5 over the decided record
+series winner, harrier-1, harrier-1 5 race wins, curlew-1 4 race wins, 0 no results
+spells, 2 series, 1 unbroken, 1 broken, 0 never behind, 0 no winner

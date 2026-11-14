@@ -1011,6 +1011,37 @@ fn every_standing_golden_still_matches_byte_for_byte() {
             assert_eq!(rendered, golden, "{name}");
             continue;
         }
+        // Altered at the Round 25 slice for its named mechanical
+        // consequence. The spells examples of DH-51 add four
+        // goldens whose stems name championships rather than a
+        // race, so the sweep reads them through the championship
+        // loader and the spells report before the generic race
+        // reading can misread their sources. The two counts
+        // below rise by fourteen each this round, the four spells
+        // goldens here and the ten constructed sibling goldens
+        // the standing streak, cluster, rally, deadlock,
+        // distance, comebacks, closing, opening, crossings, and
+        // tenure arms already read over the constructed spells
+        // stem, the unadjusted count rising with them because
+        // every race of the four championships stands
+        // unadjusted.
+        if let Some(stem) = name.strip_suffix("-spells.txt") {
+            let source = golden_path.with_file_name(format!("{stem}.json"));
+            let (championship, defects) = deadheat::championship::load_championship_file(&source);
+            assert_eq!(defects, Vec::<String>::new(), "{name}");
+            let championship = championship.expect("a championship");
+            if championship
+                .series
+                .iter()
+                .flat_map(|series| series.races.iter())
+                .all(race_is_unadjusted)
+            {
+                unadjusted += 1;
+            }
+            let rendered = deadheat::spells::spells_report(&championship).join("\n") + "\n";
+            assert_eq!(rendered, golden, "{name}");
+            continue;
+        }
         let source = golden_path.with_extension("json");
         let (race, _) = load_race_file(&source);
         if let Some(race) = race {
@@ -1054,12 +1085,12 @@ fn every_standing_golden_still_matches_byte_for_byte() {
         let rendered = deadheat::championship::championship_report(&championship).join("\n") + "\n";
         assert_eq!(rendered, golden, "{name}");
     }
-    // The counts stand at one hundred ninety
-    // goldens and one hundred eighty six unadjusted
-    // after the Round 23 enrolment counted at the
-    // depths arm above, fourteen of each over the one
-    // hundred seventy six and one hundred seventy two
-    // the Round 22 enrolment left standing. The
+    // The counts stand at two hundred four
+    // goldens and two hundred unadjusted after the
+    // Round 25 enrolment counted at the spells arm
+    // above, fourteen of each over the one hundred
+    // ninety and one hundred eighty six the Round 23
+    // enrolment left standing. The
     // Round 24 fold moved no figure the sweep reads,
     // the tally computation of the six tally readings
     // standing folded into the one helper of the
@@ -1067,6 +1098,6 @@ fn every_standing_golden_still_matches_byte_for_byte() {
     // golden standing byte for byte as it stood, so no
     // golden joins at that round, no arm joins the
     // chain, and the counts stand unmoved.
-    assert_eq!(goldens.len(), 190);
-    assert_eq!(unadjusted, 186);
+    assert_eq!(goldens.len(), 204);
+    assert_eq!(unadjusted, 200);
 }

@@ -2411,3 +2411,160 @@ fn the_constructed_depths_example_under_its_sibling_readings_matches_its_goldens
         assert!(out.trim_end().ends_with(closing), "{golden_name}");
     }
 }
+
+#[test]
+fn the_championship_spells_examples_match_their_goldens() {
+    // E-1 of the Round 25 enrolment. The three
+    // championships under the spells command, the
+    // league carrying its one section for the bolt and
+    // ember series at a spell of three in a behind
+    // count of four and the standing and survey
+    // championships carrying no section, pinned at the
+    // CLI and at the library surface both, at the
+    // closings DH-51's examples entry states.
+    for (source_name, golden_name, closing) in [
+        (
+            "championship.json",
+            "championship-spells.txt",
+            "spells, 2 series, 0 unbroken, 0 broken, 2 never behind, 0 no winner",
+        ),
+        (
+            "survey-championship.json",
+            "survey-championship-spells.txt",
+            "spells, 6 series, 4 unbroken, 0 broken, 2 never behind, 0 no winner",
+        ),
+        (
+            "league-championship.json",
+            "league-championship-spells.txt",
+            "spells, 10 series, 4 unbroken, 1 broken, 5 never behind, 0 no winner",
+        ),
+    ] {
+        let source = examples().join(source_name);
+        let out = run_ok(&["spells", source.to_str().expect("utf8")]);
+        let golden = read_text(&examples().join(golden_name));
+        assert_eq!(out, golden, "{golden_name}");
+        assert!(out.trim_end().ends_with(closing), "{golden_name}");
+        let (championship, defects) =
+            deadheat::championship::load_championship_file(&examples().join(source_name));
+        assert_eq!(defects, Vec::<String>::new());
+        let rendered = deadheat::spells::spells_report(&championship.expect("a championship"))
+            .join("\n")
+            + "\n";
+        assert_eq!(rendered, golden, "{golden_name}");
+    }
+}
+
+#[test]
+fn the_constructed_spells_example_matches_its_golden() {
+    // E-2 of the Round 25 enrolment. The constructed
+    // championship of DH-51, labelled as constructed in
+    // its file names and its task texts and never
+    // presented as recorded. Its first series stands
+    // broken at a spell of three in a behind count of
+    // five, and its second stands unbroken at a spell
+    // of five in a behind count of five, so the golden
+    // carries the first series' section alone.
+    let source = examples().join("constructed-spells.json");
+    let out = run_ok(&["spells", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("constructed-spells-spells.txt"));
+    assert_eq!(out, golden);
+    assert!(out.contains("series 1, the constructed spells drill one"));
+    assert!(out.contains("longest spell 3, behind count 5 over the decided record"));
+    assert!(!out.contains("series 2,"));
+    assert!(out
+        .trim_end()
+        .ends_with("spells, 2 series, 1 unbroken, 1 broken, 0 never behind, 0 no winner"));
+    let (championship, defects) =
+        deadheat::championship::load_championship_file(&examples().join("constructed-spells.json"));
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered =
+        deadheat::spells::spells_report(&championship.expect("a championship")).join("\n") + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_constructed_spells_example_under_its_sibling_readings_matches_its_goldens() {
+    // E-3 of the Round 25 enrolment. The same
+    // constructed file under the comeback, closing,
+    // cluster, crossings, deadlock, distance, opening,
+    // rally, streak, and tenure commands, the ten
+    // sibling goldens, both series standing from
+    // behind under the comeback command, in a run at
+    // the closing, clustered under the cluster
+    // command, the first standing short and the second
+    // through under the crossings command, both
+    // standing deadlocked, the first standing the
+    // distance and the second in between under the
+    // distance command, both standing from behind
+    // under the opening command, both standing rally
+    // and strung, and both standing behind under the
+    // tenure command, so the round's partings stand
+    // pinned over shipped data byte for byte. No
+    // depths golden stands over the pair in this
+    // enrolment, the depths closing over it standing
+    // computed in the Round 25 design record at two
+    // deep and the eleven goldens over the pair
+    // counting the pair's own spells golden among
+    // them, and no lead golden and no turns golden
+    // stands over the pair, following the crossings
+    // pair's enrolment exactly.
+    let source = examples().join("constructed-spells.json");
+    let source_arg = source.to_str().expect("utf8");
+    for (command, golden_name, closing) in [
+        (
+            "comeback",
+            "constructed-spells-comebacks.txt",
+            "comebacks, 2 series, 2 from behind, 0 from the front",
+        ),
+        (
+            "closing",
+            "constructed-spells-closing.txt",
+            "closing, 2 series, 2 in a run, 0 alone, 0 no winner",
+        ),
+        (
+            "cluster",
+            "constructed-spells-cluster.txt",
+            "cluster, 2 series, 2 clustered, 0 scattered, 0 no winner",
+        ),
+        (
+            "crossings",
+            "constructed-spells-crossings.txt",
+            "crossings, 2 series, 1 through, 1 short, 0 no winner",
+        ),
+        (
+            "deadlock",
+            "constructed-spells-deadlock.txt",
+            "deadlock, 2 series, 2 deadlocked, 0 clear, 0 no winner",
+        ),
+        (
+            "distance",
+            "constructed-spells-distance.txt",
+            "distance, 2 series, 1 the distance, 0 without reply, 1 in between, 0 no winner",
+        ),
+        (
+            "opening",
+            "constructed-spells-opening.txt",
+            "opening, 2 series, 0 in a run, 0 alone, 2 from behind, 0 no winner",
+        ),
+        (
+            "rally",
+            "constructed-spells-rally.txt",
+            "rally, 2 series, 2 rally, 0 wire to wire, 0 no winner",
+        ),
+        (
+            "streak",
+            "constructed-spells-streak.txt",
+            "streak, 2 series, 2 strung, 0 single, 0 no winner",
+        ),
+        (
+            "tenure",
+            "constructed-spells-tenure.txt",
+            "tenure, 2 series, 0 ahead, 0 level, 2 behind, 0 no winner",
+        ),
+    ] {
+        let out = run_ok(&[command, source_arg]);
+        let golden = read_text(&examples().join(golden_name));
+        assert_eq!(out, golden, "{golden_name}");
+        assert!(out.trim_end().ends_with(closing), "{golden_name}");
+    }
+}

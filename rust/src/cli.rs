@@ -33,6 +33,7 @@ use crate::races::{
 };
 use crate::rallies::rally_report;
 use crate::series::{load_series_file, series_report};
+use crate::spells::spells_report;
 use crate::streaks::streak_report;
 use crate::tenure::tenure_report;
 use crate::totals::totals_report;
@@ -352,7 +353,7 @@ fn spec_max_invocation(spec: &ParserSpec) -> usize {
 
 fn top_spec() -> ParserSpec {
     let mut commands = action(
-        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths}",
+        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells}",
         None,
     );
     commands.subactions = vec![
@@ -443,16 +444,20 @@ fn top_spec() -> ParserSpec {
             "depths",
             Some("print the depths report for one championship file"),
         ),
+        action(
+            "spells",
+            Some("print the spells report for one championship file"),
+        ),
     ];
     let mut spec = ParserSpec {
         prog: "deadheat",
         description: Some("Race two attempts at one task and keep the standings."),
         opt_usage: "[-h]",
         pos_usage:
-            "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths} ...",
+            "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells} ...",
         opt_parts: vec!["[-h]"],
         pos_parts: vec![
-            "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths}",
+            "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells}",
             "...",
         ],
         positionals: vec![commands],
@@ -665,6 +670,14 @@ fn sub_spec(command: &str) -> ParserSpec {
         ),
         "depths" => (
             "deadheat depths",
+            vec![action("file", None)],
+            vec![help_action()],
+            "[-h]",
+            "file",
+            vec!["file"],
+        ),
+        "spells" => (
+            "deadheat spells",
             vec![action("file", None)],
             vec![help_action()],
             "[-h]",
@@ -1108,7 +1121,7 @@ fn is_help_token(text: &PText, has_standings: bool) -> bool {
     false
 }
 
-const COMMANDS: [&str; 24] = [
+const COMMANDS: [&str; 25] = [
     "race",
     "adopt",
     "discard",
@@ -1133,6 +1146,7 @@ const COMMANDS: [&str; 24] = [
     "crossings",
     "tenure",
     "depths",
+    "spells",
 ];
 
 /// Run the command line over the given arguments at the given
@@ -1208,7 +1222,7 @@ fn invalid_choice(spec: &ParserSpec, columns: usize, value: &PText) -> Outcome {
         spec,
         columns,
         &format!(
-            "argument command: invalid choice: {} (choose from 'race', 'adopt', 'discard', 'standings', 'closecall', 'series', 'championship', 'flip', 'totals', 'pairing', 'comeback', 'distance', 'run', 'rally', 'deadlock', 'streak', 'cluster', 'closing', 'opening', 'turns', 'lead', 'crossings', 'tenure', 'depths')",
+            "argument command: invalid choice: {} (choose from 'race', 'adopt', 'discard', 'standings', 'closecall', 'series', 'championship', 'flip', 'totals', 'pairing', 'comeback', 'distance', 'run', 'rally', 'deadlock', 'streak', 'cluster', 'closing', 'opening', 'turns', 'lead', 'crossings', 'tenure', 'depths', 'spells')",
             py_repr(value)
         ),
     )
@@ -1385,6 +1399,7 @@ fn run_subcommand(
         "crossings" => command_crossings(&values[0]),
         "tenure" => command_tenure(&values[0]),
         "depths" => command_depths(&values[0]),
+        "spells" => command_spells(&values[0]),
         _ => unreachable!("a known command"),
     }
 }
@@ -1562,6 +1577,17 @@ fn command_depths(file: &PText) -> Outcome {
     }
     Outcome::plain(
         depths_report(&championship.expect("a clean championship")),
+        0,
+    )
+}
+
+fn command_spells(file: &PText) -> Outcome {
+    let (championship, defects) = load_championship_file(&path_from_arg(file));
+    if !defects.is_empty() {
+        return print_defects("invalid championship file", defects);
+    }
+    Outcome::plain(
+        spells_report(&championship.expect("a clean championship")),
         0,
     )
 }

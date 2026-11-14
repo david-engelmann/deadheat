@@ -1,0 +1,178 @@
+{
+ "models": [
+  "gannet-1",
+  "avocet-1"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "gannet-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 44900
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "avocet-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 44943
+    }
+   ],
+   "task": "spells drill two race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "gannet-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45037
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "avocet-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 45004
+    }
+   ],
+   "task": "spells drill two race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "gannet-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45174
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "avocet-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 45065
+    }
+   ],
+   "task": "spells drill two race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "gannet-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 45311
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "avocet-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45126
+    }
+   ],
+   "task": "spells drill two race four"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "gannet-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 45448
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "avocet-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45187
+    }
+   ],
+   "task": "spells drill two race five"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "gannet-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 45585
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "avocet-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45248
+    }
+   ],
+   "task": "spells drill two race six"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "gannet-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 45722
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "avocet-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45309
+    }
+   ],
+   "task": "spells drill two race seven"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "gannet-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 45859
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "avocet-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45370
+    }
+   ],
+   "task": "spells drill two race eight"
+  }
+ ],
+ "task": "the constructed spells drill two",
+ "wins_target": 5
+}
