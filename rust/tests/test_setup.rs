@@ -25,7 +25,7 @@ fn agents_carries_the_canonical_marker() {
 #[test]
 fn readme_states_the_closed_round_count() {
     let text = read(&repo_root().join("README.md"));
-    assert!(text.contains("Closed perfection rounds, 26 of 100"));
+    assert!(text.contains("Closed perfection rounds, 27 of 100"));
 }
 
 #[test]
@@ -141,7 +141,8 @@ fn readme_reports_the_round_four_status() {
     // so the count was one again until the Round 26 closure
     // landed slice 27 and the count returned to zero.
     // Slice 28 stood in review while Round 27 was built,
-    // so the count was one again. The round five pin
+    // so the count was one again until the Round 27 closure
+    // landed slice 28 and the count returned to zero. The round five pin
     // below holds the slice 6 line itself, the round six pin
     // below holds the slice 7 line, the round seven pin
     // below holds the slice 8 line, the round eight pin
@@ -169,7 +170,7 @@ fn readme_reports_the_round_four_status() {
     // twenty six pin below holds the slice 27 line,
     // and the round twenty seven pin below holds the
     // slice 28 line.
-    assert_eq!(text.matches("built and in review").count(), 1);
+    assert_eq!(text.matches("built and in review").count(), 0);
 }
 
 #[test]
@@ -372,9 +373,9 @@ fn readme_reports_the_round_twenty_six_status() {
 #[test]
 fn readme_reports_the_round_twenty_seven_status() {
     let text = read(&repo_root().join("README.md"));
-    let standing = "- Contract, FIX-DH-29 now stands in full form in CONTRACT.md under the Round 27 obligations, and its standing is not claimed here, as Round 27 has not closed.";
+    let standing = "- Contract, the record count statement, with FIX-DH-29, met. They stand in full form in CONTRACT.md under the Round 27 obligations, and Round 27 closed on the merged slice 28 after three reviews, with FIX-DH-29 standing spent on the record count statement at both seats, the sentence standing added in place to the stated relations of DH-51 and to the stated relations of DH-53, the two pins R-21 in rust/tests/test_reigns.rs and W-21 in rust/tests/test_spells.rs standing as its witnesses, the spec review approving with no findings, the standards review approving with findings at three Observations, and the red team approving with no findings, its first seating standing ended without a handoff or a banked report and its scratch standing adopted by the reseat only after hash verification of all 440 files per tree, the reseat's report standing as the review of record, and CodeRabbit returning no inline comments on the slice, its completed review standing read by the owner at the merge gate at zero inline comments, zero submitted reviews, and no actionable comments, with the design record's section 0.1 naming rust/src/main.rs for the command table where it stands at rust/src/cli.rs line 1137, declared 26 and counted 26, standing for the errata queue, the standards review's phrasing Observation standing recorded, the relations sentence standing a third time in lowercase inside the FIX-DH-29 entry's own quotation of the form it adds, the build report's count of exactly two naming the capitalised obligation instances, the red team's edge account standing as executed, forty drives at no disagreement, the statement's qualifier holding at the counted record's tail, a no-result race after the decision counting for nothing, and FIX-DH-30 standing free and unspent.";
     assert!(text.lines().any(|line| line == standing));
-    let slice_line = "- Slice 28 is built and in review. It carries the record count statement of FIX-DH-29, the numbering of a section's decided races stated as the count of the race in the record in the stated relations of DH-51 and DH-53, with one pin in each of rust/tests/test_reigns.rs and rust/tests/test_spells.rs asserting its reading's whole report over a series whose first recorded race holds no winner, its section printing the decided races at their counts in the record with the count of the race holding no winner standing skipped, and no new command, no new reading, no figure moved, and no golden changed.";
+    let slice_line = "- Slice 28 has landed. It carries the record count statement of FIX-DH-29, the numbering of a section's decided races stated as the count of the race in the record in the stated relations of DH-51 and DH-53, with one pin in each of rust/tests/test_reigns.rs and rust/tests/test_spells.rs asserting its reading's whole report over a series whose first recorded race holds no winner, its section printing the decided races at their counts in the record with the count of the race holding no winner standing skipped, and no new command, no new reading, no figure moved, and no golden changed.";
     assert!(text.lines().any(|line| line == slice_line));
 }
 
