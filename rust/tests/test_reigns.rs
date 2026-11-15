@@ -9,8 +9,10 @@
 //! there at compile time. That absence is recorded
 //! once here and is not a discrimination claim. The
 //! discrimination each pin carries is against the
-//! stated mutation of DH-52 beside it. Nine mutations
-//! are named for the whole file. V-1, the class cuts
+//! stated mutation of DH-52 beside it, and the pin of
+//! the record count carries its discrimination against
+//! the mutation of DH-53 its comment names beside the
+//! nine. Ten mutations are named for the whole file. V-1, the class cuts
 //! exchanged, a series classing broken where the
 //! shipped reading classes it unbroken and unbroken
 //! where it classes it broken. V-2, the longest reign
@@ -31,7 +33,12 @@
 //! a series holding no winner placed in the unbroken
 //! class in place of standing in no class. V-9, the
 //! section standing for every decided series in place
-//! of the broken series alone.
+//! of the broken series alone. V-10, the decided races
+//! of a section renumbered as their order among the
+//! decided races, the first decided race standing as
+//! race 1 and each later decided race standing one
+//! above the last, in place of the count of the race
+//! in the record the walk leaves.
 
 mod shared;
 
@@ -1013,6 +1020,62 @@ fn a_collection_holding_no_series_renders_the_empty_form_at_the_library_surface(
         vec![
             "reigns",
             "reigns, 0 series, 0 unbroken, 0 broken, 0 no winner"
+        ]
+    );
+}
+
+#[test]
+fn the_record_count_stands_skipped_over_a_no_result_race() {
+    // R-21. The record count at hand scale, the pin
+    // FIX-DH-29 names for this file. A hand-built series
+    // at a target of two whose first recorded race holds
+    // no winner, its winner alpha-1 taking the second
+    // and fourth recorded races against beta-1's third,
+    // stands broken at a reign of one in a front count
+    // of two, and its whole report stands asserted, its
+    // section printing its decided races at their counts
+    // in the record, race 2, race 3, and race 4, the
+    // count of the race holding no winner standing
+    // skipped, as the stated relations of DH-53 now
+    // state the count's meaning. Fails under V-1, the
+    // series classing unbroken and taking no section.
+    // Fails under V-2, its reign reading as its front
+    // count of two and the series classing unbroken.
+    // Fails under V-6, its figure line printing a front
+    // count of nought against the asserted two. Fails
+    // under V-7, its figure line printing the front
+    // count of two in the reign's place. Fails under
+    // V-10, its decided races standing renumbered as
+    // race 1, race 2, and race 3. Passes under V-3 and
+    // V-5, its winner's largest lead and its winner's
+    // longest run of wins both standing at one with its
+    // reign, under V-4, its recorded record ending at
+    // its decision, and under V-8 and V-9 by design.
+    let dir = temp_dir("reigns-record-count");
+    let series = series_json(
+        "the record count drill",
+        vec![ALPHA, BETA],
+        2,
+        vec![
+            no_result("record count drill race one", ALPHA, BETA),
+            clear_win("record count drill race two", ALPHA, BETA),
+            clear_win("record count drill race three", BETA, ALPHA),
+            clear_win("record count drill race four", ALPHA, BETA),
+        ],
+    );
+    let lines = reigns_for(&dir, vec![("one.json", series)], vec!["one.json"]);
+    assert_eq!(
+        lines,
+        vec![
+            "reigns",
+            "series 1, the record count drill",
+            "alpha-1 against beta-1, first to 2 wins",
+            "race 2, record count drill race two, alpha-1 wins",
+            "race 3, record count drill race three, beta-1 wins",
+            "race 4, record count drill race four, alpha-1 wins",
+            "longest reign 1, front count 2 over the decided record",
+            "series winner, alpha-1, alpha-1 2 race wins, beta-1 1 race wins, 1 no results",
+            "reigns, 1 series, 0 unbroken, 1 broken, 0 no winner"
         ]
     );
 }
