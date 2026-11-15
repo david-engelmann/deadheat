@@ -1,0 +1,157 @@
+{
+ "models": [
+  "godwit-1",
+  "stilt-1"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "godwit-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42341
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "stilt-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42348
+    }
+   ],
+   "task": "reigns drill two race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "godwit-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42374
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "stilt-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42395
+    }
+   ],
+   "task": "reigns drill two race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "godwit-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42411
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "stilt-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42436
+    }
+   ],
+   "task": "reigns drill two race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "godwit-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42448
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "stilt-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42477
+    }
+   ],
+   "task": "reigns drill two race four"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "godwit-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42505
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "stilt-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42496
+    }
+   ],
+   "task": "reigns drill two race five"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "godwit-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42522
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "stilt-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42559
+    }
+   ],
+   "task": "reigns drill two race six"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "godwit-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42559
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "stilt-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42600
+    }
+   ],
+   "task": "reigns drill two race seven"
+  }
+ ],
+ "task": "the constructed reigns drill two",
+ "wins_target": 5
+}

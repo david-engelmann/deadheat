@@ -1,0 +1,157 @@
+{
+ "models": [
+  "plover-1",
+  "dunlin-1"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "plover-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42337
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "dunlin-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42354
+    }
+   ],
+   "task": "reigns drill one race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "plover-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42382
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "dunlin-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42385
+    }
+   ],
+   "task": "reigns drill one race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "plover-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42411
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "dunlin-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42436
+    }
+   ],
+   "task": "reigns drill one race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "plover-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42464
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "dunlin-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42459
+    }
+   ],
+   "task": "reigns drill one race four"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "plover-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42485
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "dunlin-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42518
+    }
+   ],
+   "task": "reigns drill one race five"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "plover-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42522
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "dunlin-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42559
+    }
+   ],
+   "task": "reigns drill one race six"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "plover-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42559
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "dunlin-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42600
+    }
+   ],
+   "task": "reigns drill one race seven"
+  }
+ ],
+ "task": "the constructed reigns drill one",
+ "wins_target": 5
+}

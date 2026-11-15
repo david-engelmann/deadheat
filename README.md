@@ -416,6 +416,17 @@ spells
 spells, 2 series, 0 unbroken, 0 broken, 2 never behind, 0 no winner
 ```
 
+The reigns command reads a championship file and reports the series that stood broken, whose winner's longest reign over the decided record stood below the front count of the series, standing the decided races of each beside the longest reign and front count of the series and its race split.
+
+```sh
+deadheat reigns examples/championship.json
+```
+
+```text
+reigns
+reigns, 2 series, 2 unbroken, 0 broken, 0 no winner
+```
+
 The standings command prints the standings table held in a standings file. The adopt command writes the losing attempt patch into a patches folder and the discard command removes it.
 
 ## Status
@@ -475,6 +486,8 @@ Seeded in October 2026. Setup has landed, and Rounds 1 to 25 have closed, with a
 - Slice 24 has landed. It carries the depths reading over a recorded championship, the classification of each decided series by the depth of its winner over the decided record read against the margin the series was won by as deep, matched, or shallow, one section for each series standing deep naming its decided races in race order and the deepest deficit of the series and its winner with its race split, with the closing counts of series, deep, matched, shallow, and no winner, with the depths example over the standing championship in its empty form and the constructed depths example and their goldens under examples, and the depths command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, opening, turns, lead, crossings, and tenure.
 - Slice 25 has landed. It carries the fold of the tally computation of the lead, crossings, deadlock, rally, tenure, and depths readings into the one helper of the championship module, all six readings reading the tallies of a decided series from the one home from this round, with no command added, no figure moved, and no golden changed, under the repair amendment FIX-DH-28.
 - Slice 26 has landed. It carries the spells reading over a recorded championship, the classification of each decided series by the longest spell its winner stood behind over the decided record read against the behind count of the series as unbroken, broken, or never behind, one section for each series standing broken naming its decided races in race order and the longest spell and behind count of the series and its winner with its race split, with the closing counts of series, unbroken, broken, never behind, and no winner, with the spells example over the standing championship in its empty form and the constructed spells example and their goldens under examples, and the spells command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, opening, turns, lead, crossings, tenure, and depths.
+- Contract, DH-52 and DH-53 now stand in full form in CONTRACT.md under the Round 26 obligations, and their standing is not claimed here, as Round 26 has not closed.
+- Slice 27 is built and in review. It carries the reigns reading over a recorded championship, the classification of each decided series by the longest reign of its winner over the decided record read against the front count of the series as unbroken or broken, one section for each series standing broken naming its decided races in race order and the longest reign and front count of the series and its winner with its race split, with the closing counts of series, unbroken, broken, and no winner, with the reigns example over the standing championship in its empty form and the constructed reigns example and their goldens under examples, and the reigns command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, opening, turns, lead, crossings, tenure, depths, and spells.
 - The Rust port has landed. It carries the behavior the Python package carried, checked against the same goldens, and the Python tree stands removed under PORT-13.
 - Local gate, cargo run --bin codepoint_scan, cargo fmt --check, cargo clippy --all-targets -- -D warnings, and cargo test. CI runs the same commands.
 

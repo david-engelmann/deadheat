@@ -1,0 +1,2 @@
+cluster
+cluster, 2 series, 0 clustered, 2 scattered, 0 no winner

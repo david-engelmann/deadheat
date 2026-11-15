@@ -34,6 +34,7 @@ use deadheat::races::{
     StandingEntry, Standings, SuiteResult,
 };
 use deadheat::rallies::rally_report;
+use deadheat::reigns::reigns_report;
 use deadheat::seats::attempt_summary;
 use deadheat::series::{series_report, Series};
 use deadheat::spells::spells_report;
@@ -1280,6 +1281,99 @@ fn the_spells_report_fences_its_fields() {
             "longest spell 1, behind count 2 over the decided record",
             "series winner, ,  3 race wins,  2 race wins, 0 no results",
             "spells, 1 series, 0 unbroken, 1 broken, 0 never behind, 0 no winner",
+        ]
+    );
+}
+
+#[test]
+fn the_reigns_report_fences_its_fields() {
+    // F-1 of the Round 26 discrimination plan. A
+    // series rebuilt by hand on the bad series frame,
+    // read under DH-53, its second model standing
+    // break bearing as its first does. The first
+    // model takes the first, third, and fifth races
+    // and the second model takes the second and
+    // fourth at a wins target of three, so the first
+    // model stood ahead in three runs of one against
+    // a front count of three and the series stands
+    // broken, and its section prints the series task,
+    // the race tasks, and both model labels, every
+    // field holding a break standing fenced to the
+    // empty field through the one helper of
+    // FIX-DH-16, as on the sibling surfaces. Its
+    // failure mode is a second fencing path standing
+    // in the new module. It fails on the pre round
+    // tree by compile absence, the reigns module
+    // standing absent there.
+    let mut series = bad_series();
+    series.models[1] = bad("beta");
+    series.wins_target = BigInt::from(3);
+    series.races = vec![
+        Race {
+            task: text("race one"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Green, 100.0),
+                attempt(bad("beta"), "lane two", SuiteResult::Red, 130.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+        Race {
+            task: bad("race task"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Red, 130.0),
+                attempt(bad("beta"), "lane two", SuiteResult::Green, 100.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+        Race {
+            task: text("race three"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Green, 100.0),
+                attempt(bad("beta"), "lane two", SuiteResult::Red, 130.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+        Race {
+            task: text("race four"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Red, 130.0),
+                attempt(bad("beta"), "lane two", SuiteResult::Green, 100.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+        Race {
+            task: text("race five"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Green, 100.0),
+                attempt(bad("beta"), "lane two", SuiteResult::Red, 130.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+    ];
+    let championship = Championship {
+        series: vec![series],
+    };
+    let lines = reigns_report(&championship);
+    assert_no_forgery(&lines);
+    assert_eq!(
+        lines,
+        vec![
+            "reigns",
+            "series 1, ",
+            " against , first to 3 wins",
+            "race 1, race one,  wins",
+            "race 2, ,  wins",
+            "race 3, race three,  wins",
+            "race 4, race four,  wins",
+            "race 5, race five,  wins",
+            "longest reign 1, front count 3 over the decided record",
+            "series winner, ,  3 race wins,  2 race wins, 0 no results",
+            "reigns, 1 series, 0 unbroken, 1 broken, 0 no winner",
         ]
     );
 }
