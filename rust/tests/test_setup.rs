@@ -139,7 +139,9 @@ fn readme_reports_the_round_four_status() {
     // landed slice 26 and the count returned to zero.
     // Slice 27 stood in review while Round 26 was built,
     // so the count was one again until the Round 26 closure
-    // landed slice 27 and the count returned to zero. The round five pin
+    // landed slice 27 and the count returned to zero.
+    // Slice 28 stood in review while Round 27 was built,
+    // so the count was one again. The round five pin
     // below holds the slice 6 line itself, the round six pin
     // below holds the slice 7 line, the round seven pin
     // below holds the slice 8 line, the round eight pin
@@ -164,8 +166,10 @@ fn readme_reports_the_round_four_status() {
     // line, and the round twenty four pin below holds
     // the slice 25 line, and the round twenty five
     // pin below holds the slice 26 line, and the round
-    // twenty six pin below holds the slice 27 line.
-    assert_eq!(text.matches("built and in review").count(), 0);
+    // twenty six pin below holds the slice 27 line,
+    // and the round twenty seven pin below holds the
+    // slice 28 line.
+    assert_eq!(text.matches("built and in review").count(), 1);
 }
 
 #[test]
@@ -362,6 +366,15 @@ fn readme_reports_the_round_twenty_six_status() {
     let standing = "- Contract, DH-52 and DH-53 met. They stand in full form in CONTRACT.md under the Round 26 obligations, and Round 26 closed on the merged slice 27 after three reviews, with the spec review approving with findings at one Observation, its Observation standing against the design record on the section 1.8 standings enumeration for drill two, the standards review approving with findings at one Observation, and the red team approving with findings at two Observations, and CodeRabbit returning one inline comment on the slice adjudicated not valid, the printed number standing as DH-13's documented count of the race in the record and a renumbering of reigns alone breaking the family's one form, with FIX-DH-29 standing free and unspent, the fresh extraction gate re-run carried from the Round 25 closure standing discharged by this round's warm-up on main at 921 passed and 0 failed, the sibling golden residual standing discharged, the depths golden over the spells pair standing enrolled with its E-3 arm and the C-1 count restated at 221 and 217, the design record's R-15 account of V-4 standing as a records item, its prose reading a reign of five in a front count of eight where the computation over the tailed fixture reads a reign of five in a front count of seven classing the series broken and the pin failing V-4 on its figures either way, the design record's section 1.8 enumeration standing with its sixth standing for drill two reading level where its own winner sequence yields ahead, its figures and the shipped golden agreeing with the recount, the red team's parity record standing as stated, the run relations of DH-52 holding over the file corpus and a 20,000 series sweep and the loose parity paraphrase standing nowhere in DH-52 or the design record, the record count semantics standing unpinned at the section surface family-wide as a candidate pin for a later round, this round's survey reigns golden already pinning the shape in substance on the red team's note, the build lane standing ended without a handoff and the completion lane's adoption standing as the build report's section 6 records them, and the four errata of the Round 25 design record standing as records items.";
     assert!(text.lines().any(|line| line == standing));
     let slice_line = "- Slice 27 has landed. It carries the reigns reading over a recorded championship, the classification of each decided series by the longest reign of its winner over the decided record read against the front count of the series as unbroken or broken, one section for each series standing broken naming its decided races in race order and the longest reign and front count of the series and its winner with its race split, with the closing counts of series, unbroken, broken, and no winner, with the reigns example over the standing championship in its empty form and the constructed reigns example and their goldens under examples, and the reigns command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, opening, turns, lead, crossings, tenure, depths, and spells.";
+    assert!(text.lines().any(|line| line == slice_line));
+}
+
+#[test]
+fn readme_reports_the_round_twenty_seven_status() {
+    let text = read(&repo_root().join("README.md"));
+    let standing = "- Contract, FIX-DH-29 now stands in full form in CONTRACT.md under the Round 27 obligations, and its standing is not claimed here, as Round 27 has not closed.";
+    assert!(text.lines().any(|line| line == standing));
+    let slice_line = "- Slice 28 is built and in review. It carries the record count statement of FIX-DH-29, the numbering of a section's decided races stated as the count of the race in the record in the stated relations of DH-51 and DH-53, with one pin in each of rust/tests/test_reigns.rs and rust/tests/test_spells.rs asserting its reading's whole report over a series whose first recorded race holds no winner, its section printing the decided races at their counts in the record with the count of the race holding no winner standing skipped, and no new command, no new reading, no figure moved, and no golden changed.";
     assert!(text.lines().any(|line| line == slice_line));
 }
 
