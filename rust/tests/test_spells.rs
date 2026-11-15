@@ -9,8 +9,10 @@
 //! there at compile time. That absence is recorded
 //! once here and is not a discrimination claim. The
 //! discrimination each pin carries is against the
-//! stated mutation of DH-50 beside it. Nine mutations
-//! are named for the whole file. V-1, the class cuts
+//! stated mutation of DH-50 beside it, and the pin of
+//! the record count carries its discrimination against
+//! the mutation of DH-51 its comment names beside the
+//! nine. Ten mutations are named for the whole file. V-1, the class cuts
 //! exchanged, a series classing unbroken where the
 //! shipped reading classes it broken and broken where
 //! it classes it unbroken, the never behind class
@@ -32,7 +34,12 @@
 //! no winner placed in the never behind class in
 //! place of standing in no class. V-9, the section
 //! standing for every decided series in place of the
-//! broken series alone.
+//! broken series alone. V-10, the decided races of a
+//! section renumbered as their order among the decided
+//! races, the first decided race standing as race 1
+//! and each later decided race standing one above the
+//! last, in place of the count of the race in the
+//! record the walk leaves.
 
 mod shared;
 
@@ -1136,6 +1143,68 @@ fn a_collection_holding_no_series_renders_the_empty_form_at_the_library_surface(
         vec![
             "spells",
             "spells, 0 series, 0 unbroken, 0 broken, 0 never behind, 0 no winner"
+        ]
+    );
+}
+
+#[test]
+fn the_record_count_stands_skipped_over_a_no_result_race() {
+    // W-21. The record count at hand scale, the pin
+    // FIX-DH-29 names for this file. A hand-built series
+    // at a target of three whose first recorded race
+    // holds no winner, its winner alpha-1 standing
+    // behind after the second and fourth recorded races
+    // and taking the third, fifth, and sixth, stands
+    // broken at a spell of one in a behind count of two,
+    // and its whole report stands asserted, its section
+    // printing its decided races at their counts in the
+    // record, race 2 through race 6, the count of the
+    // race holding no winner standing skipped, as the
+    // stated relations of DH-51 now state the count's
+    // meaning. Fails under V-1, the series classing
+    // unbroken and taking no section. Fails under V-2,
+    // its spell reading as its behind count of two and
+    // the series classing unbroken. Fails under V-5, its
+    // spell reading as its winner's longest run of wins
+    // of two and the series classing unbroken. Fails
+    // under V-6, its behind count reading as a front
+    // count of one and the series classing unbroken.
+    // Fails under V-7, its figure line printing the
+    // behind count of two in the spell's place. Fails
+    // under V-10, its decided races standing renumbered
+    // as race 1 through race 5. Passes under V-3, its
+    // depth standing at one with its spell, under V-4,
+    // its recorded record ending at its decision, and
+    // under V-8 and V-9 by design.
+    let dir = temp_dir("spells-record-count");
+    let series = series_json(
+        "the record count drill",
+        vec![ALPHA, BETA],
+        3,
+        vec![
+            no_result("record count drill race one", ALPHA, BETA),
+            clear_win("record count drill race two", BETA, ALPHA),
+            clear_win("record count drill race three", ALPHA, BETA),
+            clear_win("record count drill race four", BETA, ALPHA),
+            clear_win("record count drill race five", ALPHA, BETA),
+            clear_win("record count drill race six", ALPHA, BETA),
+        ],
+    );
+    let lines = spells_for(&dir, vec![("one.json", series)], vec!["one.json"]);
+    assert_eq!(
+        lines,
+        vec![
+            "spells",
+            "series 1, the record count drill",
+            "alpha-1 against beta-1, first to 3 wins",
+            "race 2, record count drill race two, beta-1 wins",
+            "race 3, record count drill race three, alpha-1 wins",
+            "race 4, record count drill race four, beta-1 wins",
+            "race 5, record count drill race five, alpha-1 wins",
+            "race 6, record count drill race six, alpha-1 wins",
+            "longest spell 1, behind count 2 over the decided record",
+            "series winner, alpha-1, alpha-1 3 race wins, beta-1 2 race wins, 1 no results",
+            "spells, 1 series, 0 unbroken, 1 broken, 0 never behind, 0 no winner"
         ]
     );
 }
