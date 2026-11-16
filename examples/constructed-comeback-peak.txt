@@ -1,0 +1,9 @@
+peak
+series 1, the constructed comeback drill
+alpha-1 against beta-1, first to 2 wins
+race 1, comeback drill race one, beta-1 wins
+race 2, comeback drill race two, alpha-1 wins
+race 3, comeback drill race three, alpha-1 wins
+largest lead 1, place 3 over the decided record
+series winner, alpha-1, alpha-1 2 race wins, beta-1 1 race wins, 0 no results
+peak, 1 series, 0 early, 1 late, 0 no winner

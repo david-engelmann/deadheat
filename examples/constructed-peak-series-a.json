@@ -1,0 +1,136 @@
+{
+ "models": [
+  "finch-1",
+  "harrier-1"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "finch-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42701
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 140.0,
+     "model": "harrier-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42724
+    }
+   ],
+   "task": "peak drill one race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "finch-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42747
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "harrier-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42770
+    }
+   ],
+   "task": "peak drill one race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "finch-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42793
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "harrier-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42816
+    }
+   ],
+   "task": "peak drill one race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "finch-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42839
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "harrier-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42862
+    }
+   ],
+   "task": "peak drill one race four"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "finch-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42885
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "harrier-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42908
+    }
+   ],
+   "task": "peak drill one race five"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "finch-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42931
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "harrier-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42954
+    }
+   ],
+   "task": "peak drill one race six"
+  }
+ ],
+ "task": "the constructed peak drill one",
+ "wins_target": 3
+}
