@@ -393,6 +393,15 @@ fn readme_reports_the_round_twenty_eight_status() {
 }
 
 #[test]
+fn readme_reports_the_round_twenty_nine_status() {
+    let text = read(&repo_root().join("README.md"));
+    let standing = "- Contract, DH-56 and DH-57 now stand in full form in CONTRACT.md under the Round 29 obligations, and their standing is not claimed here, as Round 29 has not closed.";
+    assert!(text.lines().any(|line| line == standing));
+    let slice_line = "- Slice 30 is built and in review. It carries the peak reading over a recorded championship, the classification of each decided series by the place of the largest lead of its winner over the decided record read against the lead itself as early or late, one section for each series standing late naming its decided races in race order and the largest lead and place of the series and its winner with its race split, with the closing counts of series, early, late, and no winner, with the peak example over the standing championship in its empty form and the constructed peak example and their goldens under examples, and the peak command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, opening, turns, lead, crossings, tenure, depths, spells, reigns, and place.";
+    assert!(text.lines().any(|line| line == slice_line));
+}
+
+#[test]
 fn contract_states_the_winner_line_in_the_house_form() {
     // The FIX-DH-21 pin. It fails on the pre repair tree by
     // content, where the DH-37 and DH-39 entries state the
