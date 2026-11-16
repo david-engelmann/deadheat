@@ -61,10 +61,6 @@ const ALPHA: &str = "alpha-1";
 const BETA: &str = "beta-1";
 const FINCH: &str = "finch-1";
 const HARRIER: &str = "harrier-1";
-const LINNET: &str = "linnet-1";
-const MARTIN: &str = "martin-1";
-const OSPREY: &str = "osprey-1";
-const KESTREL: &str = "kestrel-1";
 
 fn attempt(model: &str, result: &str, finished: f64, tokens: Option<i64>) -> JsonValue {
     obj(vec![
@@ -203,25 +199,6 @@ fn drill_one() -> JsonValue {
             clear_win("peak drill one race four", FINCH, HARRIER),
             clear_win("peak drill one race five", HARRIER, FINCH),
             clear_win("peak drill one race six", FINCH, HARRIER),
-        ],
-    )
-}
-
-fn drill_two() -> JsonValue {
-    series_json(
-        "the constructed peak drill two",
-        vec![LINNET, MARTIN],
-        5,
-        vec![
-            clear_win("peak drill two race one", MARTIN, LINNET),
-            clear_win("peak drill two race two", MARTIN, LINNET),
-            clear_win("peak drill two race three", LINNET, MARTIN),
-            clear_win("peak drill two race four", LINNET, MARTIN),
-            clear_win("peak drill two race five", LINNET, MARTIN),
-            clear_win("peak drill two race six", LINNET, MARTIN),
-            clear_win("peak drill two race seven", MARTIN, LINNET),
-            clear_win("peak drill two race eight", MARTIN, LINNET),
-            clear_win("peak drill two race nine", MARTIN, LINNET),
         ],
     )
 }
