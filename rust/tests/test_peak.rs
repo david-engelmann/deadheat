@@ -1139,7 +1139,7 @@ fn early_and_late_stand_across_the_place_classes() {
     );
     assert_eq!(
         place_class(&third_ch.series[0]),
-        Some(PlaceClass::NeverBehind)
+        Some((PlaceClass::NeverBehind, 0, 0))
     );
     let fourth_ch = load(&dir, vec![("four.json", fourth)], vec!["four.json"]);
     assert_eq!(
@@ -1148,7 +1148,7 @@ fn early_and_late_stand_across_the_place_classes() {
     );
     assert_eq!(
         place_class(&fourth_ch.series[0]),
-        Some(PlaceClass::NeverBehind)
+        Some((PlaceClass::NeverBehind, 0, 0))
     );
 }
 
