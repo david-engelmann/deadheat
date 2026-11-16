@@ -25,7 +25,7 @@ fn agents_carries_the_canonical_marker() {
 #[test]
 fn readme_states_the_closed_round_count() {
     let text = read(&repo_root().join("README.md"));
-    assert!(text.contains("Closed perfection rounds, 27 of 100"));
+    assert!(text.contains("Closed perfection rounds, 28 of 100"));
 }
 
 #[test]
@@ -174,7 +174,7 @@ fn readme_reports_the_round_four_status() {
     // and the round twenty seven pin below holds the
     // slice 28 line, and the round twenty eight pin
     // below holds the slice 29 line.
-    assert_eq!(text.matches("built and in review").count(), 1);
+    assert_eq!(text.matches("built and in review").count(), 0);
 }
 
 #[test]
@@ -386,9 +386,9 @@ fn readme_reports_the_round_twenty_seven_status() {
 #[test]
 fn readme_reports_the_round_twenty_eight_status() {
     let text = read(&repo_root().join("README.md"));
-    let standing = "- Contract, DH-54 and DH-55 now stand in full form in CONTRACT.md under the Round 28 obligations, and their standing is not claimed here, as Round 28 has not closed.";
+    let standing = "- Contract, DH-54 and DH-55 met. They stand in full form in CONTRACT.md under the Round 28 obligations, and Round 28 closed on the merged slice 29 after three reviews, with the standards review approving with findings at one Minor and one Observation, its Minor standing charged to the slice, the place module's doc head naming the posture of the depths module where the design charges the posture of the reigns module and the body follows it, cured in slice by the repair commit 6316c238 standing on the slice head, the one word depths standing replaced by reigns in the doc comment with no other word moving, the repair standing verified by the owner at exactly that one word with the repair head's hosted gate and gate-stable standing at success twice each, the spec review approving with findings at three Observations, each standing against the design record and none charged to the slice, and the red team approving with no findings, its independent oracle standing at no disagreement over all nineteen championships, its spot executions of V-5, V-8, and g15 standing name for name against the executed record, and its two points standing recorded against the owner's brief phrasing and not the slice, a first attainment at the last decided race standing arithmetically impossible under DH-54, the latest attainable shape standing executed in its place, and a series standing never behind bearing depth nought under the obligation's own text, and CodeRabbit returning no inline comments on the slice, its completed review standing read in full by the standards lane at zero inline comments and zero submitted reviews, with the slice standing merged as pull request 65 at de2b2324, main's tree standing verified equal to the repaired slice tree 9cd8314c, the census standing at 980, the design record's section 5 load bearing list naming the constructed pair's whole report pin as falling under V-4 where the pin's own comment and the build's corrected V-4 execution read it passing, the same list numbering that pin PL-1 where the committed file labels it PL-2 and labels the standing championship pin PL-1, the build's first V-4 construction standing void in the open with its mechanism proven, the same slip standing in the design lane's unexecuted draft of the variant, the design's gap hunt standing negative over its fifteen mutations, both passing variants standing proven equivalent and no gap standing charged, the five items of the design record's errata queue standing as records items untouched by this round's text, and FIX-DH-30 standing free and unspent.";
     assert!(text.lines().any(|line| line == standing));
-    let slice_line = "- Slice 29 is built and in review. It carries the place reading over a recorded championship, the classification of each decided series by the place of the deepest deficit of its winner over the decided record read against the depth itself as early, late, or never behind, one section for each series standing late naming its decided races in race order and the depth and place of the series and its winner with its race split, with the closing counts of series, early, late, never behind, and no winner, with the place example over the standing championship in its empty form and the constructed place example and their goldens under examples, and the place command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, opening, turns, lead, crossings, tenure, depths, spells, and reigns.";
+    let slice_line = "- Slice 29 has landed. It carries the place reading over a recorded championship, the classification of each decided series by the place of the deepest deficit of its winner over the decided record read against the depth itself as early, late, or never behind, one section for each series standing late naming its decided races in race order and the depth and place of the series and its winner with its race split, with the closing counts of series, early, late, never behind, and no winner, with the place example over the standing championship in its empty form and the constructed place example and their goldens under examples, and the place command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, opening, turns, lead, crossings, tenure, depths, spells, and reigns.";
     assert!(text.lines().any(|line| line == slice_line));
 }
 
