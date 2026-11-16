@@ -438,6 +438,17 @@ place
 place, 2 series, 0 early, 0 late, 2 never behind, 0 no winner
 ```
 
+The peak command reads a championship file and reports the series that stood late, whose winner's largest lead over the decided record was first stood at a place above the lead itself, standing the decided races of each beside the largest lead and place of the series and its race split.
+
+```sh
+deadheat peak examples/championship.json
+```
+
+```text
+peak
+peak, 2 series, 2 early, 0 late, 0 no winner
+```
+
 The standings command prints the standings table held in a standings file. The adopt command writes the losing attempt patch into a patches folder and the discard command removes it.
 
 ## Status
