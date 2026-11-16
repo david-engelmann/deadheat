@@ -174,7 +174,7 @@ fn readme_reports_the_round_four_status() {
     // and the round twenty seven pin below holds the
     // slice 28 line, and the round twenty eight pin
     // below holds the slice 29 line.
-    assert_eq!(text.matches("built and in review").count(), 0);
+    assert_eq!(text.matches("built and in review").count(), 1);
 }
 
 #[test]
