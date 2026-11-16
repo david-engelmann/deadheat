@@ -163,6 +163,10 @@ name = "test_reigns"
 path = "rust/tests/test_reigns.rs"
 
 [[test]]
+name = "test_place"
+path = "rust/tests/test_place.rs"
+
+[[test]]
 name = "test_fold"
 path = "rust/tests/test_fold.rs"
 
