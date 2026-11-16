@@ -1,0 +1,199 @@
+{
+ "models": [
+  "osprey-1",
+  "kestrel-1"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "osprey-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42341
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "kestrel-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42364
+    }
+   ],
+   "task": "place drill one race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "osprey-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42395
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "kestrel-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42418
+    }
+   ],
+   "task": "place drill one race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "osprey-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42449
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "kestrel-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42472
+    }
+   ],
+   "task": "place drill one race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "osprey-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42503
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "kestrel-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42526
+    }
+   ],
+   "task": "place drill one race four"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "osprey-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42557
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "kestrel-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42580
+    }
+   ],
+   "task": "place drill one race five"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "osprey-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42611
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "kestrel-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42634
+    }
+   ],
+   "task": "place drill one race six"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "osprey-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42665
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "kestrel-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42688
+    }
+   ],
+   "task": "place drill one race seven"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "osprey-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42719
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "kestrel-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42742
+    }
+   ],
+   "task": "place drill one race eight"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "osprey-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42773
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "kestrel-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42796
+    }
+   ],
+   "task": "place drill one race nine"
+  }
+ ],
+ "task": "the constructed place drill one",
+ "wins_target": 5
+}

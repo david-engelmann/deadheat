@@ -1,0 +1,12 @@
+place
+series 2, the constructed league series, apex-1 against crest-1
+apex-1 against crest-1, first to 4 wins
+race 1, league race one, apex-1 wins
+race 2, league race two, crest-1 wins
+race 3, league race three, crest-1 wins
+race 4, league race four, apex-1 wins
+race 5, league race five, apex-1 wins
+race 6, league race six, apex-1 wins
+deepest deficit 1, place 3 over the decided record
+series winner, apex-1, apex-1 4 race wins, crest-1 2 race wins, 0 no results
+place, 10 series, 4 early, 1 late, 5 never behind, 0 no winner

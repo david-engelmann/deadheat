@@ -1,0 +1,115 @@
+{
+ "models": [
+  "hobby-1",
+  "merlin-1"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "hobby-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42713
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "merlin-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42736
+    }
+   ],
+   "task": "place drill two race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "hobby-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42767
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "merlin-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42790
+    }
+   ],
+   "task": "place drill two race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "hobby-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42821
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "merlin-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42844
+    }
+   ],
+   "task": "place drill two race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "hobby-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42875
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "merlin-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42898
+    }
+   ],
+   "task": "place drill two race four"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "hobby-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 42929
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "merlin-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 42952
+    }
+   ],
+   "task": "place drill two race five"
+  }
+ ],
+ "task": "the constructed place drill two",
+ "wins_target": 3
+}
