@@ -30,7 +30,7 @@
 //! second winner rule and no second counting walk
 //! stands in this module. The standings the reading
 //! classes by stand read in this module's own body
-//! over that record, in the posture of the depths
+//! over that record, in the posture of the reigns
 //! module, and no tally helper is consumed here.
 
 use crate::championship::{count_series, Championship, SeriesCount};
