@@ -1,0 +1,15 @@
+recovery
+series 1, the constructed place drill one
+osprey-1 against kestrel-1, first to 5 wins
+race 1, place drill one race one, osprey-1 wins
+race 2, place drill one race two, kestrel-1 wins
+race 3, place drill one race three, kestrel-1 wins
+race 4, place drill one race four, kestrel-1 wins
+race 5, place drill one race five, osprey-1 wins
+race 6, place drill one race six, kestrel-1 wins
+race 7, place drill one race seven, osprey-1 wins
+race 8, place drill one race eight, osprey-1 wins
+race 9, place drill one race nine, osprey-1 wins
+deepest deficit 2, answer 5 over the decided record
+series winner, osprey-1, osprey-1 5 race wins, kestrel-1 4 race wins, 0 no results
+recovery, 2 series, 1 immediate, 1 delayed, 0 never behind, 0 no winner

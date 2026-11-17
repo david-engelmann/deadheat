@@ -1,0 +1,178 @@
+{
+ "models": [
+  "avocet-1",
+  "stint-1"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "avocet-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 43701
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "stint-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 43724
+    }
+   ],
+   "task": "recovery drill one race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "avocet-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 43747
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "stint-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 43770
+    }
+   ],
+   "task": "recovery drill one race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "avocet-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 43793
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 140.0,
+     "model": "stint-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 43816
+    }
+   ],
+   "task": "recovery drill one race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "avocet-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 43839
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "stint-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 43862
+    }
+   ],
+   "task": "recovery drill one race four"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "avocet-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 43885
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "stint-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 43908
+    }
+   ],
+   "task": "recovery drill one race five"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "avocet-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 43931
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "stint-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 43954
+    }
+   ],
+   "task": "recovery drill one race six"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "avocet-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 43977
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "stint-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 44000
+    }
+   ],
+   "task": "recovery drill one race seven"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "avocet-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 44023
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "stint-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 44046
+    }
+   ],
+   "task": "recovery drill one race eight"
+  }
+ ],
+ "task": "the constructed recovery drill one",
+ "wins_target": 4
+}
