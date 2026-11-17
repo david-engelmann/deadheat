@@ -300,8 +300,8 @@ fn the_constructed_example_carries_the_delayed_series_alone() {
             "avocet-1 against stint-1, first to 4 wins",
             "race 1, recovery drill one race one, avocet-1 wins",
             "race 2, recovery drill one race two, avocet-1 wins",
-            "race 4, recovery drill one race four, avocet-1 wins",
-            "race 5, recovery drill one race five, stint-1 wins",
+            "race 4, recovery drill one race four, stint-1 wins",
+            "race 5, recovery drill one race five, avocet-1 wins",
             "race 6, recovery drill one race six, stint-1 wins",
             "race 7, recovery drill one race seven, stint-1 wins",
             "race 8, recovery drill one race eight, stint-1 wins",
@@ -568,8 +568,8 @@ fn the_answer_names_the_first_ahead_standing_not_the_deciding_race() {
     // RC-8. A series whose winner stood ahead
     // first at its fifth decided race and won the
     // series only at its eighth, won by beta,
-    // beta, alpha, alpha, alpha, beta, beta, alpha
-    // under a target of four, asserted at the
+    // beta, alpha, alpha, alpha, beta, alpha, alpha
+    // under a target of five, asserted at the
     // entry. Its depth of two stands attained at
     // its second decided race, and its answer
     // stands at three, the count from the
@@ -597,7 +597,7 @@ fn the_answer_names_the_first_ahead_standing_not_the_deciding_race() {
             series_json(
                 "the level recovery saga",
                 vec![ALPHA, BETA],
-                4,
+                5,
                 vec![
                     clear_win("race one", BETA, ALPHA),
                     clear_win("race two", BETA, ALPHA),
@@ -605,7 +605,7 @@ fn the_answer_names_the_first_ahead_standing_not_the_deciding_race() {
                     clear_win("race four", ALPHA, BETA),
                     clear_win("race five", ALPHA, BETA),
                     clear_win("race six", BETA, ALPHA),
-                    clear_win("race seven", BETA, ALPHA),
+                    clear_win("race seven", ALPHA, BETA),
                     clear_win("race eight", ALPHA, BETA),
                 ],
             ),
@@ -862,8 +862,8 @@ fn the_constructed_drill_one_standing_alone() {
             "avocet-1 against stint-1, first to 4 wins",
             "race 1, recovery drill one race one, avocet-1 wins",
             "race 2, recovery drill one race two, avocet-1 wins",
-            "race 4, recovery drill one race four, avocet-1 wins",
-            "race 5, recovery drill one race five, stint-1 wins",
+            "race 4, recovery drill one race four, stint-1 wins",
+            "race 5, recovery drill one race five, avocet-1 wins",
             "race 6, recovery drill one race six, stint-1 wins",
             "race 7, recovery drill one race seven, stint-1 wins",
             "race 8, recovery drill one race eight, stint-1 wins",
