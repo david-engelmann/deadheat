@@ -25,7 +25,7 @@ fn agents_carries_the_canonical_marker() {
 #[test]
 fn readme_states_the_closed_round_count() {
     let text = read(&repo_root().join("README.md"));
-    assert!(text.contains("Closed perfection rounds, 29 of 100"));
+    assert!(text.contains("Closed perfection rounds, 30 of 100"));
 }
 
 #[test]
@@ -148,7 +148,10 @@ fn readme_reports_the_round_four_status() {
     // landed slice 29 and the count returned to zero.
     // Slice 30 stood in review while Round 29 was built,
     // so the count was one again until the Round 29 closure
-    // landed slice 30 and the count returned to zero. The round five pin
+    // landed slice 30 and the count returned to zero.
+    // Slice 31 stood in review while Round 30 was built,
+    // so the count was one again until the Round 30 closure
+    // landed slice 31 and the count returned to zero. The round five pin
     // below holds the slice 6 line itself, the round six pin
     // below holds the slice 7 line, the round seven pin
     // below holds the slice 8 line, the round eight pin
@@ -177,8 +180,9 @@ fn readme_reports_the_round_four_status() {
     // and the round twenty seven pin below holds the
     // slice 28 line, and the round twenty eight pin
     // below holds the slice 29 line, and the round
-    // twenty nine pin below holds the slice 30 line.
-    assert_eq!(text.matches("built and in review").count(), 1);
+    // twenty nine pin below holds the slice 30 line, and the round
+    // thirty pin below holds the slice 31 line.
+    assert_eq!(text.matches("built and in review").count(), 0);
 }
 
 #[test]
@@ -599,8 +603,8 @@ fn readme_shows_the_comeback_distance_rally_deadlock_streak_cluster_closing_open
 #[test]
 fn readme_reports_the_round_thirty_status() {
     let text = read(&repo_root().join("README.md"));
-    let standing = "- Contract, DH-58 and DH-59 now stand in full form in CONTRACT.md under the Round 30 obligations, and their standing is not claimed here, as Round 30 has not closed.";
+    let standing = "- Contract, DH-58 and DH-59 met. They stand in full form in CONTRACT.md under the Round 30 obligations, and Round 30 closed on the merged slice 31 after three reviews, with the standards review approving with findings at two Observations, none standing charged to the slice, the first pricing the X family as computed and unexecuted, an execution debt carried to this closure, and the second naming the build report's repair narrative understating the repair diff by one seat at RC-8's comment prose, a records item against the build report alone, the spec review approving with findings at four Observations, each standing against the design record and none charged to the slice, the note's section 2 naming bolt-ember's answer as seven where the data and the golden read five, the note's section 2 naming bolt-ember as the immediate and late witness against DH-56 where the series stands delayed and the contract's own section names the survey apex-drift series, a naming the red team's first Observation shares, the note's section 3 build seats naming the place module where the shipped recovery module's doc head stands in the reigns posture, and the note's section 8 drafting the slice line in landed form where its own count charge requires the in review opening the build carried, and the red team approving with findings at three Observations, no finding standing against the slice's content, its independent oracle reproducing the population whole over the 49 decided series at 18 immediate, 8 delayed, and 23 never behind, all 21 recovery goldens of the head tree standing byte equal to its own renders, the build's repair standing reproduced at the oracle, the original RC-8 shape reading (immediate, 2, 1) from the loser's seat at a target of four and the repaired pin reading (immediate, 3, 2) at a target of five, its break attempts standing exhaustive over 636 decided winner sequences with no break found, and its differential standing executed on the base side over 3,976 drives, identical on its re-run, with its head side standing unexecuted, and CodeRabbit returning no submitted review and no inline comment on the slice, with the slice standing merged as pull request 69 at ec73af90, main's tree standing verified equal to the slice tree b79e4e4e, the census standing at 1036, the build's seventh commit standing as a tests repair at 3e1281b8 beyond the six charged, curing defects of the build's own test authorship at RC-2, RC-13, and RC-8 in rust/tests/test_recovery.rs alone with the census unmoved, the 34 new goldens standing rendered by the build's transliteration proven byte for byte against all 166 standing sibling goldens and in ordered agreement with the design engine over all 49 series, the built binary standing unable to render them before the window closed and that substitution standing named in the open, the sweep standing restated at 305 goldens and 301 unadjusted, the control standing executed on the standing main tree at its fifth attempt at 1008 passed and 0 failed, W-1 standing executed at one attempt with exactly 24 falls, name for name equal to its expected set, the cured comments of Round 29 cashing under it at PK-4, PK-8, and PK-11, the fencing pin F1 falling under it and its posture standing decided there, its falls under W-5 and W-7 standing open, PK-14's entries under W-7 and W-9 standing open, and no W mutation passing whole anywhere executed, the carried family standing unexecuted on the write fault at eleven refused attempts for W-2, six for W-3, five each for W-4 to W-10, and five each for H-3 and H-5 across the build and red team lanes, the red team's 46 attempts standing counted inside those figures with its three refused tarball attempts and its 49 path blob grinder landing every file at zero bytes beside them, the X family standing computed and unexecuted whole, the candidate pins standing unexecuted on the pre-round tree, the form gate and the fresh extraction gate standing unexecuted on the same fault with the hosted gate on the exact head standing as the suite's executed evidence of record, the design note's RC-8 shape at a target of four standing refuted by execution and corroborated at two seats, and FIX-DH-30 standing free and unspent.";
     assert!(text.lines().any(|line| line == standing));
-    let slice_line = "- Slice 31 is built and in review. It carries the recovery reading over a recorded championship, the classification of each decided series by the answer of its winner to the deepest deficit of the series over the decided record read against the depth plus one as immediate, delayed, or never behind, one section for each series standing delayed naming its decided races in race order and the depth and answer of the series and its winner with its race split, with the closing counts of series, immediate, delayed, never behind, and no winner, with the recovery example over the standing championship in its empty form and the constructed recovery example and their goldens under examples, and the recovery command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, opening, turns, lead, crossings, tenure, depths, spells, reigns, place, and peak.";
+    let slice_line = "- Slice 31 has landed. It carries the recovery reading over a recorded championship, the classification of each decided series by the answer of its winner to the deepest deficit of the series over the decided record read against the depth plus one as immediate, delayed, or never behind, one section for each series standing delayed naming its decided races in race order and the depth and answer of the series and its winner with its race split, with the closing counts of series, immediate, delayed, never behind, and no winner, with the recovery example over the standing championship in its empty form and the constructed recovery example and their goldens under examples, and the recovery command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, opening, turns, lead, crossings, tenure, depths, spells, reigns, place, and peak.";
     assert!(text.lines().any(|line| line == slice_line));
 }
