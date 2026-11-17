@@ -1,0 +1,24 @@
+deadlock
+series 1, the constructed firststand drill one
+firststand-ash against firststand-birch, first to 4 wins
+race 1, firststand drill one race one, firststand-ash wins
+race 3, firststand drill one race three, firststand-ash wins
+race 4, firststand drill one race four, firststand-birch wins
+race 5, firststand drill one race five, firststand-ash wins
+race 6, firststand drill one race six, firststand-birch wins
+race 7, firststand drill one race seven, firststand-birch wins
+race 8, firststand drill one race eight, firststand-birch wins
+stood level after 1 of its decided races
+series winner, firststand-birch, firststand-ash 3 race wins, firststand-birch 4 race wins, 1 no results
+series 2, the constructed firststand drill two
+firststand-ash against firststand-birch, first to 4 wins
+race 1, firststand drill two race one, firststand-birch wins
+race 2, firststand drill two race two, firststand-ash wins
+race 3, firststand drill two race three, firststand-birch wins
+race 4, firststand drill two race four, firststand-ash wins
+race 5, firststand drill two race five, firststand-ash wins
+race 6, firststand drill two race six, firststand-birch wins
+race 7, firststand drill two race seven, firststand-birch wins
+stood level after 3 of its decided races
+series winner, firststand-birch, firststand-ash 3 race wins, firststand-birch 4 race wins, 0 no results
+deadlock, 2 series, 2 deadlocked, 0 clear, 0 no winner

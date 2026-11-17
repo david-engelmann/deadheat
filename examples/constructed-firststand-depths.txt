@@ -1,0 +1,13 @@
+depths
+series 1, the constructed firststand drill one
+firststand-ash against firststand-birch, first to 4 wins
+race 1, firststand drill one race one, firststand-ash wins
+race 3, firststand drill one race three, firststand-ash wins
+race 4, firststand drill one race four, firststand-birch wins
+race 5, firststand drill one race five, firststand-ash wins
+race 6, firststand drill one race six, firststand-birch wins
+race 7, firststand drill one race seven, firststand-birch wins
+race 8, firststand drill one race eight, firststand-birch wins
+deepest deficit 2 over the decided record
+series winner, firststand-birch, firststand-ash 3 race wins, firststand-birch 4 race wins, 1 no results
+depths, 2 series, 1 deep, 1 matched, 0 shallow, 0 no winner
