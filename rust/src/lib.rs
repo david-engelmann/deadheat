@@ -22,6 +22,7 @@ pub mod makers;
 pub mod openings;
 pub mod pairings;
 pub mod panels;
+pub mod peak;
 pub mod place;
 pub mod pynum;
 pub mod pytext;

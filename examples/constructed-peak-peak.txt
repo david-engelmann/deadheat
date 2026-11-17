@@ -1,0 +1,11 @@
+peak
+series 1, the constructed peak drill one
+finch-1 against harrier-1, first to 3 wins
+race 2, peak drill one race two, harrier-1 wins
+race 3, peak drill one race three, finch-1 wins
+race 4, peak drill one race four, finch-1 wins
+race 5, peak drill one race five, harrier-1 wins
+race 6, peak drill one race six, finch-1 wins
+largest lead 1, place 3 over the decided record
+series winner, finch-1, finch-1 3 race wins, harrier-1 2 race wins, 1 no results
+peak, 2 series, 1 early, 1 late, 0 no winner

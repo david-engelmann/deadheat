@@ -1,0 +1,199 @@
+{
+ "models": [
+  "linnet-1",
+  "martin-1"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "linnet-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 43101
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "martin-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 43124
+    }
+   ],
+   "task": "peak drill two race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "linnet-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 43147
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "martin-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 43170
+    }
+   ],
+   "task": "peak drill two race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "linnet-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 43193
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "martin-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 43216
+    }
+   ],
+   "task": "peak drill two race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "linnet-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 43239
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "martin-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 43262
+    }
+   ],
+   "task": "peak drill two race four"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "linnet-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 43285
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "martin-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 43308
+    }
+   ],
+   "task": "peak drill two race five"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "linnet-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 43331
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "martin-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 43354
+    }
+   ],
+   "task": "peak drill two race six"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "linnet-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 43377
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "martin-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 43400
+    }
+   ],
+   "task": "peak drill two race seven"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "linnet-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 43423
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "martin-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 43446
+    }
+   ],
+   "task": "peak drill two race eight"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "linnet-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 43469
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "martin-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 43492
+    }
+   ],
+   "task": "peak drill two race nine"
+  }
+ ],
+ "task": "the constructed peak drill two",
+ "wins_target": 5
+}

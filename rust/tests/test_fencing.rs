@@ -27,6 +27,7 @@ use deadheat::flips::flip_report;
 use deadheat::leads::lead_report;
 use deadheat::openings::opening_report;
 use deadheat::pairings::pairing_report;
+use deadheat::peak::peak_report;
 use deadheat::place::place_report;
 use deadheat::pynum::Num;
 use deadheat::pytext::PText;
@@ -1468,6 +1469,88 @@ fn the_place_report_fences_its_fields() {
             "deepest deficit 1, place 3 over the decided record",
             "series winner, ,  3 race wins,  2 race wins, 0 no results",
             "place, 1 series, 0 early, 1 late, 0 never behind, 0 no winner",
+        ]
+    );
+}
+
+#[test]
+fn the_peak_report_fences_its_fields() {
+    // F-1 of the Round 29 discrimination plan. A
+    // series rebuilt by hand on the bad series frame,
+    // read under DH-57, its second model standing
+    // break bearing as its first does. The second
+    // model takes the first race and the first model
+    // takes the next three at a wins target of three,
+    // so the first model's largest lead of two first
+    // stood at its fourth decided race and the series
+    // stands late, and its section prints the series
+    // task, the race tasks, and both model labels,
+    // every field holding a break standing fenced to
+    // the empty field through the one helper of
+    // FIX-DH-16, as on the sibling surfaces. Its
+    // failure mode is a second fencing path standing
+    // in the new module. It fails on the pre round
+    // tree by compile absence, the peak module
+    // standing absent there.
+    let mut series = bad_series();
+    series.models[1] = bad("beta");
+    series.wins_target = BigInt::from(3);
+    series.races = vec![
+        Race {
+            task: text("race one"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Red, 130.0),
+                attempt(bad("beta"), "lane two", SuiteResult::Green, 100.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+        Race {
+            task: bad("race task"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Green, 100.0),
+                attempt(bad("beta"), "lane two", SuiteResult::Red, 130.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+        Race {
+            task: text("race three"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Green, 100.0),
+                attempt(bad("beta"), "lane two", SuiteResult::Red, 130.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+        Race {
+            task: text("race four"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Green, 100.0),
+                attempt(bad("beta"), "lane two", SuiteResult::Red, 130.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+    ];
+    let championship = Championship {
+        series: vec![series],
+    };
+    let lines = peak_report(&championship);
+    assert_no_forgery(&lines);
+    assert_eq!(
+        lines,
+        vec![
+            "peak",
+            "series 1, ",
+            " against , first to 3 wins",
+            "race 1, race one,  wins",
+            "race 2, ,  wins",
+            "race 3, race three,  wins",
+            "race 4, race four,  wins",
+            "largest lead 2, place 4 over the decided record",
+            "series winner, ,  3 race wins,  1 race wins, 0 no results",
+            "peak, 1 series, 0 early, 1 late, 0 no winner",
         ]
     );
 }

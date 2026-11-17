@@ -167,6 +167,10 @@ name = "test_place"
 path = "rust/tests/test_place.rs"
 
 [[test]]
+name = "test_peak"
+path = "rust/tests/test_peak.rs"
+
+[[test]]
 name = "test_fold"
 path = "rust/tests/test_fold.rs"
 
