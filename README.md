@@ -471,6 +471,17 @@ laststand
 laststand, 2 series, 0 held, 1 single, 1 without reply, 0 no winner
 ```
 
+The firststand command reads a championship file and reports the series that stood held, whose loser's first run over the decided record stood at two or more, standing the decided races of each beside the first stand of the series and its race split.
+
+```sh
+deadheat firststand examples/championship.json
+```
+
+```text
+firststand
+firststand, 2 series, 0 held, 1 single, 1 without reply, 0 no winner
+```
+
 The standings command prints the standings table held in a standings file. The adopt command writes the losing attempt patch into a patches folder and the discard command removes it.
 
 ## Status
