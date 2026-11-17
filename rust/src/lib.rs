@@ -17,6 +17,7 @@ pub mod depths;
 pub mod distances;
 pub mod flips;
 pub mod json;
+pub mod laststand;
 pub mod leads;
 pub mod makers;
 pub mod openings;

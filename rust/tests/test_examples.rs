@@ -3250,3 +3250,173 @@ fn the_constructed_recovery_example_under_its_sibling_readings_matches_its_golde
         assert!(out.trim_end().ends_with(closing), "{golden_name}");
     }
 }
+
+#[test]
+fn the_championship_laststand_examples_match_their_goldens() {
+    // E-1 of the Round 31 enrolment. The three
+    // championships under the laststand command, the
+    // standing championship carrying no section, the
+    // survey carrying its three held series in section
+    // form and the league two, pinned at the CLI and
+    // at the library surface both, at the closings
+    // DH-61's examples entry states.
+    for (source_name, golden_name, closing) in [
+        (
+            "championship.json",
+            "championship-laststand.txt",
+            "laststand, 2 series, 0 held, 1 single, 1 without reply, 0 no winner",
+        ),
+        (
+            "survey-championship.json",
+            "survey-championship-laststand.txt",
+            "laststand, 6 series, 3 held, 3 single, 0 without reply, 0 no winner",
+        ),
+        (
+            "league-championship.json",
+            "league-championship-laststand.txt",
+            "laststand, 10 series, 2 held, 6 single, 2 without reply, 0 no winner",
+        ),
+    ] {
+        let source = examples().join(source_name);
+        let out = run_ok(&["laststand", source.to_str().expect("utf8")]);
+        let golden = read_text(&examples().join(golden_name));
+        assert_eq!(out, golden, "{golden_name}");
+        assert!(out.trim_end().ends_with(closing), "{golden_name}");
+        let (championship, defects) =
+            deadheat::championship::load_championship_file(&examples().join(source_name));
+        assert_eq!(defects, Vec::<String>::new());
+        let rendered =
+            deadheat::laststand::laststand_report(&championship.expect("a championship"))
+                .join("\n")
+                + "\n";
+        assert_eq!(rendered, golden, "{golden_name}");
+    }
+}
+
+#[test]
+fn the_constructed_laststand_example_matches_its_golden() {
+    // E-2 of the Round 31 enrolment. The constructed
+    // championship of DH-61, labelled as constructed in
+    // its file names and its task texts and never
+    // presented as recorded. Its first series stands
+    // held at a last stand of two, and its second
+    // stands single at a last stand of one below its
+    // longest run of two, so the golden carries the
+    // first series' section alone.
+    let source = examples().join("constructed-laststand.json");
+    let out = run_ok(&["laststand", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("constructed-laststand-laststand.txt"));
+    assert_eq!(out, golden);
+    assert!(out.contains("series 1, the constructed laststand drill one"));
+    assert!(out.contains("last stand 2 over the decided record"));
+    assert!(!out.contains("series 2,"));
+    assert!(out
+        .trim_end()
+        .ends_with("laststand, 2 series, 1 held, 1 single, 0 without reply, 0 no winner"));
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("constructed-laststand.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered = deadheat::laststand::laststand_report(&championship.expect("a championship"))
+        .join("\n")
+        + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_constructed_laststand_example_under_its_sibling_readings_matches_its_goldens() {
+    // E-3 of the Round 31 enrolment. The same
+    // constructed file under the comeback, closing,
+    // cluster, crossings, deadlock, depths, distance,
+    // opening, rally, reigns, spells, streak, and
+    // tenure commands, the thirteen sibling goldens,
+    // the pair standing both from behind under the
+    // comeback command, both in a run at the closing,
+    // both clustered under the cluster command, both
+    // short under the crossings command, both
+    // deadlocked, both deep under the depths command,
+    // both the distance under the distance command,
+    // both from behind under the opening command, both
+    // rally under the rally command, both unbroken
+    // under the reigns command, one unbroken and one
+    // broken under the spells command, both strung
+    // under the streak command, and both behind under
+    // the tenure command, so the round's partings stand
+    // pinned over shipped data byte for byte. No lead
+    // golden and no turns golden stands over the pair,
+    // following the recovery pair's enrolment exactly.
+    let source = examples().join("constructed-laststand.json");
+    let source_arg = source.to_str().expect("utf8");
+    for (command, golden_name, closing) in [
+        (
+            "comeback",
+            "constructed-laststand-comebacks.txt",
+            "comebacks, 2 series, 2 from behind, 0 from the front",
+        ),
+        (
+            "closing",
+            "constructed-laststand-closing.txt",
+            "closing, 2 series, 2 in a run, 0 alone, 0 no winner",
+        ),
+        (
+            "cluster",
+            "constructed-laststand-cluster.txt",
+            "cluster, 2 series, 2 clustered, 0 scattered, 0 no winner",
+        ),
+        (
+            "crossings",
+            "constructed-laststand-crossings.txt",
+            "crossings, 2 series, 0 through, 2 short, 0 no winner",
+        ),
+        (
+            "deadlock",
+            "constructed-laststand-deadlock.txt",
+            "deadlock, 2 series, 2 deadlocked, 0 clear, 0 no winner",
+        ),
+        (
+            "depths",
+            "constructed-laststand-depths.txt",
+            "depths, 2 series, 2 deep, 0 matched, 0 shallow, 0 no winner",
+        ),
+        (
+            "distance",
+            "constructed-laststand-distance.txt",
+            "distance, 2 series, 2 the distance, 0 without reply, 0 in between, 0 no winner",
+        ),
+        (
+            "opening",
+            "constructed-laststand-opening.txt",
+            "opening, 2 series, 0 in a run, 0 alone, 2 from behind, 0 no winner",
+        ),
+        (
+            "rally",
+            "constructed-laststand-rally.txt",
+            "rally, 2 series, 2 rally, 0 wire to wire, 0 no winner",
+        ),
+        (
+            "reigns",
+            "constructed-laststand-reigns.txt",
+            "reigns, 2 series, 2 unbroken, 0 broken, 0 no winner",
+        ),
+        (
+            "spells",
+            "constructed-laststand-spells.txt",
+            "spells, 2 series, 1 unbroken, 1 broken, 0 never behind, 0 no winner",
+        ),
+        (
+            "streak",
+            "constructed-laststand-streak.txt",
+            "streak, 2 series, 2 strung, 0 single, 0 no winner",
+        ),
+        (
+            "tenure",
+            "constructed-laststand-tenure.txt",
+            "tenure, 2 series, 0 ahead, 0 level, 2 behind, 0 no winner",
+        ),
+    ] {
+        let out = run_ok(&[command, source_arg]);
+        let golden = read_text(&examples().join(golden_name));
+        assert_eq!(out, golden, "{golden_name}");
+        assert!(out.trim_end().ends_with(closing), "{golden_name}");
+    }
+}

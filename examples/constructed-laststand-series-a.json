@@ -1,0 +1,220 @@
+{
+ "models": [
+  "whimbrel-1",
+  "redshank-1"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "whimbrel-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 45101
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "redshank-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45124
+    }
+   ],
+   "task": "laststand drill one race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "whimbrel-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 45147
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "redshank-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45170
+    }
+   ],
+   "task": "laststand drill one race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "whimbrel-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45193
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "redshank-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 45216
+    }
+   ],
+   "task": "laststand drill one race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "whimbrel-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45239
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "redshank-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 45262
+    }
+   ],
+   "task": "laststand drill one race four"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "whimbrel-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45285
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 140.0,
+     "model": "redshank-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45308
+    }
+   ],
+   "task": "laststand drill one race five"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "whimbrel-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 45331
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "redshank-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45354
+    }
+   ],
+   "task": "laststand drill one race six"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "whimbrel-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 45377
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "redshank-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45400
+    }
+   ],
+   "task": "laststand drill one race seven"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "whimbrel-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45423
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "redshank-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 45446
+    }
+   ],
+   "task": "laststand drill one race eight"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "whimbrel-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45469
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "redshank-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 45492
+    }
+   ],
+   "task": "laststand drill one race nine"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "whimbrel-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45515
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "redshank-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 45538
+    }
+   ],
+   "task": "laststand drill one race ten"
+  }
+ ],
+ "task": "the constructed laststand drill one",
+ "wins_target": 5
+}
