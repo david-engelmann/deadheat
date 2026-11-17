@@ -36,6 +36,7 @@ use deadheat::races::{
     StandingEntry, Standings, SuiteResult,
 };
 use deadheat::rallies::rally_report;
+use deadheat::recovery::recovery_report;
 use deadheat::reigns::reigns_report;
 use deadheat::seats::attempt_summary;
 use deadheat::series::{series_report, Series};
@@ -1551,6 +1552,100 @@ fn the_peak_report_fences_its_fields() {
             "largest lead 2, place 4 over the decided record",
             "series winner, ,  3 race wins,  1 race wins, 0 no results",
             "peak, 1 series, 0 early, 1 late, 0 no winner",
+        ]
+    );
+}
+
+#[test]
+fn the_recovery_report_fences_its_fields() {
+    // F-1 of the Round 30 discrimination plan. A
+    // series rebuilt by hand on the bad series frame,
+    // read under DH-59, its second model standing
+    // break bearing as its first does. The second
+    // model takes the first and third races and the
+    // first model takes the second, fourth, and fifth
+    // at a wins target of three, so the first model
+    // stood behind by one after its first decided
+    // race and stood ahead first at its fifth, and
+    // the series stands delayed at an answer of four
+    // in a depth of one, and its section prints the
+    // series task, the race tasks, and both model
+    // labels, every field holding a break standing
+    // fenced to the empty field through the one helper
+    // of FIX-DH-16, as on the sibling surfaces. Its
+    // failure mode is a second fencing path standing
+    // in the new module. It fails on the pre round
+    // tree by compile absence, the recovery module
+    // standing absent there.
+    let mut series = bad_series();
+    series.models[1] = bad("beta");
+    series.wins_target = BigInt::from(3);
+    series.races = vec![
+        Race {
+            task: text("race one"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Red, 130.0),
+                attempt(bad("beta"), "lane two", SuiteResult::Green, 100.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+        Race {
+            task: bad("race task"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Green, 100.0),
+                attempt(bad("beta"), "lane two", SuiteResult::Red, 130.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+        Race {
+            task: text("race three"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Red, 130.0),
+                attempt(bad("beta"), "lane two", SuiteResult::Green, 100.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+        Race {
+            task: text("race four"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Green, 100.0),
+                attempt(bad("beta"), "lane two", SuiteResult::Red, 130.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+        Race {
+            task: text("race five"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Green, 100.0),
+                attempt(bad("beta"), "lane two", SuiteResult::Red, 130.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+    ];
+    let championship = Championship {
+        series: vec![series],
+    };
+    let lines = recovery_report(&championship);
+    assert_no_forgery(&lines);
+    assert_eq!(
+        lines,
+        vec![
+            "recovery",
+            "series 1, ",
+            " against , first to 3 wins",
+            "race 1, race one,  wins",
+            "race 2, ,  wins",
+            "race 3, race three,  wins",
+            "race 4, race four,  wins",
+            "race 5, race five,  wins",
+            "deepest deficit 1, answer 4 over the decided record",
+            "series winner, ,  3 race wins,  2 race wins, 0 no results",
+            "recovery, 1 series, 0 immediate, 1 delayed, 0 never behind, 0 no winner",
         ]
     );
 }

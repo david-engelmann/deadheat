@@ -29,6 +29,7 @@ pub mod pytext;
 pub mod pyunicode;
 pub mod races;
 pub mod rallies;
+pub mod recovery;
 pub mod reigns;
 pub mod runner;
 pub mod scan;

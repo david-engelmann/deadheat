@@ -178,7 +178,7 @@ fn readme_reports_the_round_four_status() {
     // slice 28 line, and the round twenty eight pin
     // below holds the slice 29 line, and the round
     // twenty nine pin below holds the slice 30 line.
-    assert_eq!(text.matches("built and in review").count(), 0);
+    assert_eq!(text.matches("built and in review").count(), 1);
 }
 
 #[test]
@@ -594,4 +594,13 @@ fn readme_shows_the_comeback_distance_rally_deadlock_streak_cluster_closing_open
     ] {
         assert!(readme.contains(lead), "the README shows no section: {lead}");
     }
+}
+
+#[test]
+fn readme_reports_the_round_thirty_status() {
+    let text = read(&repo_root().join("README.md"));
+    let standing = "- Contract, DH-58 and DH-59 now stand in full form in CONTRACT.md under the Round 30 obligations, and their standing is not claimed here, as Round 30 has not closed.";
+    assert!(text.lines().any(|line| line == standing));
+    let slice_line = "- Slice 31 is built and in review. It carries the recovery reading over a recorded championship, the classification of each decided series by the answer of its winner to the deepest deficit of the series over the decided record read against the depth plus one as immediate, delayed, or never behind, one section for each series standing delayed naming its decided races in race order and the depth and answer of the series and its winner with its race split, with the closing counts of series, immediate, delayed, never behind, and no winner, with the recovery example over the standing championship in its empty form and the constructed recovery example and their goldens under examples, and the recovery command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, opening, turns, lead, crossings, tenure, depths, spells, reigns, place, and peak.";
+    assert!(text.lines().any(|line| line == slice_line));
 }
