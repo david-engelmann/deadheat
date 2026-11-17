@@ -1,0 +1,157 @@
+{
+ "models": [
+  "sanderling-1",
+  "turnstone-1"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "sanderling-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45501
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "turnstone-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 45524
+    }
+   ],
+   "task": "laststand drill two race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "sanderling-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45547
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "turnstone-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 45570
+    }
+   ],
+   "task": "laststand drill two race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "sanderling-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 45593
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "turnstone-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45616
+    }
+   ],
+   "task": "laststand drill two race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "sanderling-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45639
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "turnstone-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 45662
+    }
+   ],
+   "task": "laststand drill two race four"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "sanderling-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 45685
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "turnstone-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45708
+    }
+   ],
+   "task": "laststand drill two race five"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "sanderling-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 45731
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "turnstone-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45754
+    }
+   ],
+   "task": "laststand drill two race six"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "sanderling-1",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 45777
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "turnstone-1",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 45800
+    }
+   ],
+   "task": "laststand drill two race seven"
+  }
+ ],
+ "task": "the constructed laststand drill two",
+ "wins_target": 4
+}
