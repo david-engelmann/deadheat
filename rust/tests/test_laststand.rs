@@ -197,9 +197,11 @@ fn series_json(models: Vec<&str>, target: i64, races: Vec<JsonValue>) -> JsonVal
     ])
 }
 
-fn write_json(dir: &Path, name: &str, value: &JsonValue) {
+fn write_json(dir: &Path, name: &str, value: &JsonValue) -> PathBuf {
     std::fs::create_dir_all(dir).expect("create fixture directory");
-    std::fs::write(dir.join(name), value.to_pretty()).expect("write fixture file");
+    let path = dir.join(name);
+    std::fs::write(&path, deadheat::json::dumps(value, None, true)).expect("write fixture file");
+    path
 }
 
 fn championship_json(series_files: Vec<&str>) -> JsonValue {
@@ -210,15 +212,19 @@ fn championship_json(series_files: Vec<&str>) -> JsonValue {
 }
 
 fn load(dir: &Path) -> Championship {
-    load_championship_file(&dir.join("championship.json")).expect("load fixture championship")
+    let (championship, defects) = load_championship_file(&dir.join("championship.json"));
+    assert_eq!(defects, Vec::<String>::new());
+    championship.expect("load fixture championship")
 }
 
 fn laststand_for(championship: &Championship) -> Vec<String> {
-    lines_of(&laststand_report(championship))
+    laststand_report(championship)
 }
 
 fn load_example(name: &str) -> Championship {
-    load_championship_file(&examples().join(name)).expect("load example championship")
+    let (championship, defects) = load_championship_file(&examples().join(name));
+    assert_eq!(defects, Vec::<String>::new());
+    championship.expect("load example championship")
 }
 
 fn golden(name: &str) -> String {
@@ -532,7 +538,7 @@ fn the_constructed_example_carries_the_held_series_alone() {
         Some("laststand, 2 series, 1 held, 1 single, 0 without reply, 0 no winner")
     );
     assert_eq!(
-        laststand_report(&championship),
+        laststand_report(&championship).join("\n") + "\n",
         golden("constructed-laststand-laststand.txt")
     );
 }
@@ -666,6 +672,7 @@ fn the_last_stand_stands_above_the_longest_run_on_no_series() {
             let Some((_, last)) = laststand_class(series) else {
                 continue;
             };
+            let last = last as usize;
             let decided = decided_record(series);
             let loser = loser_of(series);
             let longest = runs_of(&decided, loser).into_iter().max().unwrap_or(0);
@@ -713,6 +720,7 @@ fn the_last_stand_stands_at_the_whole_of_the_losers_wins_on_thirty_series() {
             let Some((_, last)) = laststand_class(series) else {
                 continue;
             };
+            let last = last as usize;
             let decided = decided_record(series);
             let loser = loser_of(series);
             let wins = decided.iter().filter(|side| **side == loser).count();
@@ -841,7 +849,7 @@ fn the_depths_championship_prints_the_empty_form() {
         ]
     );
     assert_eq!(
-        laststand_report(&championship),
+        laststand_report(&championship).join("\n") + "\n",
         golden("constructed-depths-laststand.txt")
     );
 }
@@ -898,7 +906,7 @@ fn the_drill_one_section_stands_in_the_family_form() {
     .collect();
     assert_eq!(laststand_for(&championship), expected);
     assert_eq!(
-        laststand_report(&championship),
+        laststand_report(&championship).join("\n") + "\n",
         golden("constructed-laststand-laststand.txt")
     );
 }
@@ -938,6 +946,7 @@ fn the_last_stand_and_the_closing_run_together_stand_above_the_decided_count_on_
             let Some((_, last)) = laststand_class(series) else {
                 continue;
             };
+            let last = last as usize;
             let decided = decided_record(series);
             let loser = loser_of(series);
             let closing = runs_of(&decided, 1 - loser).into_iter().last().unwrap_or(0);
@@ -1081,6 +1090,7 @@ fn the_last_stand_stands_below_the_longest_run_on_eight_series() {
             let Some((_, last)) = laststand_class(series) else {
                 continue;
             };
+            let last = last as usize;
             let decided = decided_record(series);
             let loser = loser_of(series);
             let longest = runs_of(&decided, loser).into_iter().max().unwrap_or(0);
