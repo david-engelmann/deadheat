@@ -81,118 +81,63 @@ const ENROLLED: [&str; 22] = [
     "survey-championship.json",
 ];
 
-fn attempt(winner: &str, loser: &str, base: i64) -> JsonValue {
+fn attempt(model: &str, result: &str, finished: f64, tokens: Option<i64>) -> JsonValue {
     obj(vec![
-        ("model", s(winner)),
-        ("attempt_id", s(&format!("{}-a{}", winner, base))),
-        ("status", s("accepted")),
+        ("model", s(model)),
+        ("environment", s("lane one")),
+        ("result", s(result)),
+        ("finished_at", f(finished)),
         (
-            "records",
-            obj(vec![
-                ("score", f(9.0)),
-                ("penalties", i(0)),
-                ("adjustments", arr(vec![])),
-                ("margin", f(1.5)),
-            ]),
+            "tokens",
+            match tokens {
+                Some(count) => i(count),
+                None => JsonValue::Null,
+            },
         ),
-        ("seed", s(&format!("{}-s{}", winner, base))),
-        ("checksum", s(&format!("{}-c{}", winner, base))),
-        ("note", s(&format!("{}-n{}", winner, base))),
-        ("rival", s(loser)),
+        ("patch", s("a diff")),
     ])
 }
 
-fn attempt_two(winner: &str, loser: &str, base: i64) -> JsonValue {
-    obj(vec![
-        ("model", s(winner)),
-        ("attempt_id", s(&format!("{}-a{}", winner, base))),
-        ("status", s("accepted")),
-        (
-            "records",
-            obj(vec![
-                ("score", f(4.0)),
-                ("penalties", i(0)),
-                ("adjustments", arr(vec![])),
-                ("margin", f(0.5)),
-            ]),
-        ),
-        ("seed", s(&format!("{}-s{}", winner, base))),
-        ("checksum", s(&format!("{}-c{}", winner, base))),
-        ("note", s(&format!("{}-n{}", winner, base))),
-        ("rival", s(loser)),
-    ])
+fn attempt_two(model: &str, result: &str, finished: f64, tokens: Option<i64>) -> JsonValue {
+    let mut value = attempt(model, result, finished, tokens);
+    value = set(&value, "environment", s("lane two"));
+    value
 }
 
-fn race_json(number: i64, task: &str, attempts: Vec<JsonValue>) -> JsonValue {
+fn race_json(task: &str, attempts: Vec<JsonValue>) -> JsonValue {
+    obj(vec![("task", s(task)), ("attempts", arr(attempts))])
+}
+
+fn clear_win(task: &str, winner: &str, loser: &str) -> JsonValue {
+    race_json(
+        task,
+        vec![
+            attempt(winner, "green", 100.0, Some(10)),
+            attempt_two(loser, "red", 130.0, Some(20)),
+        ],
+    )
+}
+
+fn no_result(task: &str, first: &str, second: &str) -> JsonValue {
+    race_json(
+        task,
+        vec![
+            attempt(first, "red", 100.0, Some(10)),
+            attempt_two(second, "red", 140.0, Some(20)),
+        ],
+    )
+}
+
+fn series_json(
+    task: &str,
+    models: Vec<&str>,
+    wins_target: i64,
+    races: Vec<JsonValue>,
+) -> JsonValue {
     obj(vec![
-        ("race_id", s(&format!("race-{}", number))),
         ("task", s(task)),
-        ("attempts", arr(attempts)),
-    ])
-}
-
-fn clear_win(number: i64, task: &str, winner: &str, loser: &str) -> JsonValue {
-    let base = number * 10;
-    race_json(
-        number,
-        task,
-        vec![
-            attempt(winner, loser, base + 1),
-            attempt_two(loser, winner, base + 2),
-        ],
-    )
-}
-
-fn no_result(number: i64, task: &str, first: &str, second: &str) -> JsonValue {
-    let base = number * 10;
-    race_json(
-        number,
-        task,
-        vec![
-            obj(vec![
-                ("model", s(first)),
-                ("attempt_id", s(&format!("{}-a{}", first, base + 1))),
-                ("status", s("error")),
-                (
-                    "records",
-                    obj(vec![
-                        ("score", f(0.0)),
-                        ("penalties", i(0)),
-                        ("adjustments", arr(vec![])),
-                        ("margin", f(0.0)),
-                    ]),
-                ),
-                ("seed", s(&format!("{}-s{}", first, base + 1))),
-                ("checksum", s(&format!("{}-c{}", first, base + 1))),
-                ("note", s(&format!("{}-n{}", first, base + 1))),
-                ("rival", s(second)),
-            ]),
-            obj(vec![
-                ("model", s(second)),
-                ("attempt_id", s(&format!("{}-a{}", second, base + 2))),
-                ("status", s("error")),
-                (
-                    "records",
-                    obj(vec![
-                        ("score", f(0.0)),
-                        ("penalties", i(0)),
-                        ("adjustments", arr(vec![])),
-                        ("margin", f(0.0)),
-                    ]),
-                ),
-                ("seed", s(&format!("{}-s{}", second, base + 2))),
-                ("checksum", s(&format!("{}-c{}", second, base + 2))),
-                ("note", s(&format!("{}-n{}", second, base + 2))),
-                ("rival", s(first)),
-            ]),
-        ],
-    )
-}
-
-fn series_json(models: Vec<&str>, target: i64, races: Vec<JsonValue>) -> JsonValue {
-    obj(vec![
-        ("models", arr(models.iter().map(|model| s(model)).collect())),
-        ("wins_target", i(target)),
+        ("models", arr(models.into_iter().map(s).collect::<Vec<_>>())),
+        ("wins_target", i(wins_target)),
         ("races", arr(races)),
     ])
 }
@@ -325,14 +270,15 @@ fn the_classification_reads_the_last_run_of_the_loser() {
     let dir = temp_dir("laststand-ls1");
     let task = "the hand classification series";
     let series = series_json(
+        task,
         vec![ALPHA, BETA],
         3,
         vec![
-            clear_win(1, task, ALPHA, BETA),
-            clear_win(2, task, BETA, ALPHA),
-            clear_win(3, task, BETA, ALPHA),
-            clear_win(4, task, ALPHA, BETA),
-            clear_win(5, task, ALPHA, BETA),
+            clear_win(task, ALPHA, BETA),
+            clear_win(task, BETA, ALPHA),
+            clear_win(task, BETA, ALPHA),
+            clear_win(task, ALPHA, BETA),
+            clear_win(task, ALPHA, BETA),
         ],
     );
     write_json(&dir, "series.json", &series);
@@ -685,17 +631,17 @@ fn the_last_stand_stands_above_the_longest_run_on_no_series() {
 }
 
 #[test]
-fn the_last_stand_stands_at_the_whole_of_the_losers_wins_on_thirty_series() {
+fn the_last_stand_stands_at_the_whole_of_the_losers_wins_on_twenty_nine_series() {
     // LS-11. The theorem census at the whole
     // count. The last stand standing at the
-    // whole of the loser's wins on thirty
+    // whole of the loser's wins on twenty nine
     // series over the enrolment, counted from
     // the module's entry against a count of the
     // loser's wins the pin derives from the
     // decided record itself, the laststand
-    // drill one standing among the thirty at a
-    // last stand of two over two wins in one
-    // run. Fails under Y-3, the closing run
+    // drill one standing outside the count at a
+    // last stand of two over four wins in two
+    // runs. Fails under Y-3, the closing run
     // standing at the whole of the loser's
     // wins on fewer series, the panel series'
     // closing run of three standing over no
@@ -729,7 +675,7 @@ fn the_last_stand_stands_at_the_whole_of_the_losers_wins_on_thirty_series() {
             }
         }
     }
-    assert_eq!(at_whole, 30);
+    assert_eq!(at_whole, 29);
 }
 
 #[test]
@@ -757,7 +703,12 @@ fn a_series_of_target_one_stands_without_reply() {
     // standing for the figure to rise above.
     let dir = temp_dir("laststand-ls12");
     let task = "the hand target one series";
-    let series = series_json(vec![ALPHA, BETA], 1, vec![clear_win(1, task, ALPHA, BETA)]);
+    let series = series_json(
+        task,
+        vec![ALPHA, BETA],
+        1,
+        vec![clear_win(task, ALPHA, BETA)],
+    );
     write_json(&dir, "series.json", &series);
     write_json(
         &dir,
@@ -790,12 +741,13 @@ fn a_series_holding_no_winner_takes_no_class_and_no_section() {
     let dir = temp_dir("laststand-ls13");
     let task = "the hand undecided series";
     let series = series_json(
+        task,
         vec![ALPHA, BETA],
         3,
         vec![
-            clear_win(1, task, ALPHA, BETA),
-            clear_win(2, task, BETA, ALPHA),
-            clear_win(3, task, ALPHA, BETA),
+            clear_win(task, ALPHA, BETA),
+            clear_win(task, BETA, ALPHA),
+            clear_win(task, ALPHA, BETA),
         ],
     );
     write_json(&dir, "series.json", &series);
@@ -1024,15 +976,16 @@ fn a_race_holding_no_winner_neither_extends_nor_breaks_the_run() {
     let dir = temp_dir("laststand-ls18");
     let task = "the hand broken record series";
     let series = series_json(
+        task,
         vec![ALPHA, BETA],
         3,
         vec![
-            clear_win(1, task, ALPHA, BETA),
-            clear_win(2, task, BETA, ALPHA),
-            no_result(3, task, ALPHA, BETA),
-            clear_win(4, task, BETA, ALPHA),
-            clear_win(5, task, ALPHA, BETA),
-            clear_win(6, task, ALPHA, BETA),
+            clear_win(task, ALPHA, BETA),
+            clear_win(task, BETA, ALPHA),
+            no_result(task, ALPHA, BETA),
+            clear_win(task, BETA, ALPHA),
+            clear_win(task, ALPHA, BETA),
+            clear_win(task, ALPHA, BETA),
         ],
     );
     write_json(&dir, "series.json", &series);
@@ -1136,7 +1089,7 @@ fn the_survey_sections_stand_in_the_championships_order() {
     let lines = laststand_for(&championship);
     let sections: Vec<&str> = lines
         .iter()
-        .filter(|line| line.starts_with("series "))
+        .filter(|line| line.starts_with("series ") && !line.starts_with("series winner"))
         .map(String::as_str)
         .collect();
     assert_eq!(
