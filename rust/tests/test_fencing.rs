@@ -24,6 +24,7 @@ use deadheat::deadlocks::deadlock_report;
 use deadheat::depths::depths_report;
 use deadheat::distances::distance_report;
 use deadheat::flips::flip_report;
+use deadheat::laststand::laststand_report;
 use deadheat::leads::lead_report;
 use deadheat::openings::opening_report;
 use deadheat::pairings::pairing_report;
@@ -1646,6 +1647,99 @@ fn the_recovery_report_fences_its_fields() {
             "deepest deficit 1, answer 4 over the decided record",
             "series winner, ,  3 race wins,  2 race wins, 0 no results",
             "recovery, 1 series, 0 immediate, 1 delayed, 0 never behind, 0 no winner",
+        ]
+    );
+}
+
+#[test]
+fn the_laststand_report_fences_its_fields() {
+    // F-1 of the Round 31 discrimination plan. A
+    // series rebuilt by hand on the bad series frame,
+    // read under DH-61, its second model standing
+    // break bearing as its first does. The second
+    // model takes the first and second races and the
+    // first model takes the third, fourth, and fifth
+    // at a wins target of three, so the loser's two
+    // wins stand in one run at the head of the decided
+    // record and the series stands held at a last
+    // stand of two, and its section prints the series
+    // task, the race tasks, and both model labels,
+    // every field holding a break standing fenced to
+    // the empty field through the one helper of
+    // FIX-DH-16, as on the sibling surfaces. Its
+    // failure mode is a second fencing path standing
+    // in the new module. It fails on the pre round
+    // tree by compile absence, the laststand module
+    // standing absent there.
+    let mut series = bad_series();
+    series.models[1] = bad("beta");
+    series.wins_target = BigInt::from(3);
+    series.races = vec![
+        Race {
+            task: text("race one"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Red, 130.0),
+                attempt(bad("beta"), "lane two", SuiteResult::Green, 100.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+        Race {
+            task: bad("race task"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Red, 130.0),
+                attempt(bad("beta"), "lane two", SuiteResult::Green, 100.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+        Race {
+            task: text("race three"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Green, 100.0),
+                attempt(bad("beta"), "lane two", SuiteResult::Red, 130.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+        Race {
+            task: text("race four"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Green, 100.0),
+                attempt(bad("beta"), "lane two", SuiteResult::Red, 130.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+        Race {
+            task: text("race five"),
+            attempts: vec![
+                attempt(bad("model"), "lane one", SuiteResult::Green, 100.0),
+                attempt(bad("beta"), "lane two", SuiteResult::Red, 130.0),
+            ],
+            adjudication: None,
+            panel: None,
+        },
+    ];
+    let championship = Championship {
+        series: vec![series],
+    };
+    let lines = laststand_report(&championship);
+    assert_no_forgery(&lines);
+    assert_eq!(
+        lines,
+        vec![
+            "laststand",
+            "series 1, ",
+            " against , first to 3 wins",
+            "race 1, race one,  wins",
+            "race 2, ,  wins",
+            "race 3, race three,  wins",
+            "race 4, race four,  wins",
+            "race 5, race five,  wins",
+            "last stand 2 over the decided record",
+            "series winner, ,  3 race wins,  2 race wins, 0 no results",
+            "laststand, 1 series, 1 held, 0 single, 0 without reply, 0 no winner",
         ]
     );
 }

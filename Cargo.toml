@@ -175,6 +175,10 @@ name = "test_recovery"
 path = "rust/tests/test_recovery.rs"
 
 [[test]]
+name = "test_laststand"
+path = "rust/tests/test_laststand.rs"
+
+[[test]]
 name = "test_fold"
 path = "rust/tests/test_fold.rs"
 
