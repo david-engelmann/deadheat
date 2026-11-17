@@ -714,48 +714,51 @@ sys.exit(1 if failed else 0)
 }
 
 #[test]
-fn the_depths_command_stands_named_among_the_twenty_eight_in_the_help_text() {
-    // The Round 23 enrolment, its brace list restated
-    // at the Round 25 enrolment as the charged
-    // mechanical consequence of the spells command
-    // joining the list and restated again at the Round
-    // 26 enrolment as the charged mechanical
-    // consequence of the reigns command joining it and
-    // restated again at the Round 28 enrolment as the
-    // charged mechanical consequence of the place
-    // command joining it and restated again at the
-    // Round 29 enrolment as the charged mechanical
-    // consequence of the peak command joining it. The
-    // top level help names all twenty eight commands
-    // in their standing order with depths standing
-    // after tenure and peak last after place, and the
-    // subcommand list carries the depths line with its
-    // own text.
+fn the_depths_command_stands_named_among_the_twenty_nine_in_the_help_text() {
+    // The Round 23 enrolment, its brace list restated at
+    // the Round 25 enrolment as the charged mechanical
+    // consequence of the spells command joining the list
+    // and restated again at the Round 26 enrolment as
+    // the charged mechanical consequence of the reigns
+    // command joining it and restated again at the Round
+    // 28 enrolment as the charged mechanical consequence
+    // of the place command joining it and restated again
+    // at the Round 29 enrolment as the charged
+    // mechanical consequence of the peak command joining
+    // it and restated again at the Round 30 enrolment as
+    // the charged mechanical consequence of the recovery
+    // command joining it. The top level help names all
+    // twenty nine commands in their standing order with
+    // depths standing after tenure and recovery last
+    // after peak, and the subcommand list carries the
+    // depths line with its own text.
     let (out, _, code) = run_cli(&["--help"]);
     assert_eq!(code, 0);
     assert!(out.contains(
-        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak}"
+        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery}"
     ));
     assert!(out.contains("print the depths report for one championship file"));
 }
 
 #[test]
 fn the_depths_command_refuses_a_missing_file_and_a_near_miss_name() {
-    // The Round 23 enrolment. The depths command with
-    // no file named draws the required argument refusal
-    // in its own name at exit status 2, and the near
-    // miss command name depth is refused as an invalid
-    // choice naming all twenty eight commands, the
-    // choice list restated at the Round 25 enrolment
-    // as the charged mechanical consequence of the
-    // spells command joining it and restated again at
-    // the Round 26 enrolment as the charged mechanical
-    // consequence of the reigns command joining it and
-    // restated again at the Round 28 enrolment as the
-    // charged mechanical consequence of the place
-    // command joining it and restated again at the
-    // Round 29 enrolment as the charged mechanical
-    // consequence of the peak command joining it, as
+    // The Round 23 enrolment. The depths command with no
+    // file named draws the required argument refusal in
+    // its own name at exit status 2, and the near miss
+    // command name depth is refused as an invalid choice
+    // naming all twenty nine commands, the choice list
+    // restated at the Round 25 enrolment as the charged
+    // mechanical consequence of the spells command
+    // joining it and restated again at the Round 26
+    // enrolment as the charged mechanical consequence of
+    // the reigns command joining it and restated again
+    // at the Round 28 enrolment as the charged
+    // mechanical consequence of the place command
+    // joining it and restated again at the Round 29
+    // enrolment as the charged mechanical consequence of
+    // the peak command joining it and restated again at
+    // the Round 30 enrolment as the charged mechanical
+    // consequence of the recovery command joining it, as
     // every sibling near miss stands refused.
     let (_, err, code) = run_cli(&["depths"]);
     assert_eq!(code, 2);
@@ -769,7 +772,7 @@ fn the_depths_command_refuses_a_missing_file_and_a_near_miss_name() {
     assert_eq!(code, 2);
     let last = err.lines().last().expect("an error line").to_string();
     assert!(last.contains("invalid choice: 'depth' (choose from 'race'"));
-    assert!(last.ends_with("'tenure', 'depths', 'spells', 'reigns', 'place', 'peak')"));
+    assert!(last.ends_with("'tenure', 'depths', 'spells', 'reigns', 'place', 'peak', 'recovery')"));
 }
 
 #[test]
@@ -791,41 +794,45 @@ fn the_depths_command_prints_the_report_for_the_constructed_pair() {
 }
 
 #[test]
-fn the_spells_command_stands_named_among_the_twenty_eight_in_the_help_text() {
-    // The Round 25 enrolment, its brace list restated
-    // at the Round 26 enrolment as the charged
-    // mechanical consequence of the reigns command
-    // joining the list and restated again at the Round
-    // 28 enrolment as the charged mechanical
-    // consequence of the place command joining it and
-    // restated again at the Round 29 enrolment as the
-    // charged mechanical consequence of the peak
-    // command joining it. The top level help names all
-    // twenty eight commands in their standing order
-    // with peak last after place, and the subcommand
-    // list carries the spells line with its own text.
+fn the_spells_command_stands_named_among_the_twenty_nine_in_the_help_text() {
+    // The Round 25 enrolment, its brace list restated at
+    // the Round 26 enrolment as the charged mechanical
+    // consequence of the reigns command joining the list
+    // and restated again at the Round 28 enrolment as
+    // the charged mechanical consequence of the place
+    // command joining it and restated again at the Round
+    // 29 enrolment as the charged mechanical consequence
+    // of the peak command joining it and restated again
+    // at the Round 30 enrolment as the charged
+    // mechanical consequence of the recovery command
+    // joining it. The top level help names all twenty
+    // nine commands in their standing order with
+    // recovery last after peak, and the subcommand list
+    // carries the spells line with its own text.
     let (out, _, code) = run_cli(&["--help"]);
     assert_eq!(code, 0);
     assert!(out.contains(
-        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak}"
+        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery}"
     ));
     assert!(out.contains("print the spells report for one championship file"));
 }
 
 #[test]
 fn the_spells_command_refuses_a_missing_file_and_a_near_miss_name() {
-    // The Round 25 enrolment. The spells command with
-    // no file named draws the required argument refusal
-    // in its own name at exit status 2, and the near
-    // miss command name spell is refused as an invalid
-    // choice naming all twenty eight commands, the
-    // choice list restated at the Round 26 enrolment
-    // as the charged mechanical consequence of the
-    // reigns command joining it and restated again at
-    // the Round 28 enrolment as the charged mechanical
-    // consequence of the place command joining it and
-    // restated again at the Round 29 enrolment as the
-    // charged mechanical consequence of the peak
+    // The Round 25 enrolment. The spells command with no
+    // file named draws the required argument refusal in
+    // its own name at exit status 2, and the near miss
+    // command name spell is refused as an invalid choice
+    // naming all twenty nine commands, the choice list
+    // restated at the Round 26 enrolment as the charged
+    // mechanical consequence of the reigns command
+    // joining it and restated again at the Round 28
+    // enrolment as the charged mechanical consequence of
+    // the place command joining it and restated again at
+    // the Round 29 enrolment as the charged mechanical
+    // consequence of the peak command joining it and
+    // restated again at the Round 30 enrolment as the
+    // charged mechanical consequence of the recovery
     // command joining it, as every sibling near miss
     // stands refused.
     let (_, err, code) = run_cli(&["spells"]);
@@ -840,7 +847,7 @@ fn the_spells_command_refuses_a_missing_file_and_a_near_miss_name() {
     assert_eq!(code, 2);
     let last = err.lines().last().expect("an error line").to_string();
     assert!(last.contains("invalid choice: 'spell' (choose from 'race'"));
-    assert!(last.ends_with("'tenure', 'depths', 'spells', 'reigns', 'place', 'peak')"));
+    assert!(last.ends_with("'tenure', 'depths', 'spells', 'reigns', 'place', 'peak', 'recovery')"));
 }
 
 #[test]
@@ -863,37 +870,41 @@ fn the_spells_command_prints_the_report_for_the_constructed_pair() {
 }
 
 #[test]
-fn the_reigns_command_stands_named_among_the_twenty_eight_in_the_help_text() {
-    // The Round 26 enrolment, its brace list restated
-    // at the Round 28 enrolment as the charged
-    // mechanical consequence of the place command
-    // joining the list and restated again at the Round
-    // 29 enrolment as the charged mechanical
-    // consequence of the peak command joining it. The
-    // top level help names all twenty eight commands
-    // in their standing order with peak last after
-    // place, and the subcommand list carries the
-    // reigns line with its own text.
+fn the_reigns_command_stands_named_among_the_twenty_nine_in_the_help_text() {
+    // The Round 26 enrolment, its brace list restated at
+    // the Round 28 enrolment as the charged mechanical
+    // consequence of the place command joining the list
+    // and restated again at the Round 29 enrolment as
+    // the charged mechanical consequence of the peak
+    // command joining it and restated again at the Round
+    // 30 enrolment as the charged mechanical consequence
+    // of the recovery command joining it. The top level
+    // help names all twenty nine commands in their
+    // standing order with recovery last after peak, and
+    // the subcommand list carries the reigns line with
+    // its own text.
     let (out, _, code) = run_cli(&["--help"]);
     assert_eq!(code, 0);
     assert!(out.contains(
-        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak}"
+        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery}"
     ));
     assert!(out.contains("print the reigns report for one championship file"));
 }
 
 #[test]
 fn the_reigns_command_refuses_a_missing_file_and_a_near_miss_name() {
-    // The Round 26 enrolment. The reigns command with
-    // no file named draws the required argument refusal
-    // in its own name at exit status 2, and the near
-    // miss command name reign is refused as an invalid
-    // choice naming all twenty eight commands, the
-    // choice list restated at the Round 28 enrolment
-    // as the charged mechanical consequence of the
-    // place command joining it and restated again at
-    // the Round 29 enrolment as the charged mechanical
-    // consequence of the peak command joining it, as
+    // The Round 26 enrolment. The reigns command with no
+    // file named draws the required argument refusal in
+    // its own name at exit status 2, and the near miss
+    // command name reign is refused as an invalid choice
+    // naming all twenty nine commands, the choice list
+    // restated at the Round 28 enrolment as the charged
+    // mechanical consequence of the place command
+    // joining it and restated again at the Round 29
+    // enrolment as the charged mechanical consequence of
+    // the peak command joining it and restated again at
+    // the Round 30 enrolment as the charged mechanical
+    // consequence of the recovery command joining it, as
     // every sibling near miss stands refused.
     let (_, err, code) = run_cli(&["reigns"]);
     assert_eq!(code, 2);
@@ -907,7 +918,7 @@ fn the_reigns_command_refuses_a_missing_file_and_a_near_miss_name() {
     assert_eq!(code, 2);
     let last = err.lines().last().expect("an error line").to_string();
     assert!(last.contains("invalid choice: 'reign' (choose from 'race'"));
-    assert!(last.ends_with("'tenure', 'depths', 'spells', 'reigns', 'place', 'peak')"));
+    assert!(last.ends_with("'tenure', 'depths', 'spells', 'reigns', 'place', 'peak', 'recovery')"));
 }
 
 #[test]
@@ -930,33 +941,37 @@ fn the_reigns_command_prints_the_report_for_the_constructed_pair() {
 }
 
 #[test]
-fn the_place_command_stands_named_among_the_twenty_eight_in_the_help_text() {
-    // The Round 28 enrolment, its brace list restated
-    // at the Round 29 enrolment as the charged
-    // mechanical consequence of the peak command
-    // joining the list. The top level help names all
-    // twenty eight commands in their standing order
-    // with peak last after place, and the subcommand
-    // list carries the place line with its own text.
+fn the_place_command_stands_named_among_the_twenty_nine_in_the_help_text() {
+    // The Round 28 enrolment, its brace list restated at
+    // the Round 29 enrolment as the charged mechanical
+    // consequence of the peak command joining the list
+    // and restated again at the Round 30 enrolment as
+    // the charged mechanical consequence of the recovery
+    // command joining it. The top level help names all
+    // twenty nine commands in their standing order with
+    // recovery last after peak, and the subcommand list
+    // carries the place line with its own text.
     let (out, _, code) = run_cli(&["--help"]);
     assert_eq!(code, 0);
     assert!(out.contains(
-        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak}"
+        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery}"
     ));
     assert!(out.contains("print the place report for one championship file"));
 }
 
 #[test]
 fn the_place_command_refuses_a_missing_file_and_a_near_miss_name() {
-    // The Round 28 enrolment. The place command with
-    // no file named draws the required argument refusal
-    // in its own name at exit status 2, and the near
-    // miss command name plac is refused as an invalid
-    // choice naming all twenty eight commands, the
-    // choice list restated at the Round 29 enrolment
-    // as the charged mechanical consequence of the
-    // peak command joining it, as every sibling near
-    // miss stands refused.
+    // The Round 28 enrolment. The place command with no
+    // file named draws the required argument refusal in
+    // its own name at exit status 2, and the near miss
+    // command name plac is refused as an invalid choice
+    // naming all twenty nine commands, the choice list
+    // restated at the Round 29 enrolment as the charged
+    // mechanical consequence of the peak command joining
+    // it and restated again at the Round 30 enrolment as
+    // the charged mechanical consequence of the recovery
+    // command joining it, as every sibling near miss
+    // stands refused.
     let (_, err, code) = run_cli(&["place"]);
     assert_eq!(code, 2);
     let last = err.lines().last().expect("an error line").to_string();
@@ -969,7 +984,7 @@ fn the_place_command_refuses_a_missing_file_and_a_near_miss_name() {
     assert_eq!(code, 2);
     let last = err.lines().last().expect("an error line").to_string();
     assert!(last.contains("invalid choice: 'plac' (choose from 'race'"));
-    assert!(last.ends_with("'tenure', 'depths', 'spells', 'reigns', 'place', 'peak')"));
+    assert!(last.ends_with("'tenure', 'depths', 'spells', 'reigns', 'place', 'peak', 'recovery')"));
 }
 
 #[test]
@@ -992,27 +1007,33 @@ fn the_place_command_prints_the_report_for_the_constructed_pair() {
 }
 
 #[test]
-fn the_peak_command_stands_named_among_the_twenty_eight_in_the_help_text() {
-    // The Round 29 enrolment. The top level help names
-    // all twenty eight commands in their standing order
-    // with peak last after place, and the subcommand
-    // list carries the peak line with its own text.
+fn the_peak_command_stands_named_among_the_twenty_nine_in_the_help_text() {
+    // The Round 29 enrolment, its brace list restated at
+    // the Round 30 enrolment as the charged mechanical
+    // consequence of the recovery command joining it.
+    // The top level help names all twenty nine commands
+    // in their standing order with recovery last after
+    // peak, and the subcommand list carries the peak
+    // line with its own text.
     let (out, _, code) = run_cli(&["--help"]);
     assert_eq!(code, 0);
     assert!(out.contains(
-        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak}"
+        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery}"
     ));
     assert!(out.contains("print the peak report for one championship file"));
 }
 
 #[test]
 fn the_peak_command_refuses_a_missing_file_and_a_near_miss_name() {
-    // The Round 29 enrolment. The peak command with
-    // no file named draws the required argument refusal
-    // in its own name at exit status 2, and the near
-    // miss command name pea is refused as an invalid
-    // choice naming all twenty eight commands, as every
-    // sibling near miss stands refused.
+    // The Round 29 enrolment. The peak command with no
+    // file named draws the required argument refusal in
+    // its own name at exit status 2, and the near miss
+    // command name pea is refused as an invalid choice
+    // naming all twenty nine commands, the choice list
+    // restated at the Round 30 enrolment as the charged
+    // mechanical consequence of the recovery command
+    // joining it, as every sibling near miss stands
+    // refused.
     let (_, err, code) = run_cli(&["peak"]);
     assert_eq!(code, 2);
     let last = err.lines().last().expect("an error line").to_string();
@@ -1025,7 +1046,7 @@ fn the_peak_command_refuses_a_missing_file_and_a_near_miss_name() {
     assert_eq!(code, 2);
     let last = err.lines().last().expect("an error line").to_string();
     assert!(last.contains("invalid choice: 'pea' (choose from 'race'"));
-    assert!(last.ends_with("'tenure', 'depths', 'spells', 'reigns', 'place', 'peak')"));
+    assert!(last.ends_with("'tenure', 'depths', 'spells', 'reigns', 'place', 'peak', 'recovery')"));
 }
 
 #[test]
@@ -1044,5 +1065,61 @@ fn the_peak_command_prints_the_report_for_the_constructed_pair() {
     assert_eq!(out, golden);
     assert!(out.contains("series 1, the constructed peak drill one"));
     assert!(out.contains("largest lead 1, place 3 over the decided record"));
+    assert!(!out.contains("series 2,"));
+}
+
+#[test]
+fn the_recovery_command_stands_named_among_the_twenty_nine_in_the_help_text() {
+    // The Round 30 enrolment. The top level help names
+    // all twenty nine commands in their standing order
+    // with recovery last after peak, and the subcommand
+    // list carries the recovery line with its own text.
+    let (out, _, code) = run_cli(&["--help"]);
+    assert_eq!(code, 0);
+    assert!(out.contains(
+        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery}"
+    ));
+    assert!(out.contains("print the recovery report for one championship file"));
+}
+
+#[test]
+fn the_recovery_command_refuses_a_missing_file_and_a_near_miss_name() {
+    // The Round 30 enrolment. The recovery command with
+    // no file named draws the required argument refusal
+    // in its own name at exit status 2, and the near
+    // miss command name recover is refused as an invalid
+    // choice naming all twenty nine commands, as every
+    // sibling near miss stands refused.
+    let (_, err, code) = run_cli(&["recovery"]);
+    assert_eq!(code, 2);
+    let last = err.lines().last().expect("an error line").to_string();
+    assert_eq!(
+        last,
+        "deadheat recovery: error: the following arguments are required: file"
+    );
+    let source = examples().join("championship.json");
+    let (_, err, code) = run_cli(&["recover", source.to_str().expect("utf8")]);
+    assert_eq!(code, 2);
+    let last = err.lines().last().expect("an error line").to_string();
+    assert!(last.contains("invalid choice: 'recover' (choose from 'race'"));
+    assert!(last.ends_with("'tenure', 'depths', 'spells', 'reigns', 'place', 'peak', 'recovery')"));
+}
+
+#[test]
+fn the_recovery_command_prints_the_report_for_the_constructed_pair() {
+    // The Round 30 enrolment. The recovery report over
+    // the constructed recovery pair read from the
+    // dispatch, byte for byte against its golden, the
+    // first series standing in section form at an answer
+    // of five in a depth of two and the second taking no
+    // section.
+    let source = examples().join("constructed-recovery.json");
+    let (out, _, code) = run_cli(&["recovery", source.to_str().expect("utf8")]);
+    assert_eq!(code, 0);
+    let golden = std::fs::read_to_string(examples().join("constructed-recovery-recovery.txt"))
+        .expect("a golden");
+    assert_eq!(out, golden);
+    assert!(out.contains("series 1, the constructed recovery drill one"));
+    assert!(out.contains("deepest deficit 2, answer 5 over the decided record"));
     assert!(!out.contains("series 2,"));
 }
