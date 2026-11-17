@@ -25,7 +25,7 @@ fn agents_carries_the_canonical_marker() {
 #[test]
 fn readme_states_the_closed_round_count() {
     let text = read(&repo_root().join("README.md"));
-    assert!(text.contains("Closed perfection rounds, 28 of 100"));
+    assert!(text.contains("Closed perfection rounds, 29 of 100"));
 }
 
 #[test]
@@ -145,7 +145,10 @@ fn readme_reports_the_round_four_status() {
     // landed slice 28 and the count returned to zero.
     // Slice 29 stood in review while Round 28 was built,
     // so the count was one again until the Round 28 closure
-    // landed slice 29 and the count returned to zero. The round five pin
+    // landed slice 29 and the count returned to zero.
+    // Slice 30 stood in review while Round 29 was built,
+    // so the count was one again until the Round 29 closure
+    // landed slice 30 and the count returned to zero. The round five pin
     // below holds the slice 6 line itself, the round six pin
     // below holds the slice 7 line, the round seven pin
     // below holds the slice 8 line, the round eight pin
@@ -173,8 +176,9 @@ fn readme_reports_the_round_four_status() {
     // twenty six pin below holds the slice 27 line,
     // and the round twenty seven pin below holds the
     // slice 28 line, and the round twenty eight pin
-    // below holds the slice 29 line.
-    assert_eq!(text.matches("built and in review").count(), 1);
+    // below holds the slice 29 line, and the round
+    // twenty nine pin below holds the slice 30 line.
+    assert_eq!(text.matches("built and in review").count(), 0);
 }
 
 #[test]
@@ -395,9 +399,9 @@ fn readme_reports_the_round_twenty_eight_status() {
 #[test]
 fn readme_reports_the_round_twenty_nine_status() {
     let text = read(&repo_root().join("README.md"));
-    let standing = "- Contract, DH-56 and DH-57 now stand in full form in CONTRACT.md under the Round 29 obligations, and their standing is not claimed here, as Round 29 has not closed.";
+    let standing = "- Contract, DH-56 and DH-57 met. They stand in full form in CONTRACT.md under the Round 29 obligations, and Round 29 closed on the merged slice 30 after three reviews, with the standards review approving with findings at one Minor and three Observations, its Minor standing charged to the slice, four pin posture comments in rust/tests/test_peak.rs stating passes the pins cannot hold, the PK-4 comment recording passes under W-7 and W-9 where the pin falls under both, the PK-8 and PK-11 comments each asserting a figure line verbatim that W-7 renders exchanged while recording W-7 as a pass, and the PK-14 comment recording a pass under W-9 where the pin falls, cured in slice by the repair commit 5c1bad21 standing on the slice head, the four comments' failing lists standing restated with no assertion moving and the census unmoved, the PK-18 pin standing as a characterization pin by design, failing under no variant and charged nowhere, the spec review approving with findings at four Observations, each standing against the design record and none charged to the slice, and the red team approving with findings at three Observations, no finding standing against the slice's content, its differential standing executed on the base side over 3,753 drives and its head side legs standing unexecuted on the write fault, and CodeRabbit returning one inline comment on the slice, standing valid in full as the same finding as the standards Minor at the same seat and not a second one, with no new comment standing on the repaired head, with the slice standing merged as pull request 67 at 632fcdcc, main's tree standing verified equal to the repaired slice tree 284f93bf, the census standing at 1008, the W family W-1 to W-10 standing unexecuted whole on the write fault against the form tree at thirteen refused attempts for W-1, twelve each for W-2, W-3, W-4, W-5, W-6, W-8, and W-10, fourteen for W-7, and thirteen for W-9, every refusal standing as a fault signature with no assertion failure anywhere, the H-3 and H-5 spot executions against the head tree standing unexecuted at twelve refused attempts each, the candidate pins standing unexecuted on the base tree, the fencing pin's posture under the W family standing undecided between the design note's section 7 account of the pin standing unmoved under the whole family and the build report's computed account of the pin falling under W-1, W-5, and W-7, the build's local form gate and the fresh extraction gate's local cargo legs standing unexecuted on the same fault with the hosted gate on the exact head standing as the suite's executed evidence of record, the design note's section 7 unions standing understated at the falls of PK-4, PK-8, and PK-11 under W-7 and of PK-4 and PK-14 under W-9, cured in the slice's comments by the repair and standing in the note as the record seat of the same understatement, the note's section 8 assembled contract figure standing at 347,761, one short of the executed 347,762 with the section standing byte equal either way, the note's section 7 fencing description standing parted from the built F-1 form, the note's section 8 grouping the handicap sweep's restatement with the generated step where the slice carries it in the tests step in the Round 28 executed form, the note's section 7 naming the standing championship peak goldens in the E-3 form where the built file labels that pin E-1 and the sibling readings pin E-3, the peak golden count standing at twenty against the note's nineteen named beside the pair's own, the build report's repair narrative standing inaccurate in the red team's first Observation, its account of the third repair commit's restatement of the round four pin's count parting from the remote, the status step standing shown leaving the pin untouched and the repair commit fe60d404 standing shown carrying the restatement alone, and FIX-DH-30 standing free and unspent.";
     assert!(text.lines().any(|line| line == standing));
-    let slice_line = "- Slice 30 is built and in review. It carries the peak reading over a recorded championship, the classification of each decided series by the place of the largest lead of its winner over the decided record read against the lead itself as early or late, one section for each series standing late naming its decided races in race order and the largest lead and place of the series and its winner with its race split, with the closing counts of series, early, late, and no winner, with the peak example over the standing championship in its empty form and the constructed peak example and their goldens under examples, and the peak command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, opening, turns, lead, crossings, tenure, depths, spells, reigns, and place.";
+    let slice_line = "- Slice 30 has landed. It carries the peak reading over a recorded championship, the classification of each decided series by the place of the largest lead of its winner over the decided record read against the lead itself as early or late, one section for each series standing late naming its decided races in race order and the largest lead and place of the series and its winner with its race split, with the closing counts of series, early, late, and no winner, with the peak example over the standing championship in its empty form and the constructed peak example and their goldens under examples, and the peak command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, opening, turns, lead, crossings, tenure, depths, spells, reigns, and place.";
     assert!(text.lines().any(|line| line == slice_line));
 }
 
