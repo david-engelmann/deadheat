@@ -449,6 +449,17 @@ peak
 peak, 2 series, 2 early, 0 late, 0 no winner
 ```
 
+The recovery command reads a championship file and reports the series that stood delayed, whose winner's answer to the deepest deficit over the decided record stood above the depth plus one, standing the decided races of each beside the deepest deficit and answer of the series and its race split.
+
+```sh
+deadheat recovery examples/championship.json
+```
+
+```text
+recovery
+recovery, 2 series, 0 immediate, 0 delayed, 2 never behind, 0 no winner
+```
+
 The standings command prints the standings table held in a standings file. The adopt command writes the losing attempt patch into a patches folder and the discard command removes it.
 
 ## Status
