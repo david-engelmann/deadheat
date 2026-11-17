@@ -366,18 +366,25 @@ fn the_classification_reads_the_place_against_the_lead() {
     // place reading three, the series classing late.
     // Fails under W-5, the entries reading from the
     // loser's seat on the first two series. Fails
-    // under W-8, the third series gaining the early
-    // class at the entry. Passes under W-3, no race
-    // of any series holding no winner, so the count
-    // in the record and the count of decided races
-    // agree at each attainment. Passes under W-4, no
-    // series recording past its decision. Passes
-    // under W-6, W-7, W-9, and W-10 by the fixture's
-    // shape and the pin's seats, the classes standing
-    // unmoved at the half count cut and the one
-    // section already standing where W-9 would put
-    // it, its races numbered as the record numbers
-    // them.
+    // under W-7, the figure line of the second series
+    // printing the place in place of the lead and the
+    // lead in place of the place, so the figure
+    // extraction reads one where the pin asserts
+    // three. Fails under W-8, the third series
+    // gaining the early class at the entry. Fails
+    // under W-9, the first series gaining a section,
+    // its figure joining the extraction ahead of the
+    // second series' figure and a line starting with
+    // "series 1," standing where the pin asserts none
+    // stands. Passes under W-3, no race of any series
+    // holding no winner, so the count in the record
+    // and the count of decided races agree at each
+    // attainment. Passes under W-4, no series
+    // recording past its decision. Passes under W-6
+    // and W-10 by the fixture's shape and the pin's
+    // seats, the classes standing unmoved at the
+    // half count cut and the one section's races
+    // numbered as the record numbers them.
     let dir = temp_dir("peak-classification");
     let first = series_json(
         "the early peak saga",
@@ -598,16 +605,22 @@ fn the_place_names_the_first_attainment_not_the_last() {
     // reading five, the last attainment. Fails under
     // W-5, its entry reading the place of its depth of
     // one, first standing at its first decided race,
-    // and the series classing early. Passes under W-3,
-    // no race holding no winner, so the count in the
-    // record agrees with the count of decided races at
-    // the attainment. Passes under W-6, its place of
-    // three standing above half its decided count of
-    // five. Passes under W-4 by design, the series
-    // recording no race past its decision. Passes
-    // under W-7, W-8, W-9, and W-10, the series already
-    // standing sectioned and its races standing
-    // numbered as the record numbers them.
+    // and the series classing early. Fails under
+    // W-7, the figure line printing the place in
+    // place of the lead and the lead in place of the
+    // place, so the line the pin asserts standing in
+    // the report reads largest lead 3, place 1 where
+    // the shipped line reads largest lead 1, place 3.
+    // Passes under W-3, no race holding no winner, so
+    // the count in the record agrees with the count
+    // of decided races at the attainment. Passes
+    // under W-6, its place of three standing above
+    // half its decided count of five. Passes under
+    // W-4 by design, the series recording no race
+    // past its decision. Passes under W-8, W-9, and
+    // W-10, the series already standing sectioned
+    // and its races standing numbered as the record
+    // numbers them.
     let dir = temp_dir("peak-first-attainment");
     let series = series_json(
         "the first attainment saga",
@@ -733,16 +746,22 @@ fn an_adjudicated_race_counts_in_the_place() {
     // and taking no section. Fails under W-5, its entry
     // reading the place of its depth of one, first
     // standing at its first decided race, and the
-    // series classing early. Passes under W-2, its lead
-    // standing attained at one standing alone. Passes
-    // under W-3, its attainment race standing fifth in
-    // the record as in the decided count. Passes under
-    // W-6, its place of five standing above half its
-    // decided count of five. Passes under W-4 and W-8
-    // by design, and under W-7, W-9, and W-10, its one
-    // decided series already standing sectioned and
-    // its races standing numbered as the record
-    // numbers them.
+    // series classing early. Fails under W-7, the
+    // figure line of its whole report printing the
+    // place in place of the lead and the lead in
+    // place of the place, so the asserted vector
+    // reads largest lead 5, place 1 where the shipped
+    // line reads largest lead 1, place 5. Passes
+    // under W-2, its lead standing attained at one
+    // standing alone. Passes under W-3, its
+    // attainment race standing fifth in the record as
+    // in the decided count. Passes under W-6, its
+    // place of five standing above half its decided
+    // count of five. Passes under W-4 and W-8 by
+    // design, and under W-9 and W-10, its one decided
+    // series already standing sectioned and its
+    // races standing numbered as the record numbers
+    // them.
     let dir = temp_dir("peak-adjudicated");
     let series = series_json(
         "the adjudicated peak saga",
@@ -897,13 +916,18 @@ fn a_series_of_target_one_stands_early() {
     // Fails under W-6, its place of one standing above
     // half its decided count of one, the half standing
     // at nought rounded down, and the series classing
-    // late. Passes under W-2, its lead standing attained
+    // late. Fails under W-9, the section standing for
+    // its one decided series where the shipped
+    // reading stands a section for the late series
+    // alone, so the report the pin asserts as two
+    // lines gains the section and its figure line.
+    // Passes under W-2, its lead standing attained
     // at one standing alone. Passes under W-3, its
     // attainment race standing first in the record as
-    // in the decided count. Passes under W-4, W-7, W-8,
-    // W-9, and W-10 by design, no section standing and
-    // no figure standing in the report for any of them
-    // to move.
+    // in the decided count. Passes under W-4, W-7,
+    // W-8, and W-10 by design, no section standing
+    // and no figure standing in the report for any of
+    // them to move.
     let dir = temp_dir("peak-target-one");
     let series = series_json(
         "the single race saga",
