@@ -179,6 +179,10 @@ name = "test_laststand"
 path = "rust/tests/test_laststand.rs"
 
 [[test]]
+name = "test_firststand"
+path = "rust/tests/test_firststand.rs"
+
+[[test]]
 name = "test_fold"
 path = "rust/tests/test_fold.rs"
 

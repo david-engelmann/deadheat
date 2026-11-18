@@ -23,6 +23,7 @@ use deadheat::crossings::crossings_report;
 use deadheat::deadlocks::deadlock_report;
 use deadheat::depths::depths_report;
 use deadheat::distances::distance_report;
+use deadheat::firststand::firststand_report;
 use deadheat::flips::flip_report;
 use deadheat::laststand::laststand_report;
 use deadheat::leads::lead_report;
@@ -1742,4 +1743,46 @@ fn the_laststand_report_fences_its_fields() {
             "laststand, 1 series, 1 held, 0 single, 0 without reply, 0 no winner",
         ]
     );
+}
+
+#[test]
+fn the_firststand_report_fences_its_fields() {
+    // The Round 32 enrolment. The firststand report
+    // of the championship example standing whole at
+    // its fenced width, its two lines carrying no
+    // field a break can forge, the report standing as
+    // its golden stands. It falls under Z-3, the panel
+    // series' winner opening at three there and
+    // drawing a section, under Z-5, the pilot standing
+    // held under the exchange and drawing a section,
+    // under Z-6, the panel standing single there and
+    // moving the closing, under Z-7, the pilot standing
+    // held there at its first stand of one and drawing
+    // a section, and under Z-8, the pilot's first stand
+    // standing at two there and drawing a section. It
+    // stands under Z-1, the pilot's first run standing
+    // at its longest and the panel holding no winner
+    // under either reading, under Z-2, the pilot's
+    // last run standing at its first, and under Z-4,
+    // no first stand of the example reaching the cut
+    // of three. It fails on the pre round tree by
+    // compile absence, the firststand module standing
+    // absent there.
+    let root = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"));
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &root.join("examples").join("championship.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let lines = firststand_report(&championship.expect("a championship"));
+    assert_no_forgery(&lines);
+    assert_eq!(
+        lines,
+        vec![
+            "firststand",
+            "firststand, 2 series, 0 held, 1 single, 1 without reply, 0 no winner",
+        ]
+    );
+    let golden = std::fs::read_to_string(root.join("examples").join("championship-firststand.txt"))
+        .expect("the firststand golden");
+    assert_eq!(lines.join("\n") + "\n", golden);
 }

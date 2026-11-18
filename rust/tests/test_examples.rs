@@ -3420,3 +3420,122 @@ fn the_constructed_laststand_example_under_its_sibling_readings_matches_its_gold
         assert!(out.trim_end().ends_with(closing), "{golden_name}");
     }
 }
+
+#[test]
+fn the_survey_championship_matches_its_firststand_golden() {
+    // The Round 32 enrolment. The survey championship
+    // under the firststand command standing byte for
+    // byte as its firststand golden stands, at the
+    // closing DH-63's examples entry states, the
+    // command surface and the library surface both
+    // asserted over the same file. It falls under
+    // Z-1, Z-2, Z-3, Z-4, Z-5, Z-7, and Z-8, the survey
+    // fields moving under each, and stands under Z-6,
+    // the survey carrying no series without reply.
+    let source = examples().join("survey-championship.json");
+    let out = run_ok(&["firststand", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("survey-championship-firststand.txt"));
+    assert_eq!(out, golden);
+    assert!(out
+        .trim_end()
+        .ends_with("firststand, 6 series, 2 held, 4 single, 0 without reply, 0 no winner"));
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("survey-championship.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered = deadheat::firststand::firststand_report(&championship.expect("a championship"))
+        .join("\n")
+        + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_league_championship_matches_its_firststand_golden() {
+    // The Round 32 enrolment. The league championship
+    // under the firststand command standing byte for
+    // byte as its firststand golden stands, at the
+    // closing DH-63's examples entry states, the
+    // command surface and the library surface both
+    // asserted over the same file. It falls under
+    // every variant of the family, the league fields
+    // moving under each, its two series without reply
+    // carrying the Z-6 fall.
+    let source = examples().join("league-championship.json");
+    let out = run_ok(&["firststand", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("league-championship-firststand.txt"));
+    assert_eq!(out, golden);
+    assert!(out
+        .trim_end()
+        .ends_with("firststand, 10 series, 3 held, 5 single, 2 without reply, 0 no winner"));
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("league-championship.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered = deadheat::firststand::firststand_report(&championship.expect("a championship"))
+        .join("\n")
+        + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn every_enrolled_firststand_golden_matches_the_library_report() {
+    // The Round 32 enrolment. The golden census pin
+    // of the firststand reading, standing over the
+    // twenty three enrolled championships, each
+    // firststand golden standing byte for byte as the
+    // library report over its championship renders,
+    // and the count of firststand goldens in the
+    // examples directory standing at twenty three.
+    // It falls under every variant of the family, each
+    // variant moving the reports of at least three
+    // enrolled championships.
+    let stems = [
+        "championship",
+        "survey-championship",
+        "league-championship",
+        "constructed-closing",
+        "constructed-cluster",
+        "constructed-comeback",
+        "constructed-crossings",
+        "constructed-deadlock",
+        "constructed-depths",
+        "constructed-distance",
+        "constructed-laststand",
+        "constructed-lead",
+        "constructed-opening",
+        "constructed-peak",
+        "constructed-place",
+        "constructed-rally",
+        "constructed-recovery",
+        "constructed-reigns",
+        "constructed-spells",
+        "constructed-streak",
+        "constructed-tenure",
+        "constructed-turns",
+        "constructed-firststand",
+    ];
+    let mut count = 0;
+    for entry in std::fs::read_dir(examples()).expect("the examples directory") {
+        let name = entry
+            .expect("an entry")
+            .file_name()
+            .to_string_lossy()
+            .into_owned();
+        if name.ends_with("-firststand.txt") {
+            count += 1;
+        }
+    }
+    assert_eq!(count, 23);
+    for stem in stems {
+        let (championship, defects) = deadheat::championship::load_championship_file(
+            &examples().join(format!("{stem}.json")),
+        );
+        assert_eq!(defects, Vec::<String>::new(), "{stem}");
+        let rendered =
+            deadheat::firststand::firststand_report(&championship.expect("a championship"))
+                .join("\n")
+                + "\n";
+        let golden = read_text(&examples().join(format!("{stem}-firststand.txt")));
+        assert_eq!(rendered, golden, "{stem}");
+    }
+}

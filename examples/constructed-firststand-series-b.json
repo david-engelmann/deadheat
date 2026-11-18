@@ -1,0 +1,157 @@
+{
+ "models": [
+  "firststand-ash",
+  "firststand-birch"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "firststand-ash",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 46501
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "firststand-birch",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 46524
+    }
+   ],
+   "task": "firststand drill two race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "firststand-ash",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 46547
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "firststand-birch",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 46570
+    }
+   ],
+   "task": "firststand drill two race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "firststand-ash",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 46593
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "firststand-birch",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 46616
+    }
+   ],
+   "task": "firststand drill two race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "firststand-ash",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 46639
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "firststand-birch",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 46662
+    }
+   ],
+   "task": "firststand drill two race four"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "firststand-ash",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 46685
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "firststand-birch",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 46708
+    }
+   ],
+   "task": "firststand drill two race five"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "firststand-ash",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 46731
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "firststand-birch",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 46754
+    }
+   ],
+   "task": "firststand drill two race six"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "firststand-ash",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 46777
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "firststand-birch",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 46800
+    }
+   ],
+   "task": "firststand drill two race seven"
+  }
+ ],
+ "task": "the constructed firststand drill two",
+ "wins_target": 4
+}
