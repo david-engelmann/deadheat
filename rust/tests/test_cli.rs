@@ -1225,7 +1225,8 @@ fn the_firststand_command_prints_the_survey_report() {
     // one above its count there. It stands under Z-6,
     // the survey carrying no series without reply.
     let source = examples().join("survey-championship.json");
-    let out = run_cli(&["firststand", source.to_str().expect("utf8")]);
+    let (out, _, code) = run_cli(&["firststand", source.to_str().expect("utf8")]);
+    assert_eq!(code, 0);
     let golden = read_text(&examples().join("survey-championship-firststand.txt"));
     assert_eq!(out, golden);
 }
@@ -1247,7 +1248,8 @@ fn the_firststand_command_prints_the_championship_example_report() {
     // pilot's first stand standing at two there and
     // drawing a section.
     let source = examples().join("championship.json");
-    let out = run_cli(&["firststand", source.to_str().expect("utf8")]);
+    let (out, _, code) = run_cli(&["firststand", source.to_str().expect("utf8")]);
+    assert_eq!(code, 0);
     let golden = read_text(&examples().join("championship-firststand.txt"));
     assert_eq!(out, golden);
     assert!(out
@@ -1267,9 +1269,10 @@ fn the_firststand_command_stands_named_among_the_thirty_one_in_the_help_text() {
     // variant family, the table's own statement
     // standing outside DH-62's reading, so it falls
     // under no variant of Z-1 to Z-8.
-    let out = run_cli(&["--help"]);
-    let first = out.lines().next().expect("a first line");
-    assert!(first.starts_with("usage: deadheat {"));
-    assert!(first.ends_with("place,peak,recovery,laststand,firststand}"));
+    let (out, _, code) = run_cli(&["--help"]);
+    assert_eq!(code, 0);
+    assert!(out.contains(
+        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand}"
+    ));
     assert!(out.contains("print the firststand report for one championship file"));
 }
