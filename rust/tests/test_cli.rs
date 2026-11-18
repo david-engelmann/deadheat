@@ -1227,7 +1227,8 @@ fn the_firststand_command_prints_the_survey_report() {
     let source = examples().join("survey-championship.json");
     let (out, _, code) = run_cli(&["firststand", source.to_str().expect("utf8")]);
     assert_eq!(code, 0);
-    let golden = read_text(&examples().join("survey-championship-firststand.txt"));
+    let golden = std::fs::read_to_string(examples().join("survey-championship-firststand.txt"))
+        .expect("a golden");
     assert_eq!(out, golden);
 }
 
@@ -1250,7 +1251,8 @@ fn the_firststand_command_prints_the_championship_example_report() {
     let source = examples().join("championship.json");
     let (out, _, code) = run_cli(&["firststand", source.to_str().expect("utf8")]);
     assert_eq!(code, 0);
-    let golden = read_text(&examples().join("championship-firststand.txt"));
+    let golden =
+        std::fs::read_to_string(examples().join("championship-firststand.txt")).expect("a golden");
     assert_eq!(out, golden);
     assert!(out
         .trim_end()
