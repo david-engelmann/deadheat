@@ -16,6 +16,7 @@ pub mod deadlocks;
 pub mod depths;
 pub mod distances;
 pub mod firststand;
+pub mod firststrike;
 pub mod flips;
 pub mod json;
 pub mod laststand;
