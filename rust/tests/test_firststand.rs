@@ -54,8 +54,6 @@ use shared::*;
 
 const ALPHA: &str = "alpha-1";
 const BETA: &str = "beta-1";
-const ASH: &str = "firststand-ash";
-const BIRCH: &str = "firststand-birch";
 
 const ENROLLED: [&str; 23] = [
     "championship.json",
