@@ -1,0 +1,24 @@
+firststand
+series 1, the constructed recovery drill one
+avocet-1 against stint-1, first to 4 wins
+race 1, recovery drill one race one, avocet-1 wins
+race 2, recovery drill one race two, avocet-1 wins
+race 4, recovery drill one race four, stint-1 wins
+race 5, recovery drill one race five, avocet-1 wins
+race 6, recovery drill one race six, stint-1 wins
+race 7, recovery drill one race seven, stint-1 wins
+race 8, recovery drill one race eight, stint-1 wins
+first stand 2 over the decided record
+series winner, stint-1, avocet-1 3 race wins, stint-1 4 race wins, 1 no results
+series 2, the constructed recovery drill two
+curlew-1 against godwit-1, first to 4 wins
+race 1, recovery drill two race one, godwit-1 wins
+race 2, recovery drill two race two, godwit-1 wins
+race 3, recovery drill two race three, godwit-1 wins
+race 4, recovery drill two race four, curlew-1 wins
+race 5, recovery drill two race five, curlew-1 wins
+race 6, recovery drill two race six, curlew-1 wins
+race 7, recovery drill two race seven, curlew-1 wins
+first stand 3 over the decided record
+series winner, curlew-1, curlew-1 4 race wins, godwit-1 3 race wins, 0 no results
+firststand, 2 series, 2 held, 0 single, 0 without reply, 0 no winner
