@@ -745,25 +745,26 @@ fn a_series_holding_no_winner_takes_no_class_and_no_section() {
 }
 
 #[test]
-fn a_championship_holding_no_series_prints_the_empty_form() {
+fn a_championship_holding_no_series_stands_refused_at_the_load() {
     // FS-14. The empty report form pin. A
-    // championship holding no series at all,
-    // its report standing as the closing line
-    // over zero series and no section. The pin
-    // falls under no mutation of the eight, no
-    // series standing in the championship for
-    // any mutation to read, and it stands in
-    // the roster so the empty form of DH-63
+    // championship holding no series at all
+    // stands refused at the load, the empty
+    // series list drawing the one defect
+    // field series holds no series files, so
+    // no championship stands for a report to
+    // stand over. The pin falls under no
+    // mutation of the eight, no series
+    // standing in the championship for any
+    // mutation to read, and it stands in the
+    // roster so the load boundary of DH-63
     // stands pinned in words.
     let dir = temp_dir("firststand-fs14");
     write_json(&dir, "championship.json", &championship_json(vec![]));
-    let championship = load(&dir);
+    let (championship, defects) = load_championship_file(&dir.join("championship.json"));
+    assert_eq!(championship, None);
     assert_eq!(
-        firststand_report(&championship),
-        vec![
-            "firststand".to_string(),
-            "firststand, 0 series, 0 held, 0 single, 0 without reply, 0 no winner".to_string(),
-        ]
+        defects,
+        vec!["field series holds no series files".to_string()]
     );
 }
 
