@@ -3432,25 +3432,21 @@ fn the_survey_championship_matches_its_firststand_golden() {
     // Z-1, Z-2, Z-3, Z-4, Z-5, Z-7, and Z-8, the survey
     // fields moving under each, and stands under Z-6,
     // the survey carrying no series without reply.
-    for (source_name, golden_name, closing) in [(
-        "survey-championship.json",
-        "survey-championship-firststand.txt",
-        "firststand, 6 series, 2 held, 4 single, 0 without reply, 0 no winner",
-    )] {
-        let source = examples().join(source_name);
-        let out = run_ok(&["firststand", source.to_str().expect("utf8")]);
-        let golden = read_text(&examples().join(golden_name));
-        assert_eq!(out, golden, "{golden_name}");
-        assert!(out.trim_end().ends_with(closing), "{golden_name}");
-        let (championship, defects) =
-            deadheat::championship::load_championship_file(&examples().join(source_name));
-        assert_eq!(defects, Vec::<String>::new());
-        let rendered =
-            deadheat::firststand::firststand_report(&championship.expect("a championship"))
-                .join("\n")
-                + "\n";
-        assert_eq!(rendered, golden, "{golden_name}");
-    }
+    let source = examples().join("survey-championship.json");
+    let out = run_ok(&["firststand", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("survey-championship-firststand.txt"));
+    assert_eq!(out, golden);
+    assert!(out
+        .trim_end()
+        .ends_with("firststand, 6 series, 2 held, 4 single, 0 without reply, 0 no winner"));
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("survey-championship.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered = deadheat::firststand::firststand_report(&championship.expect("a championship"))
+        .join("\n")
+        + "\n";
+    assert_eq!(rendered, golden);
 }
 
 #[test]
@@ -3464,25 +3460,21 @@ fn the_league_championship_matches_its_firststand_golden() {
     // every variant of the family, the league fields
     // moving under each, its two series without reply
     // carrying the Z-6 fall.
-    for (source_name, golden_name, closing) in [(
-        "league-championship.json",
-        "league-championship-firststand.txt",
-        "firststand, 10 series, 3 held, 5 single, 2 without reply, 0 no winner",
-    )] {
-        let source = examples().join(source_name);
-        let out = run_ok(&["firststand", source.to_str().expect("utf8")]);
-        let golden = read_text(&examples().join(golden_name));
-        assert_eq!(out, golden, "{golden_name}");
-        assert!(out.trim_end().ends_with(closing), "{golden_name}");
-        let (championship, defects) =
-            deadheat::championship::load_championship_file(&examples().join(source_name));
-        assert_eq!(defects, Vec::<String>::new());
-        let rendered =
-            deadheat::firststand::firststand_report(&championship.expect("a championship"))
-                .join("\n")
-                + "\n";
-        assert_eq!(rendered, golden, "{golden_name}");
-    }
+    let source = examples().join("league-championship.json");
+    let out = run_ok(&["firststand", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("league-championship-firststand.txt"));
+    assert_eq!(out, golden);
+    assert!(out
+        .trim_end()
+        .ends_with("firststand, 10 series, 3 held, 5 single, 2 without reply, 0 no winner"));
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("league-championship.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered = deadheat::firststand::firststand_report(&championship.expect("a championship"))
+        .join("\n")
+        + "\n";
+    assert_eq!(rendered, golden);
 }
 
 #[test]
