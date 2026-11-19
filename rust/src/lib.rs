@@ -15,6 +15,7 @@ pub mod crossings;
 pub mod deadlocks;
 pub mod depths;
 pub mod distances;
+pub mod firstreign;
 pub mod firststand;
 pub mod firststrike;
 pub mod flips;
