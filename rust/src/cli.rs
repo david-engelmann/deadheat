@@ -21,6 +21,7 @@ use crate::crossings::crossings_report;
 use crate::deadlocks::deadlock_report;
 use crate::depths::depths_report;
 use crate::distances::distance_report;
+use crate::firstreign::firstreign_report;
 use crate::firststand::firststand_report;
 use crate::firststrike::firststrike_report;
 use crate::flips::flip_report;
@@ -360,7 +361,7 @@ fn spec_max_invocation(spec: &ParserSpec) -> usize {
 
 fn top_spec() -> ParserSpec {
     let mut commands = action(
-        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike}",
+        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign}",
         None,
     );
     commands.subactions = vec![
@@ -483,16 +484,20 @@ fn top_spec() -> ParserSpec {
             "firststrike",
             Some("print the firststrike report for one championship file"),
         ),
+        action(
+            "firstreign",
+            Some("print the firstreign report for one championship file"),
+        ),
     ];
     let mut spec = ParserSpec {
         prog: "deadheat",
         description: Some("Race two attempts at one task and keep the standings."),
         opt_usage: "[-h]",
         pos_usage:
-            "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike} ...",
+            "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign} ...",
         opt_parts: vec!["[-h]"],
         pos_parts: vec![
-            "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike}",
+            "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign}",
             "...",
         ],
         positionals: vec![commands],
@@ -769,6 +774,14 @@ fn sub_spec(command: &str) -> ParserSpec {
         ),
         "firststrike" => (
             "deadheat firststrike",
+            vec![action("file", None)],
+            vec![help_action()],
+            "[-h]",
+            "file",
+            vec!["file"],
+        ),
+        "firstreign" => (
+            "deadheat firstreign",
             vec![action("file", None)],
             vec![help_action()],
             "[-h]",
@@ -1212,7 +1225,7 @@ fn is_help_token(text: &PText, has_standings: bool) -> bool {
     false
 }
 
-const COMMANDS: [&str; 32] = [
+const COMMANDS: [&str; 33] = [
     "race",
     "adopt",
     "discard",
@@ -1245,6 +1258,7 @@ const COMMANDS: [&str; 32] = [
     "laststand",
     "firststand",
     "firststrike",
+    "firstreign",
 ];
 
 /// Run the command line over the given arguments at the given
@@ -1320,7 +1334,7 @@ fn invalid_choice(spec: &ParserSpec, columns: usize, value: &PText) -> Outcome {
         spec,
         columns,
         &format!(
-            "argument command: invalid choice: {} (choose from 'race', 'adopt', 'discard', 'standings', 'closecall', 'series', 'championship', 'flip', 'totals', 'pairing', 'comeback', 'distance', 'run', 'rally', 'deadlock', 'streak', 'cluster', 'closing', 'opening', 'turns', 'lead', 'crossings', 'tenure', 'depths', 'spells', 'reigns', 'place', 'peak', 'recovery', 'laststand', 'firststand', 'firststrike')",
+            "argument command: invalid choice: {} (choose from 'race', 'adopt', 'discard', 'standings', 'closecall', 'series', 'championship', 'flip', 'totals', 'pairing', 'comeback', 'distance', 'run', 'rally', 'deadlock', 'streak', 'cluster', 'closing', 'opening', 'turns', 'lead', 'crossings', 'tenure', 'depths', 'spells', 'reigns', 'place', 'peak', 'recovery', 'laststand', 'firststand', 'firststrike', 'firstreign')",
             py_repr(value)
         ),
     )
@@ -1505,6 +1519,7 @@ fn run_subcommand(
         "laststand" => command_laststand(&values[0]),
         "firststand" => command_firststand(&values[0]),
         "firststrike" => command_firststrike(&values[0]),
+        "firstreign" => command_firstreign(&values[0]),
         _ => unreachable!("a known command"),
     }
 }
@@ -1767,6 +1782,17 @@ fn command_firststrike(file: &PText) -> Outcome {
     }
     Outcome::plain(
         firststrike_report(&championship.expect("a clean championship")),
+        0,
+    )
+}
+
+fn command_firstreign(file: &PText) -> Outcome {
+    let (championship, defects) = load_championship_file(&path_from_arg(file));
+    if !defects.is_empty() {
+        return print_defects("invalid championship file", defects);
+    }
+    Outcome::plain(
+        firstreign_report(&championship.expect("a clean championship")),
         0,
     )
 }

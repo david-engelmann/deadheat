@@ -187,6 +187,10 @@ name = "test_firststrike"
 path = "rust/tests/test_firststrike.rs"
 
 [[test]]
+name = "test_firstreign"
+path = "rust/tests/test_firstreign.rs"
+
+[[test]]
 name = "test_fold"
 path = "rust/tests/test_fold.rs"
 
