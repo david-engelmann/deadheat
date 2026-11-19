@@ -1,0 +1,15 @@
+firststrike
+series 1, the constructed laststand drill one
+whimbrel-1 against redshank-1, first to 5 wins
+race 1, laststand drill one race one, whimbrel-1 wins
+race 2, laststand drill one race two, whimbrel-1 wins
+race 3, laststand drill one race three, redshank-1 wins
+race 4, laststand drill one race four, redshank-1 wins
+race 6, laststand drill one race six, whimbrel-1 wins
+race 7, laststand drill one race seven, whimbrel-1 wins
+race 8, laststand drill one race eight, redshank-1 wins
+race 9, laststand drill one race nine, redshank-1 wins
+race 10, laststand drill one race ten, redshank-1 wins
+first strike 2 over the decided record
+series winner, redshank-1, whimbrel-1 4 race wins, redshank-1 5 race wins, 1 no results
+firststrike, 2 series, 1 in a run, 1 alone, 0 no winner
