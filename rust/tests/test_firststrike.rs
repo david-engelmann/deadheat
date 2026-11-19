@@ -670,7 +670,10 @@ fn a_series_at_a_wins_target_of_one_stands_alone() {
     // and the entry returning no class at a
     // strike of none. Fails under AA-5, the
     // exchange classing the strike of one in a
-    // run. Fails under AA-8, the strike standing
+    // run. Fails under AA-7, the report carrying
+    // a section for the series, the sections
+    // standing for the alone series. Fails under
+    // AA-8, the strike standing
     // raised at two and classing in a run.
     // Passes under AA-1, the winner's longest
     // run standing at one. Passes under AA-2,
@@ -678,9 +681,7 @@ fn a_series_at_a_wins_target_of_one_stands_alone() {
     // Passes under AA-4, the strike of one
     // standing alone at the raised cut as
     // before. Passes under AA-6, the winner's
-    // opening run standing at one. Passes under
-    // AA-7, the report carrying no section for
-    // the series under either form.
+    // opening run standing at one.
     let dir = temp_dir("firststrike-sk12");
     let task = "the hand target one series";
     let series = series_json(
@@ -913,9 +914,15 @@ fn the_first_drills_section_spans_the_record_places_of_its_strike() {
     // the race holding no winner at the third
     // place of the record standing in no race
     // line, and its figure line stands at a
-    // first strike of two. Fails under AA-3, the
-    // strike reading the loser's first stand of
-    // one and the section falling away. Fails
+    // first strike of two. Fails under AA-1,
+    // drill two's longest run of three classing
+    // it in a run and drawing its section, the
+    // gathered places moving over the pair's
+    // whole report. Fails under AA-2, drill
+    // two's closing run of three drawing its
+    // section on the same move. Fails under AA-3,
+    // the strike reading the loser's first stand
+    // of one and the section falling away. Fails
     // under AA-4, the strike of two classing
     // alone at the raised cut and the section
     // falling away. Fails under AA-5, the section
@@ -925,11 +932,6 @@ fn the_first_drills_section_spans_the_record_places_of_its_strike() {
     // section. Fails under AA-7, the sections
     // standing for the alone series. Fails under
     // AA-8, the figure standing raised at three.
-    // Passes under AA-1, the winner's longest run
-    // standing at two and the section standing
-    // word for word. Passes under AA-2, the
-    // winner's closing run standing at two on
-    // the same ground.
     let championship = load_example("constructed-firststrike.json");
     let report = firststrike_report(&championship);
     let places: Vec<u64> = report
