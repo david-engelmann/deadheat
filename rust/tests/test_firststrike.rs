@@ -405,7 +405,7 @@ fn the_championship_example_closes_at_two_in_a_run_with_two_sections() {
     );
     let sections: Vec<&String> = report
         .iter()
-        .filter(|line| line.starts_with("series "))
+        .filter(|line| line.starts_with("series ") && !line.starts_with("series winner"))
         .collect();
     assert_eq!(sections.len(), 2);
     assert!(sections[0].starts_with("series 1,"));
