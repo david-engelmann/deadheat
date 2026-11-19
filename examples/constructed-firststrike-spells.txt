@@ -1,0 +1,13 @@
+spells
+series 1, the constructed firststrike drill one
+firststrike-ash against firststrike-birch, first to 4 wins
+race 1, firststrike drill one race one, firststrike-ash wins
+race 2, firststrike drill one race two, firststrike-birch wins
+race 4, firststrike drill one race four, firststrike-birch wins
+race 5, firststrike drill one race five, firststrike-ash wins
+race 6, firststrike drill one race six, firststrike-ash wins
+race 7, firststrike drill one race seven, firststrike-birch wins
+race 8, firststrike drill one race eight, firststrike-birch wins
+longest spell 1, behind count 2 over the decided record
+series winner, firststrike-birch, firststrike-ash 3 race wins, firststrike-birch 4 race wins, 1 no results
+spells, 2 series, 1 unbroken, 1 broken, 0 never behind, 0 no winner
