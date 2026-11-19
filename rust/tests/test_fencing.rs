@@ -23,6 +23,7 @@ use deadheat::crossings::crossings_report;
 use deadheat::deadlocks::deadlock_report;
 use deadheat::depths::depths_report;
 use deadheat::distances::distance_report;
+use deadheat::firstreign::firstreign_report;
 use deadheat::firststand::firststand_report;
 use deadheat::firststrike::firststrike_report;
 use deadheat::flips::flip_report;
@@ -1843,5 +1844,62 @@ fn the_firststrike_report_fences_its_fields() {
     let golden =
         std::fs::read_to_string(root.join("examples").join("championship-firststrike.txt"))
             .expect("the firststrike golden");
+    assert_eq!(lines.join("\n") + "\n", golden);
+}
+
+#[test]
+fn the_firstreign_report_fences_its_fields() {
+    // The Round 34 enrolment. The firstreign report
+    // of the championship example standing whole at
+    // its fenced width, its seventeen lines carrying
+    // no field a break can forge, the report standing
+    // as its golden stands. It falls under BB-5, the
+    // classes standing exchanged there and both
+    // sections falling away, under BB-6, the losers'
+    // seats moving both series there, and under BB-7,
+    // the sections standing for the single series and
+    // this championship carrying none. It stands under
+    // BB-1, both first reigns standing at their longest
+    // reigns and the report standing word for word,
+    // under BB-2, both series standing unbroken with
+    // their first reigns at their front counts, under
+    // BB-3, both closing reigns standing at their first
+    // reigns, under BB-4, both reigns standing held at
+    // the raised cut, and under BB-8, neither record
+    // carrying a level standing for the count to run
+    // through. It fails on the pre round tree by
+    // compile absence, the firstreign module standing
+    // absent there.
+    let root = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"));
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &root.join("examples").join("championship.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let lines = firstreign_report(&championship.expect("a championship"));
+    assert_no_forgery(&lines);
+    assert_eq!(
+        lines,
+        vec![
+            "firstreign",
+            "series 1, the recorded close call pilot",
+            "prime-1 against shadow-1, first to 3 wins",
+            "race 1, pin the cache key, prime-1 wins",
+            "race 5, name the worker pool, prime-1 wins",
+            "race 7, shrink the prompt budget, shadow-1 wins",
+            "race 9, sort the seed list, prime-1 wins",
+            "first reign 4 over the decided record",
+            "series winner, prime-1, prime-1 3 race wins, shadow-1 1 race wins, 5 no results",
+            "series 2, the recorded close call panel",
+            "prime-1 against shadow-1, first to 3 wins",
+            "race 1, pin the cache key, prime-1 wins",
+            "race 2, trim the import list, prime-1 wins",
+            "race 5, name the worker pool, prime-1 wins",
+            "first reign 3 over the decided record",
+            "series winner, prime-1, prime-1 3 race wins, shadow-1 0 race wins, 2 no results",
+            "firstreign, 2 series, 2 held, 0 single, 0 no winner",
+        ]
+    );
+    let golden = std::fs::read_to_string(root.join("examples").join("championship-firstreign.txt"))
+        .expect("the firstreign golden");
     assert_eq!(lines.join("\n") + "\n", golden);
 }
