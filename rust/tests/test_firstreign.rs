@@ -255,20 +255,6 @@ fn behind_flags(decided: &[usize], winner: usize) -> Vec<bool> {
     flags
 }
 
-fn first_run(flags: &[bool]) -> u64 {
-    let mut run = 0u64;
-    let mut started = false;
-    for flag in flags {
-        if *flag {
-            started = true;
-            run += 1;
-        } else if started {
-            break;
-        }
-    }
-    run
-}
-
 fn longest_run(flags: &[bool]) -> u64 {
     let mut longest = 0u64;
     let mut open = 0u64;
@@ -295,11 +281,6 @@ fn closing_run(flags: &[bool]) -> u64 {
         }
     }
     run
-}
-
-fn first_reign_of(series: &Series) -> u64 {
-    let winner = winner_of(series).expect("a decided series");
-    first_run(&ahead_flags(&decided_record(series), winner))
 }
 
 fn longest_reign_of(series: &Series) -> u64 {
@@ -900,7 +881,7 @@ fn the_second_drills_section_stands_in_the_family_form() {
     // the raised cut and drill one's standing
     // single, the report standing word for word.
     let championship = load_example("constructed-firstreign.json");
-    let expected: Vec<String> = vec![
+    let expected: Vec<String> = [
         "firstreign",
         "series 2, the constructed firstreign drill two",
         "firstreign-ash against firstreign-birch, first to 5 wins",
