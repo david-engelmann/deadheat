@@ -1,0 +1,13 @@
+reigns
+series 1, the constructed firstreign drill one
+firstreign-ash against firstreign-birch, first to 5 wins
+race 1, firstreign drill one race one, firstreign-birch wins
+race 2, firstreign drill one race two, firstreign-ash wins
+race 3, firstreign drill one race three, firstreign-birch wins
+race 4, firstreign drill one race four, firstreign-ash wins
+race 5, firstreign drill one race five, firstreign-birch wins
+race 6, firstreign drill one race six, firstreign-birch wins
+race 7, firstreign drill one race seven, firstreign-birch wins
+longest reign 3, front count 5 over the decided record
+series winner, firstreign-birch, firstreign-ash 2 race wins, firstreign-birch 5 race wins, 0 no results
+reigns, 2 series, 1 unbroken, 1 broken, 0 no winner
