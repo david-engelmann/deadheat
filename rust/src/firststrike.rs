@@ -74,25 +74,33 @@ pub fn firststrike_report(championship: &Championship) -> Vec<String> {
             }
         }
         let champion = count.champion.expect("a classed series holds a winner");
-        lines.push(format!("series {}, {}", offset + 1, series.task));
+        lines.push(format!(
+            "series {}, {}",
+            offset + 1,
+            series.task.display_line()
+        ));
         lines.push(format!(
             "{} against {}, first to {} wins",
-            series.models[0], series.models[1], series.wins_target
+            series.models[0].display_line(),
+            series.models[1].display_line(),
+            series.wins_target
         ));
         for (race_count, side) in &count.decided {
             let race = &series.races[(race_count - 1) as usize];
             lines.push(format!(
                 "race {}, {}, {} wins",
-                race_count, race.task, series.models[*side as usize]
+                race_count,
+                race.task.display_line(),
+                series.models[*side].display_line()
             ));
         }
         lines.push(format!("first strike {} over the decided record", strike));
         lines.push(format!(
             "series winner, {}, {} {} race wins, {} {} race wins, {} no results",
-            series.models[champion as usize],
-            series.models[0],
+            series.models[champion].display_line(),
+            series.models[0].display_line(),
             count.wins[0],
-            series.models[1],
+            series.models[1].display_line(),
             count.wins[1],
             count.no_results
         ));
