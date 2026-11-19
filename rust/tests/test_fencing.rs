@@ -24,6 +24,7 @@ use deadheat::deadlocks::deadlock_report;
 use deadheat::depths::depths_report;
 use deadheat::distances::distance_report;
 use deadheat::firststand::firststand_report;
+use deadheat::firststrike::firststrike_report;
 use deadheat::flips::flip_report;
 use deadheat::laststand::laststand_report;
 use deadheat::leads::lead_report;
@@ -1784,5 +1785,63 @@ fn the_firststand_report_fences_its_fields() {
     );
     let golden = std::fs::read_to_string(root.join("examples").join("championship-firststand.txt"))
         .expect("the firststand golden");
+    assert_eq!(lines.join("\n") + "\n", golden);
+}
+
+#[test]
+fn the_firststrike_report_fences_its_fields() {
+    // The Round 33 enrolment. The firststrike report
+    // of the championship example standing whole at
+    // its fenced width, its seventeen lines carrying
+    // no field a break can forge, the report standing
+    // as its golden stands. It falls under AA-2, the
+    // pilot's closing run standing at one there and
+    // its section falling away, under AA-3, the
+    // losers' first runs moving both series there,
+    // under AA-4, the pilot's strike of two classing
+    // alone there and its section falling away, under
+    // AA-5, the classes standing exchanged there and
+    // both sections falling away, under AA-7, the
+    // sections standing for the alone series and this
+    // championship carrying none, and under AA-8, the
+    // figure lines standing raised there. It stands
+    // under AA-1, both strikes standing at their
+    // longest runs and the report standing word for
+    // word, and under AA-6, both winners opening with
+    // the runs this reading counts. It fails on the
+    // pre round tree by compile absence, the
+    // firststrike module standing absent there.
+    let root = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"));
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &root.join("examples").join("championship.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let lines = firststrike_report(&championship.expect("a championship"));
+    assert_no_forgery(&lines);
+    assert_eq!(
+        lines,
+        vec![
+            "firststrike",
+            "series 1, the recorded close call pilot",
+            "prime-1 against shadow-1, first to 3 wins",
+            "race 1, pin the cache key, prime-1 wins",
+            "race 5, name the worker pool, prime-1 wins",
+            "race 7, shrink the prompt budget, shadow-1 wins",
+            "race 9, sort the seed list, prime-1 wins",
+            "first strike 2 over the decided record",
+            "series winner, prime-1, prime-1 3 race wins, shadow-1 1 race wins, 5 no results",
+            "series 2, the recorded close call panel",
+            "prime-1 against shadow-1, first to 3 wins",
+            "race 1, pin the cache key, prime-1 wins",
+            "race 2, trim the import list, prime-1 wins",
+            "race 5, name the worker pool, prime-1 wins",
+            "first strike 3 over the decided record",
+            "series winner, prime-1, prime-1 3 race wins, shadow-1 0 race wins, 2 no results",
+            "firststrike, 2 series, 2 in a run, 0 alone, 0 no winner",
+        ]
+    );
+    let golden =
+        std::fs::read_to_string(root.join("examples").join("championship-firststrike.txt"))
+            .expect("the firststrike golden");
     assert_eq!(lines.join("\n") + "\n", golden);
 }

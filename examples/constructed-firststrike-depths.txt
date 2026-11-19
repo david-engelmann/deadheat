@@ -1,0 +1,13 @@
+depths
+series 2, the constructed firststrike drill two
+firststrike-ash against firststrike-birch, first to 4 wins
+race 1, firststrike drill two race one, firststrike-ash wins
+race 2, firststrike drill two race two, firststrike-birch wins
+race 3, firststrike drill two race three, firststrike-birch wins
+race 4, firststrike drill two race four, firststrike-birch wins
+race 5, firststrike drill two race five, firststrike-ash wins
+race 6, firststrike drill two race six, firststrike-ash wins
+race 7, firststrike drill two race seven, firststrike-ash wins
+deepest deficit 2 over the decided record
+series winner, firststrike-ash, firststrike-ash 4 race wins, firststrike-birch 3 race wins, 0 no results
+depths, 2 series, 1 deep, 1 matched, 0 shallow, 0 no winner
