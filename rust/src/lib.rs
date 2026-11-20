@@ -22,6 +22,7 @@ pub mod flips;
 pub mod json;
 pub mod lastreign;
 pub mod laststand;
+pub mod leadchanges;
 pub mod leads;
 pub mod makers;
 pub mod openings;
