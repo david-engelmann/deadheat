@@ -388,14 +388,16 @@ fn the_survey_championship_closes_at_two_swung_two_turned_and_two_never_behind()
     // closing. Fails under DD-4, the survey
     // series standing at two changes classing
     // turned at the raised cut. Fails under
-    // DD-5, the classes standing exchanged over
-    // the field. Fails under DD-8, the passes
-    // to the loser moving the closing. Passes
-    // under DD-6, the closing standing as
-    // before while its sections move. Passes
-    // under DD-7, the survey changes standing
-    // at the coarsened count under the level as
-    // ahead count at every survey series.
+    // DD-8, the passes to the loser moving the
+    // closing. Passes under DD-5, the classes
+    // standing exchanged over the field and
+    // the closing standing at two and two as
+    // before. Passes under DD-6, the closing
+    // standing as before while its sections
+    // move. Passes under DD-7, the survey
+    // changes standing at the coarsened count
+    // under the level as ahead count at every
+    // survey series.
     let championship = load_example("survey-championship.json");
     let report = leadchanges_report(&championship);
     assert_eq!(
@@ -516,13 +518,14 @@ fn the_constructed_leadchanges_championship_closes_at_one_swung_and_one_turned()
     // closing standing at none swung. Fails
     // under DD-4, the first drill's changes of
     // two classing turned at the raised cut.
-    // Fails under DD-5, the exchange standing
-    // this pair at one and one the other way.
     // Fails under DD-8, the passes to the loser
-    // moving the closing. Passes under DD-6,
-    // the closing standing as before. Passes
-    // under DD-7, the coarsened counts standing
-    // at the changes over both drills.
+    // moving the closing. Passes under DD-5,
+    // the exchange standing this pair at one
+    // and one the other way and the closing
+    // standing word for word. Passes under
+    // DD-6, the closing standing as before.
+    // Passes under DD-7, the coarsened counts
+    // standing at the changes over both drills.
     let championship = load_example("constructed-leadchanges.json");
     let report = leadchanges_report(&championship);
     assert_eq!(
@@ -944,28 +947,31 @@ fn the_first_drills_section_spans_the_record_places_of_its_changes() {
     // changes of hand, the skipped place
     // standing inside the span of the changes
     // themselves, the span witness of the
-    // roster. Fails under DD-1, the level
-    // count of the drill standing at two and
-    // its figure standing there while drill
-    // two gains a section beside it. Fails
-    // under DD-2, the record changes moving
-    // the drill's class and section. Fails
-    // under DD-3, the drill classing turned at
-    // its passes to the winner of one and its
-    // section falling away. Fails under DD-4,
-    // the drill classing turned at the raised
-    // cut and its section falling away. Fails
-    // under DD-5, the drill classing turned
-    // under the exchange and its section
-    // falling away. Fails under DD-6, the
-    // sections standing for the turned series
-    // and the first drill losing its section
-    // to the second. Fails under DD-8, the
-    // drill classing turned at its passes to
-    // the loser of one and its section falling
-    // away. Passes under DD-7, the coarsened
-    // count standing at two and the section
-    // standing as before.
+    // roster. Fails under DD-3, the drill
+    // classing turned at its passes to the
+    // winner of one and its section falling
+    // away. Fails under DD-4, the drill
+    // classing turned at the raised cut and
+    // its section falling away. Fails under
+    // DD-5, the drill classing turned under
+    // the exchange and its section falling
+    // away. Fails under DD-6, the sections
+    // standing for the turned series and the
+    // first drill losing its section to the
+    // second. Fails under DD-8, the drill
+    // classing turned at its passes to the
+    // loser of one and its section falling
+    // away. Passes under DD-1, the level count
+    // of the drill standing at two, its figure
+    // standing there and its section standing
+    // as before, drill two gaining a section
+    // beside it that this pin does not reach.
+    // Passes under DD-2, the record changes
+    // of the drill standing at two as its
+    // changes do, its class and section
+    // standing as before. Passes under DD-7,
+    // the coarsened count standing at two and
+    // the section standing as before.
     let championship = load_example("constructed-leadchanges.json");
     let report = leadchanges_report(&championship);
     let start = report

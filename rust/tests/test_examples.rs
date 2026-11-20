@@ -3909,8 +3909,11 @@ fn the_survey_championship_matches_its_leadchanges_golden() {
     // closing DH-71's examples entry states, the
     // command surface and the library surface both
     // asserted over the same file. It falls under
-    // every variant of the family, the survey fields
-    // moving under each.
+    // every variant of the family but DD-7, the
+    // survey fields moving under each of the
+    // seven, and under DD-7 the survey changes
+    // standing at the coarsened count and the
+    // render standing unmoved there.
     let source = examples().join("survey-championship.json");
     let out = run_ok(&["leadchanges", source.to_str().expect("utf8")]);
     let golden = read_text(&examples().join("survey-championship-leadchanges.txt"));
