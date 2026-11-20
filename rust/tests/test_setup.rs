@@ -141,34 +141,37 @@ fn readme_reports_the_round_four_status() {
     // until the Round 34 closure landed slice 35 and the count returned to
     // zero. Slice 36 stood in review while Round 35 was built, so the count
     // was one again until the Round 35 closure landed slice 36 and the
-    // count returned to zero. The round five pin below holds the slice 6
-    // line itself, the round six pin below holds the slice 7 line, the
-    // round seven pin below holds the slice 8 line, the round eight pin
-    // below holds the slice 9 line, the round nine pin below holds the
-    // slice 10 line, the round ten pin below holds the slice 11 line, the
-    // round eleven pin below holds the slice 12 line, the round twelve pin
-    // below holds the slice 13 line, the round thirteen pin below holds the
-    // slice 14 line, the round fourteen pin below holds the slice 15 line,
-    // and the round fifteen pin below holds the slice 16 line, and the
-    // round sixteen pin below holds the slice 17 line, and the round
-    // seventeen pin below holds the slice 18 line, and the round eighteen
-    // pin below holds the slice 19 line, and the round nineteen pin below
-    // holds the slice 20 line, and the round twenty pin below holds the
-    // slice 21 line, and the round twenty one pin below holds the slice 22
-    // line, and the round twenty two pin below holds the slice 23 line, and
-    // the round twenty three pin below holds the slice 24 line, and the
-    // round twenty four pin below holds the slice 25 line, and the round
-    // twenty five pin below holds the slice 26 line, and the round twenty
-    // six pin below holds the slice 27 line, and the round twenty seven pin
-    // below holds the slice 28 line, and the round twenty eight pin below
-    // holds the slice 29 line, and the round twenty nine pin below holds
-    // the slice 30 line, and the round thirty pin below holds the slice 31
-    // line, and the round thirty one pin below holds the slice 32 line, and
-    // the round thirty two pin below holds the slice 33 line, and the round
-    // thirty three pin below holds the slice 34 line, and the round thirty
-    // four pin below holds the slice 35 line, and the round thirty five pin
-    // below holds the slice 36 line.
-    assert_eq!(text.matches("built and in review").count(), 0);
+    // count returned to zero. Slice 37 stood in review while Round 36 was
+    // built, so the count was one again until the Round 36 closure landed
+    // slice 37 and the count returned to zero. The round five pin below
+    // holds the slice 6 line itself, the round six pin below holds the
+    // slice 7 line, the round seven pin below holds the slice 8 line, the
+    // round eight pin below holds the slice 9 line, the round nine pin
+    // below holds the slice 10 line, the round ten pin below holds the
+    // slice 11 line, the round eleven pin below holds the slice 12 line,
+    // the round twelve pin below holds the slice 13 line, the round
+    // thirteen pin below holds the slice 14 line, the round fourteen pin
+    // below holds the slice 15 line, and the round fifteen pin below holds
+    // the slice 16 line, and the round sixteen pin below holds the slice 17
+    // line, and the round seventeen pin below holds the slice 18 line, and
+    // the round eighteen pin below holds the slice 19 line, and the round
+    // nineteen pin below holds the slice 20 line, and the round twenty pin
+    // below holds the slice 21 line, and the round twenty one pin below
+    // holds the slice 22 line, and the round twenty two pin below holds the
+    // slice 23 line, and the round twenty three pin below holds the slice
+    // 24 line, and the round twenty four pin below holds the slice 25 line,
+    // and the round twenty five pin below holds the slice 26 line, and the
+    // round twenty six pin below holds the slice 27 line, and the round
+    // twenty seven pin below holds the slice 28 line, and the round twenty
+    // eight pin below holds the slice 29 line, and the round twenty nine
+    // pin below holds the slice 30 line, and the round thirty pin below
+    // holds the slice 31 line, and the round thirty one pin below holds the
+    // slice 32 line, and the round thirty two pin below holds the slice 33
+    // line, and the round thirty three pin below holds the slice 34 line,
+    // and the round thirty four pin below holds the slice 35 line, and the
+    // round thirty five pin below holds the slice 36 line, and the round
+    // thirty six pin below holds the slice 37 line.
+    assert_eq!(text.matches("built and in review").count(), 1);
 }
 
 #[test]
@@ -637,5 +640,14 @@ fn readme_reports_the_round_thirty_five_status() {
     let standing = "- Contract, DH-68 and DH-69 stand met on the strength of the census and the discrimination plan of the design note, the warm-up standing largely carried under the write fault as the closure report names it. They stand in full form in CONTRACT.md under the Round 35 obligations, and Round 35 closed on the merged slice 36 after three reviews, with the spec review approving at no finding against the slice, with two Minors against the design record at the two partings, the generated step standing at 39 golden files with the counts at 490 and 486 against the note's 38, 489, and 485, and LR-1's fixture standing at a wins target of six against the note's word five, and two Minors against the build record, the warm-up's carrying standing named in the open in the completion report and the first seating's section 2 naming the below-longest seats at the survey championship's first series and the peak championship's first series where the design's section 2 and the review's third walk stand at the third and the second, the standards review approving at no finding against the slice and no finding against the build record, with two Minors against the design record at the same two partings, CodeRabbit standing as one summary comment in processing form at every read, stating it is still reviewing the changes, with no inline comment standing on the pull request, and the red team approving at no finding against the slice and no finding against the build record, with two Minors against the design record at the same two partings, its premise, population, and hunt sections standing banked by its first seating before a runtime failure ended it and its verdicts standing banked by its second seating, with the slice standing merged as pull request 87 at 93dcbcaa, main's tree standing verified equal to the slice tree 7498561a, the census standing at 1176, the sweep standing restated at 490 goldens and 486 unadjusted, the build's repair commit standing at one beyond the six charged steps, the repair ee7118c5 removing the one dead helper of the first build lane's own authorship from the pins file, no assertion, no figure, and no comment word moving, both gates green on the repaired head, the warm-up standing carried in large part under the write fault as the closure report names it, leg 1's X-6 standing executed at this closure at 15 falls against its corrected expectation of 15, its set standing in the recovery and golden names, the remaining legs of leg 1 standing carried at their corrected expectations on counted attempts refused on the fault's signatures across the build, the red team, and this closure, the two verdicts standing decided, the fencing pin falling under W-5 and under W-7 with no conviction standing against it, and the cured peak comments standing confirmed, leg 2's BB family standing carried whole at the adopted unions of 14, 16, 15, 8, 17, 25, 11, and 20 falls summing to 126 over the 28 pins, leg 3 standing carried at this closure in both its forms, cand34 in whole-tree form and cand35 in candidate form, cand34's candidate form standing executed at the Round 34 build at one E0432 on the absent firstreign module, leg 4 standing executed at the build in its formatting half and carried in its local gate half, its formatting proof standing executed at the build and the whole suite standing passed on the hosted gate over both exact heads, with the hosted gate on the closure head standing as the verdict of record for its closure form, and leg 5 standing discharged by hash at this closure, the head tree verified at 746 of 749 files byte-equal from the local tree with the three standing texts read whole and hash-asserted from the remote at this lane's premise and the closure tree's two changed files standing proven by the closure readback, the CC family standing carried at the design's computed split of 14, 19, 15, 8, 19, 25, 11, and 20 falls summing to 131 over the 28 pins, no variant standing a dud, the design record's items standing for the errata queue at four, the generated step's count and LR-1's fixture word, the closure diff's four setup moves against the head's three, and the form gate's both modes against the one local suite, and FIX-DH-32 standing free and unengaged, this round carrying no repair amendment, no mutation of any family passing whole anywhere executed.";
     assert!(text.lines().any(|line| line == standing));
     let slice_line = "- Slice 36 has landed. It carries the last reign reading of the decided record and the lastreign report, the constructed lastreign championship beside the standing championships, and the lastreign command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, opening, turns, lead, crossings, tenure, depths, spells, reigns, place, peak, recovery, laststand, firststand, firststrike, firstreign, and lastreign.";
+    assert!(text.lines().any(|line| line == slice_line));
+}
+
+#[test]
+fn readme_reports_the_round_thirty_six_status() {
+    let text = read(&repo_root().join("README.md"));
+    let standing = "- Contract, DH-70 and DH-71 now stand in full form in CONTRACT.md under the Round 36 obligations, and their standing is not claimed here, as Round 36 has not closed.";
+    assert!(text.lines().any(|line| line == standing));
+    let slice_line = "- Slice 37 is built and in review. It carries the leadchanges reading of the decided record and the leadchanges report, the constructed leadchanges championship beside the standing championships, and the leadchanges command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, opening, turns, lead, crossings, tenure, depths, spells, reigns, place, peak, recovery, laststand, firststand, firststrike, firstreign, lastreign, and leadchanges.";
     assert!(text.lines().any(|line| line == slice_line));
 }

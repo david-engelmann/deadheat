@@ -195,6 +195,10 @@ name = "test_lastreign"
 path = "rust/tests/test_lastreign.rs"
 
 [[test]]
+name = "test_leadchanges"
+path = "rust/tests/test_leadchanges.rs"
+
+[[test]]
 name = "test_fold"
 path = "rust/tests/test_fold.rs"
 

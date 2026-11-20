@@ -1,0 +1,115 @@
+{
+ "models": [
+  "leadchanges-ash",
+  "leadchanges-birch"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "leadchanges-ash",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 54401
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "leadchanges-birch",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 54424
+    }
+   ],
+   "task": "leadchanges drill two race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "leadchanges-ash",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 54447
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 140.0,
+     "model": "leadchanges-birch",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 54470
+    }
+   ],
+   "task": "leadchanges drill two race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "leadchanges-ash",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 54493
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "leadchanges-birch",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 54516
+    }
+   ],
+   "task": "leadchanges drill two race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 140.0,
+     "model": "leadchanges-ash",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 54539
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "leadchanges-birch",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 54562
+    }
+   ],
+   "task": "leadchanges drill two race four"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "leadchanges-ash",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 54585
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "leadchanges-birch",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 54608
+    }
+   ],
+   "task": "leadchanges drill two race five"
+  }
+ ],
+ "task": "the constructed leadchanges drill two",
+ "wins_target": 3
+}

@@ -1,0 +1,20 @@
+tenure
+series 1, the constructed leadchanges drill one
+leadchanges-ash against leadchanges-birch, first to 3 wins
+race 1, leadchanges drill one race one, leadchanges-birch wins
+race 2, leadchanges drill one race two, leadchanges-ash wins
+race 3, leadchanges drill one race three, leadchanges-ash wins
+race 4, leadchanges drill one race four, leadchanges-birch wins
+race 6, leadchanges drill one race six, leadchanges-birch wins
+front count 2 over the decided record
+series winner, leadchanges-birch, leadchanges-ash 2 race wins, leadchanges-birch 3 race wins, 1 no results
+series 2, the constructed leadchanges drill two
+leadchanges-ash against leadchanges-birch, first to 3 wins
+race 1, leadchanges drill two race one, leadchanges-birch wins
+race 2, leadchanges drill two race two, leadchanges-ash wins
+race 3, leadchanges drill two race three, leadchanges-ash wins
+race 4, leadchanges drill two race four, leadchanges-birch wins
+race 5, leadchanges drill two race five, leadchanges-ash wins
+front count 2 over the decided record
+series winner, leadchanges-ash, leadchanges-ash 3 race wins, leadchanges-birch 2 race wins, 0 no results
+tenure, 2 series, 2 ahead, 0 level, 0 behind, 0 no winner
