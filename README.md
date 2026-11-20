@@ -560,6 +560,17 @@ series winner, prime-1, prime-1 3 race wins, shadow-1 0 race wins, 2 no results
 lastreign, 2 series, 2 held, 0 single, 0 no winner
 ```
 
+The leadchanges command reads a championship file and reports the series that stood swung, whose lead passed from one model to the other two or more times over the decided record, standing the decided races of each beside the changes of hand of the lead of the series and its race split.
+
+```sh
+deadheat leadchanges examples/championship.json
+```
+
+```text
+leadchanges
+leadchanges, 2 series, 0 swung, 0 turned, 2 never behind, 0 no winner
+```
+
 The standings command prints the standings table held in a standings file. The adopt command writes the losing attempt patch into a patches folder and the discard command removes it.
 
 ## Status
