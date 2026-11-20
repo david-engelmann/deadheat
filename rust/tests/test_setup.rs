@@ -25,7 +25,7 @@ fn agents_carries_the_canonical_marker() {
 #[test]
 fn readme_states_the_closed_round_count() {
     let text = read(&repo_root().join("README.md"));
-    assert!(text.contains("Closed perfection rounds, 33 of 100"));
+    assert!(text.contains("Closed perfection rounds, 34 of 100"));
 }
 
 #[test]
@@ -160,7 +160,10 @@ fn readme_reports_the_round_four_status() {
     // landed slice 33 and the count returned to zero.
     // Slice 34 stood in review while Round 33 was built,
     // so the count was one again until the Round 33 closure
-    // landed slice 34 and the count returned to zero. The round five pin
+    // landed slice 34 and the count returned to zero.
+    // Slice 35 stood in review while Round 34 was built,
+    // so the count was one again until the Round 34 closure
+    // landed slice 35 and the count returned to zero. The round five pin
     // below holds the slice 6 line itself, the round six pin
     // below holds the slice 7 line, the round seven pin
     // below holds the slice 8 line, the round eight pin
@@ -193,8 +196,9 @@ fn readme_reports_the_round_four_status() {
     // thirty pin below holds the slice 31 line, and the round
     // thirty one pin below holds the slice 32 line, and the round
     // thirty two pin below holds the slice 33 line, and the round
-    // thirty three pin below holds the slice 34 line.
-    assert_eq!(text.matches("built and in review").count(), 1);
+    // thirty three pin below holds the slice 34 line, and the round
+    // thirty four pin below holds the slice 35 line.
+    assert_eq!(text.matches("built and in review").count(), 0);
 }
 
 #[test]
@@ -651,8 +655,8 @@ fn readme_reports_the_round_thirty_three_status() {
 #[test]
 fn readme_reports_the_round_thirty_four_status() {
     let text = read(&repo_root().join("README.md"));
-    let standing = "- Contract, DH-66 and DH-67 now stand in full form in CONTRACT.md under the Round 34 obligations, and their standing is not claimed here, as Round 34 has not closed.";
+    let standing = "- Contract, DH-66 and DH-67 stand met on the strength of the census and the discrimination plan of the design note, the warm-up standing largely carried under the write fault as the closure report names it. They stand in full form in CONTRACT.md under the Round 34 obligations, and Round 34 closed on the merged slice 35 after three reviews, with the spec review approving at no finding against the slice and no finding against the design record, with two Observations against the build record, the head gate failure of the build's own authorship standing cured in slice and the warm-up ledger's completeness at three seats resting on batch markers, the standards review approving at no finding against the slice, with one Observation against the design record, the seating brief's stale base figures standing named and corrected in the design note's own text, and two Observations against the build record at the same seats, CodeRabbit standing as one summary comment stating no actionable comments were generated, with no inline comment standing on the pull request, and the red team approving at no finding against the slice, its verdict standing banked by its third seating after the first seating banked its premise, population, and hunt sections and died mid-hunt and the second seating banked nothing before a runtime database failure, with one Observation against the design record and two Observations against the build record at the same seats, with the slice standing merged as pull request 83 at f1efedb3, main's tree standing verified equal to the slice tree 025d7980, the census standing at 1148, the sweep standing restated at 451 goldens and 447 unadjusted, the build's repair commit standing at one beyond the six charged steps, the repair 681a5c05 removing two dead helpers and restating one vector in the pins file, no assertion, no figure, and no comment word moving, both gates green on the repaired head, the warm-up standing carried in large part under the write fault as the closure report names it, leg 1's W-5 standing executed at the build at 23 falls with the fencing pin in its set as the decided verdict places it and W-6 at six falls adopted whole as the corrected expectation, the X family's X-2, X-3, and X-4 standing executed at the red team at 13, 11, and 6 falls name for name with the Round 32 closure's sets, the remaining legs of leg 1 standing carried at their corrected expectations on counted attempts refused on the fault's signatures across the build, the red team, and this closure, the two verdicts standing decided, the fencing pin falling under W-5 and under W-7 with no conviction standing against it, and the cured peak comments standing confirmed, leg 2's BB family standing carried whole at the adopted unions of 14, 16, 15, 8, 17, 25, 11, and 20 falls summing to 126 over the 28 pins, the three reviews agreeing at every figure, no variant standing a dud, leg 3 standing executed in the candidate form at the build at one E0432 on the absent firstreign module, its whole-tree form standing carried, leg 4 standing discharged in part, its no-rust suite executed whole at the build at 1,148 passed and 0 failed with its format check and codepoint scan exiting zero, its Rust-active suite and clippy re-run standing carried with the hosted gate on the exact head standing as their verdict of record, and leg 5's fresh extraction gate standing discharged at the build and at the red team, the head extraction verified file for file against the head tree's 705 blobs with its census exact at 1148, with the hosted gate on the closure head standing as the verdict of record, the design record's items standing for the errata queue, the Round 33 note's second run correction standing refuted on its figures and its attribution both, none at 28 against the true 29 and two or more at 4 against the true 3, the Round 32 red team's report carrying no second run correction at all, and FIX-DH-32 standing free and unengaged, this round carrying no repair amendment, no mutation of any family passing whole anywhere executed.";
     assert!(text.lines().any(|line| line == standing));
-    let slice_line = "- Slice 35 is built and in review. It carries the first reign reading of the decided record and the firstreign report, the constructed firstreign championship beside the standing championships, and the firstreign command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, opening, turns, lead, crossings, tenure, depths, spells, reigns, place, peak, recovery, laststand, firststand, firststrike, and firstreign.";
+    let slice_line = "- Slice 35 has landed. It carries the first reign reading of the decided record and the firstreign report, the constructed firstreign championship beside the standing championships, and the firstreign command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, opening, turns, lead, crossings, tenure, depths, spells, reigns, place, peak, recovery, laststand, firststand, firststrike, and firstreign.";
     assert!(text.lines().any(|line| line == slice_line));
 }
