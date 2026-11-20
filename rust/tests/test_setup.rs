@@ -63,142 +63,112 @@ fn readme_reports_the_round_four_status() {
     assert!(text.lines().any(|line| line == standing));
     let slice_line = "- Slice 5 has landed. It carries the panel reading over two recorded adjudication entries, the panel join over the Round 3 pilot records, and the recorded panel pilot over both models, ten panel records with their closecall goldens and the panel series under examples.";
     assert!(text.lines().any(|line| line == slice_line));
-    // Altered at the Round 5 slice for its named mechanical
-    // consequence, and again at the Round 6 slice for the same
-    // consequence, and again at the Round 7 slice, and again
-    // at the Round 8 slice, and again at the Round 9 slice,
-    // and again at the Round 10 slice, and again at the
-    // Round 11 slice, and again at the Round 12 slice, and
-    // again at the Round 13 slice, and again at the
-    // Round 14 slice, and again at the Round 15 slice,
-    // and again at the Round 16 slice, and again at the
-    // Round 17 slice. This count
-    // holds the slices standing in review across the whole
-    // README. It stood at zero when Round 4 closed, and slice
-    // 6 stood in review while Round 5 was built, so the count
-    // was one until the Round 5 closure landed slice 6 and the
-    // count returned to zero. Slice 7 stood in review while
-    // Round 6 was built, so the count was one again until the
-    // Round 6 closure landed slice 7 and the count returned
-    // to zero. Slice 8 stood in review while Round 7 was
-    // built, so the count was one again until the Round 7
-    // closure landed slice 8 and the count returned to zero.
-    // Slice 9 stood in review while Round 8 was
-    // built, so the count was one again until the Round 8
-    // closure landed slice 9 and the count returned to zero.
-    // Slice 10 stood in review while Round 9 was built, so
-    // the count was one again until the Round 9 closure
-    // landed slice 10 and the count returned to zero.
-    // Slice 11 stood in review while Round 10 was built, so
-    // the count was one again until the Round 10 closure
-    // landed slice 11 and the count returned to zero.
-    // Slice 12 stood in review while Round 11 was built, so
-    // the count was one again until the Round 11 closure
-    // landed slice 12 and the count returned to zero.
-    // Slice 13 stood in review while Round 12 was built, so
-    // the count was one again until the Round 12 closure
-    // landed slice 13 and the count returned to zero.
-    // Slice 14 stood in review while Round 13 was built, so
-    // the count was one again until the Round 13 closure
-    // landed slice 14 and the count returned to zero.
-    // Slice 15 stood in review while Round 14 was built, so
-    // the count was one again until the Round 14 closure
-    // landed slice 15 and the count returned to zero.
-    // Slice 16 stood in review while Round 15 was built,
-    // so the count was one again until the Round 15 closure
-    // landed slice 16 and the count returned to zero.
-    // Slice 17 stood in review while Round 16 was built,
-    // so the count was one again until the Round 16 closure
-    // landed slice 17 and the count returned to zero.
-    // Slice 18 stood in review while Round 17 was built,
-    // so the count was one again until the Round 17 closure
-    // landed slice 18 and the count returned to zero.
-    // Slice 19 stood in review while Round 18 was built,
-    // so the count was one again until the Round 18 closure
-    // landed slice 19 and the count returned to zero.
-    // Slice 20 stood in review while Round 19 was built,
-    // so the count was one again until the Round 19 closure
-    // landed slice 20 and the count returned to zero.
-    // Slice 21 stood in review while Round 20 was built,
-    // so the count was one again until the Round 20 closure
-    // landed slice 21 and the count returned to zero.
-    // Slice 22 stood in review while Round 21 was built,
-    // so the count was one again until the Round 21 closure
-    // landed slice 22 and the count returned to zero.
-    // Slice 23 stood in review while Round 22 was built,
-    // so the count was one again until the Round 22 closure
-    // landed slice 23 and the count returned to zero.
-    // Slice 24 stood in review while Round 23 was built,
-    // so the count was one again until the Round 23 closure
-    // landed slice 24 and the count returned to zero.
-    // Slice 25 stood in review while Round 24 was built,
-    // so the count was one again until the Round 24 closure
-    // landed slice 25 and the count returned to zero.
-    // Slice 26 stood in review while Round 25 was built,
-    // so the count was one again until the Round 25 closure
-    // landed slice 26 and the count returned to zero.
-    // Slice 27 stood in review while Round 26 was built,
-    // so the count was one again until the Round 26 closure
-    // landed slice 27 and the count returned to zero.
-    // Slice 28 stood in review while Round 27 was built,
-    // so the count was one again until the Round 27 closure
-    // landed slice 28 and the count returned to zero.
-    // Slice 29 stood in review while Round 28 was built,
-    // so the count was one again until the Round 28 closure
-    // landed slice 29 and the count returned to zero.
-    // Slice 30 stood in review while Round 29 was built,
-    // so the count was one again until the Round 29 closure
-    // landed slice 30 and the count returned to zero.
-    // Slice 31 stood in review while Round 30 was built,
-    // so the count was one again until the Round 30 closure
-    // landed slice 31 and the count returned to zero.
-    // Slice 32 stood in review while Round 31 was built,
-    // so the count was one again until the Round 31 closure
-    // landed slice 32 and the count returned to zero.
-    // Slice 33 stood in review while Round 32 was built,
-    // so the count was one again until the Round 32 closure
-    // landed slice 33 and the count returned to zero.
-    // Slice 34 stood in review while Round 33 was built,
-    // so the count was one again until the Round 33 closure
-    // landed slice 34 and the count returned to zero.
-    // Slice 35 stood in review while Round 34 was built,
-    // so the count was one again until the Round 34 closure
-    // landed slice 35 and the count returned to zero. The round five pin
-    // below holds the slice 6 line itself, the round six pin
-    // below holds the slice 7 line, the round seven pin
-    // below holds the slice 8 line, the round eight pin
-    // below holds the slice 9 line, the round nine pin
-    // below holds the slice 10 line, the round ten pin
-    // below holds the slice 11 line, the round eleven
-    // pin below holds the slice 12 line, the round
-    // twelve pin below holds the slice 13 line, the round
-    // thirteen pin below holds the slice 14 line, the
-    // round fourteen pin below holds the slice 15 line,
-    // and the round fifteen pin below holds the slice 16
-    // line, and the round sixteen pin below holds the
-    // slice 17 line, and the round seventeen pin below
-    // holds the slice 18 line, and the round eighteen
-    // pin below holds the slice 19 line, and the round
-    // nineteen pin below holds the slice 20 line, and
-    // the round twenty pin below holds the slice 21
-    // line, and the round twenty one pin below holds
-    // the slice 22 line, and the round twenty two pin
-    // below holds the slice 23 line, and the round
-    // twenty three pin below holds the slice 24
-    // line, and the round twenty four pin below holds
-    // the slice 25 line, and the round twenty five
-    // pin below holds the slice 26 line, and the round
-    // twenty six pin below holds the slice 27 line,
-    // and the round twenty seven pin below holds the
-    // slice 28 line, and the round twenty eight pin
-    // below holds the slice 29 line, and the round
-    // twenty nine pin below holds the slice 30 line, and the round
-    // thirty pin below holds the slice 31 line, and the round
-    // thirty one pin below holds the slice 32 line, and the round
-    // thirty two pin below holds the slice 33 line, and the round
-    // thirty three pin below holds the slice 34 line, and the round
-    // thirty four pin below holds the slice 35 line.
-    assert_eq!(text.matches("built and in review").count(), 0);
+    // Altered at the Round 5 slice for its named mechanical consequence,
+    // and again at the Round 6 slice for the same consequence, and again at
+    // the Round 7 slice, and again at the Round 8 slice, and again at the
+    // Round 9 slice, and again at the Round 10 slice, and again at the
+    // Round 11 slice, and again at the Round 12 slice, and again at the
+    // Round 13 slice, and again at the Round 14 slice, and again at the
+    // Round 15 slice, and again at the Round 16 slice, and again at the
+    // Round 17 slice. This count holds the slices standing in review across
+    // the whole README. It stood at zero when Round 4 closed, and slice 6
+    // stood in review while Round 5 was built, so the count was one until
+    // the Round 5 closure landed slice 6 and the count returned to zero.
+    // Slice 7 stood in review while Round 6 was built, so the count was one
+    // again until the Round 6 closure landed slice 7 and the count returned
+    // to zero. Slice 8 stood in review while Round 7 was built, so the
+    // count was one again until the Round 7 closure landed slice 8 and the
+    // count returned to zero. Slice 9 stood in review while Round 8 was
+    // built, so the count was one again until the Round 8 closure landed
+    // slice 9 and the count returned to zero. Slice 10 stood in review
+    // while Round 9 was built, so the count was one again until the Round 9
+    // closure landed slice 10 and the count returned to zero. Slice 11
+    // stood in review while Round 10 was built, so the count was one again
+    // until the Round 10 closure landed slice 11 and the count returned to
+    // zero. Slice 12 stood in review while Round 11 was built, so the count
+    // was one again until the Round 11 closure landed slice 12 and the
+    // count returned to zero. Slice 13 stood in review while Round 12 was
+    // built, so the count was one again until the Round 12 closure landed
+    // slice 13 and the count returned to zero. Slice 14 stood in review
+    // while Round 13 was built, so the count was one again until the Round
+    // 13 closure landed slice 14 and the count returned to zero. Slice 15
+    // stood in review while Round 14 was built, so the count was one again
+    // until the Round 14 closure landed slice 15 and the count returned to
+    // zero. Slice 16 stood in review while Round 15 was built, so the count
+    // was one again until the Round 15 closure landed slice 16 and the
+    // count returned to zero. Slice 17 stood in review while Round 16 was
+    // built, so the count was one again until the Round 16 closure landed
+    // slice 17 and the count returned to zero. Slice 18 stood in review
+    // while Round 17 was built, so the count was one again until the Round
+    // 17 closure landed slice 18 and the count returned to zero. Slice 19
+    // stood in review while Round 18 was built, so the count was one again
+    // until the Round 18 closure landed slice 19 and the count returned to
+    // zero. Slice 20 stood in review while Round 19 was built, so the count
+    // was one again until the Round 19 closure landed slice 20 and the
+    // count returned to zero. Slice 21 stood in review while Round 20 was
+    // built, so the count was one again until the Round 20 closure landed
+    // slice 21 and the count returned to zero. Slice 22 stood in review
+    // while Round 21 was built, so the count was one again until the Round
+    // 21 closure landed slice 22 and the count returned to zero. Slice 23
+    // stood in review while Round 22 was built, so the count was one again
+    // until the Round 22 closure landed slice 23 and the count returned to
+    // zero. Slice 24 stood in review while Round 23 was built, so the count
+    // was one again until the Round 23 closure landed slice 24 and the
+    // count returned to zero. Slice 25 stood in review while Round 24 was
+    // built, so the count was one again until the Round 24 closure landed
+    // slice 25 and the count returned to zero. Slice 26 stood in review
+    // while Round 25 was built, so the count was one again until the Round
+    // 25 closure landed slice 26 and the count returned to zero. Slice 27
+    // stood in review while Round 26 was built, so the count was one again
+    // until the Round 26 closure landed slice 27 and the count returned to
+    // zero. Slice 28 stood in review while Round 27 was built, so the count
+    // was one again until the Round 27 closure landed slice 28 and the
+    // count returned to zero. Slice 29 stood in review while Round 28 was
+    // built, so the count was one again until the Round 28 closure landed
+    // slice 29 and the count returned to zero. Slice 30 stood in review
+    // while Round 29 was built, so the count was one again until the Round
+    // 29 closure landed slice 30 and the count returned to zero. Slice 31
+    // stood in review while Round 30 was built, so the count was one again
+    // until the Round 30 closure landed slice 31 and the count returned to
+    // zero. Slice 32 stood in review while Round 31 was built, so the count
+    // was one again until the Round 31 closure landed slice 32 and the
+    // count returned to zero. Slice 33 stood in review while Round 32 was
+    // built, so the count was one again until the Round 32 closure landed
+    // slice 33 and the count returned to zero. Slice 34 stood in review
+    // while Round 33 was built, so the count was one again until the Round
+    // 33 closure landed slice 34 and the count returned to zero. Slice 35
+    // stood in review while Round 34 was built, so the count was one again
+    // until the Round 34 closure landed slice 35 and the count returned to
+    // zero. Slice 36 stood in review while Round 35 was built, so the count
+    // was one again until the Round 35 closure landed slice 36 and the
+    // count returned to zero. The round five pin below holds the slice 6
+    // line itself, the round six pin below holds the slice 7 line, the
+    // round seven pin below holds the slice 8 line, the round eight pin
+    // below holds the slice 9 line, the round nine pin below holds the
+    // slice 10 line, the round ten pin below holds the slice 11 line, the
+    // round eleven pin below holds the slice 12 line, the round twelve pin
+    // below holds the slice 13 line, the round thirteen pin below holds the
+    // slice 14 line, the round fourteen pin below holds the slice 15 line,
+    // and the round fifteen pin below holds the slice 16 line, and the
+    // round sixteen pin below holds the slice 17 line, and the round
+    // seventeen pin below holds the slice 18 line, and the round eighteen
+    // pin below holds the slice 19 line, and the round nineteen pin below
+    // holds the slice 20 line, and the round twenty pin below holds the
+    // slice 21 line, and the round twenty one pin below holds the slice 22
+    // line, and the round twenty two pin below holds the slice 23 line, and
+    // the round twenty three pin below holds the slice 24 line, and the
+    // round twenty four pin below holds the slice 25 line, and the round
+    // twenty five pin below holds the slice 26 line, and the round twenty
+    // six pin below holds the slice 27 line, and the round twenty seven pin
+    // below holds the slice 28 line, and the round twenty eight pin below
+    // holds the slice 29 line, and the round twenty nine pin below holds
+    // the slice 30 line, and the round thirty pin below holds the slice 31
+    // line, and the round thirty one pin below holds the slice 32 line, and
+    // the round thirty two pin below holds the slice 33 line, and the round
+    // thirty three pin below holds the slice 34 line, and the round thirty
+    // four pin below holds the slice 35 line, and the round thirty five pin
+    // below holds the slice 36 line.
+    assert_eq!(text.matches("built and in review").count(), 1);
 }
 
 #[test]
@@ -658,5 +628,14 @@ fn readme_reports_the_round_thirty_four_status() {
     let standing = "- Contract, DH-66 and DH-67 stand met on the strength of the census and the discrimination plan of the design note, the warm-up standing largely carried under the write fault as the closure report names it. They stand in full form in CONTRACT.md under the Round 34 obligations, and Round 34 closed on the merged slice 35 after three reviews, with the spec review approving at no finding against the slice and no finding against the design record, with two Observations against the build record, the head gate failure of the build's own authorship standing cured in slice and the warm-up ledger's completeness at three seats resting on batch markers, the standards review approving at no finding against the slice, with one Observation against the design record, the seating brief's stale base figures standing named and corrected in the design note's own text, and two Observations against the build record at the same seats, CodeRabbit standing as one summary comment stating no actionable comments were generated, with no inline comment standing on the pull request, and the red team approving at no finding against the slice, its verdict standing banked by its third seating after the first seating banked its premise, population, and hunt sections and died mid-hunt and the second seating banked nothing before a runtime database failure, with one Observation against the design record and two Observations against the build record at the same seats, with the slice standing merged as pull request 83 at f1efedb3, main's tree standing verified equal to the slice tree 025d7980, the census standing at 1148, the sweep standing restated at 451 goldens and 447 unadjusted, the build's repair commit standing at one beyond the six charged steps, the repair 681a5c05 removing two dead helpers and restating one vector in the pins file, no assertion, no figure, and no comment word moving, both gates green on the repaired head, the warm-up standing carried in large part under the write fault as the closure report names it, leg 1's W-5 standing executed at the build at 23 falls with the fencing pin in its set as the decided verdict places it and W-6 at six falls adopted whole as the corrected expectation, the X family's X-2, X-3, and X-4 standing executed at the red team at 13, 11, and 6 falls name for name with the Round 32 closure's sets, the remaining legs of leg 1 standing carried at their corrected expectations on counted attempts refused on the fault's signatures across the build, the red team, and this closure, the two verdicts standing decided, the fencing pin falling under W-5 and under W-7 with no conviction standing against it, and the cured peak comments standing confirmed, leg 2's BB family standing carried whole at the adopted unions of 14, 16, 15, 8, 17, 25, 11, and 20 falls summing to 126 over the 28 pins, the three reviews agreeing at every figure, no variant standing a dud, leg 3 standing executed in the candidate form at the build at one E0432 on the absent firstreign module, its whole-tree form standing carried, leg 4 standing discharged in part, its no-rust suite executed whole at the build at 1,148 passed and 0 failed with its format check and codepoint scan exiting zero, its Rust-active suite and clippy re-run standing carried with the hosted gate on the exact head standing as their verdict of record, and leg 5's fresh extraction gate standing discharged at the build and at the red team, the head extraction verified file for file against the head tree's 705 blobs with its census exact at 1148, with the hosted gate on the closure head standing as the verdict of record, the design record's items standing for the errata queue, the Round 33 note's second run correction standing refuted on its figures and its attribution both, none at 28 against the true 29 and two or more at 4 against the true 3, the Round 32 red team's report carrying no second run correction at all, and FIX-DH-32 standing free and unengaged, this round carrying no repair amendment, no mutation of any family passing whole anywhere executed.";
     assert!(text.lines().any(|line| line == standing));
     let slice_line = "- Slice 35 has landed. It carries the first reign reading of the decided record and the firstreign report, the constructed firstreign championship beside the standing championships, and the firstreign command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, opening, turns, lead, crossings, tenure, depths, spells, reigns, place, peak, recovery, laststand, firststand, firststrike, and firstreign.";
+    assert!(text.lines().any(|line| line == slice_line));
+}
+
+#[test]
+fn readme_reports_the_round_thirty_five_status() {
+    let text = read(&repo_root().join("README.md"));
+    let standing = "- Contract, DH-68 and DH-69 now stand in full form in CONTRACT.md under the Round 35 obligations, and their standing is not claimed here, as Round 35 has not closed.";
+    assert!(text.lines().any(|line| line == standing));
+    let slice_line = "- Slice 36 is built and in review. It carries the last reign reading of the decided record and the lastreign report, the constructed lastreign championship beside the standing championships, and the lastreign command beside race, closecall, series, championship, flip, totals, pairing, comeback, distance, run, rally, deadlock, streak, cluster, closing, opening, turns, lead, crossings, tenure, depths, spells, reigns, place, peak, recovery, laststand, firststand, firststrike, firstreign, and lastreign.";
     assert!(text.lines().any(|line| line == slice_line));
 }
