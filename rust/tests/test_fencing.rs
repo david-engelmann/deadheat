@@ -29,6 +29,7 @@ use deadheat::firststrike::firststrike_report;
 use deadheat::flips::flip_report;
 use deadheat::lastreign::lastreign_report;
 use deadheat::laststand::laststand_report;
+use deadheat::leadchanges::leadchanges_report;
 use deadheat::leads::lead_report;
 use deadheat::openings::opening_report;
 use deadheat::pairings::pairing_report;
@@ -1959,5 +1960,50 @@ fn the_lastreign_report_fences_its_fields() {
     );
     let golden = std::fs::read_to_string(root.join("examples").join("championship-lastreign.txt"))
         .expect("the lastreign golden");
+    assert_eq!(lines.join("\n") + "\n", golden);
+}
+
+#[test]
+fn the_leadchanges_report_fences_its_fields() {
+    // The Round 36 enrolment. The leadchanges report
+    // of the championship example standing whole at
+    // its two lines, the header and the closing, no
+    // section standing for either series, both series
+    // standing never behind, its lines carrying no
+    // field a break can forge, the report standing as
+    // its golden stands. It falls under DD-2 alone,
+    // the pilot series' record changes standing at
+    // two there, classing it swung and its section
+    // standing in the report and the lines parting.
+    // It stands under DD-1, both level counts standing
+    // at nought and the figures standing at nought
+    // there, under DD-3 and DD-8, no pass of either
+    // direction standing in either record, under DD-4,
+    // the raised cut moving no series here, under
+    // DD-5, the classes standing exchanged over two
+    // never behind series, under DD-6, the sections
+    // standing for the turned series and this
+    // championship carrying none, and under DD-7, the
+    // coarsened counts standing at the changes over
+    // two records carrying no level standing. It fails
+    // on the pre round tree by compile absence, the
+    // leadchanges module standing absent there.
+    let root = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"));
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &root.join("examples").join("championship.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let lines = leadchanges_report(&championship.expect("a championship"));
+    assert_no_forgery(&lines);
+    assert_eq!(
+        lines,
+        vec![
+            "leadchanges",
+            "leadchanges, 2 series, 0 swung, 0 turned, 2 never behind, 0 no winner",
+        ]
+    );
+    let golden =
+        std::fs::read_to_string(root.join("examples").join("championship-leadchanges.txt"))
+            .expect("the leadchanges golden");
     assert_eq!(lines.join("\n") + "\n", golden);
 }

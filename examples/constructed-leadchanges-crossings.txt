@@ -1,0 +1,11 @@
+crossings
+series 1, the constructed leadchanges drill one
+leadchanges-ash against leadchanges-birch, first to 3 wins
+race 1, leadchanges drill one race one, leadchanges-birch wins
+race 2, leadchanges drill one race two, leadchanges-ash wins
+race 3, leadchanges drill one race three, leadchanges-ash wins
+race 4, leadchanges drill one race four, leadchanges-birch wins
+race 6, leadchanges drill one race six, leadchanges-birch wins
+crossings 2 over the decided record
+series winner, leadchanges-birch, leadchanges-ash 2 race wins, leadchanges-birch 3 race wins, 1 no results
+crossings, 2 series, 1 through, 1 short, 0 no winner
