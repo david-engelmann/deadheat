@@ -3900,3 +3900,126 @@ fn every_enrolled_lastreign_golden_matches_the_library_report() {
         assert_eq!(rendered, golden, "{stem}");
     }
 }
+
+#[test]
+fn the_survey_championship_matches_its_leadchanges_golden() {
+    // The Round 36 enrolment. The survey championship
+    // under the leadchanges command standing byte for
+    // byte as its leadchanges golden stands, at the
+    // closing DH-71's examples entry states, the
+    // command surface and the library surface both
+    // asserted over the same file. It falls under
+    // every variant of the family, the survey fields
+    // moving under each.
+    let source = examples().join("survey-championship.json");
+    let out = run_ok(&["leadchanges", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("survey-championship-leadchanges.txt"));
+    assert_eq!(out, golden);
+    assert!(out
+        .trim_end()
+        .ends_with("leadchanges, 6 series, 2 swung, 2 turned, 2 never behind, 0 no winner"));
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("survey-championship.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered =
+        deadheat::leadchanges::leadchanges_report(&championship.expect("a championship"))
+            .join("\n")
+            + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_league_championship_matches_its_leadchanges_golden() {
+    // The Round 36 enrolment. The league championship
+    // under the leadchanges command standing byte for
+    // byte as its leadchanges golden stands, at the
+    // closing DH-71's examples entry states, the
+    // command surface and the library surface both
+    // asserted over the same file. It falls under
+    // every variant of the family, the league fields
+    // moving under each.
+    let source = examples().join("league-championship.json");
+    let out = run_ok(&["leadchanges", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("league-championship-leadchanges.txt"));
+    assert_eq!(out, golden);
+    assert!(out
+        .trim_end()
+        .ends_with("leadchanges, 10 series, 1 swung, 4 turned, 5 never behind, 0 no winner"));
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("league-championship.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered =
+        deadheat::leadchanges::leadchanges_report(&championship.expect("a championship"))
+            .join("\n")
+            + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn every_enrolled_leadchanges_golden_matches_the_library_report() {
+    // The Round 36 enrolment. The golden census pin
+    // of the leadchanges reading, standing over the
+    // twenty seven enrolled championships, each
+    // leadchanges golden standing byte for byte as the
+    // library report over its championship renders,
+    // and the count of leadchanges goldens in the
+    // examples directory standing at twenty seven.
+    // It falls under every variant of the family, each
+    // variant moving the reports of at least six
+    // enrolled championships.
+    let stems = [
+        "championship",
+        "survey-championship",
+        "league-championship",
+        "constructed-closing",
+        "constructed-cluster",
+        "constructed-comeback",
+        "constructed-crossings",
+        "constructed-deadlock",
+        "constructed-depths",
+        "constructed-distance",
+        "constructed-laststand",
+        "constructed-lead",
+        "constructed-opening",
+        "constructed-peak",
+        "constructed-place",
+        "constructed-rally",
+        "constructed-recovery",
+        "constructed-reigns",
+        "constructed-spells",
+        "constructed-streak",
+        "constructed-tenure",
+        "constructed-turns",
+        "constructed-firststand",
+        "constructed-firststrike",
+        "constructed-firstreign",
+        "constructed-lastreign",
+        "constructed-leadchanges",
+    ];
+    let mut count = 0;
+    for entry in std::fs::read_dir(examples()).expect("the examples directory") {
+        let name = entry
+            .expect("an entry")
+            .file_name()
+            .to_string_lossy()
+            .into_owned();
+        if name.ends_with("-leadchanges.txt") {
+            count += 1;
+        }
+    }
+    assert_eq!(count, 27);
+    for stem in stems {
+        let (championship, defects) = deadheat::championship::load_championship_file(
+            &examples().join(format!("{stem}.json")),
+        );
+        assert_eq!(defects, Vec::<String>::new(), "{stem}");
+        let rendered =
+            deadheat::leadchanges::leadchanges_report(&championship.expect("a championship"))
+                .join("\n")
+                + "\n";
+        let golden = read_text(&examples().join(format!("{stem}-leadchanges.txt")));
+        assert_eq!(rendered, golden, "{stem}");
+    }
+}
