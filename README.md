@@ -534,6 +534,32 @@ series winner, prime-1, prime-1 3 race wins, shadow-1 0 race wins, 2 no results
 firstreign, 2 series, 2 held, 0 single, 0 no winner
 ```
 
+The lastreign command reads a championship file and reports the series that stood held, whose winner's last run of ahead standings over the decided record stood at two or more, standing the decided races of each beside the last reign of the series and its race split.
+
+```sh
+deadheat lastreign examples/championship.json
+```
+
+```text
+lastreign
+series 1, the recorded close call pilot
+prime-1 against shadow-1, first to 3 wins
+race 1, pin the cache key, prime-1 wins
+race 5, name the worker pool, prime-1 wins
+race 7, shrink the prompt budget, shadow-1 wins
+race 9, sort the seed list, prime-1 wins
+last reign 4 over the decided record
+series winner, prime-1, prime-1 3 race wins, shadow-1 1 race wins, 5 no results
+series 2, the recorded close call panel
+prime-1 against shadow-1, first to 3 wins
+race 1, pin the cache key, prime-1 wins
+race 2, trim the import list, prime-1 wins
+race 5, name the worker pool, prime-1 wins
+last reign 3 over the decided record
+series winner, prime-1, prime-1 3 race wins, shadow-1 0 race wins, 2 no results
+lastreign, 2 series, 2 held, 0 single, 0 no winner
+```
+
 The standings command prints the standings table held in a standings file. The adopt command writes the losing attempt patch into a patches folder and the discard command removes it.
 
 ## Status
