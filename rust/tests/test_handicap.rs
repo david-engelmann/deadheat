@@ -1262,6 +1262,37 @@ fn every_standing_golden_still_matches_byte_for_byte() {
             assert_eq!(rendered, golden, "{name}");
             continue;
         }
+        // Altered at the Round 35 slice for its named mechanical
+        // consequence. The lastreign examples of DH-69 add twenty
+        // six goldens whose stems name championships rather than a
+        // race, so the sweep reads them through the championship
+        // loader and the lastreign report before the generic race
+        // reading can misread their sources. The two counts
+        // below rise by thirty nine each this round, the twenty
+        // six lastreign goldens here and the thirteen constructed
+        // sibling goldens the standing streak, cluster, rally,
+        // deadlock, distance, comebacks, closing, opening,
+        // crossings, tenure, depths, spells, and reigns arms
+        // already read over the constructed lastreign stem, the
+        // unadjusted count rising with them because every race
+        // of the championships stands unadjusted.
+        if let Some(stem) = name.strip_suffix("-lastreign.txt") {
+            let source = golden_path.with_file_name(format!("{stem}.json"));
+            let (championship, defects) = deadheat::championship::load_championship_file(&source);
+            assert_eq!(defects, Vec::<String>::new(), "{name}");
+            let championship = championship.expect("a championship");
+            if championship
+                .series
+                .iter()
+                .flat_map(|series| series.races.iter())
+                .all(race_is_unadjusted)
+            {
+                unadjusted += 1;
+            }
+            let rendered = deadheat::lastreign::lastreign_report(&championship).join("\n") + "\n";
+            assert_eq!(rendered, golden, "{name}");
+            continue;
+        }
         // Altered at the Round 34 slice for its named mechanical
         // consequence. The firstreign examples of DH-67 add twenty
         // five goldens whose stems name championships rather than a
@@ -1336,11 +1367,15 @@ fn every_standing_golden_still_matches_byte_for_byte() {
         let rendered = deadheat::championship::championship_report(&championship).join("\n") + "\n";
         assert_eq!(rendered, golden, "{name}");
     }
-    // The counts stand at four hundred fifty one
-    // goldens and four hundred forty seven unadjusted
-    // after the Round 34 enrolment
-    // counted at the firstreign arm above, thirty
-    // eight of each over the four hundred thirteen
+    // The counts stand at four hundred ninety
+    // goldens and four hundred eighty six unadjusted
+    // after the Round 35 enrolment
+    // counted at the lastreign arm above, thirty
+    // nine of each over the four hundred fifty one
+    // and four hundred forty seven the Round 34 enrolment
+    // left standing after counting at the
+    // firstreign arm, thirty eight of each over the
+    // four hundred thirteen
     // and four hundred nine the Round 33 enrolment
     // left standing after counting at the
     // firststrike arm, thirty seven of each over the
@@ -1379,6 +1414,6 @@ fn every_standing_golden_still_matches_byte_for_byte() {
     // golden standing byte for byte as it stood, so no
     // golden joins at that round, no arm joins the
     // chain, and the counts stand unmoved.
-    assert_eq!(goldens.len(), 451);
-    assert_eq!(unadjusted, 447);
+    assert_eq!(goldens.len(), 490);
+    assert_eq!(unadjusted, 486);
 }

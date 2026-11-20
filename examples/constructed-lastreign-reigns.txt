@@ -1,0 +1,24 @@
+reigns
+series 1, the constructed lastreign drill one
+lastreign-ash against lastreign-birch, first to 5 wins
+race 1, lastreign drill one race one, lastreign-birch wins
+race 2, lastreign drill one race two, lastreign-ash wins
+race 3, lastreign drill one race three, lastreign-birch wins
+race 4, lastreign drill one race four, lastreign-ash wins
+race 5, lastreign drill one race five, lastreign-birch wins
+race 6, lastreign drill one race six, lastreign-birch wins
+race 8, lastreign drill one race eight, lastreign-birch wins
+longest reign 3, front count 5 over the decided record
+series winner, lastreign-birch, lastreign-ash 2 race wins, lastreign-birch 5 race wins, 1 no results
+series 2, the constructed lastreign drill two
+lastreign-ash against lastreign-birch, first to 4 wins
+race 1, lastreign drill two race one, lastreign-ash wins
+race 2, lastreign drill two race two, lastreign-birch wins
+race 3, lastreign drill two race three, lastreign-ash wins
+race 4, lastreign drill two race four, lastreign-ash wins
+race 5, lastreign drill two race five, lastreign-birch wins
+race 6, lastreign drill two race six, lastreign-birch wins
+race 7, lastreign drill two race seven, lastreign-ash wins
+longest reign 3, front count 5 over the decided record
+series winner, lastreign-ash, lastreign-ash 4 race wins, lastreign-birch 3 race wins, 0 no results
+reigns, 2 series, 0 unbroken, 2 broken, 0 no winner

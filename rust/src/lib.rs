@@ -20,6 +20,7 @@ pub mod firststand;
 pub mod firststrike;
 pub mod flips;
 pub mod json;
+pub mod lastreign;
 pub mod laststand;
 pub mod leads;
 pub mod makers;
