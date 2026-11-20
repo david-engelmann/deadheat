@@ -1,0 +1,24 @@
+lastreign
+series 1, the constructed reigns drill one
+plover-1 against dunlin-1, first to 5 wins
+race 1, reigns drill one race one, plover-1 wins
+race 2, reigns drill one race two, dunlin-1 wins
+race 3, reigns drill one race three, plover-1 wins
+race 4, reigns drill one race four, dunlin-1 wins
+race 5, reigns drill one race five, plover-1 wins
+race 6, reigns drill one race six, plover-1 wins
+race 7, reigns drill one race seven, plover-1 wins
+last reign 3 over the decided record
+series winner, plover-1, plover-1 5 race wins, dunlin-1 2 race wins, 0 no results
+series 2, the constructed reigns drill two
+godwit-1 against stilt-1, first to 5 wins
+race 1, reigns drill two race one, stilt-1 wins
+race 2, reigns drill two race two, godwit-1 wins
+race 3, reigns drill two race three, godwit-1 wins
+race 4, reigns drill two race four, godwit-1 wins
+race 5, reigns drill two race five, stilt-1 wins
+race 6, reigns drill two race six, godwit-1 wins
+race 7, reigns drill two race seven, godwit-1 wins
+last reign 5 over the decided record
+series winner, godwit-1, godwit-1 5 race wins, stilt-1 2 race wins, 0 no results
+lastreign, 2 series, 2 held, 0 single, 0 no winner

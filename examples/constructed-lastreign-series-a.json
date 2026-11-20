@@ -1,0 +1,178 @@
+{
+ "models": [
+  "lastreign-ash",
+  "lastreign-birch"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "lastreign-ash",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 53101
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "lastreign-birch",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 53124
+    }
+   ],
+   "task": "lastreign drill one race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "lastreign-ash",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 53147
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 140.0,
+     "model": "lastreign-birch",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 53170
+    }
+   ],
+   "task": "lastreign drill one race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "lastreign-ash",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 53193
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "lastreign-birch",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 53216
+    }
+   ],
+   "task": "lastreign drill one race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "lastreign-ash",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 53239
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 140.0,
+     "model": "lastreign-birch",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 53262
+    }
+   ],
+   "task": "lastreign drill one race four"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "lastreign-ash",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 53285
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "lastreign-birch",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 53308
+    }
+   ],
+   "task": "lastreign drill one race five"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 140.0,
+     "model": "lastreign-ash",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 53331
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "lastreign-birch",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 53354
+    }
+   ],
+   "task": "lastreign drill one race six"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "lastreign-ash",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 53377
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 140.0,
+     "model": "lastreign-birch",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 53400
+    }
+   ],
+   "task": "lastreign drill one race seven"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 140.0,
+     "model": "lastreign-ash",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 53423
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "lastreign-birch",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 53446
+    }
+   ],
+   "task": "lastreign drill one race eight"
+  }
+ ],
+ "task": "the constructed lastreign drill one",
+ "wins_target": 5
+}

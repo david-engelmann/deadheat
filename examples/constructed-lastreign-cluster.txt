@@ -1,0 +1,13 @@
+cluster
+series 2, the constructed lastreign drill two
+lastreign-ash against lastreign-birch, first to 4 wins
+race 1, lastreign drill two race one, lastreign-ash wins
+race 2, lastreign drill two race two, lastreign-birch wins
+race 3, lastreign drill two race three, lastreign-ash wins
+race 4, lastreign drill two race four, lastreign-ash wins
+race 5, lastreign drill two race five, lastreign-birch wins
+race 6, lastreign drill two race six, lastreign-birch wins
+race 7, lastreign drill two race seven, lastreign-ash wins
+longest run against 2 consecutive decided race wins
+series winner, lastreign-ash, lastreign-ash 4 race wins, lastreign-birch 3 race wins, 0 no results
+cluster, 2 series, 1 clustered, 1 scattered, 0 no winner
