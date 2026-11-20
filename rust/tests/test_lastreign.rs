@@ -206,13 +206,6 @@ fn winner_of(series: &Series) -> Option<usize> {
     }
 }
 
-fn loser_of(series: &Series) -> usize {
-    match winner_of(series) {
-        Some(0) => 1,
-        _ => 0,
-    }
-}
-
 fn enrolled() -> Vec<Championship> {
     ENROLLED.iter().map(|name| load_example(name)).collect()
 }
