@@ -571,6 +571,17 @@ leadchanges
 leadchanges, 2 series, 0 swung, 0 turned, 2 never behind, 0 no winner
 ```
 
+The outset command reads a championship file and reports the series that stood spell longer, whose winner first stood behind for longer than it first stood ahead over the decided record, standing the decided races of each beside the first reign and the first spell of the series and its race split.
+
+```sh
+deadheat outset examples/championship.json
+```
+
+```text
+outset
+outset, 2 series, 2 reign longer, 0 spell longer, 0 matched, 0 no winner
+```
+
 The standings command prints the standings table held in a standings file. The adopt command writes the losing attempt patch into a patches folder and the discard command removes it.
 
 ## Status
