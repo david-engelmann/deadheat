@@ -4063,8 +4063,12 @@ fn the_league_championship_matches_its_outset_golden() {
     // closing DH-73's examples entry states, the
     // command surface and the library surface both
     // asserted over the same file. It falls under
-    // every variant of the family, the league fields
-    // moving under each.
+    // EE-2, EE-3, EE-4, EE-5, EE-6, EE-7, and
+    // EE-8, the league fields moving under each,
+    // and stands under EE-1, the first spell
+    // standing at the longest spell at every
+    // standing series and the league render
+    // standing as before under it.
     let source = examples().join("league-championship.json");
     let out = run_ok(&["outset", source.to_str().expect("utf8")]);
     let golden = read_text(&examples().join("league-championship-outset.txt"));

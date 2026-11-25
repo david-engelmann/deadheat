@@ -952,11 +952,13 @@ fn the_second_drills_section_spans_the_record_places_one_to_nine() {
     // decided and no place standing skipped
     // inside the span, and its figure line
     // stands at a first reign of one and a
-    // first spell of three. Fails under
+    // first spell of three. Passes under
     // EE-1, the first drill classing spell
-    // longer and drawing its own section
-    // while this section's figure line
-    // stands. Fails under EE-3, the drill
+    // longer and drawing its own section,
+    // the substitution moving nothing this
+    // pin reads, its race places and its
+    // figure line standing as before.
+    // Fails under EE-3, the drill
     // classing matched at its last spell of
     // one and its section falling away.
     // Fails under EE-5, the drill classing
