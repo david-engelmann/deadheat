@@ -30,6 +30,7 @@ use crate::laststand::laststand_report;
 use crate::leadchanges::leadchanges_report;
 use crate::leads::lead_report;
 use crate::openings::opening_report;
+use crate::outset::outset_report;
 use crate::pairings::pairing_report;
 use crate::peak::peak_report;
 use crate::place::place_report;
@@ -363,7 +364,7 @@ fn spec_max_invocation(spec: &ParserSpec) -> usize {
 
 fn top_spec() -> ParserSpec {
     let mut commands = action(
-        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges}",
+        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges,outset}",
         None,
     );
     commands.subactions = vec![
@@ -498,16 +499,20 @@ fn top_spec() -> ParserSpec {
             "leadchanges",
             Some("print the leadchanges report for one championship file"),
         ),
+        action(
+            "outset",
+            Some("print the outset report for one championship file"),
+        ),
     ];
     let mut spec = ParserSpec {
         prog: "deadheat",
         description: Some("Race two attempts at one task and keep the standings."),
         opt_usage: "[-h]",
         pos_usage:
-            "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges} ...",
+            "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges,outset} ...",
         opt_parts: vec!["[-h]"],
         pos_parts: vec![
-            "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges}",
+            "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges,outset}",
             "...",
         ],
         positionals: vec![commands],
@@ -808,6 +813,14 @@ fn sub_spec(command: &str) -> ParserSpec {
         ),
         "leadchanges" => (
             "deadheat leadchanges",
+            vec![action("file", None)],
+            vec![help_action()],
+            "[-h]",
+            "file",
+            vec!["file"],
+        ),
+        "outset" => (
+            "deadheat outset",
             vec![action("file", None)],
             vec![help_action()],
             "[-h]",
@@ -1251,7 +1264,7 @@ fn is_help_token(text: &PText, has_standings: bool) -> bool {
     false
 }
 
-const COMMANDS: [&str; 35] = [
+const COMMANDS: [&str; 36] = [
     "race",
     "adopt",
     "discard",
@@ -1287,6 +1300,7 @@ const COMMANDS: [&str; 35] = [
     "firstreign",
     "lastreign",
     "leadchanges",
+    "outset",
 ];
 
 /// Run the command line over the given arguments at the given
@@ -1362,7 +1376,7 @@ fn invalid_choice(spec: &ParserSpec, columns: usize, value: &PText) -> Outcome {
         spec,
         columns,
         &format!(
-            "argument command: invalid choice: {} (choose from 'race', 'adopt', 'discard', 'standings', 'closecall', 'series', 'championship', 'flip', 'totals', 'pairing', 'comeback', 'distance', 'run', 'rally', 'deadlock', 'streak', 'cluster', 'closing', 'opening', 'turns', 'lead', 'crossings', 'tenure', 'depths', 'spells', 'reigns', 'place', 'peak', 'recovery', 'laststand', 'firststand', 'firststrike', 'firstreign', 'lastreign', 'leadchanges')",
+            "argument command: invalid choice: {} (choose from 'race', 'adopt', 'discard', 'standings', 'closecall', 'series', 'championship', 'flip', 'totals', 'pairing', 'comeback', 'distance', 'run', 'rally', 'deadlock', 'streak', 'cluster', 'closing', 'opening', 'turns', 'lead', 'crossings', 'tenure', 'depths', 'spells', 'reigns', 'place', 'peak', 'recovery', 'laststand', 'firststand', 'firststrike', 'firstreign', 'lastreign', 'leadchanges', 'outset')",
             py_repr(value)
         ),
     )
@@ -1550,6 +1564,7 @@ fn run_subcommand(
         "firstreign" => command_firstreign(&values[0]),
         "lastreign" => command_lastreign(&values[0]),
         "leadchanges" => command_leadchanges(&values[0]),
+        "outset" => command_outset(&values[0]),
         _ => unreachable!("a known command"),
     }
 }
@@ -1845,6 +1860,17 @@ fn command_leadchanges(file: &PText) -> Outcome {
     }
     Outcome::plain(
         leadchanges_report(&championship.expect("a clean championship")),
+        0,
+    )
+}
+
+fn command_outset(file: &PText) -> Outcome {
+    let (championship, defects) = load_championship_file(&path_from_arg(file));
+    if !defects.is_empty() {
+        return print_defects("invalid championship file", defects);
+    }
+    Outcome::plain(
+        outset_report(&championship.expect("a clean championship")),
         0,
     )
 }

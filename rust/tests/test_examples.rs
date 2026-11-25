@@ -4026,3 +4026,130 @@ fn every_enrolled_leadchanges_golden_matches_the_library_report() {
         assert_eq!(rendered, golden, "{stem}");
     }
 }
+
+#[test]
+fn the_survey_championship_matches_its_outset_golden() {
+    // The Round 37 enrolment. The survey championship
+    // under the outset command standing byte for
+    // byte as its outset golden stands, at the
+    // closing DH-73's examples entry states, the
+    // command surface and the library surface both
+    // asserted over the same file. It falls under
+    // EE-2, EE-5, EE-6, and EE-8, the survey fields
+    // moving under each, and stands under EE-1,
+    // EE-3, EE-4, and EE-7, the survey render
+    // standing as before under each.
+    let source = examples().join("survey-championship.json");
+    let out = run_ok(&["outset", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("survey-championship-outset.txt"));
+    assert_eq!(out, golden);
+    assert!(out
+        .trim_end()
+        .ends_with("outset, 6 series, 4 reign longer, 0 spell longer, 2 matched, 0 no winner"));
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("survey-championship.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered =
+        deadheat::outset::outset_report(&championship.expect("a championship")).join("\n") + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_league_championship_matches_its_outset_golden() {
+    // The Round 37 enrolment. The league championship
+    // under the outset command standing byte for
+    // byte as its outset golden stands, at the
+    // closing DH-73's examples entry states, the
+    // command surface and the library surface both
+    // asserted over the same file. It falls under
+    // EE-2, EE-3, EE-4, EE-5, EE-6, EE-7, and
+    // EE-8, the league fields moving under each,
+    // and stands under EE-1, the first spell
+    // standing at the longest spell at every
+    // standing series and the league render
+    // standing as before under it.
+    let source = examples().join("league-championship.json");
+    let out = run_ok(&["outset", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("league-championship-outset.txt"));
+    assert_eq!(out, golden);
+    assert!(out
+        .trim_end()
+        .ends_with("outset, 10 series, 6 reign longer, 1 spell longer, 3 matched, 0 no winner"));
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("league-championship.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered =
+        deadheat::outset::outset_report(&championship.expect("a championship")).join("\n") + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn every_enrolled_outset_golden_matches_the_library_report() {
+    // The Round 37 enrolment. The golden census pin
+    // of the outset reading, standing over the
+    // twenty eight enrolled championships, each
+    // outset golden standing byte for byte as the
+    // library report over its championship renders,
+    // and the count of outset goldens in the
+    // examples directory standing at twenty eight.
+    // It falls under every variant of the family,
+    // each variant moving at least one enrolled
+    // championship's report, EE-1 moving the
+    // constructed outset render alone and the
+    // widest of them moving twenty five renders.
+    let stems = [
+        "championship",
+        "survey-championship",
+        "league-championship",
+        "constructed-closing",
+        "constructed-cluster",
+        "constructed-comeback",
+        "constructed-crossings",
+        "constructed-deadlock",
+        "constructed-depths",
+        "constructed-distance",
+        "constructed-laststand",
+        "constructed-lead",
+        "constructed-opening",
+        "constructed-peak",
+        "constructed-place",
+        "constructed-rally",
+        "constructed-recovery",
+        "constructed-reigns",
+        "constructed-spells",
+        "constructed-streak",
+        "constructed-tenure",
+        "constructed-turns",
+        "constructed-firststand",
+        "constructed-firststrike",
+        "constructed-firstreign",
+        "constructed-lastreign",
+        "constructed-leadchanges",
+        "constructed-outset",
+    ];
+    let mut count = 0;
+    for entry in std::fs::read_dir(examples()).expect("the examples directory") {
+        let name = entry
+            .expect("an entry")
+            .file_name()
+            .to_string_lossy()
+            .into_owned();
+        if name.ends_with("-outset.txt") {
+            count += 1;
+        }
+    }
+    assert_eq!(count, 28);
+    for stem in stems {
+        let (championship, defects) = deadheat::championship::load_championship_file(
+            &examples().join(format!("{stem}.json")),
+        );
+        assert_eq!(defects, Vec::<String>::new(), "{stem}");
+        let rendered = deadheat::outset::outset_report(&championship.expect("a championship"))
+            .join("\n")
+            + "\n";
+        let golden = read_text(&examples().join(format!("{stem}-outset.txt")));
+        assert_eq!(rendered, golden, "{stem}");
+    }
+}

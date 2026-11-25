@@ -32,6 +32,7 @@ use deadheat::laststand::laststand_report;
 use deadheat::leadchanges::leadchanges_report;
 use deadheat::leads::lead_report;
 use deadheat::openings::opening_report;
+use deadheat::outset::outset_report;
 use deadheat::pairings::pairing_report;
 use deadheat::peak::peak_report;
 use deadheat::place::place_report;
@@ -2005,5 +2006,47 @@ fn the_leadchanges_report_fences_its_fields() {
     let golden =
         std::fs::read_to_string(root.join("examples").join("championship-leadchanges.txt"))
             .expect("the leadchanges golden");
+    assert_eq!(lines.join("\n") + "\n", golden);
+}
+
+#[test]
+fn the_outset_report_fences_its_fields() {
+    // The Round 37 enrolment. The outset report
+    // of the championship example standing whole at
+    // its two lines, the header and the closing, no
+    // section standing for either series, both series
+    // standing reign longer, its lines carrying no
+    // field a break can forge, the report standing as
+    // its golden stands. It falls under EE-5 alone,
+    // the classes standing exchanged there and both
+    // series drawing sections and the lines parting.
+    // It stands under EE-1, both first spells standing
+    // at nought and the figures standing at nought
+    // there, under EE-2 and EE-4, the longest and
+    // last reigns standing above the first spells of
+    // none there, under EE-3, the last spells standing
+    // at none there, under EE-6, the sections standing
+    // for the matched series and this championship
+    // carrying none, and under EE-7 and EE-8, the
+    // first strikes and first stands leaving both
+    // series reign longer there. It fails on the
+    // pre round tree by compile absence, the outset
+    // module standing absent there.
+    let root = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"));
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &root.join("examples").join("championship.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let lines = outset_report(&championship.expect("a championship"));
+    assert_no_forgery(&lines);
+    assert_eq!(
+        lines,
+        vec![
+            "outset",
+            "outset, 2 series, 2 reign longer, 0 spell longer, 0 matched, 0 no winner",
+        ]
+    );
+    let golden = std::fs::read_to_string(root.join("examples").join("championship-outset.txt"))
+        .expect("the outset golden");
     assert_eq!(lines.join("\n") + "\n", golden);
 }

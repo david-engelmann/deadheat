@@ -26,6 +26,7 @@ pub mod leadchanges;
 pub mod leads;
 pub mod makers;
 pub mod openings;
+pub mod outset;
 pub mod pairings;
 pub mod panels;
 pub mod peak;

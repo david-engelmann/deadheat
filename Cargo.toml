@@ -199,6 +199,10 @@ name = "test_leadchanges"
 path = "rust/tests/test_leadchanges.rs"
 
 [[test]]
+name = "test_outset"
+path = "rust/tests/test_outset.rs"
+
+[[test]]
 name = "test_fold"
 path = "rust/tests/test_fold.rs"
 
