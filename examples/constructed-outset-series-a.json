@@ -1,0 +1,199 @@
+{
+ "models": [
+  "outset-ash",
+  "outset-birch"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "outset-ash",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 55101
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "outset-birch",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 55124
+    }
+   ],
+   "task": "outset drill one race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 140.0,
+     "model": "outset-ash",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 55147
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "outset-birch",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 55170
+    }
+   ],
+   "task": "outset drill one race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "outset-ash",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 55193
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "outset-birch",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 55216
+    }
+   ],
+   "task": "outset drill one race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "outset-ash",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 55239
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 140.0,
+     "model": "outset-birch",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 55262
+    }
+   ],
+   "task": "outset drill one race four"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "outset-ash",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 55285
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "outset-birch",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 55308
+    }
+   ],
+   "task": "outset drill one race five"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 140.0,
+     "model": "outset-ash",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 55331
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "outset-birch",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 55354
+    }
+   ],
+   "task": "outset drill one race six"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "outset-ash",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 55377
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "outset-birch",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 55400
+    }
+   ],
+   "task": "outset drill one race seven"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 140.0,
+     "model": "outset-ash",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 55423
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "outset-birch",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 55446
+    }
+   ],
+   "task": "outset drill one race eight"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "outset-ash",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 55469
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "outset-birch",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 55492
+    }
+   ],
+   "task": "outset drill one race nine"
+  }
+ ],
+ "task": "the constructed outset drill one",
+ "wins_target": 5
+}
