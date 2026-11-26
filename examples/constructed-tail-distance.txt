@@ -1,0 +1,26 @@
+distance
+series 1, the constructed tail drill one
+tail-ash against tail-birch, first to 5 wins
+race 1, tail drill one race one, tail-ash wins
+race 2, tail drill one race two, tail-birch wins
+race 3, tail drill one race three, tail-ash wins
+race 4, tail drill one race four, tail-ash wins
+race 5, tail drill one race five, tail-birch wins
+race 6, tail drill one race six, tail-birch wins
+race 7, tail drill one race seven, tail-ash wins
+race 8, tail drill one race eight, tail-birch wins
+race 9, tail drill one race nine, tail-birch wins
+series winner, tail-birch, tail-ash 4 race wins, tail-birch 5 race wins, 0 no results
+series 2, the constructed tail drill two
+tail-ash against tail-birch, first to 5 wins
+race 1, tail drill two race one, tail-birch wins
+race 2, tail drill two race two, tail-ash wins
+race 3, tail drill two race three, tail-birch wins
+race 4, tail drill two race four, tail-ash wins
+race 5, tail drill two race five, tail-birch wins
+race 6, tail drill two race six, tail-birch wins
+race 7, tail drill two race seven, tail-ash wins
+race 8, tail drill two race eight, tail-ash wins
+race 9, tail drill two race nine, tail-ash wins
+series winner, tail-ash, tail-ash 5 race wins, tail-birch 4 race wins, 0 no results
+distance, 2 series, 2 the distance, 0 without reply, 0 in between, 0 no winner
