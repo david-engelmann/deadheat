@@ -773,27 +773,25 @@ fn a_series_holding_no_winner_takes_no_class_and_no_section() {
 
 #[test]
 fn a_championship_holding_no_series_stands_refused_at_the_load() {
-    // TA-14. A fixture championship naming a
-    // series file holding no series at all, the
-    // load standing refused with the standing
-    // defect for an empty series file. Falls
-    // under no variant. The refusal stands at
-    // the loader, outside the reading, so every
-    // mutation of the reading leaves it
-    // standing.
+    // TA-14. The empty report form pin. A
+    // championship holding no series at all
+    // stands refused at the load, the empty
+    // series list drawing the one defect
+    // field series holds no series files, so
+    // no championship stands for a report to
+    // stand over. The pin falls under no
+    // mutation of the eight, no series
+    // standing in the championship for any
+    // mutation to read, and it stands in the
+    // roster so the load boundary of DH-75
+    // stands pinned in words.
     let dir = temp_dir("tail-ta14");
-    let empty = obj(vec![("series", arr(vec![]))]);
-    write_json(&dir, "empty.json", &empty);
-    write_json(
-        &dir,
-        "championship.json",
-        &championship_json(vec!["empty.json"]),
-    );
+    write_json(&dir, "championship.json", &championship_json(vec![]));
     let (championship, defects) = load_championship_file(&dir.join("championship.json"));
-    assert!(championship.is_none());
+    assert_eq!(championship, None);
     assert_eq!(
         defects,
-        vec!["championship series entry 1 names a file holding no series".to_string()]
+        vec!["field series holds no series files".to_string()]
     );
 }
 
