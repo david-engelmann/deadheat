@@ -582,6 +582,17 @@ outset
 outset, 2 series, 2 reign longer, 0 spell longer, 0 matched, 0 no winner
 ```
 
+The tail command reads a championship file and reports the series that stood spell longer, whose winner last stood behind for longer than it last stood ahead over the decided record, standing the decided races of each beside the last reign and the last spell of the series and its race split.
+
+```sh
+deadheat tail examples/championship.json
+```
+
+```text
+tail
+tail, 2 series, 2 reign longer, 0 spell longer, 0 matched, 0 no winner
+```
+
 The standings command prints the standings table held in a standings file. The adopt command writes the losing attempt patch into a patches folder and the discard command removes it.
 
 ## Status
