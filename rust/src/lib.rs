@@ -11,6 +11,7 @@ pub mod cli;
 pub mod closings;
 pub mod clusters;
 pub mod comebacks;
+pub mod crosshead;
 pub mod crossings;
 pub mod deadlocks;
 pub mod depths;
