@@ -1262,6 +1262,37 @@ fn every_standing_golden_still_matches_byte_for_byte() {
             assert_eq!(rendered, golden, "{name}");
             continue;
         }
+        // Altered at the Round 38 slice for its named mechanical
+        // consequence. The tail examples of DH-75 add twenty
+        // nine goldens whose stems name championships rather than a
+        // race, so the sweep reads them through the championship
+        // loader and the tail report before the generic race
+        // reading can misread their sources. The two counts
+        // below rise by forty two each this round, the twenty
+        // nine tail goldens here and the thirteen constructed
+        // sibling goldens the standing streak, cluster, rally,
+        // deadlock, distance, comebacks, closing, opening,
+        // crossings, tenure, depths, spells, and reigns arms
+        // already read over the constructed tail stem, the
+        // unadjusted count rising with them because every race
+        // of the championships stands unadjusted.
+        if let Some(stem) = name.strip_suffix("-tail.txt") {
+            let source = golden_path.with_file_name(format!("{stem}.json"));
+            let (championship, defects) = deadheat::championship::load_championship_file(&source);
+            assert_eq!(defects, Vec::<String>::new(), "{name}");
+            let championship = championship.expect("a championship");
+            if championship
+                .series
+                .iter()
+                .flat_map(|series| series.races.iter())
+                .all(race_is_unadjusted)
+            {
+                unadjusted += 1;
+            }
+            let rendered = deadheat::tail::tail_report(&championship).join("\n") + "\n";
+            assert_eq!(rendered, golden, "{name}");
+            continue;
+        }
         // Altered at the Round 37 slice for its named mechanical
         // consequence. The outset examples of DH-73 add twenty
         // eight goldens whose stems name championships rather than a
@@ -1430,11 +1461,16 @@ fn every_standing_golden_still_matches_byte_for_byte() {
         let rendered = deadheat::championship::championship_report(&championship).join("\n") + "\n";
         assert_eq!(rendered, golden, "{name}");
     }
-    // The counts stand at five hundred seventy
-    // one goldens and five hundred sixty seven
-    // unadjusted after the Round 37 enrolment
-    // counted at the outset arm above, forty one
-    // of each over the five hundred thirty
+    // The counts stand at six hundred thirteen
+    // goldens and six hundred nine
+    // unadjusted after the Round 38 enrolment
+    // counted at the tail arm above, forty two
+    // of each over the five hundred seventy
+    // one and five hundred sixty seven
+    // the Round 37 enrolment
+    // left standing after counting at the
+    // outset arm, forty one of each over the
+    // five hundred thirty
     // and five hundred twenty six the Round 36 enrolment
     // left standing after counting at the
     // leadchanges arm, forty of each over the
@@ -1485,6 +1521,6 @@ fn every_standing_golden_still_matches_byte_for_byte() {
     // golden standing byte for byte as it stood, so no
     // golden joins at that round, no arm joins the
     // chain, and the counts stand unmoved.
-    assert_eq!(goldens.len(), 571);
-    assert_eq!(unadjusted, 567);
+    assert_eq!(goldens.len(), 613);
+    assert_eq!(unadjusted, 609);
 }

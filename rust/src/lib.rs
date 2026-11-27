@@ -45,6 +45,7 @@ pub mod series;
 pub mod specs;
 pub mod spells;
 pub mod streaks;
+pub mod tail;
 pub mod tenure;
 pub mod totals;
 pub mod turns;
