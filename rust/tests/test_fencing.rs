@@ -19,6 +19,7 @@ use deadheat::championship::{championship_report, Championship};
 use deadheat::closings::closing_report;
 use deadheat::clusters::cluster_report;
 use deadheat::comebacks::comeback_report;
+use deadheat::crosshead::crosshead_report;
 use deadheat::crossings::crossings_report;
 use deadheat::deadlocks::deadlock_report;
 use deadheat::depths::depths_report;
@@ -2090,5 +2091,46 @@ fn the_tail_report_fences_its_fields() {
     );
     let golden = std::fs::read_to_string(root.join("examples").join("championship-tail.txt"))
         .expect("the tail golden");
+    assert_eq!(lines.join("\n") + "\n", golden);
+}
+
+#[test]
+fn the_crosshead_report_fences_its_fields() {
+    // The Round 39 enrolment. The crosshead report
+    // of the championship example standing whole at
+    // its two lines, the header and the closing, no
+    // section standing for either series, both series
+    // standing reign longer, its lines carrying no
+    // field a break can forge, the report standing as
+    // its golden stands. It falls under GG-5 alone,
+    // the classes standing exchanged there and both
+    // series drawing sections and the lines parting.
+    // It stands under GG-1 and GG-4, the longest and
+    // first spells standing at nought there, under
+    // GG-2 and GG-3, the longest and last reigns
+    // standing above the last spells of none there,
+    // under GG-6, the sections standing for the
+    // matched series and this championship carrying
+    // none, under GG-7, the closing runs leaving both
+    // series reign longer there, and under GG-8, the
+    // last stands standing at none there. It fails on
+    // the pre round tree by compile absence, the crosshead
+    // module standing absent there.
+    let root = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"));
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &root.join("examples").join("championship.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let lines = crosshead_report(&championship.expect("a championship"));
+    assert_no_forgery(&lines);
+    assert_eq!(
+        lines,
+        vec![
+            "crosshead",
+            "crosshead, 2 series, 2 reign longer, 0 spell longer, 0 matched, 0 no winner",
+        ]
+    );
+    let golden = std::fs::read_to_string(root.join("examples").join("championship-crosshead.txt"))
+        .expect("the crosshead golden");
     assert_eq!(lines.join("\n") + "\n", golden);
 }

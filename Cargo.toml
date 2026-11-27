@@ -207,6 +207,10 @@ name = "test_tail"
 path = "rust/tests/test_tail.rs"
 
 [[test]]
+name = "test_crosshead"
+path = "rust/tests/test_crosshead.rs"
+
+[[test]]
 name = "test_fold"
 path = "rust/tests/test_fold.rs"
 
