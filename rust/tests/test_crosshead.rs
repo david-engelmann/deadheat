@@ -595,6 +595,7 @@ fn the_second_drill_stands_reign_longer_at_a_first_reign_of_three() {
         Some((CrossheadClass::ReignLonger, 3, 1))
     );
     assert_eq!(first_reign_of(series), 3);
+    assert_eq!(last_reign_of(series), 1);
     assert_eq!(last_spell_of(series), 1);
 }
 
