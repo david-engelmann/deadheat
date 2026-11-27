@@ -1,0 +1,28 @@
+deadlock
+series 1, the constructed crosshead drill one
+crosshead-ash against crosshead-birch, first to 5 wins
+race 1, crosshead drill one race one, crosshead-ash wins
+race 2, crosshead drill one race two, crosshead-birch wins
+race 3, crosshead drill one race three, crosshead-birch wins
+race 4, crosshead drill one race four, crosshead-ash wins
+race 5, crosshead drill one race five, crosshead-birch wins
+race 6, crosshead drill one race six, crosshead-birch wins
+race 7, crosshead drill one race seven, crosshead-ash wins
+race 8, crosshead drill one race eight, crosshead-ash wins
+race 9, crosshead drill one race nine, crosshead-birch wins
+stood level after 3 of its decided races
+series winner, crosshead-birch, crosshead-ash 4 race wins, crosshead-birch 5 race wins, 0 no results
+series 2, the constructed crosshead drill two
+crosshead-ash against crosshead-birch, first to 5 wins
+race 1, crosshead drill two race one, crosshead-birch wins
+race 2, crosshead drill two race two, crosshead-ash wins
+race 3, crosshead drill two race three, crosshead-ash wins
+race 4, crosshead drill two race four, crosshead-ash wins
+race 5, crosshead drill two race five, crosshead-birch wins
+race 6, crosshead drill two race six, crosshead-birch wins
+race 7, crosshead drill two race seven, crosshead-ash wins
+race 8, crosshead drill two race eight, crosshead-birch wins
+race 9, crosshead drill two race nine, crosshead-ash wins
+stood level after 3 of its decided races
+series winner, crosshead-ash, crosshead-ash 5 race wins, crosshead-birch 4 race wins, 0 no results
+deadlock, 2 series, 2 deadlocked, 0 clear, 0 no winner
