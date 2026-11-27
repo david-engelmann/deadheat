@@ -1,0 +1,199 @@
+{
+ "models": [
+  "crosshead-ash",
+  "crosshead-birch"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "crosshead-ash",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 78101
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "crosshead-birch",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 78124
+    }
+   ],
+   "task": "crosshead drill one race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 140.0,
+     "model": "crosshead-ash",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 78147
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "crosshead-birch",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 78170
+    }
+   ],
+   "task": "crosshead drill one race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "crosshead-ash",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 78193
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "crosshead-birch",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 78216
+    }
+   ],
+   "task": "crosshead drill one race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "crosshead-ash",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 78239
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 140.0,
+     "model": "crosshead-birch",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 78262
+    }
+   ],
+   "task": "crosshead drill one race four"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "crosshead-ash",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 78285
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "crosshead-birch",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 78308
+    }
+   ],
+   "task": "crosshead drill one race five"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 140.0,
+     "model": "crosshead-ash",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 78331
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "crosshead-birch",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 78354
+    }
+   ],
+   "task": "crosshead drill one race six"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "crosshead-ash",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 78377
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "crosshead-birch",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 78400
+    }
+   ],
+   "task": "crosshead drill one race seven"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "crosshead-ash",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 78423
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 140.0,
+     "model": "crosshead-birch",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 78446
+    }
+   ],
+   "task": "crosshead drill one race eight"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "crosshead-ash",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 78469
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "crosshead-birch",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 78492
+    }
+   ],
+   "task": "crosshead drill one race nine"
+  }
+ ],
+ "task": "the constructed crosshead drill one",
+ "wins_target": 5
+}
