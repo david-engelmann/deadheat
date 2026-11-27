@@ -17,5 +17,6 @@ Under `DH-6` and `DH-17`, once one model reaches `wins_target` (for example 3 wi
 ## What do the exit codes mean?
 
 - **`0`** Race executed cleanly (`run`), patch adopted/discarded (`adopt`/`discard`), or report printed cleanly.
-- **`1`** Malformed JSON specification or record file refused with structured defect lines on `stdout`, or `adopt`/`discard` invoked on a valid race that has no winner (`DH-3`).
+- **`1`** Malformed JSON specification or record file refused with structured defect lines on `stdout`, `adopt`/`discard` invoked on a valid race that has no winner (`DH-3`), filesystem write failure, or a closed `stdout` pipe on large output (`>= 8192` bytes under `PORT-12`).
 - **`2`** Unknown command or invalid CLI flags on `stderr`.
+- **`120`** Failed `stderr` stream write, or a closed `stdout` pipe on short output (`<= 4096` bytes under `PORT-12`).

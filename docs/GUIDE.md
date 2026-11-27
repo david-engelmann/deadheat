@@ -8,7 +8,10 @@ Deadheat runs head-to-head duels between two model attempts on the same coding o
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/david-engelmann/deadheat/main/install.sh | sh
+export PATH="$HOME/.local/bin:$PATH"
 ```
+
+Pass `--to <DIR>` to install somewhere other than `$HOME/.local/bin`, and ensure the destination directory stands on `PATH`.
 
 ### Cargo Binstall
 
@@ -26,7 +29,7 @@ cargo install --path . --bin deadheat --locked
 
 ## 60-Second Walkthrough
 
-Run a live local duel using the synthetic specification in `examples/duel-spec.json`, inspect the resulting race report, and then explore close-call and multi-series championship analytics on the shipped fixtures.
+From the root of a `deadheat` repository checkout (`git clone https://github.com/david-engelmann/deadheat.git && cd deadheat`), run a live local duel using the synthetic specification in `examples/duel-spec.json`, inspect the resulting race report, and then explore close-call and multi-series championship analytics on the shipped fixtures.
 
 ```sh
 deadheat run examples/duel-spec.json
@@ -84,6 +87,6 @@ All input JSON schemas stand documented in [../FORMATS.md](../FORMATS.md).
 
 To benchmark two coding agents, two prompt revisions, or two model providers head to head on the same task suite on Unix runners, wire `deadheat` into your evaluation harness.
 
-1. **Author a `duel-spec.json`.** Point each attempt's `command` at an isolated wrapper script. Inside its working directory (`<workspace>/attempt-1` or `attempt-2`), have the script run your test suite, write `git diff > patch.diff` so `deadheat` captures the exact diff text (`DH-1`), and write `{"result": "green", "tokens": 48210}` (or `"red"`) to `result.json`.
+1. **Author a `duel-spec.json`.** Point each attempt's `command` at an isolated wrapper script. Inside its working directory (`<workspace>/attempt-1` or `attempt-2`), have the script run your test suite, stage intent-to-add markers and diff against `HEAD` (`git add -N . && git diff HEAD > patch.diff`) so `deadheat` captures tracked edits, staged edits, and newly created files (`DH-1`), and write `{"result": "green", "tokens": 48210}` (or `"red"`) to `result.json`.
 2. **Execute, score, and salvage loser patches.** Run `deadheat run duel-spec.json`, inspect `deadheat race duel-record.json --standings standings.json`, and optionally call `deadheat adopt duel-record.json patches/` to archive the defeated attempt's diff from its funeral (`DH-3`).
-3. **Aggregate multi-task series.** Bundle repeated runs per task into `series.json` files (`wins_target: 3` filters single-run noise) and group the benchmark suite into `championship.json`. Run `deadheat championship`, `deadheat totals`, and `deadheat pairing` to compare win rates and decided-walk token spend.
+3. **Aggregate multi-task series.** Bundle repeated runs per task into `series.json` files (`wins_target: 3` filters single-run noise) and group the benchmark suite into `championship.json`. Run `deadheat championship championship.json`, `deadheat totals championship.json`, and `deadheat pairing championship.json` to compare win rates and decided-walk token spend.

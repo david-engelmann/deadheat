@@ -23,7 +23,7 @@ Head-to-head coding agent duel runner, close-call adjudicator, and thirty-eight-
 
 ## Design Guarantees
 
-- **Zero network sockets.** `deadheat` makes zero network calls and phones home nowhere. Its thirty-five analytical reading commands are pure read-only functions, while `run`, `adopt`, `discard`, and `race --standings` perform only the explicit local workspace or file actions requested on the command line.
+- **Zero network sockets in `deadheat` itself.** `deadheat`'s own code makes zero network calls and phones home nowhere. Its thirty-five analytical reading commands are pure read-only functions and `adopt`, `discard`, and `race --standings` touch only the named local files, while external lane commands started by `deadheat run` execute unrestricted in the local shell environment and may use the network.
 - **Exact rational timing and margins.** Finish adjustments, the five-percent close-call band, and aggregate championship margins run through `BigInt` and `BigRational` arithmetic with zero float drift.
 - **Whole-input defect reporting.** Malformed specifications and records return structured defect lists naming every reachable schema violation before running or printing a report.
-- **Terminal injection fencing.** Task titles, model identifiers, environment labels, and adjudicator fields are fenced against embedded newlines at both loader and library boundaries.
+- **Single-line output fencing.** Task titles, model identifiers, environment labels, and adjudicator fields reject unpaired UTF-16 surrogates and line breaks (`\n` and `\r`) at both loader and library boundaries, though untrusted text displayed in a terminal should still pass through a pager or sanitizer.
