@@ -714,7 +714,7 @@ sys.exit(1 if failed else 0)
 }
 
 #[test]
-fn the_depths_command_stands_named_among_the_thirty_seven_in_the_help_text() {
+fn the_depths_command_stands_named_among_the_thirty_eight_in_the_help_text() {
     // The Round 23 enrolment, its brace list restated at the Round 25
     // enrolment as the charged mechanical consequence of the spells command
     // joining the list and restated again at the Round 26 enrolment as the
@@ -738,14 +738,16 @@ fn the_depths_command_stands_named_among_the_thirty_seven_in_the_help_text() {
     // restated again at the Round 37 enrolment as the charged mechanical
     // consequence of the outset command joining it and restated again at
     // the Round 38 enrolment as the charged mechanical consequence of the
-    // tail command joining it. The top level help names all thirty seven
-    // commands in their standing order with depths standing after tenure
-    // and tail last after outset, and the subcommand list carries the
-    // depths line with its own text.
+    // tail command joining it and restated again at the Round 39 enrolment
+    // as the charged mechanical consequence of the crosshead command
+    // joining it. The top level help names all thirty eight commands in
+    // their standing order with depths standing after tenure and crosshead
+    // last after tail, and the subcommand list carries the depths line with
+    // its own text.
     let (out, _, code) = run_cli(&["--help"]);
     assert_eq!(code, 0);
     assert!(out.contains(
-        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges,outset,tail}"
+        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges,outset,tail,crosshead}"
     ));
     assert!(out.contains("print the depths report for one championship file"));
 }
@@ -755,7 +757,7 @@ fn the_depths_command_refuses_a_missing_file_and_a_near_miss_name() {
     // The Round 23 enrolment. The depths command with no file named draws
     // the required argument refusal in its own name at exit status 2, and
     // the near miss command name depth is refused as an invalid choice
-    // naming all thirty seven commands, the choice list restated at the
+    // naming all thirty eight commands, the choice list restated at the
     // Round 25 enrolment as the charged mechanical consequence of the
     // spells command joining it and restated again at the Round 26
     // enrolment as the charged mechanical consequence of the reigns command
@@ -778,8 +780,10 @@ fn the_depths_command_refuses_a_missing_file_and_a_near_miss_name() {
     // command joining it and restated again at the Round 37 enrolment as
     // the charged mechanical consequence of the outset command joining it
     // and restated again at the Round 38 enrolment as the charged
-    // mechanical consequence of the tail command joining it, as every
-    // sibling near miss stands refused.
+    // mechanical consequence of the tail command joining it and restated
+    // again at the Round 39 enrolment as the charged mechanical consequence
+    // of the crosshead command joining it, as every sibling near miss
+    // stands refused.
     let (_, err, code) = run_cli(&["depths"]);
     assert_eq!(code, 2);
     let last = err.lines().last().expect("an error line").to_string();
@@ -793,7 +797,7 @@ fn the_depths_command_refuses_a_missing_file_and_a_near_miss_name() {
     let last = err.lines().last().expect("an error line").to_string();
     assert!(last.contains("invalid choice: 'depth' (choose from 'race'"));
     assert!(last.ends_with(
-        "'tenure', 'depths', 'spells', 'reigns', 'place', 'peak', 'recovery', 'laststand', 'firststand', 'firststrike', 'firstreign', 'lastreign', 'leadchanges', 'outset', 'tail')"
+        "'tenure', 'depths', 'spells', 'reigns', 'place', 'peak', 'recovery', 'laststand', 'firststand', 'firststrike', 'firstreign', 'lastreign', 'leadchanges', 'outset', 'tail', 'crosshead')"
     ));
 }
 
@@ -816,7 +820,7 @@ fn the_depths_command_prints_the_report_for_the_constructed_pair() {
 }
 
 #[test]
-fn the_spells_command_stands_named_among_the_thirty_seven_in_the_help_text() {
+fn the_spells_command_stands_named_among_the_thirty_eight_in_the_help_text() {
     // The Round 25 enrolment, its brace list restated at the Round 26
     // enrolment as the charged mechanical consequence of the reigns command
     // joining the list and restated again at the Round 28 enrolment as the
@@ -838,14 +842,16 @@ fn the_spells_command_stands_named_among_the_thirty_seven_in_the_help_text() {
     // command joining it and restated again at the Round 37 enrolment as
     // the charged mechanical consequence of the outset command joining it
     // and restated again at the Round 38 enrolment as the charged
-    // mechanical consequence of the tail command joining it. The top level
-    // help names all thirty seven commands in their standing order with
-    // tail last after outset, and the subcommand list carries the spells
-    // line with its own text.
+    // mechanical consequence of the tail command joining it and restated
+    // again at the Round 39 enrolment as the charged mechanical consequence
+    // of the crosshead command joining it. The top level help names all
+    // thirty eight commands in their standing order with crosshead last
+    // after tail, and the subcommand list carries the spells line with its
+    // own text.
     let (out, _, code) = run_cli(&["--help"]);
     assert_eq!(code, 0);
     assert!(out.contains(
-        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges,outset,tail}"
+        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges,outset,tail,crosshead}"
     ));
     assert!(out.contains("print the spells report for one championship file"));
 }
@@ -855,7 +861,7 @@ fn the_spells_command_refuses_a_missing_file_and_a_near_miss_name() {
     // The Round 25 enrolment. The spells command with no file named draws
     // the required argument refusal in its own name at exit status 2, and
     // the near miss command name spell is refused as an invalid choice
-    // naming all thirty seven commands, the choice list restated at the
+    // naming all thirty eight commands, the choice list restated at the
     // Round 26 enrolment as the charged mechanical consequence of the
     // reigns command joining it and restated again at the Round 28
     // enrolment as the charged mechanical consequence of the place command
@@ -876,8 +882,10 @@ fn the_spells_command_refuses_a_missing_file_and_a_near_miss_name() {
     // leadchanges command joining it and restated again at the Round 37
     // enrolment as the charged mechanical consequence of the outset command
     // joining it and restated again at the Round 38 enrolment as the
-    // charged mechanical consequence of the tail command joining it, as
-    // every sibling near miss stands refused.
+    // charged mechanical consequence of the tail command joining it and
+    // restated again at the Round 39 enrolment as the charged mechanical
+    // consequence of the crosshead command joining it, as every sibling
+    // near miss stands refused.
     let (_, err, code) = run_cli(&["spells"]);
     assert_eq!(code, 2);
     let last = err.lines().last().expect("an error line").to_string();
@@ -891,7 +899,7 @@ fn the_spells_command_refuses_a_missing_file_and_a_near_miss_name() {
     let last = err.lines().last().expect("an error line").to_string();
     assert!(last.contains("invalid choice: 'spell' (choose from 'race'"));
     assert!(last.ends_with(
-        "'tenure', 'depths', 'spells', 'reigns', 'place', 'peak', 'recovery', 'laststand', 'firststand', 'firststrike', 'firstreign', 'lastreign', 'leadchanges', 'outset', 'tail')"
+        "'tenure', 'depths', 'spells', 'reigns', 'place', 'peak', 'recovery', 'laststand', 'firststand', 'firststrike', 'firstreign', 'lastreign', 'leadchanges', 'outset', 'tail', 'crosshead')"
     ));
 }
 
@@ -915,7 +923,7 @@ fn the_spells_command_prints_the_report_for_the_constructed_pair() {
 }
 
 #[test]
-fn the_reigns_command_stands_named_among_the_thirty_seven_in_the_help_text() {
+fn the_reigns_command_stands_named_among_the_thirty_eight_in_the_help_text() {
     // The Round 26 enrolment, its brace list restated at the Round 28
     // enrolment as the charged mechanical consequence of the place command
     // joining the list and restated again at the Round 29 enrolment as the
@@ -935,14 +943,16 @@ fn the_reigns_command_stands_named_among_the_thirty_seven_in_the_help_text() {
     // leadchanges command joining it and restated again at the Round 37
     // enrolment as the charged mechanical consequence of the outset command
     // joining it and restated again at the Round 38 enrolment as the
-    // charged mechanical consequence of the tail command joining it. The
-    // top level help names all thirty seven commands in their standing
-    // order with tail last after outset, and the subcommand list carries
-    // the reigns line with its own text.
+    // charged mechanical consequence of the tail command joining it and
+    // restated again at the Round 39 enrolment as the charged mechanical
+    // consequence of the crosshead command joining it. The top level help
+    // names all thirty eight commands in their standing order with
+    // crosshead last after tail, and the subcommand list carries the reigns
+    // line with its own text.
     let (out, _, code) = run_cli(&["--help"]);
     assert_eq!(code, 0);
     assert!(out.contains(
-        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges,outset,tail}"
+        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges,outset,tail,crosshead}"
     ));
     assert!(out.contains("print the reigns report for one championship file"));
 }
@@ -952,7 +962,7 @@ fn the_reigns_command_refuses_a_missing_file_and_a_near_miss_name() {
     // The Round 26 enrolment. The reigns command with no file named draws
     // the required argument refusal in its own name at exit status 2, and
     // the near miss command name reign is refused as an invalid choice
-    // naming all thirty seven commands, the choice list restated at the
+    // naming all thirty eight commands, the choice list restated at the
     // Round 28 enrolment as the charged mechanical consequence of the place
     // command joining it and restated again at the Round 29 enrolment as
     // the charged mechanical consequence of the peak command joining it and
@@ -971,8 +981,10 @@ fn the_reigns_command_refuses_a_missing_file_and_a_near_miss_name() {
     // leadchanges command joining it and restated again at the Round 37
     // enrolment as the charged mechanical consequence of the outset command
     // joining it and restated again at the Round 38 enrolment as the
-    // charged mechanical consequence of the tail command joining it, as
-    // every sibling near miss stands refused.
+    // charged mechanical consequence of the tail command joining it and
+    // restated again at the Round 39 enrolment as the charged mechanical
+    // consequence of the crosshead command joining it, as every sibling
+    // near miss stands refused.
     let (_, err, code) = run_cli(&["reigns"]);
     assert_eq!(code, 2);
     let last = err.lines().last().expect("an error line").to_string();
@@ -986,7 +998,7 @@ fn the_reigns_command_refuses_a_missing_file_and_a_near_miss_name() {
     let last = err.lines().last().expect("an error line").to_string();
     assert!(last.contains("invalid choice: 'reign' (choose from 'race'"));
     assert!(last.ends_with(
-        "'tenure', 'depths', 'spells', 'reigns', 'place', 'peak', 'recovery', 'laststand', 'firststand', 'firststrike', 'firstreign', 'lastreign', 'leadchanges', 'outset', 'tail')"
+        "'tenure', 'depths', 'spells', 'reigns', 'place', 'peak', 'recovery', 'laststand', 'firststand', 'firststrike', 'firstreign', 'lastreign', 'leadchanges', 'outset', 'tail', 'crosshead')"
     ));
 }
 
@@ -1010,7 +1022,7 @@ fn the_reigns_command_prints_the_report_for_the_constructed_pair() {
 }
 
 #[test]
-fn the_place_command_stands_named_among_the_thirty_seven_in_the_help_text() {
+fn the_place_command_stands_named_among_the_thirty_eight_in_the_help_text() {
     // The Round 28 enrolment, its brace list restated at the Round 29
     // enrolment as the charged mechanical consequence of the peak command
     // joining the list and restated again at the Round 30 enrolment as the
@@ -1029,13 +1041,15 @@ fn the_place_command_stands_named_among_the_thirty_seven_in_the_help_text() {
     // at the Round 37 enrolment as the charged mechanical consequence of
     // the outset command joining it and restated again at the Round 38
     // enrolment as the charged mechanical consequence of the tail command
-    // joining it. The top level help names all thirty seven commands in
-    // their standing order with tail last after outset, and the subcommand
-    // list carries the place line with its own text.
+    // joining it and restated again at the Round 39 enrolment as the
+    // charged mechanical consequence of the crosshead command joining it.
+    // The top level help names all thirty eight commands in their standing
+    // order with crosshead last after tail, and the subcommand list carries
+    // the place line with its own text.
     let (out, _, code) = run_cli(&["--help"]);
     assert_eq!(code, 0);
     assert!(out.contains(
-        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges,outset,tail}"
+        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges,outset,tail,crosshead}"
     ));
     assert!(out.contains("print the place report for one championship file"));
 }
@@ -1045,7 +1059,7 @@ fn the_place_command_refuses_a_missing_file_and_a_near_miss_name() {
     // The Round 28 enrolment. The place command with no file named draws
     // the required argument refusal in its own name at exit status 2, and
     // the near miss command name plac is refused as an invalid choice
-    // naming all thirty seven commands, the choice list restated at the
+    // naming all thirty eight commands, the choice list restated at the
     // Round 29 enrolment as the charged mechanical consequence of the peak
     // command joining it and restated again at the Round 30 enrolment as
     // the charged mechanical consequence of the recovery command joining it
@@ -1063,7 +1077,9 @@ fn the_place_command_refuses_a_missing_file_and_a_near_miss_name() {
     // restated again at the Round 37 enrolment as the charged mechanical
     // consequence of the outset command joining it and restated again at
     // the Round 38 enrolment as the charged mechanical consequence of the
-    // tail command joining it, as every sibling near miss stands refused.
+    // tail command joining it and restated again at the Round 39 enrolment
+    // as the charged mechanical consequence of the crosshead command
+    // joining it, as every sibling near miss stands refused.
     let (_, err, code) = run_cli(&["place"]);
     assert_eq!(code, 2);
     let last = err.lines().last().expect("an error line").to_string();
@@ -1077,7 +1093,7 @@ fn the_place_command_refuses_a_missing_file_and_a_near_miss_name() {
     let last = err.lines().last().expect("an error line").to_string();
     assert!(last.contains("invalid choice: 'plac' (choose from 'race'"));
     assert!(last.ends_with(
-        "'tenure', 'depths', 'spells', 'reigns', 'place', 'peak', 'recovery', 'laststand', 'firststand', 'firststrike', 'firstreign', 'lastreign', 'leadchanges', 'outset', 'tail')"
+        "'tenure', 'depths', 'spells', 'reigns', 'place', 'peak', 'recovery', 'laststand', 'firststand', 'firststrike', 'firstreign', 'lastreign', 'leadchanges', 'outset', 'tail', 'crosshead')"
     ));
 }
 
@@ -1101,7 +1117,7 @@ fn the_place_command_prints_the_report_for_the_constructed_pair() {
 }
 
 #[test]
-fn the_peak_command_stands_named_among_the_thirty_seven_in_the_help_text() {
+fn the_peak_command_stands_named_among_the_thirty_eight_in_the_help_text() {
     // The Round 29 enrolment, its brace list restated at the Round 30
     // enrolment as the charged mechanical consequence of the recovery
     // command joining it and restated again at the Round 31 enrolment as
@@ -1118,13 +1134,15 @@ fn the_peak_command_stands_named_among_the_thirty_seven_in_the_help_text() {
     // it and restated again at the Round 37 enrolment as the charged
     // mechanical consequence of the outset command joining it and restated
     // again at the Round 38 enrolment as the charged mechanical consequence
-    // of the tail command joining it. The top level help names all thirty
-    // seven commands in their standing order with tail last after outset,
-    // and the subcommand list carries the peak line with its own text.
+    // of the tail command joining it and restated again at the Round 39
+    // enrolment as the charged mechanical consequence of the crosshead
+    // command joining it. The top level help names all thirty eight
+    // commands in their standing order with crosshead last after tail, and
+    // the subcommand list carries the peak line with its own text.
     let (out, _, code) = run_cli(&["--help"]);
     assert_eq!(code, 0);
     assert!(out.contains(
-        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges,outset,tail}"
+        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges,outset,tail,crosshead}"
     ));
     assert!(out.contains("print the peak report for one championship file"));
 }
@@ -1134,7 +1152,7 @@ fn the_peak_command_refuses_a_missing_file_and_a_near_miss_name() {
     // The Round 29 enrolment. The peak command with no file named draws the
     // required argument refusal in its own name at exit status 2, and the
     // near miss command name pea is refused as an invalid choice naming all
-    // thirty seven commands, the choice list restated at the Round 30
+    // thirty eight commands, the choice list restated at the Round 30
     // enrolment as the charged mechanical consequence of the recovery
     // command joining it and restated again at the Round 31 enrolment as
     // the charged mechanical consequence of the laststand command joining
@@ -1150,8 +1168,9 @@ fn the_peak_command_refuses_a_missing_file_and_a_near_miss_name() {
     // it and restated again at the Round 37 enrolment as the charged
     // mechanical consequence of the outset command joining it and restated
     // again at the Round 38 enrolment as the charged mechanical consequence
-    // of the tail command joining it, as every sibling near miss stands
-    // refused.
+    // of the tail command joining it and restated again at the Round 39
+    // enrolment as the charged mechanical consequence of the crosshead
+    // command joining it, as every sibling near miss stands refused.
     let (_, err, code) = run_cli(&["peak"]);
     assert_eq!(code, 2);
     let last = err.lines().last().expect("an error line").to_string();
@@ -1165,7 +1184,7 @@ fn the_peak_command_refuses_a_missing_file_and_a_near_miss_name() {
     let last = err.lines().last().expect("an error line").to_string();
     assert!(last.contains("invalid choice: 'pea' (choose from 'race'"));
     assert!(last.ends_with(
-        "'tenure', 'depths', 'spells', 'reigns', 'place', 'peak', 'recovery', 'laststand', 'firststand', 'firststrike', 'firstreign', 'lastreign', 'leadchanges', 'outset', 'tail')"
+        "'tenure', 'depths', 'spells', 'reigns', 'place', 'peak', 'recovery', 'laststand', 'firststand', 'firststrike', 'firstreign', 'lastreign', 'leadchanges', 'outset', 'tail', 'crosshead')"
     ));
 }
 
@@ -1189,7 +1208,7 @@ fn the_peak_command_prints_the_report_for_the_constructed_pair() {
 }
 
 #[test]
-fn the_recovery_command_stands_named_among_the_thirty_seven_in_the_help_text() {
+fn the_recovery_command_stands_named_among_the_thirty_eight_in_the_help_text() {
     // The Round 30 enrolment, its brace list restated at the Round 31
     // enrolment as the charged mechanical consequence of the laststand
     // command joining it and restated again at the Round 32 enrolment as
@@ -1204,14 +1223,16 @@ fn the_recovery_command_stands_named_among_the_thirty_seven_in_the_help_text() {
     // command joining it and restated again at the Round 37 enrolment as
     // the charged mechanical consequence of the outset command joining it
     // and restated again at the Round 38 enrolment as the charged
-    // mechanical consequence of the tail command joining it. The top level
-    // help names all thirty seven commands in their standing order with
-    // tail last after outset, and the subcommand list carries the recovery
-    // line with its own text.
+    // mechanical consequence of the tail command joining it and restated
+    // again at the Round 39 enrolment as the charged mechanical consequence
+    // of the crosshead command joining it. The top level help names all
+    // thirty eight commands in their standing order with crosshead last
+    // after tail, and the subcommand list carries the recovery line with
+    // its own text.
     let (out, _, code) = run_cli(&["--help"]);
     assert_eq!(code, 0);
     assert!(out.contains(
-        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges,outset,tail}"
+        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges,outset,tail,crosshead}"
     ));
     assert!(out.contains("print the recovery report for one championship file"));
 }
@@ -1221,7 +1242,7 @@ fn the_recovery_command_refuses_a_missing_file_and_a_near_miss_name() {
     // The Round 30 enrolment. The recovery command with no file named draws
     // the required argument refusal in its own name at exit status 2, and
     // the near miss command name recover is refused as an invalid choice
-    // naming all thirty seven commands, the choice list restated at the
+    // naming all thirty eight commands, the choice list restated at the
     // Round 31 enrolment as the charged mechanical consequence of the
     // laststand command joining it and restated again at the Round 32
     // enrolment as the charged mechanical consequence of the firststand
@@ -1235,8 +1256,10 @@ fn the_recovery_command_refuses_a_missing_file_and_a_near_miss_name() {
     // leadchanges command joining it and restated again at the Round 37
     // enrolment as the charged mechanical consequence of the outset command
     // joining it and restated again at the Round 38 enrolment as the
-    // charged mechanical consequence of the tail command joining it, as
-    // every sibling near miss stands refused.
+    // charged mechanical consequence of the tail command joining it and
+    // restated again at the Round 39 enrolment as the charged mechanical
+    // consequence of the crosshead command joining it, as every sibling
+    // near miss stands refused.
     let (_, err, code) = run_cli(&["recovery"]);
     assert_eq!(code, 2);
     let last = err.lines().last().expect("an error line").to_string();
@@ -1250,7 +1273,7 @@ fn the_recovery_command_refuses_a_missing_file_and_a_near_miss_name() {
     let last = err.lines().last().expect("an error line").to_string();
     assert!(last.contains("invalid choice: 'recover' (choose from 'race'"));
     assert!(last.ends_with(
-        "'tenure', 'depths', 'spells', 'reigns', 'place', 'peak', 'recovery', 'laststand', 'firststand', 'firststrike', 'firstreign', 'lastreign', 'leadchanges', 'outset', 'tail')"
+        "'tenure', 'depths', 'spells', 'reigns', 'place', 'peak', 'recovery', 'laststand', 'firststand', 'firststrike', 'firstreign', 'lastreign', 'leadchanges', 'outset', 'tail', 'crosshead')"
     ));
 }
 
@@ -1274,7 +1297,7 @@ fn the_recovery_command_prints_the_report_for_the_constructed_pair() {
 }
 
 #[test]
-fn the_laststand_command_stands_named_among_the_thirty_seven_in_the_help_text() {
+fn the_laststand_command_stands_named_among_the_thirty_eight_in_the_help_text() {
     // The Round 31 enrolment, its brace list restated at the Round 32
     // enrolment as the charged mechanical consequence of the firststand
     // command joining it and restated again at the Round 33 enrolment as
@@ -1287,14 +1310,16 @@ fn the_laststand_command_stands_named_among_the_thirty_seven_in_the_help_text() 
     // leadchanges command joining it and restated again at the Round 37
     // enrolment as the charged mechanical consequence of the outset command
     // joining it and restated again at the Round 38 enrolment as the
-    // charged mechanical consequence of the tail command joining it. The
-    // top level help names all thirty seven commands in their standing
-    // order with tail last after outset, and the subcommand list carries
-    // the laststand line with its own text.
+    // charged mechanical consequence of the tail command joining it and
+    // restated again at the Round 39 enrolment as the charged mechanical
+    // consequence of the crosshead command joining it. The top level help
+    // names all thirty eight commands in their standing order with
+    // crosshead last after tail, and the subcommand list carries the
+    // laststand line with its own text.
     let (out, _, code) = run_cli(&["--help"]);
     assert_eq!(code, 0);
     assert!(out.contains(
-        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges,outset,tail}"
+        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges,outset,tail,crosshead}"
     ));
     assert!(out.contains("print the laststand report for one championship file"));
 }
@@ -1304,7 +1329,7 @@ fn the_laststand_command_refuses_a_missing_file_and_a_near_miss_name() {
     // The Round 31 enrolment. The laststand command with no file named
     // draws the required argument refusal in its own name at exit status 2,
     // and the near miss command name laststan is refused as an invalid
-    // choice naming all thirty seven commands, the choice list restated at
+    // choice naming all thirty eight commands, the choice list restated at
     // the Round 32 enrolment as the charged mechanical consequence of the
     // firststand command joining it and restated again at the Round 33
     // enrolment as the charged mechanical consequence of the firststrike
@@ -1317,7 +1342,9 @@ fn the_laststand_command_refuses_a_missing_file_and_a_near_miss_name() {
     // at the Round 37 enrolment as the charged mechanical consequence of
     // the outset command joining it and restated again at the Round 38
     // enrolment as the charged mechanical consequence of the tail command
-    // joining it, as every sibling near miss stands refused.
+    // joining it and restated again at the Round 39 enrolment as the
+    // charged mechanical consequence of the crosshead command joining it,
+    // as every sibling near miss stands refused.
     let (_, err, code) = run_cli(&["laststand"]);
     assert_eq!(code, 2);
     let last = err.lines().last().expect("an error line").to_string();
@@ -1331,7 +1358,7 @@ fn the_laststand_command_refuses_a_missing_file_and_a_near_miss_name() {
     let last = err.lines().last().expect("an error line").to_string();
     assert!(last.contains("invalid choice: 'laststan' (choose from 'race'"));
     assert!(last.ends_with(
-        "'tenure', 'depths', 'spells', 'reigns', 'place', 'peak', 'recovery', 'laststand', 'firststand', 'firststrike', 'firstreign', 'lastreign', 'leadchanges', 'outset', 'tail')"
+        "'tenure', 'depths', 'spells', 'reigns', 'place', 'peak', 'recovery', 'laststand', 'firststand', 'firststrike', 'firstreign', 'lastreign', 'leadchanges', 'outset', 'tail', 'crosshead')"
     ));
 }
 
@@ -1410,7 +1437,7 @@ fn the_firststand_command_prints_the_championship_example_report() {
 }
 
 #[test]
-fn the_firststand_command_stands_named_among_the_thirty_seven_in_the_help_text() {
+fn the_firststand_command_stands_named_among_the_thirty_eight_in_the_help_text() {
     // The Round 32 enrolment, its brace list restated at the Round 33
     // enrolment as the charged mechanical consequence of the firststrike
     // command joining it and restated again at the Round 34 enrolment as
@@ -1422,17 +1449,19 @@ fn the_firststand_command_stands_named_among_the_thirty_seven_in_the_help_text()
     // at the Round 37 enrolment as the charged mechanical consequence of
     // the outset command joining it and restated again at the Round 38
     // enrolment as the charged mechanical consequence of the tail command
-    // joining it. The firststand command standing named among all thirty
-    // seven commands in the help text, the command table declared and
-    // counted at thirty seven with tail standing last in it after outset,
-    // and the subcommand list carrying the firststand line with its own
-    // text. The pin is characterization under the variant family, the
-    // table's own statement standing outside DH-62's reading, so it falls
-    // under no variant of Z-1 to Z-8.
+    // joining it and restated again at the Round 39 enrolment as the
+    // charged mechanical consequence of the crosshead command joining it.
+    // The firststand command standing named among all thirty eight commands
+    // in the help text, the command table declared and counted at thirty
+    // eight with crosshead standing last in it after tail, and the
+    // subcommand list carrying the firststand line with its own text. The
+    // pin is characterization under the variant family, the table's own
+    // statement standing outside DH-62's reading, so it falls under no
+    // variant of Z-1 to Z-8.
     let (out, _, code) = run_cli(&["--help"]);
     assert_eq!(code, 0);
     assert!(out.contains(
-        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges,outset,tail}"
+        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges,outset,tail,crosshead}"
     ));
     assert!(out.contains("print the firststand report for one championship file"));
 }
@@ -1500,7 +1529,7 @@ fn the_firststrike_command_prints_the_championship_example_report() {
 }
 
 #[test]
-fn the_firststrike_command_stands_named_among_the_thirty_seven_in_the_help_text() {
+fn the_firststrike_command_stands_named_among_the_thirty_eight_in_the_help_text() {
     // The Round 33 enrolment, its brace list restated at the Round 34
     // enrolment as the charged mechanical consequence of the firstreign
     // command joining it and restated again at the Round 35 enrolment as
@@ -1510,17 +1539,19 @@ fn the_firststrike_command_stands_named_among_the_thirty_seven_in_the_help_text(
     // restated again at the Round 37 enrolment as the charged mechanical
     // consequence of the outset command joining it and restated again at
     // the Round 38 enrolment as the charged mechanical consequence of the
-    // tail command joining it. The firststrike command standing named among
-    // all thirty seven commands in the help text, the command table
-    // declared and counted at thirty seven with tail standing last in it
-    // after outset, and the subcommand list carrying the firststrike line
-    // with its own text. The pin is characterization under the variant
-    // family, the table's own statement standing outside DH-64's reading,
-    // so it falls under no variant of AA-1 to AA-8.
+    // tail command joining it and restated again at the Round 39 enrolment
+    // as the charged mechanical consequence of the crosshead command
+    // joining it. The firststrike command standing named among all thirty
+    // eight commands in the help text, the command table declared and
+    // counted at thirty eight with crosshead standing last in it after
+    // tail, and the subcommand list carrying the firststrike line with its
+    // own text. The pin is characterization under the variant family, the
+    // table's own statement standing outside DH-64's reading, so it falls
+    // under no variant of AA-1 to AA-8.
     let (out, _, code) = run_cli(&["--help"]);
     assert_eq!(code, 0);
     assert!(out.contains(
-        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges,outset,tail}"
+        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges,outset,tail,crosshead}"
     ));
     assert!(out.contains("print the firststrike report for one championship file"));
 }
@@ -1587,7 +1618,7 @@ fn the_firstreign_command_prints_the_championship_example_report() {
 }
 
 #[test]
-fn the_firstreign_command_stands_named_among_the_thirty_seven_in_the_help_text() {
+fn the_firstreign_command_stands_named_among_the_thirty_eight_in_the_help_text() {
     // The Round 34 enrolment, its brace list restated at the Round 35
     // enrolment as the charged mechanical consequence of the lastreign
     // command joining it and restated again at the Round 36 enrolment as
@@ -1595,17 +1626,19 @@ fn the_firstreign_command_stands_named_among_the_thirty_seven_in_the_help_text()
     // it and restated again at the Round 37 enrolment as the charged
     // mechanical consequence of the outset command joining it and restated
     // again at the Round 38 enrolment as the charged mechanical consequence
-    // of the tail command joining it. The firstreign command standing named
-    // among all thirty seven commands in the help text, the command table
-    // declared and counted at thirty seven with tail standing last in it
-    // after outset, and the subcommand list carrying the firstreign line
-    // with its own text. The pin is characterization under the variant
-    // family, the table's own statement standing outside DH-66's reading,
-    // so it falls under no variant of BB-1 to BB-8.
+    // of the tail command joining it and restated again at the Round 39
+    // enrolment as the charged mechanical consequence of the crosshead
+    // command joining it. The firstreign command standing named among all
+    // thirty eight commands in the help text, the command table declared
+    // and counted at thirty eight with crosshead standing last in it after
+    // tail, and the subcommand list carrying the firstreign line with its
+    // own text. The pin is characterization under the variant family, the
+    // table's own statement standing outside DH-66's reading, so it falls
+    // under no variant of BB-1 to BB-8.
     let (out, _, code) = run_cli(&["--help"]);
     assert_eq!(code, 0);
     assert!(out.contains(
-        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges,outset,tail}"
+        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges,outset,tail,crosshead}"
     ));
     assert!(out.contains("print the firstreign report for one championship file"));
 }
@@ -1672,24 +1705,25 @@ fn the_lastreign_command_prints_the_championship_example_report() {
 }
 
 #[test]
-fn the_lastreign_command_stands_named_among_the_thirty_seven_in_the_help_text() {
+fn the_lastreign_command_stands_named_among_the_thirty_eight_in_the_help_text() {
     // The Round 35 enrolment, its brace list restated at the Round 36
     // enrolment as the charged mechanical consequence of the leadchanges
     // command joining it and restated again at the Round 37 enrolment as
     // the charged mechanical consequence of the outset command joining it
     // and restated again at the Round 38 enrolment as the charged
-    // mechanical consequence of the tail command joining it. The lastreign
-    // command standing named among all thirty seven commands in the help
-    // text, the command table declared and counted at thirty seven with
-    // tail standing last in it after outset, and the subcommand list
-    // carrying the lastreign line with its own text. The pin is
-    // characterization under the variant family, the table's own statement
-    // standing outside DH-68's reading, so it falls under no variant of
-    // CC-1 to CC-8.
+    // mechanical consequence of the tail command joining it and restated
+    // again at the Round 39 enrolment as the charged mechanical consequence
+    // of the crosshead command joining it. The lastreign command standing
+    // named among all thirty eight commands in the help text, the command
+    // table declared and counted at thirty eight with crosshead standing
+    // last in it after tail, and the subcommand list carrying the lastreign
+    // line with its own text. The pin is characterization under the variant
+    // family, the table's own statement standing outside DH-68's reading,
+    // so it falls under no variant of CC-1 to CC-8.
     let (out, _, code) = run_cli(&["--help"]);
     assert_eq!(code, 0);
     assert!(out.contains(
-        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges,outset,tail}"
+        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges,outset,tail,crosshead}"
     ));
     assert!(out.contains("print the lastreign report for one championship file"));
 }
@@ -1758,14 +1792,16 @@ fn the_leadchanges_command_prints_the_championship_example_report() {
 }
 
 #[test]
-fn the_leadchanges_command_stands_named_among_the_thirty_seven_in_the_help_text() {
+fn the_leadchanges_command_stands_named_among_the_thirty_eight_in_the_help_text() {
     // The Round 36 enrolment, its brace list restated at the Round 37
     // enrolment as the charged mechanical consequence of the outset command
     // joining it and restated again at the Round 38 enrolment as the
-    // charged mechanical consequence of the tail command joining it. The
-    // leadchanges command standing named among all thirty seven commands in
-    // the help text, the command table declared and counted at thirty seven
-    // with tail standing last in it after outset, and the subcommand list
+    // charged mechanical consequence of the tail command joining it and
+    // restated again at the Round 39 enrolment as the charged mechanical
+    // consequence of the crosshead command joining it. The leadchanges
+    // command standing named among all thirty eight commands in the help
+    // text, the command table declared and counted at thirty eight with
+    // crosshead standing last in it after tail, and the subcommand list
     // carrying the leadchanges line with its own text. The pin is
     // characterization under the variant family, the table's own statement
     // standing outside DH-70's reading, so it falls under no variant of
@@ -1773,7 +1809,7 @@ fn the_leadchanges_command_stands_named_among_the_thirty_seven_in_the_help_text(
     let (out, _, code) = run_cli(&["--help"]);
     assert_eq!(code, 0);
     assert!(out.contains(
-        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges,outset,tail}"
+        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges,outset,tail,crosshead}"
     ));
     assert!(out.contains("print the leadchanges report for one championship file"));
 }
@@ -1841,20 +1877,22 @@ fn the_outset_command_prints_the_championship_example_report() {
 }
 
 #[test]
-fn the_outset_command_stands_named_among_the_thirty_seven_in_the_help_text() {
+fn the_outset_command_stands_named_among_the_thirty_eight_in_the_help_text() {
     // The Round 37 enrolment, its brace list restated at the Round 38
     // enrolment as the charged mechanical consequence of the tail command
-    // joining it. The outset command standing named among all thirty seven
-    // commands in the help text, the command table declared and counted at
-    // thirty seven with tail standing last in it after outset, and the
-    // subcommand list carrying the outset line with its own text. The pin
-    // is characterization under the variant family, the table's own
-    // statement standing outside DH-72's reading, so it falls under no
-    // variant of EE-1 to EE-8.
+    // joining it and restated again at the Round 39 enrolment as the
+    // charged mechanical consequence of the crosshead command joining it.
+    // The outset command standing named among all thirty eight commands in
+    // the help text, the command table declared and counted at thirty eight
+    // with crosshead standing last in it after tail, and the subcommand
+    // list carrying the outset line with its own text. The pin is
+    // characterization under the variant family, the table's own statement
+    // standing outside DH-72's reading, so it falls under no variant of
+    // EE-1 to EE-8.
     let (out, _, code) = run_cli(&["--help"]);
     assert_eq!(code, 0);
     assert!(out.contains(
-        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges,outset,tail}"
+        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges,outset,tail,crosshead}"
     ));
     assert!(out.contains("print the outset report for one championship file"));
 }
@@ -1921,21 +1959,102 @@ fn the_tail_command_prints_the_championship_example_report() {
 }
 
 #[test]
-fn the_tail_command_stands_named_among_the_thirty_seven_in_the_help_text() {
-    // The Round 38 enrolment. The tail command
-    // standing named among all thirty seven commands in
-    // the help text, the command table declared and
-    // counted at thirty seven with tail standing
-    // last in it after outset, and the subcommand
-    // list carrying the tail line with its own
-    // text. The pin is characterization under the
-    // variant family, the table's own statement
-    // standing outside DH-74's reading, so it falls
+fn the_tail_command_stands_named_among_the_thirty_eight_in_the_help_text() {
+    // The Round 38 enrolment, its brace list restated at the Round 39
+    // enrolment as the charged mechanical consequence of the crosshead
+    // command joining it. The tail command standing named among all thirty
+    // eight commands in the help text, the command table declared and
+    // counted at thirty eight with crosshead standing last in it after
+    // tail, and the subcommand list carrying the tail line with its own
+    // text. The pin is characterization under the variant family, the
+    // table's own statement standing outside DH-74's reading, so it falls
     // under no variant of FF-1 to FF-8.
     let (out, _, code) = run_cli(&["--help"]);
     assert_eq!(code, 0);
     assert!(out.contains(
-        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges,outset,tail}"
+        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges,outset,tail,crosshead}"
     ));
     assert!(out.contains("print the tail report for one championship file"));
+}
+
+#[test]
+fn the_crosshead_command_prints_the_survey_report() {
+    // The Round 39 enrolment. Fails under GG-2,
+    // the longest reigns of DH-52 standing as
+    // the first figures and the closing moving.
+    // Fails under GG-5, the classes standing
+    // exchanged over the field. Fails under
+    // GG-6, the sections standing for the
+    // matched series and the survey report
+    // gaining sections. Fails under GG-7, the
+    // closing runs standing as the first
+    // figures. Fails under GG-8, the last stands
+    // standing as the second figures. Passes
+    // under GG-1, the last spells standing at
+    // the longest spells at every survey series
+    // and the report standing as before. Passes
+    // under GG-3, the last reigns classing the
+    // survey series as the first reigns do.
+    // Passes under GG-4, the first spells
+    // standing at the last spells at the survey
+    // seats the closing reads.
+    let outcome = run(
+        &args(&["deadheat", "crosshead", "examples/survey-championship.json"]),
+        200,
+    );
+    assert_eq!(outcome.code, 0);
+    assert!(outcome.stdout.starts_with("crosshead\n"));
+    assert!(outcome.stdout.ends_with(
+        "crosshead, 6 series, 4 reign longer, 0 spell longer, 2 matched, 0 no winner\n"
+    ));
+}
+
+#[test]
+fn the_crosshead_command_prints_the_championship_example_report() {
+    // The Round 39 enrolment. Fails under GG-5
+    // alone, the exchange classing both series
+    // spell longer and drawing their sections.
+    // Passes under GG-1 and GG-4, the longest
+    // and first spells standing at none as the
+    // last spells do over both series. Passes
+    // under GG-2 and GG-3, the longest and last
+    // reigns standing above the last spells of
+    // none at both series. Passes under GG-6,
+    // the sections standing for the matched
+    // series and this championship carrying
+    // none. Passes under GG-7, the closing runs
+    // leaving both series reign longer. Passes
+    // under GG-8, the last stands standing at
+    // none as the last spells do at both
+    // series.
+    let outcome = run(
+        &args(&["deadheat", "crosshead", "examples/championship.json"]),
+        200,
+    );
+    assert_eq!(outcome.code, 0);
+    assert!(outcome.stdout.starts_with("crosshead\n"));
+    assert!(outcome.stdout.ends_with(
+        "crosshead, 2 series, 2 reign longer, 0 spell longer, 0 matched, 0 no winner\n"
+    ));
+}
+
+#[test]
+fn the_crosshead_command_stands_named_among_the_thirty_eight_in_the_help_text() {
+    // The Round 39 enrolment. The crosshead
+    // command standing named among all thirty
+    // eight commands in the help text, the
+    // command table declared and counted at
+    // thirty eight with crosshead standing last
+    // in it after tail, and the subcommand list
+    // carrying the crosshead line with its own
+    // text.
+    let outcome = run(&args(&["deadheat", "--help"]), 200);
+    assert_eq!(outcome.code, 0);
+    assert!(outcome.stdout.contains("crosshead"));
+    assert!(outcome
+        .stdout
+        .contains("leadchanges,outset,tail,crosshead}"));
+    assert!(outcome
+        .stdout
+        .contains("print the crosshead report for one championship file"));
 }

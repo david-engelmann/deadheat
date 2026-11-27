@@ -19,6 +19,7 @@ use deadheat::championship::{championship_report, Championship};
 use deadheat::closings::closing_report;
 use deadheat::clusters::cluster_report;
 use deadheat::comebacks::comeback_report;
+use deadheat::crosshead::crosshead_report;
 use deadheat::crossings::crossings_report;
 use deadheat::deadlocks::deadlock_report;
 use deadheat::depths::depths_report;
@@ -2091,4 +2092,37 @@ fn the_tail_report_fences_its_fields() {
     let golden = std::fs::read_to_string(root.join("examples").join("championship-tail.txt"))
         .expect("the tail golden");
     assert_eq!(lines.join("\n") + "\n", golden);
+}
+
+#[test]
+fn the_crosshead_reading_and_report_stand_fenced_behind_their_own_module() {
+    // The Round 39 enrolment. Fails under GG-2,
+    // the longest reigns of DH-52 standing as
+    // the first figures and the closing moving.
+    // Fails under GG-5, the classes standing
+    // exchanged over the field. Fails under
+    // GG-6, the sections standing for the
+    // matched series and the survey report
+    // gaining sections. Fails under GG-7, the
+    // closing runs standing as the first
+    // figures. Fails under GG-8, the last stands
+    // standing as the second figures. Passes
+    // under GG-1, the last spells standing at
+    // the longest spells at every survey series
+    // and the report standing as before. Passes
+    // under GG-3, the last reigns classing the
+    // survey series as the first reigns do.
+    // Passes under GG-4, the first spells
+    // standing at the last spells at the survey
+    // seats the closing reads.
+    let (championship, defects) =
+        load_championship_file(&examples().join("survey-championship.json"));
+    assert_eq!(defects, Vec::<String>::new());
+    let championship = championship.expect("load the survey championship");
+    let lines = crosshead_report(&championship);
+    assert_eq!(lines[0], "crosshead");
+    assert_eq!(
+        lines.last().map(|line| line.as_str()),
+        Some("crosshead, 6 series, 4 reign longer, 0 spell longer, 2 matched, 0 no winner")
+    );
 }

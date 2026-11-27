@@ -4276,3 +4276,129 @@ fn every_enrolled_tail_golden_matches_the_library_report() {
         assert_eq!(rendered, golden, "{stem}");
     }
 }
+
+#[test]
+fn the_survey_championship_matches_its_crosshead_golden() {
+    // The Round 39 enrolment. The survey championship
+    // under the crosshead command standing byte for
+    // byte as its crosshead golden stands, at the
+    // closing DH-77's examples entry states, the
+    // command surface and the library surface both
+    // asserted over the same file. It falls under
+    // GG-2, GG-5, GG-6, GG-7, and GG-8, the survey fields
+    // moving under each, and stands under GG-1,
+    // GG-3, and GG-4, the survey render
+    // standing as before under each.
+    let source = examples().join("survey-championship.json");
+    let out = run_ok(&["crosshead", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("survey-championship-crosshead.txt"));
+    assert_eq!(out, golden);
+    assert!(out
+        .trim_end()
+        .ends_with("crosshead, 6 series, 4 reign longer, 0 spell longer, 2 matched, 0 no winner"));
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("survey-championship.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered = deadheat::crosshead::crosshead_report(&championship.expect("a championship"))
+        .join("\n")
+        + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn the_league_championship_matches_its_crosshead_golden() {
+    // The Round 39 enrolment. The league championship
+    // under the crosshead command standing byte for
+    // byte as its crosshead golden stands, at the
+    // closing DH-77's examples entry states, the
+    // command surface and the library surface both
+    // asserted over the same file. It falls under
+    // GG-1, GG-2, GG-3, GG-4, GG-5, GG-6, GG-7, and GG-8, the league fields
+    // moving under each.
+    let source = examples().join("league-championship.json");
+    let out = run_ok(&["crosshead", source.to_str().expect("utf8")]);
+    let golden = read_text(&examples().join("league-championship-crosshead.txt"));
+    assert_eq!(out, golden);
+    assert!(out
+        .trim_end()
+        .ends_with("crosshead, 10 series, 7 reign longer, 0 spell longer, 3 matched, 0 no winner"));
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &examples().join("league-championship.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let rendered = deadheat::crosshead::crosshead_report(&championship.expect("a championship"))
+        .join("\n")
+        + "\n";
+    assert_eq!(rendered, golden);
+}
+
+#[test]
+fn every_enrolled_crosshead_golden_matches_the_library_report() {
+    // The Round 39 enrolment. The golden census pin
+    // of the crosshead reading, standing over the
+    // thirty enrolled championships, each
+    // crosshead golden standing byte for byte as the
+    // library report over its championship renders,
+    // and the count of crosshead goldens in the
+    // examples directory standing at thirty.
+    // It falls under every variant of the family,
+    // each variant moving at least one enrolled
+    // championship's report.
+    let stems = [
+        "championship",
+        "survey-championship",
+        "league-championship",
+        "constructed-closing",
+        "constructed-cluster",
+        "constructed-comeback",
+        "constructed-crossings",
+        "constructed-deadlock",
+        "constructed-depths",
+        "constructed-distance",
+        "constructed-laststand",
+        "constructed-lead",
+        "constructed-opening",
+        "constructed-peak",
+        "constructed-place",
+        "constructed-rally",
+        "constructed-recovery",
+        "constructed-reigns",
+        "constructed-spells",
+        "constructed-streak",
+        "constructed-tenure",
+        "constructed-turns",
+        "constructed-firststand",
+        "constructed-firststrike",
+        "constructed-firstreign",
+        "constructed-lastreign",
+        "constructed-leadchanges",
+        "constructed-outset",
+        "constructed-tail",
+        "constructed-crosshead",
+    ];
+    let mut count = 0;
+    for entry in std::fs::read_dir(examples()).expect("the examples directory") {
+        let name = entry
+            .expect("an entry")
+            .file_name()
+            .to_string_lossy()
+            .into_owned();
+        if name.ends_with("-crosshead.txt") {
+            count += 1;
+        }
+    }
+    assert_eq!(count, 30);
+    for stem in stems {
+        let (championship, defects) = deadheat::championship::load_championship_file(
+            &examples().join(format!("{stem}.json")),
+        );
+        assert_eq!(defects, Vec::<String>::new(), "{stem}");
+        let rendered =
+            deadheat::crosshead::crosshead_report(&championship.expect("a championship"))
+                .join("\n")
+                + "\n";
+        let golden = read_text(&examples().join(format!("{stem}-crosshead.txt")));
+        assert_eq!(rendered, golden, "{stem}");
+    }
+}
