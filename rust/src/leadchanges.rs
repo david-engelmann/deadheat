@@ -18,10 +18,15 @@
 use crate::championship::{count_series, Championship, SeriesCount};
 use crate::series::Series;
 
+/// The lead changes class of a decided series under DH-70, counting places
+/// over the decided record where the lead passed from one model to the other.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum LeadchangesClass {
+    /// The lead changed hands two or more times across the decided record.
     Swung,
+    /// The lead changed hands once across the decided record.
     Turned,
+    /// The lead never changed hands across the decided record.
     NeverBehind,
 }
 

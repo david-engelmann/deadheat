@@ -17,9 +17,14 @@
 use crate::championship::{count_series, Championship, SeriesCount};
 use crate::series::Series;
 
+/// The last reign class of a decided series under DH-68, standing held
+/// where the winner's closing run of ahead standings holds two or more
+/// decided races and single where it holds one.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum LastreignClass {
+    /// The winner's last run of ahead standings holds two or more races.
     Held,
+    /// The winner's last run of ahead standings holds one race.
     Single,
 }
 

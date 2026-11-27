@@ -18,9 +18,14 @@
 use crate::championship::{count_series, Championship, SeriesCount};
 use crate::series::Series;
 
+/// The first reign class of a decided series under DH-66, standing held
+/// where the winner's first run of ahead standings holds two or more
+/// decided races and single where it holds one.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum FirstreignClass {
+    /// The winner's first run of ahead standings holds two or more races.
     Held,
+    /// The winner's first run of ahead standings holds one race.
     Single,
 }
 
