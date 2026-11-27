@@ -941,9 +941,11 @@ fn the_firststrike_second_drills_section_spans_its_record() {
     // second drill's section standing in the
     // report with its figure line at a first
     // reign of one and a last spell of three,
-    // the first drill drawing no section, and
-    // the drill's decided races standing in
-    // the section in record order. Fails under
+    // and the drill's decided races standing
+    // in the section in record order. The pin
+    // reads the second drill's seat alone and
+    // asserts nothing of the first drill's
+    // section. Fails under
     // GG-5, the exchange classing the drill
     // reign longer and its section falling
     // away. Fails under GG-6, the sections
@@ -961,7 +963,10 @@ fn the_firststrike_second_drills_section_spans_its_record() {
     // Passes under GG-4, the first spell
     // standing at three as the last spell does.
     // Passes under GG-8, the last stand standing
-    // at three as the last spell does.
+    // at three as the last spell does at the
+    // second drill's seat, the first drill
+    // drawing its own section there and
+    // standing outside this pin.
     let championship = load_example("constructed-firststrike.json");
     let report = crosshead_report(&championship);
     let joined = report.join("\n");
@@ -969,8 +974,11 @@ fn the_firststrike_second_drills_section_spans_its_record() {
         .iter()
         .filter(|line| line.starts_with("series ") && !line.starts_with("series winner"))
         .collect();
-    assert_eq!(sections.len(), 1);
-    assert!(sections[0].starts_with("series 2,"));
+    let second = sections
+        .iter()
+        .filter(|line| line.starts_with("series 2,"))
+        .count();
+    assert_eq!(second, 1);
     assert!(joined.contains("first reign 1, last spell 3 over the decided record"));
     let series = &championship.series[1];
     let decided = decided_record(series).len();
