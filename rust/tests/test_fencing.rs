@@ -49,6 +49,7 @@ use deadheat::seats::attempt_summary;
 use deadheat::series::{series_report, Series};
 use deadheat::spells::spells_report;
 use deadheat::streaks::streak_report;
+use deadheat::tail::tail_report;
 use deadheat::tenure::tenure_report;
 use deadheat::totals::totals_report;
 use deadheat::turns::turns_report;
@@ -2048,5 +2049,46 @@ fn the_outset_report_fences_its_fields() {
     );
     let golden = std::fs::read_to_string(root.join("examples").join("championship-outset.txt"))
         .expect("the outset golden");
+    assert_eq!(lines.join("\n") + "\n", golden);
+}
+
+#[test]
+fn the_tail_report_fences_its_fields() {
+    // The Round 38 enrolment. The tail report
+    // of the championship example standing whole at
+    // its two lines, the header and the closing, no
+    // section standing for either series, both series
+    // standing reign longer, its lines carrying no
+    // field a break can forge, the report standing as
+    // its golden stands. It falls under FF-5 alone,
+    // the classes standing exchanged there and both
+    // series drawing sections and the lines parting.
+    // It stands under FF-1 and FF-3, the longest and
+    // first spells standing at nought there, under
+    // FF-2 and FF-4, the longest and first reigns
+    // standing above the last spells of none there,
+    // under FF-6, the sections standing for the
+    // matched series and this championship carrying
+    // none, under FF-7, the closing runs leaving both
+    // series reign longer there, and under FF-8, the
+    // last stands standing at none there. It fails on
+    // the pre round tree by compile absence, the tail
+    // module standing absent there.
+    let root = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"));
+    let (championship, defects) = deadheat::championship::load_championship_file(
+        &root.join("examples").join("championship.json"),
+    );
+    assert_eq!(defects, Vec::<String>::new());
+    let lines = tail_report(&championship.expect("a championship"));
+    assert_no_forgery(&lines);
+    assert_eq!(
+        lines,
+        vec![
+            "tail",
+            "tail, 2 series, 2 reign longer, 0 spell longer, 0 matched, 0 no winner",
+        ]
+    );
+    let golden = std::fs::read_to_string(root.join("examples").join("championship-tail.txt"))
+        .expect("the tail golden");
     assert_eq!(lines.join("\n") + "\n", golden);
 }

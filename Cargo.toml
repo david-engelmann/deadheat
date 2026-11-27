@@ -203,6 +203,10 @@ name = "test_outset"
 path = "rust/tests/test_outset.rs"
 
 [[test]]
+name = "test_tail"
+path = "rust/tests/test_tail.rs"
+
+[[test]]
 name = "test_fold"
 path = "rust/tests/test_fold.rs"
 

@@ -1,0 +1,199 @@
+{
+ "models": [
+  "tail-ash",
+  "tail-birch"
+ ],
+ "races": [
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "tail-ash",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 77401
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "tail-birch",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 77424
+    }
+   ],
+   "task": "tail drill two race one"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "tail-ash",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 77447
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 140.0,
+     "model": "tail-birch",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 77470
+    }
+   ],
+   "task": "tail drill two race two"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "tail-ash",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 77493
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "tail-birch",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 77516
+    }
+   ],
+   "task": "tail drill two race three"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "tail-ash",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 77539
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 140.0,
+     "model": "tail-birch",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 77562
+    }
+   ],
+   "task": "tail drill two race four"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 130.0,
+     "model": "tail-ash",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 77585
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "tail-birch",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 77608
+    }
+   ],
+   "task": "tail drill two race five"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 140.0,
+     "model": "tail-ash",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 77631
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 100.0,
+     "model": "tail-birch",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 77654
+    }
+   ],
+   "task": "tail drill two race six"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "tail-ash",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 77677
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "tail-birch",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 77700
+    }
+   ],
+   "task": "tail drill two race seven"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "tail-ash",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 77723
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 140.0,
+     "model": "tail-birch",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 77746
+    }
+   ],
+   "task": "tail drill two race eight"
+  },
+  {
+   "attempts": [
+    {
+     "environment": "lane one",
+     "finished_at": 100.0,
+     "model": "tail-ash",
+     "patch": "winner diff",
+     "result": "green",
+     "tokens": 77769
+    },
+    {
+     "environment": "lane two",
+     "finished_at": 130.0,
+     "model": "tail-birch",
+     "patch": "loser diff",
+     "result": "red",
+     "tokens": 77792
+    }
+   ],
+   "task": "tail drill two race nine"
+  }
+ ],
+ "task": "the constructed tail drill two",
+ "wins_target": 5
+}
