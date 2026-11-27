@@ -1979,82 +1979,81 @@ fn the_tail_command_stands_named_among_the_thirty_eight_in_the_help_text() {
 
 #[test]
 fn the_crosshead_command_prints_the_survey_report() {
-    // The Round 39 enrolment. Fails under GG-2,
-    // the longest reigns of DH-52 standing as
-    // the first figures and the closing moving.
-    // Fails under GG-5, the classes standing
-    // exchanged over the field. Fails under
-    // GG-6, the sections standing for the
-    // matched series and the survey report
-    // gaining sections. Fails under GG-7, the
-    // closing runs standing as the first
-    // figures. Fails under GG-8, the last stands
-    // standing as the second figures. Passes
-    // under GG-1, the last spells standing at
-    // the longest spells at every survey series
-    // and the report standing as before. Passes
-    // under GG-3, the last reigns classing the
-    // survey series as the first reigns do.
-    // Passes under GG-4, the first spells
-    // standing at the last spells at the survey
-    // seats the closing reads.
-    let outcome = run(
-        &args(&["deadheat", "crosshead", "examples/survey-championship.json"]),
-        200,
-    );
-    assert_eq!(outcome.code, 0);
-    assert!(outcome.stdout.starts_with("crosshead\n"));
-    assert!(outcome.stdout.ends_with(
-        "crosshead, 6 series, 4 reign longer, 0 spell longer, 2 matched, 0 no winner\n"
-    ));
+    // The Round 39 enrolment. The crosshead command
+    // at the survey championship, its output standing
+    // byte for byte as the survey crosshead golden
+    // stands, the report the library renders over the
+    // same file, so the command surface and the library
+    // surface stand unable to part on the new reading.
+    // It falls under GG-2, the longest reigns of the
+    // survey fields standing as their first figures
+    // there, under GG-5, the classes standing exchanged
+    // there, under GG-6, its matched series drawing
+    // sections there, under GG-7, the closing runs
+    // standing as their first figures there, and
+    // under GG-8, the last stands standing as the
+    // second figures there. It stands under GG-1, the
+    // longest spells standing at the last spells at
+    // every survey series there, under GG-3, the last
+    // reigns classing the survey series as the first
+    // reigns do there, and under GG-4, the first
+    // spells standing at the last spells at the survey
+    // seats the closing reads there.
+    let source = examples().join("survey-championship.json");
+    let (out, _, code) = run_cli(&["crosshead", source.to_str().expect("utf8")]);
+    assert_eq!(code, 0);
+    let golden = std::fs::read_to_string(examples().join("survey-championship-crosshead.txt"))
+        .expect("a golden");
+    assert_eq!(out, golden);
 }
 
 #[test]
 fn the_crosshead_command_prints_the_championship_example_report() {
-    // The Round 39 enrolment. Fails under GG-5
-    // alone, the exchange classing both series
-    // spell longer and drawing their sections.
-    // Passes under GG-1 and GG-4, the longest
-    // and first spells standing at none as the
-    // last spells do over both series. Passes
-    // under GG-2 and GG-3, the longest and last
-    // reigns standing above the last spells of
-    // none at both series. Passes under GG-6,
-    // the sections standing for the matched
-    // series and this championship carrying
-    // none. Passes under GG-7, the closing runs
-    // leaving both series reign longer. Passes
-    // under GG-8, the last stands standing at
-    // none as the last spells do at both
-    // series.
-    let outcome = run(
-        &args(&["deadheat", "crosshead", "examples/championship.json"]),
-        200,
-    );
-    assert_eq!(outcome.code, 0);
-    assert!(outcome.stdout.starts_with("crosshead\n"));
-    assert!(outcome.stdout.ends_with(
-        "crosshead, 2 series, 2 reign longer, 0 spell longer, 0 matched, 0 no winner\n"
-    ));
+    // The Round 39 enrolment. The crosshead command
+    // at the championship example, its output standing
+    // byte for byte as the championship crosshead golden
+    // stands, the full report over a championship
+    // whose two series both stand reign longer and
+    // neither section standing. It falls under GG-5
+    // alone, the classes standing exchanged there and
+    // both series drawing their sections. It stands
+    // under GG-1 and GG-4, the longest and first
+    // spells standing at none as the last spells do
+    // over both series there, under GG-2 and GG-3, the
+    // longest and last reigns standing above the
+    // last spells of none there, under GG-6, the
+    // sections standing for the matched series and
+    // this championship carrying none, under GG-7,
+    // the closing runs leaving both series reign
+    // longer there, and under GG-8, the last stands
+    // standing at none as the last spells do there.
+    let source = examples().join("championship.json");
+    let (out, _, code) = run_cli(&["crosshead", source.to_str().expect("utf8")]);
+    assert_eq!(code, 0);
+    let golden =
+        std::fs::read_to_string(examples().join("championship-crosshead.txt")).expect("a golden");
+    assert_eq!(out, golden);
+    assert!(out
+        .trim_end()
+        .ends_with("crosshead, 2 series, 2 reign longer, 0 spell longer, 0 matched, 0 no winner"));
 }
 
 #[test]
 fn the_crosshead_command_stands_named_among_the_thirty_eight_in_the_help_text() {
-    // The Round 39 enrolment. The crosshead
-    // command standing named among all thirty
-    // eight commands in the help text, the
-    // command table declared and counted at
-    // thirty eight with crosshead standing last
-    // in it after tail, and the subcommand list
-    // carrying the crosshead line with its own
-    // text.
-    let outcome = run(&args(&["deadheat", "--help"]), 200);
-    assert_eq!(outcome.code, 0);
-    assert!(outcome.stdout.contains("crosshead"));
-    assert!(outcome
-        .stdout
-        .contains("leadchanges,outset,tail,crosshead}"));
-    assert!(outcome
-        .stdout
-        .contains("print the crosshead report for one championship file"));
+    // The Round 39 enrolment. The crosshead command
+    // standing named among all thirty eight commands in
+    // the help text, the command table declared and
+    // counted at thirty eight with crosshead standing
+    // last in it after tail, and the subcommand
+    // list carrying the crosshead line with its own
+    // text. The pin is characterization under the
+    // variant family, the table's own statement
+    // standing outside DH-76's reading, so it falls
+    // under no variant of GG-1 to GG-8.
+    let (out, _, code) = run_cli(&["--help"]);
+    assert_eq!(code, 0);
+    assert!(out.contains(
+        "{race,adopt,discard,standings,closecall,series,championship,flip,totals,pairing,comeback,distance,run,rally,deadlock,streak,cluster,closing,opening,turns,lead,crossings,tenure,depths,spells,reigns,place,peak,recovery,laststand,firststand,firststrike,firstreign,lastreign,leadchanges,outset,tail,crosshead}"
+    ));
+    assert!(out.contains("print the crosshead report for one championship file"));
 }
