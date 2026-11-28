@@ -1,7 +1,7 @@
 //! The deadheat command line surface, as a library function.
 //!
-//! Six commands work on recorded races, series, and the
-//! standings file. The dispatch mirrors the Python argparse
+//! Thirty eight commands work on recorded races, series,
+//! championships, and the standings file. The dispatch mirrors the Python argparse
 //! surface of the same name, the help and usage text wraps at
 //! the width the Python surface wraps at under PORT-7, the
 //! arguments are carried as the code unit sequences the
@@ -299,7 +299,7 @@ fn terminal_width() -> Option<usize> {
         ws_ypixel: u16,
     }
     extern "C" {
-        fn ioctl(fd: i32, request: u64, ...) -> i32;
+        fn ioctl(fd: i32, request: std::ffi::c_ulong, ...) -> i32;
     }
     let mut size = Winsize {
         ws_row: 0,
@@ -307,8 +307,25 @@ fn terminal_width() -> Option<usize> {
         ws_xpixel: 0,
         ws_ypixel: 0,
     };
-    // TIOCGWINSZ on Linux.
-    let result = unsafe { ioctl(1, 0x5413, &mut size as *mut Winsize) };
+    #[cfg(any(
+        target_os = "macos",
+        target_os = "ios",
+        target_os = "freebsd",
+        target_os = "netbsd",
+        target_os = "openbsd",
+        target_os = "dragonfly"
+    ))]
+    const TIOCGWINSZ: std::ffi::c_ulong = 0x4008_7468;
+    #[cfg(not(any(
+        target_os = "macos",
+        target_os = "ios",
+        target_os = "freebsd",
+        target_os = "netbsd",
+        target_os = "openbsd",
+        target_os = "dragonfly"
+    )))]
+    const TIOCGWINSZ: std::ffi::c_ulong = 0x5413;
+    let result = unsafe { ioctl(1, TIOCGWINSZ, &mut size as *mut Winsize) };
     if result == 0 && size.ws_col > 0 {
         Some(size.ws_col as usize)
     } else {

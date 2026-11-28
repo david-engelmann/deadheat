@@ -554,7 +554,11 @@ fn a_standings_sum_at_exactly_the_digit_limit_renders() {
     assert!(stored.contains(&big), "the 4300 digit total stands");
 }
 
-#[cfg(unix)]
+// Narrowed from #[cfg(unix)] to #[cfg(target_os = "linux")] as a recorded
+// cross-platform correction because macOS APFS rejects non-UTF-8 0xFF byte
+// sequences in on-disk filenames at std::fs::copy, whereas Linux filesystems
+// permit raw byte filenames.
+#[cfg(target_os = "linux")]
 #[test]
 fn a_filename_carrying_byte_ff_opens_and_echoes_raw() {
     // Red team Minor 3 and spec Minor 5. Byte 0xFF decodes to

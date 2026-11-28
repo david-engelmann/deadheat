@@ -19,10 +19,15 @@
 use crate::championship::{count_series, Championship, SeriesCount};
 use crate::series::Series;
 
+/// The tail class of a decided series under DH-74, reading the winner's
+/// last reign against the winner's last spell behind.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum TailClass {
+    /// The winner's last reign stands above its last spell behind.
     ReignLonger,
+    /// The winner's last spell behind stands above its last reign.
     SpellLonger,
+    /// The winner's last reign and last spell behind stand equal.
     Matched,
 }
 

@@ -12,3 +12,5 @@ target/
 .idea/
 .vscode/
 *.log
+duel-workspace/
+duel-record.json

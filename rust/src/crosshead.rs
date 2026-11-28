@@ -19,10 +19,15 @@
 use crate::championship::{count_series, Championship, SeriesCount};
 use crate::series::Series;
 
+/// The crosshead class of a decided series under DH-76, reading the winner's
+/// first reign against the winner's last spell behind.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum CrossheadClass {
+    /// The winner's first reign stands above its last spell behind.
     ReignLonger,
+    /// The winner's last spell behind stands above its first reign.
     SpellLonger,
+    /// The winner's first reign and last spell behind stand equal.
     Matched,
 }
 

@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/david-engelmann/deadheat/main/schemas/standings.schema.json",
+  "title": "Deadheat Standings File (v1)",
+  "description": "Version 1 cumulative standings ledger read and updated by deadheat standings and race --standings.",
+  "type": "object",
+  "required": [
+    "models"
+  ],
+  "properties": {
+    "version": {
+      "type": "integer",
+      "const": 1
+    },
+    "models": {
+      "type": "object",
+      "propertyNames": {
+        "not": {
+          "pattern": "[\\r\\n]"
+        }
+      },
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "wins",
+          "losses",
+          "no_results",
+          "tokens",
+          "tokens_unreported"
+        ],
+        "properties": {
+          "wins": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "losses": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "no_results": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "tokens": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "tokens_unreported": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    }
+  }
+}

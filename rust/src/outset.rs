@@ -19,10 +19,15 @@
 use crate::championship::{count_series, Championship, SeriesCount};
 use crate::series::Series;
 
+/// The outset class of a decided series under DH-72, reading the winner's
+/// first reign against the winner's first spell behind.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum OutsetClass {
+    /// The winner's first reign stands above its first spell behind.
     ReignLonger,
+    /// The winner's first spell behind stands above its first reign.
     SpellLonger,
+    /// The winner's first reign and first spell behind stand equal.
     Matched,
 }
 

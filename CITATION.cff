@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use Deadheat in research or engineering benchmarks, please cite this software."
+type: software
+title: "Deadheat"
+abstract: "Deadheat is a head to head coding agent duel runner, close call adjudicator, and thirty eight command series analytics suite written in Rust."
+authors:
+  - family-names: "Engelmann"
+    given-names: "David"
+version: "0.1.0"
+license: "MIT"
+repository-code: "https://github.com/david-engelmann/deadheat"
+url: "https://github.com/david-engelmann/deadheat"
+keywords:
+  - "cli"
+  - "benchmarking"
+  - "evaluation"
+  - "agents"
+  - "llm"

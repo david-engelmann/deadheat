@@ -15,9 +15,14 @@
 use crate::championship::{count_series, Championship, SeriesCount};
 use crate::series::Series;
 
+/// The first strike class of a decided series under DH-64, standing in a run
+/// where the winner's first run of wins holds two or more decided races and
+/// alone where it holds one.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum FirststrikeClass {
+    /// The winner's first run of decided race wins holds two or more races.
     InARun,
+    /// The winner's first run of decided race wins holds a single race.
     Alone,
 }
 

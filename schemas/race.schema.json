@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/david-engelmann/deadheat/main/schemas/race.schema.json",
+  "title": "Deadheat Race Record (v1)",
+  "description": "Version 1 two-attempt race record read by race, closecall, adopt, and discard.",
+  "type": "object",
+  "required": [
+    "task",
+    "attempts"
+  ],
+  "not": {
+    "required": [
+      "adjudication",
+      "panel"
+    ]
+  },
+  "properties": {
+    "version": {
+      "type": "integer",
+      "const": 1
+    },
+    "task": {
+      "type": "string",
+      "minLength": 1,
+      "not": {
+        "pattern": "[\\r\\n]"
+      }
+    },
+    "attempts": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "$ref": "#/$defs/attempt"
+      }
+    },
+    "adjudication": {
+      "$ref": "#/$defs/adjudication"
+    },
+    "panel": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 2,
+      "items": {
+        "$ref": "#/$defs/adjudication"
+      }
+    }
+  },
+  "$defs": {
+    "attempt": {
+      "type": "object",
+      "required": [
+        "model",
+        "environment",
+        "result",
+        "tokens",
+        "patch"
+      ],
+      "properties": {
+        "model": {
+          "type": "string",
+          "minLength": 1,
+          "not": {
+            "pattern": "[\\r\\n]"
+          }
+        },
+        "environment": {
+          "type": "string",
+          "minLength": 1,
+          "not": {
+            "pattern": "[\\r\\n]"
+          }
+        },
+        "result": {
+          "type": "string",
+          "enum": [
+            "green",
+            "red",
+            "unfinished"
+          ]
+        },
+        "finished_at": {
+          "type": "number",
+          "minimum": 0
+        },
+        "adjustment": {
+          "type": "number"
+        },
+        "tokens": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "patch": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "result": {
+                "enum": [
+                  "green",
+                  "red"
+                ]
+              }
+            },
+            "required": [
+              "result"
+            ]
+          },
+          "then": {
+            "required": [
+              "finished_at"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "result": {
+                "const": "unfinished"
+              }
+            },
+            "required": [
+              "result"
+            ]
+          },
+          "then": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "finished_at"
+                  ]
+                },
+                {
+                  "required": [
+                    "adjustment"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "adjudication": {
+      "type": "object",
+      "required": [
+        "adjudicator",
+        "chosen",
+        "reason",
+        "confidence"
+      ],
+      "properties": {
+        "version": {
+          "type": "integer",
+          "const": 1
+        },
+        "adjudicator": {
+          "type": "string",
+          "minLength": 1,
+          "not": {
+            "pattern": "[\\r\\n]"
+          }
+        },
+        "chosen": {
+          "type": "string",
+          "minLength": 1,
+          "not": {
+            "pattern": "[\\r\\n]"
+          }
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "not": {
+            "pattern": "[\\r\\n]"
+          }
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        }
+      }
+    }
+  }
+}

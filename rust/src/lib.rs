@@ -1,10 +1,13 @@
-//! The deadheat library, the Rust port of the Python package.
+//! Deadheat races two attempts at one task in isolated workspaces, scores
+//! finishes by passing verification checks, elapsed seconds, and optional
+//! handicaps, adjudicates close calls from recorded model verdicts, adopts
+//! or discards loser patches, and renders thirty five analytical readings
+//! across races, series, and championships.
 //!
-//! The landed Python implementation is the behavioral spec of
-//! this port, as PORT-1 in CONTRACT.md states. The loaders, the
-//! readings, and the renderings are pure library functions over
-//! recorded files, and the command line is a thin shell over
-//! them.
+//! The loaders, readings, and renderers stand as pure functions over
+//! version 1 JSON records, while `runner` executes two local command
+//! attempts side by side from a race specification. The command line
+//! binary in `cli` is a thin shell over these modules.
 
 pub mod championship;
 pub mod cli;

@@ -1,0 +1,65 @@
+#compdef deadheat
+
+_deadheat() {
+  local line
+  local -a subcommands
+  subcommands=(
+    'run'
+    'race'
+    'closecall'
+    'adopt'
+    'discard'
+    'standings'
+    'series'
+    'flip'
+    'championship'
+    'totals'
+    'pairing'
+    'comeback'
+    'distance'
+    'rally'
+    'deadlock'
+    'streak'
+    'cluster'
+    'closing'
+    'opening'
+    'turns'
+    'lead'
+    'crossings'
+    'tenure'
+    'depths'
+    'spells'
+    'reigns'
+    'place'
+    'peak'
+    'recovery'
+    'laststand'
+    'firststand'
+    'firststrike'
+    'firstreign'
+    'lastreign'
+    'leadchanges'
+    'outset'
+    'tail'
+    'crosshead'
+  )
+  _arguments -C \
+    '(- *)'{-h,--help}'[Print help information]' \
+    '1:command:compadd -a subcommands' \
+    '*::arg:->args'
+  case "$line[1]" in
+    race)
+      _arguments \
+        '(-h --help)'{-h,--help}'[Print help information]' \
+        '--standings[Update standings JSON file]:standings file:_files' \
+        '*:input file:_files'
+      ;;
+    *)
+      _arguments \
+        '(-h --help)'{-h,--help}'[Print help information]' \
+        '*:input file:_files'
+      ;;
+  esac
+}
+
+_deadheat "$@"

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 549" width="920" height="549" role="img"><title>deadheat - head-to-head model duel runner and tournament standings</title><style>.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; }.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }@keyframes pulseGlow { 0%, 100% { opacity: 1; } 50% { opacity: 0.55; } }.live-dot { animation: pulseGlow 2.8s ease-in-out infinite; }@media (prefers-reduced-motion: reduce) { .live-dot { animation: none; } }</style><rect x="1" y="1" width="918" height="547" rx="14" fill="#0f0e0c" stroke="#2e2b25" stroke-width="1.5"/>
+        <text x="36" y="44" class="sans" font-size="13" font-weight="700" fill="#a6a095" letter-spacing="0.8">TWO-LANE DUEL TELEMETRY &amp; 5% CLOSE-CALL ADJUDICATION</text>
+        <circle cx="880" cy="39" r="5" fill="#10b981" class="live-dot"/>
+        <text x="866" y="44" text-anchor="end" class="mono" font-size="11" fill="#10b981">WINNER DECIDED</text>
+
+        <rect x="36" y="60" width="526" height="172" rx="8" fill="#1f1d19" stroke="#2e2b25"/>
+        <text x="54" y="84" class="sans" font-size="13" font-weight="700" fill="#f2eee6">Task · land the settings migration</text>
+        <rect x="54" y="98" width="490" height="48" rx="6" fill="#0d281f"/>
+        <text x="68" y="119" class="mono" font-size="12" font-weight="700" fill="#10b981">WINNER  shadow-1 (shadow worktree)</text>
+        <text x="68" y="136" class="mono" font-size="11.5" fill="#f2eee6">GREEN in 640.75s · 121,900 tokens · margin 171.65s</text>
+
+        <rect x="54" y="156" width="490" height="48" rx="6" fill="#2b1212"/>
+        <text x="68" y="177" class="mono" font-size="12" font-weight="700" fill="#ef4444">LOSER   prime-1 (home worktree)</text>
+        <text x="68" y="194" class="mono" font-size="11.5" fill="#f2eee6">RED in 812.40s · 152,300 tokens · patch adoptable</text>
+
+        <rect x="580" y="60" width="304" height="172" rx="8" fill="#1f1d19" stroke="#2e2b25"/>
+        <text x="598" y="84" class="sans" font-size="13" font-weight="700" fill="#f2eee6">Close-Call &amp; Season Gate</text>
+        <text x="598" y="109" class="mono" font-size="11.5" fill="#f59e0b">Band · 0 &lt; gap &lt;= 5% or both red</text>
+        <text x="598" y="128" class="mono" font-size="11" fill="#a6a095">288s vs 300s (12s gap = 4.0%)</text>
+        <text x="598" y="148" class="mono" font-size="11.5" fill="#10b981">judge-2 -&gt; prime-1 (conf 0.87 &gt;= 0.80)</text>
+        <line x1="598" y1="163" x2="866" y2="163" stroke="#2e2b25"/>
+        <text x="598" y="184" class="mono" font-size="11.5" fill="#f2eee6">Championship · 2 series · 14 races</text>
+        <text x="598" y="204" class="mono" font-size="11.5" fill="#f59e0b">prime-1 6W-1L · shadow-1 1W-6L</text>
+        <rect x="36" y="252" width="848" height="269" rx="10" fill="#12110f" stroke="#2e2b25"/><circle cx="56" cy="272" r="5" fill="#ef4444"/><circle cx="72" cy="272" r="5" fill="#f59e0b"/><circle cx="88" cy="272" r="5" fill="#10b981"/><text x="460" y="276" text-anchor="middle" class="mono" font-size="11" fill="#9c9588">deadheat - verified offline examples</text><line x1="36" y1="288" x2="884" y2="288" stroke="#2a2722"/><text x="54" y="310" class="mono" font-size="11.5" fill="#f59e0b">$ deadheat race examples/shadow-wins.json</text><text x="54" y="329" class="mono" font-size="11.5" fill="#f2eee6">race land the settings migration</text><text x="54" y="348" class="mono" font-size="11.5" fill="#f87171">prime-1 in home worktree, red in 812.4 seconds, 152300 tokens</text><text x="54" y="367" class="mono" font-size="11.5" fill="#34d399">shadow-1 in shadow worktree, green in 640.75 seconds, 121900 tokens</text><text x="54" y="386" class="mono" font-size="11.5" fill="#34d399">verdict, shadow-1 wins</text><text x="54" y="405" class="mono" font-size="11.5" fill="#9c9588">margin 171.65 seconds between the two finishes</text><text x="54" y="424" class="mono" font-size="11.5" fill="#f59e0b">$ deadheat closecall examples/close-call-decided.json</text><text x="54" y="443" class="mono" font-size="11.5" fill="#f2eee6">in the band, both attempts went green and the gap of 12 seconds is within five percent of the slower finish of 300 seconds</text><text x="54" y="462" class="mono" font-size="11.5" fill="#34d399">adjudication by judge-2 chose prime-1 at confidence 0.87, the race is decided for prime-1</text><text x="54" y="481" class="mono" font-size="11.5" fill="#f59e0b">$ deadheat totals examples/championship.json</text><text x="54" y="500" class="mono" font-size="11.5" fill="#f2eee6">prime-1, 14 races, 6 wins, 1 losses, 7 no results, 1017000 tokens  |  totals, 2 series, 14 races</text></svg>
