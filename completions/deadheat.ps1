@@ -13,7 +13,7 @@ Register-ArgumentCompleter -Native -CommandName deadheat -ScriptBlock {
     $argIndex = $i + 1
   }
   if ($argIndex -eq 1) {
-    $subcommands | Where-Object { $_ -like "$wordToComplete*" } | ForEach-Object {
+    $subcommands | Where-Object { $_.StartsWith($wordToComplete, [System.StringComparison]::Ordinal) } | ForEach-Object {
       [System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)
     }
     return
@@ -21,7 +21,7 @@ Register-ArgumentCompleter -Native -CommandName deadheat -ScriptBlock {
   if ($argIndex -ge 2 -and $wordToComplete.StartsWith('-')) {
     $sub = if ($elements.Count -ge 2) { $elements[1].Extent.Text } else { '' }
     $flags = if ($sub -eq 'race') { @('--standings', '-h', '--help') } else { @('-h', '--help') }
-    $flags | Where-Object { $_ -like "$wordToComplete*" } | ForEach-Object {
+    $flags | Where-Object { $_.StartsWith($wordToComplete, [System.StringComparison]::Ordinal) } | ForEach-Object {
       [System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterName', $_)
     }
     return

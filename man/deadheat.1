@@ -1,0 +1,76 @@
+.TH DEADHEAT 1 "2026-11-27" "deadheat 0.1.0" "Spectacle Line Manual"
+.SH NAME
+deadheat \- two-lane coding agent duel runner, close-call adjudicator, and series analytics tool
+.SH SYNOPSIS
+\fBdeadheat\fR [\fB-h\fR | \fB--help\fR] \fICOMMAND\fR [\fIOPTIONS\fR] \fIFILE\fR ...
+.SH DESCRIPTION
+\fBdeadheat\fR races two competing model attempts at one task in isolated workspace directories, decides the winner from suite pass/fail status, elapsed wall-clock seconds, optional handicaps, and the fixed five-percent close-call band, salvages defeated patches, and prints thirty-five offline analytical readings across races, standings, series, and championships.
+.SH COMMANDS
+.TP
+\fBrun <spec.json>\fR
+Execute a two-lane local duel specification and write the version 1 race record.
+.TP
+\fBrace [--standings <standings.json>] <race.json>\fR
+Score a recorded race and optionally update cumulative model standings.
+.TP
+\fBclosecall <race.json>\fR
+Print close-call adjudication or dual-judge panel details for a race.
+.TP
+\fBadopt | discard <race.json> <patches_dir>\fR
+Write or remove archived loser patch files for a decided race.
+.TP
+\fBstandings <standings.json>\fR
+Render cumulative wins, losses, no-results, and token totals.
+.TP
+\fBseries <series.json>\fR
+Render a first-to-N race series.
+.TP
+\fBflip <series.json>\fR
+Compare each race's scratch winner against its handicap-adjusted winner (flipped, held, or no result).
+.TP
+\fBchampionship | totals | pairing <championship.json>\fR
+Summarize multi-series championships, aggregate model totals, and head-to-head pairings.
+.TP
+\fBcomeback | distance | rally | deadlock | streak | cluster | closing | opening | turns | lead | crossings | tenure | depths | spells | reigns | place | peak | recovery | laststand | firststand | firststrike | firstreign | lastreign | leadchanges | outset | tail | crosshead <championship.json>\fR
+Run the twenty-seven trajectory, momentum, reign, and deficit championship readings.
+.SH EXIT STATUS
+.TP
+\fB0\fR
+Race executed cleanly (run), patch adopted or discarded (adopt or discard), or report printed cleanly.
+.TP
+\fB1\fR
+Malformed JSON refused with structured defect lines on stdout, unreadable or non-UTF-8 input file, existing workspace directory or malformed attempt result on run, 4300-digit integer overflow, adopt or discard invoked on a valid race with no winner, filesystem write failure, or closed stdout pipe on large output (>= 8192 bytes).
+.TP
+\fB2\fR
+Unknown subcommand, unrecognized option, or wrong argument count on stderr.
+.TP
+\fB120\fR
+Failed stderr stream write, or closed stdout pipe on short output (<= 4096 bytes).
+.SH EXAMPLES
+Score a recorded race
+.nf
+.RS 4
+deadheat race examples/shadow-wins.json
+.RE
+.fi
+.PP
+Summarize model totals across a championship
+.nf
+.RS 4
+deadheat totals examples/championship.json
+.RE
+.fi
+.PP
+Inspect comeback series across a championship
+.nf
+.RS 4
+deadheat comeback examples/championship.json
+.RE
+.fi
+.SH SEE ALSO
+Project documentation and Draft 2020-12 JSON Schemas at
+.I https://github.com/david-engelmann/deadheat
+and the online operator handbook at
+.I https://david-engelmann.github.io/deadheat/
+.SH AUTHORS
+David Engelmann. Released under the MIT License.

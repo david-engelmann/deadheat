@@ -14,6 +14,7 @@ categories = ["command-line-utilities", "development-tools"]
 default-run = "deadheat"
 exclude = [
   "AGENTS.md",
+  "action.yml",
   "CONTRACT.md",
   "ROADMAP.md",
   ".github/**",
