@@ -20,7 +20,7 @@ Measured on Apple Silicon (`cargo build --release --locked`, median wall-clock d
 | Benchmark command | `deadheat totals` | Full end-to-end CLI invocation |
 | Synthetic workload | 100 first-to-3 series (500 two-lane races, 1,000 attempts) | Validated whole before rendering |
 | Median wall-clock time | `20.19 ms` | Median of 9 cold-process runs |
-| Sustained throughput | `24,765 races/sec` | Includes JSON parsing and line-break fencing |
+| Median-derived rate | `24,765 races/sec` | Derived from median of 9 cold-process runs |
 
 ## Spectacle Line Release Comparison
 

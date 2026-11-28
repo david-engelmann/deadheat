@@ -18,7 +18,9 @@
     "task": {
       "type": "string",
       "minLength": 1,
-      "pattern": "^[^\\r\\n]+$"
+      "not": {
+        "pattern": "[\\r\\n]"
+      }
     },
     "workspace": {
       "type": "string",
@@ -43,12 +45,16 @@
           "model": {
             "type": "string",
             "minLength": 1,
-            "pattern": "^[^\\r\\n]+$"
+            "not": {
+              "pattern": "[\\r\\n]"
+            }
           },
           "environment": {
             "type": "string",
             "minLength": 1,
-            "pattern": "^[^\\r\\n]+$"
+            "not": {
+              "pattern": "[\\r\\n]"
+            }
           },
           "command": {
             "type": "string",

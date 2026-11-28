@@ -77,16 +77,16 @@ All input JSON schemas stand documented in [../FORMATS.md](../FORMATS.md).
 
 | Family | Commands | What they classify across decided series |
 | --- | --- | --- |
-| Opening & closing (6) | `comeback`, `opening`, `closing`, `firststrike`, `firststand`, `laststand` | Whether the champion dropped race 1 (`comeback`), opened/closed in a multi-win run, or faced a multi-win loser stand |
+| Opening & closing (6) | `comeback`, `opening`, `closing`, `firststrike`, `firststand`, `laststand` | Whether the champion dropped the first decided race (`comeback`), opened/closed in a multi-win run, or faced a multi-win loser stand |
 | Competitiveness & swings (6) | `distance`, `rally`, `deadlock`, `turns`, `leadchanges`, `crossings` | Full-distance deciders, trailing deficits (`rally`), tied tallies (`deadlock`), momentum handovers, and lead changes |
 | Run lengths (2) | `streak`, `cluster` | Longest consecutive win streak by the champion (`streak`) or by the defeated opponent (`cluster`) |
 | Ahead & behind spells (7) | `lead`, `tenure`, `depths`, `spells`, `reigns`, `firstreign`, `lastreign` | Peak lead vs final margin, races spent ahead vs behind, deepest deficit, and unbroken/broken reigns and spells |
-| Timing & symmetry (6) | `place`, `peak`, `recovery`, `outset`, `tail`, `crosshead` | Where the longest reign stood (`place`), where peak lead arrived (`peak`), speed of deficit recovery (`recovery`), and reign-vs-spell comparisons (`outset`, `tail`, `crosshead`) |
+| Timing & symmetry (6) | `place`, `peak`, `recovery`, `outset`, `tail`, `crosshead` | Where the winner first reached its deepest deficit (`place`), where peak lead arrived (`peak`), speed of deficit recovery (`recovery`), and reign-vs-spell comparisons (`outset`, `tail`, `crosshead`) |
 
 ## Multi-Agent Pipeline Integration Recipe
 
 To benchmark two coding agents, two prompt revisions, or two model providers head to head on the same task suite on Unix runners, wire `deadheat` into your evaluation harness.
 
-1. **Author a `duel-spec.json`.** Point each attempt's `command` at an isolated wrapper script. Inside its working directory (`<workspace>/attempt-1` or `attempt-2`), have the script run your test suite, stage intent-to-add markers and diff against `HEAD` (`git add -N . && git diff HEAD > patch.diff`) so `deadheat` captures tracked edits, staged edits, and newly created files (`DH-1`), and write `{"result": "green", "tokens": 48210}` (or `"red"`) to `result.json`.
+1. **Author a `duel-spec.json`.** Point each attempt's `command` at an isolated wrapper script. Because the runner creates an empty directory for each lane (`<workspace>/attempt-1` and `attempt-2`), have the wrapper copy or clone the target repository into its lane first, run the agent and test suite, stage intent-to-add markers and diff against `HEAD` (`git add -N . && git diff --binary HEAD > patch.diff`) so `deadheat` captures tracked edits, staged edits, newly created files, and binary changes (`DH-1`), and write `{"result": "green", "tokens": 48210}` (or `"red"`) to `result.json`.
 2. **Execute, score, and salvage loser patches.** Run `deadheat run duel-spec.json`, inspect `deadheat race duel-record.json --standings standings.json`, and optionally call `deadheat adopt duel-record.json patches/` to archive the defeated attempt's diff from its funeral (`DH-3`).
 3. **Aggregate multi-task series.** Bundle repeated runs per task into `series.json` files (`wins_target: 3` filters single-run noise) and group the benchmark suite into `championship.json`. Run `deadheat championship championship.json`, `deadheat totals championship.json`, and `deadheat pairing championship.json` to compare win rates and decided-walk token spend.

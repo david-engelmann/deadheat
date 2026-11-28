@@ -15,7 +15,9 @@
     "models": {
       "type": "object",
       "propertyNames": {
-        "pattern": "^[^\\r\\n]*$"
+        "not": {
+          "pattern": "[\\r\\n]"
+        }
       },
       "additionalProperties": {
         "type": "object",

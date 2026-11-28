@@ -22,7 +22,9 @@
     "task": {
       "type": "string",
       "minLength": 1,
-      "pattern": "^[^\\r\\n]+$"
+      "not": {
+        "pattern": "[\\r\\n]"
+      }
     },
     "attempts": {
       "type": "array",
@@ -58,12 +60,16 @@
         "model": {
           "type": "string",
           "minLength": 1,
-          "pattern": "^[^\\r\\n]+$"
+          "not": {
+            "pattern": "[\\r\\n]"
+          }
         },
         "environment": {
           "type": "string",
           "minLength": 1,
-          "pattern": "^[^\\r\\n]+$"
+          "not": {
+            "pattern": "[\\r\\n]"
+          }
         },
         "result": {
           "type": "string",
@@ -162,17 +168,23 @@
         "adjudicator": {
           "type": "string",
           "minLength": 1,
-          "pattern": "^[^\\r\\n]+$"
+          "not": {
+            "pattern": "[\\r\\n]"
+          }
         },
         "chosen": {
           "type": "string",
           "minLength": 1,
-          "pattern": "^[^\\r\\n]+$"
+          "not": {
+            "pattern": "[\\r\\n]"
+          }
         },
         "reason": {
           "type": "string",
           "minLength": 1,
-          "pattern": "^[^\\r\\n]+$"
+          "not": {
+            "pattern": "[\\r\\n]"
+          }
         },
         "confidence": {
           "type": "number",
